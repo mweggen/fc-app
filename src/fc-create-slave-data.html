@@ -1,0 +1,129 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<dom-module id="fc-create-slave-data">
+  <script>
+    class FCCreateSlaveData extends Polymer.Element {
+      static get is() {
+        return "fc-create-slave-data";
+      }
+
+      static get properties() {
+        return {
+          continents: {
+            type: Object,
+            value: {
+              'North America': {
+                'supremacistRace': 'white',
+                'subjugationistRace': 'black',
+                'nationalities': [{
+                  name: 'American',
+                  races: [{
+                    name: 'white',
+                    weight: 3
+                  }, {
+                    name: 'black',
+                    weight: 1
+                  }, {
+                    name: 'middle eastern',
+                    weight: 1
+                  }, {
+                    name: 'latina',
+                    weight: 2
+                  }, {
+                    name: 'asian',
+                    weight: 1
+                  }, {
+                    name: 'amerindian',
+                    weight: 1
+                  }, {
+                    name: 'mixed race',
+                    weight: 1
+                  }],
+                  weight: 4
+                }, {
+                  name: 'Mexican',
+                  weight: 2
+                }, {
+                  name: 'Haitian',
+                  weight: 1
+                }, {
+                  name: 'Cuban',
+                  weight: 1
+                }, {
+                  name: 'Puerto Rican',
+                  weight: 1
+                }, {
+                  name: 'Jamaican',
+                  weight: 1
+                }, {
+                  name: 'Guatemalan',
+                  weight: 1
+                }, {
+                  name: 'Bermudian',
+                  weight: 1
+                }, {
+                  name: 'Greenlandic',
+                  weight: 1
+                }, {
+                  name: 'Belizean',
+                  weight: 1
+                }, {
+                  name: 'Grenadian',
+                  weight: 1
+                }, {
+                  name: 'Honduran',
+                  weight: 1
+                }, {
+                  name: 'Costa Rican',
+                  weight: 1
+                }, {
+                  name: 'Salvadoran',
+                  weight: 1
+                }, {
+                  name: 'Nicaraguan',
+                  weight: 1
+                }, {
+                  name: 'Panamanian',
+                  weight: 1
+                }]
+              },
+              'South America': {
+                'supremacistRace': 'latina',
+                'subjugationistRace': 'black',
+                'nationalities': [{
+                  name: 'Brazilian',
+                  weight: 4
+                }, {
+                  name: 'Argentinian',
+                  weight: 2
+                }, {
+                  name: 'Colombian',
+                  weight: 2
+                }, {
+                  name: 'Peruvian',
+                  weight: 1
+                }, {
+                  name: 'Venezuelan',
+                  weight: 1
+                }, {
+                  name: 'Bolivian',
+                  weight: 1
+                }, {
+                  name: 'Chilean',
+                  weight: 1
+                }, {
+                  name: 'Uruguayan',
+                  weight: 1
+                }]
+              }
+            },
+            notify: true
+
+          }
+        }
+      }
+    }
+
+    customElements.define(FCCreateSlaveData.is, FCCreateSlaveData);
+  </script>
+</dom-module>

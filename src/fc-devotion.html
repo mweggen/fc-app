@@ -1,0 +1,53 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<dom-module id="fc-devotion">
+  <template>
+    <span hidden$="{{!article}}">[[_article]] </span><span style="[[color]]"><b>[[description]]</b></span></template>
+  <script>
+    class FCDevotion extends Polymer.Element {
+      static get is() { return "fc-devotion" };
+      static get properties() { return {
+        value: {
+          type: Number,
+          observer: '_valueChanged'
+        },
+        color: String,
+        description: String,
+        _article: String,
+        article: Boolean
+      }};
+
+      _valueChanged() {
+        let color = "white";
+        let desc = "";
+        this._article = "a";
+        if (this.value < -95) {
+          color = "darkviolet";
+          desc = "hate-filled";
+        } else if (this.value < -50) {
+          color = "darkviolet";
+          desc = "hateful";
+        } else if (this.value < -20) {
+          color = "mediumorchid";
+          desc = "reluctant";
+        } else if (this.value <= 20) {
+          color = "yellow";
+          desc = "hesitant";
+        } else if (this.value <= 50) {
+          color = "hotpink";
+          desc = "accepting";
+          this._article = "an";
+        } else if (this.value <= 95) {
+          color = "deeppink";
+          desc = "devoted";
+        } else {
+          color = "magenta";
+          desc = "worshipful";
+        }
+        this.color = "color: " + color;
+        this.description = desc;
+      }
+    }
+    customElements.define(FCDevotion.is, FCDevotion);
+  </script>
+</dom-module>

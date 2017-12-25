@@ -1,0 +1,71 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="fc-slave.html">
+
+<dom-module id="fc-slave-list">
+  <template>
+    <style>
+      :host {
+        display: block;
+
+        padding: 16px;
+      }
+      .list {
+        float:left;
+      }
+      .info {
+        /*margin-left: 200px;*/
+      }
+    </style>
+
+    <h1>List of slaves</h1>
+    <!--<button on-click="_generateSlave">Generate Slave</button>-->
+
+    <div class="list">
+      <template is="dom-repeat" items="[[slaves]]">
+        <paper-item on-click="_onClick">[[getSlaveFullName(item)]]</paper-item>
+      </template>
+    </div>
+    <div class="info">
+      <h3>[[selectedSlave.slaveName]] [[selectedSlave.slaveSurname]]</h3>
+    </div>
+  </template>
+  <script>
+    class FCSlaveList extends Polymer.Element {
+      static get is() {
+        return 'fc-slave-list';
+      }
+
+      static get properties() {
+        return {
+          slaves: Array,
+          selectedSlave: Object
+        }
+      }
+
+      _onClick(event) {
+        this.selectedSlave = event.model.item;
+      }
+
+      _addSlave() {
+        this.dispatchEvent(new CustomEvent('add-slave', {
+          bubbles: true, composed: true, detail: {
+            name: 'test name'
+          }
+        }));
+      }
+
+      _generateSlave() {
+        this.dispatchEvent(new CustomEvent('generate-slave', {
+          bubbles: true, composed: true, detail: {}
+        }));
+      }
+
+      getSlaveFullName(slave) {
+        return slave.slaveName + ' ' + slave.slaveSurname;
+      }
+    }
+
+    customElements.define(FCSlaveList.is, FCSlaveList)
+  </script>
+</dom-module>

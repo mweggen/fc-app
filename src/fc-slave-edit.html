@@ -1,0 +1,257 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../bower_components/neon-animation/web-animations.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../bower_components/iron-icons/places-icons.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../bower_components/paper-slider/paper-slider.html">
+<link rel="import" href="fc-devotion.html">
+<link rel="import" href="fc-trust.html">
+<link rel="import" href="fc-slave-title.html">
+<link rel="import" href="fc-create-slave-data.html">
+
+<dom-module id="fc-slave-edit">
+  <template>
+    <style>
+      paper-input, paper-dropdown-menu {
+        padding: 10px;
+      }
+
+      paper-button.green {
+        background-color: var(--paper-green-500);
+        color: white;
+      }
+
+      paper-button.indigo {
+        background-color: var(--paper-indigo-500);
+        color: white;
+      }
+
+      paper-dropdown-menu, paper-listbox {
+        width: 150px;
+      }
+
+      paper-dropdown-menu#indenture-menu, paper-dropdown-menu#indenture-menu > paper-listbox {
+        width: 175px;
+      }
+
+      paper-icon-button {
+        width: 24px;
+        height: 24px;
+        padding: 0 4px;
+      }
+    </style>
+    <fc-create-slave-data id="fcCreateSlaveData" continents="{{_continents}}"></fc-create-slave-data>
+    <style include="iron-flex"></style>
+    <div style="padding: 15px">
+      <b>[[slave.birthName]] [[slave.birthSurname]]</b> is
+      <fc-devotion article="true" value="[[slave.devotion]]"></fc-devotion>,
+      <fc-trust value="[[slave.trust]]"></fc-trust>
+      <fc-slave-title slave="[[slave]]"></fc-slave-title>.
+    </div>
+    <div class="layout horizontal" style="align-items: flex-end">
+      <paper-dropdown-menu label="Nationality">
+        <paper-listbox slot="dropdown-content" attr-for-selected="name" selected="{{slave.nationality}}"
+                       on-selected-changed="_nationalityChanged">
+          <template is="dom-repeat" items="[[_nationalities]]">
+            <paper-item name="[[item]]">[[item]]</paper-item>
+          </template>
+        </paper-listbox>
+      </paper-dropdown-menu>
+      <paper-icon-button style="position:relative; left: -15px; top: -18px; margin-right: -18px" icon="places:casino" onclick="clearInput()"  ></paper-icon-button>
+      <paper-dropdown-menu label="Race">
+        <paper-listbox id="races" slot="dropdown-content" attr-for-selected="name" selected="{{slave.race}}">
+          <template is="dom-repeat" items="[[_races]]">
+            <paper-item name="[[item]]">[[item]]</paper-item>
+          </template>
+        </paper-listbox>
+      </paper-dropdown-menu>
+      <paper-input label="Name" style="width: 120px" value="{{slave.birthName}}">
+        <paper-icon-button slot="suffix" icon="places:casino" on-click="_randomizeName"></paper-icon-button>
+      </paper-input>
+      <paper-input label="Surname" style="width: 150px" value="{{slave.birthSurname}}">
+        <paper-icon-button slot="suffix" icon="places:casino" on-click="_randomizeSurname"></paper-icon-button>
+      </paper-input>
+      <paper-input label="Age" style="width: 50px" value="{{slave.age}}">
+        <paper-icon-button slot="suffix" icon="places:casino" on-click="_randomizeAge"></paper-icon-button>
+      </paper-input>
+    </div>
+    <div class="layout horizontal">
+      <div>
+        <div style="padding: 0 15px" class="caption">Devotion:
+          <fc-devotion value="[[_devotion]]"></fc-devotion>
+          ([[_devotion]])
+        </div>
+        <paper-slider on-immediate-value-change="_devotionImmediateChange" id="devotion" min="-100"
+                      value="{{slave.devotion}}" secondary-progress="-100"></paper-slider>
+      </div>
+      <div>
+        <div style="padding: 0 15px" class="caption">Trust:
+          <fc-trust value="[[_trust]]"></fc-trust>
+          ([[_trust]])
+        </div>
+        <paper-slider on-immediate-value-change="_trustImmediateChange" id="trust" min="-100"
+                      value="{{slave.trust}}" secondary-progress="-100"></paper-slider>
+      </div>
+    </div>
+    <div class="layout horizontal">
+      <paper-dropdown-menu label="Legal status" id="indenture-menu">
+        <paper-listbox id="indenture" slot="dropdown-content" selected="0" on-selected-changed="_indentureChangedEvent">
+          <paper-item>Slave</paper-item>
+          <paper-item>Indentured Servant</paper-item>
+        </paper-listbox>
+      </paper-dropdown-menu>
+      <div hidden$="{{_isIndentured}}">
+        <div class="layout horizontal" style="align-items: flex-end">
+          <span style="padding: 20px 0">with</span>
+          <paper-input style="width: 30px; display: inline" value="{{slave.indenture}}"></paper-input>
+          <span style="padding: 20px 0">weeks remaining.</span>
+        </div>
+      </div>
+    </div>
+    <div class="layout horizontal">
+      <paper-dropdown-menu label="Voice">
+        <paper-listbox slot="dropdown-content" attr-for-selected="name" selected="{{slave.voice}}">
+          <paper-item name="0">Mute</paper-item>
+          <paper-item name="1">Deep</paper-item>
+          <paper-item name="2">Normal</paper-item>
+          <paper-item name="3">High</paper-item>
+        </paper-listbox>
+      </paper-dropdown-menu>
+    </div>
+    <div class="layout horizontal">
+      <paper-button raised class="green" on-click="_addSlave">Add Slave</paper-button>
+      <paper-button raised class="indigo" on-click="_randomizeAll">Randomize</paper-button>
+    </div>
+  </template>
+  <script>
+    class FCSlaveEdit extends Polymer.Element {
+      static get is() {
+        return "fc-slave-edit";
+      }
+
+      static get properties() {
+        return {
+          slave: Object,
+          _devotion: Number,
+          _trust: Number,
+          _isIndentured: Boolean,
+          _nationalities: Array,
+          _races: Array
+        }
+      }
+
+      static get observers() {
+        return [
+          '_devotionChanged(slave.devotion)',
+          '_trustChanged(slave.trust)',
+          '_indentureChanged(slave.indenture)'
+        ]
+      }
+
+      ready() {
+        super.ready();
+        this._randomizeAll();
+        this.set('_nationalities', this._continents['North America'].nationalities.map(n => n.name).sort());
+        this.set('_races', this._continents['North America'].nationalities
+          .find(n => n.name === this.slave.nationality).races.map(n => n.name).sort());
+      }
+
+      _raceChanged(e) {
+        this.$.races.select(this.slave.race);
+      }
+
+      _nationalityChanged(e) {
+        let nationalities = this._continents['North America'].nationalities;
+        if (nationalities !== undefined) {
+          let races = nationalities
+            .find(n => n.name === e.detail.value).races;
+          if (races !== undefined) {
+            this.set('_races', races.map(n => n.name).sort());
+          }
+        }
+      }
+
+      _indentureChangedEvent(e) {
+        if (e.detail.value === 0 && this.slave.indenture !== -1) {
+          this.set('slave.indenture', -1);
+        } else if (e.detail.value === 1 && this.slave.indenture < 0) {
+          this.set('slave.indenture', 52);
+        }
+        this.set('_isIndentured', this.slave.indenture < 0);
+      }
+
+      _indentureChanged(id) {
+        if (id !== undefined) {
+          if (id >= 0 && this.$.indenture.selected !== 0) {
+            this.$.indenture.selectIndex(1);
+          } else if (id < 0 && this.$.indenture.selected !== 1) {
+            this.$.indenture.selectIndex(0);
+          }
+        }
+        this.set('_isIndentured', this.slave.indenture < 0);
+      }
+
+      _devotionImmediateChange(e) {
+        this._devotionChanged(this.$.devotion.immediateValue);
+      }
+
+      _devotionChanged(d) {
+        this._devotion = d;
+      }
+
+      _trustImmediateChange(e) {
+        this._trustChanged(this.$.trust.immediateValue);
+      }
+
+      _trustChanged(trust) {
+        this._trust = trust;
+      }
+
+      _randomizeAll() {
+        this.slave = {};
+
+        this._randomizeName();
+        this._randomizeSurname();
+        this._randomizeAge();
+
+        this.set('slave.devotion', 0);
+        this.set('_devotion', 0);
+        this.set('slave.trust', 0);
+        this.set('_trust', 0);
+        this.set('slave.indenture', -1);
+        this.set('slave.nationality', 'American');
+        this.set('slave.race', 'white');
+        this.set('slave.voice', 2);
+      }
+
+      _randomizeName() {
+        let names = ["Abigail", "Adalyn", "Addison", "Adeline", "Alaina", "Alexandra", "Alicia", "Allison", "Alyssa", "Amanda", "Amber", "Amelia", "Amy", "Andrea", "Angela", "Anna", "Annabelle", "Anne", "April", "Aria", "Arianna", "Ashley", "Aubrey", "Audrey", "Ava", "Avery", "Bailey", "Bethany", "Brandi", "Brandy", "Brittany", "Brittney", "Brooke", "Brooklyn", "Caitlin", "Callie", "Candice", "Caroline", "Carrie", "Cassandra", "Catherine", "Charlotte", "Chelsea", "Chloe", "Christina", "Christine", "Claire", "Clover", "Courtney", "Crystal", "Cynthia", "Dana", "Danielle", "Diana", "Elena", "Eliana", "Elizabeth", "Ella", "Ellie", "Emily", "Emma", "Erica", "Erika", "Erin", "Eva", "Evelyn", "Gabriella", "Grace", "Hailey", "Hannah", "Harper", "Heather", "Holly", "Isabella", "Isabelle", "Jacqueline", "Jade", "Jamie", "Jane", "Jasmine", "Jenna", "Jennifer", "Jenny", "Jessica", "Joan", "Julia", "Julie", "June", "Kaitlyn", "Karen", "Kate", "Katherine", "Kathleen", "Kathryn", "Katie", "Kayla", "Kaylee", "Keira", "Kelly", "Kennedy", "Kimberly", "Kristen", "Kristin", "Kristina", "Krystal", "Kylie", "Latoya", "Laura", "Lauren", "Laurie", "Layla", "Leah", "Leslie", "Lila", "Liliana", "Lillian", "Lily", "Lindsay", "Lindsey", "Lisa", "Lois", "Lucy", "Mackenzie", "Madelyn", "Madison", "Makayla", "Mandy", "Margaret", "Maria", "Mary", "Maya", "Megan", "Meghan", "Melanie", "Melissa", "Mia", "Michelle", "Mila", "Misty", "Monica", "Natalie", "Natasha", "Nicole", "Nora", "Olivia", "Patricia", "Penelope", "Peyton", "Rachel", "Reagan", "Rebecca", "Riley", "Rose", "Sadie", "Samantha", "Sandra", "Sara", "Sarah", "Savannah", "Scarlett", "Shannon", "Skyler", "Sophia", "Sophie", "Stacey", "Stacy", "Stella", "Stephanie", "Susan", "Tara", "Tiffany", "Tina", "Valerie", "Vanessa", "Veronica", "Victoria", "Violet", "Whitney", "Zoe"];
+        this.set('slave.birthName', names[Math.floor(Math.random() * names.length)]);
+      }
+
+      _randomizeSurname() {
+        let surnames = ["Adams", "Allen", "Allred", "Anderson", "Avery", "Bailey", "Baker", "Barnes", "Beckstead", "Bell", "Bennett", "Bennion", "Benson", "Bingham", "Bradshaw", "Brooks", "Brown", "Burns", "Butler", "Campbell", "Carr", "Carter", "Christensen", "Clark", "Clooney", "Cole", "Coleman", "Collins", "Cook", "Cooper", "Cox", "Cunningham", "Davis", "DeMille", "Donaldson", "Edwards", "Ellis", "Evans", "Feldsted", "Fisher", "Forbush", "Foster", "Fox", "Frank", "Franklin", "Gardner", "Gibson", "Graham", "Gray", "Green", "Gubler", "Hall", "Hamilton", "Hancock", "Hanks", "Hansen", "Hardward", "Harris", "Hartvigsen", "Hatch", "Hayes", "Hill", "Howard", "Hughes", "Hymas", "Izatt", "Jackson", "Jacobs", "Jacobsen", "Jacobson", "James", "Jensen", "Johnson", "Jones", "Jorgensen", "Kelly", "Kennedy", "Kimball", "King", "Larsen", "Lauritzen", "Lee", "Lewis", "Long", "MacDonald", "Marks", "Martin", "McDonald", "Mecham", "Meyer", "Michaels", "Miller", "Mitchell", "Moore", "Morgan", "Morris", "Murphy", "Murray", "Myers", "Naegle", "Nelson", "Olsen", "Olson", "Orwell", "Parker", "Patterson", "Perry", "Peterson", "Phelps", "Phillips", "Pitt", "Powell", "Price", "Pulsipher", "Rasmussen", "Reed", "Reynolds", "Richardson", "Rigby", "Roberts", "Robinson", "Robison", "Rogers", "Romney", "Ross", "Roth", "Russell", "Sanders", "Schmidt", "Scott", "Shumway", "Smith", "Smoot", "Snyder", "Sorensen", "Spendlove", "Stevens", "Stewart", "Stone", "Sullivan", "Talbot", "Taylor", "Thomas", "Thompson", "Thomson", "Turley", "Turner", "Wagner", "Walker", "Wallace", "Ward", "Watson", "West", "White", "Willem", "Williams", "Wilson", "Wood", "Wright", "Yorgensen", "Young", "Zabriskie", "Zollinger"]
+        this.set('slave.birthSurname', surnames[Math.floor(Math.random() * surnames.length)]);
+      }
+
+      _randomizeAge() {
+        this.set('slave.age', Math.floor(Math.random() * 24) + 18);
+      }
+
+      _addSlave() {
+        this.slave.slaveName = this.slave.birthName;
+        this.slave.slaveSurname = this.slave.birthSurname;
+        this.dispatchEvent(new CustomEvent('add-slave', {
+          bubbles: true, composed: true, detail: this.slave
+        }));
+      }
+    }
+
+    customElements.define(FCSlaveEdit.is, FCSlaveEdit);
+  </script>
+</dom-module>

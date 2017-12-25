@@ -1,0 +1,42 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<dom-module id="fc-slave-title">
+  <template>[[_title]]</template>
+  <script>
+    class FCSlaveTitle extends Polymer.Element {
+      static get is() { return "fc-slave-title"; }
+      static get properties() { return {
+        slave: Object,
+        _title: {
+          type: String,
+          value: "slave"
+        }
+      }};
+      static get observers() {
+        return [
+          '_slaveChanged(slave.age)'
+        ];
+      }
+      ready() {
+        super.ready();
+        this._slaveChanged(this.slave);
+      }
+      _slaveChanged() {
+        if (this.slave) {
+          let desc = "";
+          if (this.slave.age > 35) {
+            desc += "MILF";
+          } else if (this.slave.age >= 25) {
+            desc += "slave";
+          } else {
+            desc += "slavegirl";
+          }
+          this._title = desc;
+        } else {
+          this._title = "slave";
+        }
+      }
+    }
+    customElements.define(FCSlaveTitle.is, FCSlaveTitle);
+  </script>
+</dom-module>

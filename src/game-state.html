@@ -1,0 +1,38 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/app-storage/app-localstorage/app-localstorage-document.html">
+
+<dom-module id="fc-game-state">
+  <template>
+    <app-localstorage-document key="fc-game-state" data="{{slaves}}"></app-localstorage-document>
+  </template>
+  <script>
+    class FCGameState extends Polymer.Element {
+      static get is() {
+        return 'fc-game-state';
+      }
+
+      static get properties() {
+        return {
+          slaves: {
+            type: Array,
+            value: () => [],
+            notify: true
+          }
+        }
+      }
+
+      addSlave(slave) {
+        console.info(slave);
+        this.push('slaves', slave);
+      }
+
+      generateSlave() {
+        let slave = {};
+        slave.age = Math.floor(Math.random() * 24) + 18;
+        return slave;
+      }
+    }
+
+    customElements.define(FCGameState.is, FCGameState);
+  </script>
+</dom-module>

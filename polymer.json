@@ -1,0 +1,35 @@
+{
+  "entrypoint": "index.html",
+  "shell": "src/fc-app.html",
+  "fragments": [
+    "src/fc-view1.html",
+    "src/fc-view2.html",
+    "src/fc-view3.html",
+    "src/fc-new-view.html",
+    "src/fc-slave-edit.html",
+    "src/fc-slave.html",
+    "src/fc-view404.html"
+  ],
+  "sources": [
+    "src/**/*",
+    "images/**/*"
+  ],
+  "extraDependencies": [
+    "manifest.json",
+    "bower_components/webcomponentsjs/*.js"
+  ],
+  "lint": {
+    "rules": ["polymer-2"]
+  },
+  "builds": [
+    {
+      "preset": "es5-bundled"
+    },
+    {
+      "preset": "es6-bundled"
+    },
+    {
+      "preset": "es6-unbundled"
+    }
+  ]
+}
