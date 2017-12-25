@@ -122,6 +122,51 @@
           }
         }
       }
+
+      createSlave() {
+        let slave = {
+          devotion: 0,
+          trust: 0,
+          indenture: -1,
+          nationality: 'American',
+          race: 'white',
+          voice: 2,
+          age: this.randomizeAge()
+        };
+
+        slave.birthName = this.randomizeName(slave);
+        slave.birthSurname = this.randomizeSurname(slave);
+
+/*
+        this._randomizeName();
+        this._randomizeSurname();
+        this._randomizeAge();
+
+        this.set('slave.devotion', 0);
+        this.set('_devotion', 0);
+        this.set('slave.trust', 0);
+        this.set('_trust', 0);
+        this.set('slave.indenture', -1);
+        this.set('slave.nationality', 'American');
+        this.set('slave.race', 'white');
+        this.set('slave.voice', 2);
+*/
+        return slave;
+      }
+
+      randomizeName(slave) {
+        let names = ["Abigail", "Adalyn", "Addison", "Adeline", "Alaina", "Alexandra", "Alicia", "Allison", "Alyssa", "Amanda", "Amber", "Amelia", "Amy", "Andrea", "Angela", "Anna", "Annabelle", "Anne", "April", "Aria", "Arianna", "Ashley", "Aubrey", "Audrey", "Ava", "Avery", "Bailey", "Bethany", "Brandi", "Brandy", "Brittany", "Brittney", "Brooke", "Brooklyn", "Caitlin", "Callie", "Candice", "Caroline", "Carrie", "Cassandra", "Catherine", "Charlotte", "Chelsea", "Chloe", "Christina", "Christine", "Claire", "Clover", "Courtney", "Crystal", "Cynthia", "Dana", "Danielle", "Diana", "Elena", "Eliana", "Elizabeth", "Ella", "Ellie", "Emily", "Emma", "Erica", "Erika", "Erin", "Eva", "Evelyn", "Gabriella", "Grace", "Hailey", "Hannah", "Harper", "Heather", "Holly", "Isabella", "Isabelle", "Jacqueline", "Jade", "Jamie", "Jane", "Jasmine", "Jenna", "Jennifer", "Jenny", "Jessica", "Joan", "Julia", "Julie", "June", "Kaitlyn", "Karen", "Kate", "Katherine", "Kathleen", "Kathryn", "Katie", "Kayla", "Kaylee", "Keira", "Kelly", "Kennedy", "Kimberly", "Kristen", "Kristin", "Kristina", "Krystal", "Kylie", "Latoya", "Laura", "Lauren", "Laurie", "Layla", "Leah", "Leslie", "Lila", "Liliana", "Lillian", "Lily", "Lindsay", "Lindsey", "Lisa", "Lois", "Lucy", "Mackenzie", "Madelyn", "Madison", "Makayla", "Mandy", "Margaret", "Maria", "Mary", "Maya", "Megan", "Meghan", "Melanie", "Melissa", "Mia", "Michelle", "Mila", "Misty", "Monica", "Natalie", "Natasha", "Nicole", "Nora", "Olivia", "Patricia", "Penelope", "Peyton", "Rachel", "Reagan", "Rebecca", "Riley", "Rose", "Sadie", "Samantha", "Sandra", "Sara", "Sarah", "Savannah", "Scarlett", "Shannon", "Skyler", "Sophia", "Sophie", "Stacey", "Stacy", "Stella", "Stephanie", "Susan", "Tara", "Tiffany", "Tina", "Valerie", "Vanessa", "Veronica", "Victoria", "Violet", "Whitney", "Zoe"];
+        return names[Math.floor(Math.random() * names.length)];
+      }
+
+      randomizeSurname(slave) {
+        let surnames = ["Adams", "Allen", "Allred", "Anderson", "Avery", "Bailey", "Baker", "Barnes", "Beckstead", "Bell", "Bennett", "Bennion", "Benson", "Bingham", "Bradshaw", "Brooks", "Brown", "Burns", "Butler", "Campbell", "Carr", "Carter", "Christensen", "Clark", "Clooney", "Cole", "Coleman", "Collins", "Cook", "Cooper", "Cox", "Cunningham", "Davis", "DeMille", "Donaldson", "Edwards", "Ellis", "Evans", "Feldsted", "Fisher", "Forbush", "Foster", "Fox", "Frank", "Franklin", "Gardner", "Gibson", "Graham", "Gray", "Green", "Gubler", "Hall", "Hamilton", "Hancock", "Hanks", "Hansen", "Hardward", "Harris", "Hartvigsen", "Hatch", "Hayes", "Hill", "Howard", "Hughes", "Hymas", "Izatt", "Jackson", "Jacobs", "Jacobsen", "Jacobson", "James", "Jensen", "Johnson", "Jones", "Jorgensen", "Kelly", "Kennedy", "Kimball", "King", "Larsen", "Lauritzen", "Lee", "Lewis", "Long", "MacDonald", "Marks", "Martin", "McDonald", "Mecham", "Meyer", "Michaels", "Miller", "Mitchell", "Moore", "Morgan", "Morris", "Murphy", "Murray", "Myers", "Naegle", "Nelson", "Olsen", "Olson", "Orwell", "Parker", "Patterson", "Perry", "Peterson", "Phelps", "Phillips", "Pitt", "Powell", "Price", "Pulsipher", "Rasmussen", "Reed", "Reynolds", "Richardson", "Rigby", "Roberts", "Robinson", "Robison", "Rogers", "Romney", "Ross", "Roth", "Russell", "Sanders", "Schmidt", "Scott", "Shumway", "Smith", "Smoot", "Snyder", "Sorensen", "Spendlove", "Stevens", "Stewart", "Stone", "Sullivan", "Talbot", "Taylor", "Thomas", "Thompson", "Thomson", "Turley", "Turner", "Wagner", "Walker", "Wallace", "Ward", "Watson", "West", "White", "Willem", "Williams", "Wilson", "Wood", "Wright", "Yorgensen", "Young", "Zabriskie", "Zollinger"]
+        return surnames[Math.floor(Math.random() * surnames.length)];
+      }
+
+      randomizeAge() {
+        return Math.floor(Math.random() * 24) + 18;
+      }
     }
 
     customElements.define(FCCreateSlaveData.is, FCCreateSlaveData);
