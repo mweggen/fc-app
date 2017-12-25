@@ -2,7 +2,7 @@
 
 <dom-module id="fc-devotion">
   <template>
-    <span hidden$="{{!article}}">[[_article]] </span><span style="[[color]]"><b>[[description]]</b></span></template>
+    <template is="dom-if" if="{{article}}">[[_article]] </template><span style="[[color]]"><b>[[description]]</b></span></template>
   <script>
     class FCDevotion extends Polymer.Element {
       static get is() { return "fc-devotion" };

@@ -2,7 +2,12 @@
 
 <dom-module id="fc-trust">
   <template>
-    <span hidden$="{{!article}}">[[_article]]</span> <span style="[[color]]"><b>[[description]]</b></span>
+    <style>
+      [hidden] {
+        display: none !important;
+      }
+    </style>
+    <template is="dom-if" if="{{article}}">[[_article]] </template><span style="[[color]]"><b>[[description]]</b></span>
   </template>
   <script>
     class FCTrust extends Polymer.Element {

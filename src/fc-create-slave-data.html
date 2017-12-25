@@ -42,48 +42,159 @@
                   weight: 4
                 }, {
                   name: 'Mexican',
+                  races: [{
+                    name: 'latina',
+                    weight: 5
+                  }, {
+                    name: 'amerindian',
+                    weight: 1
+                  }],
                   weight: 2
                 }, {
                   name: 'Haitian',
+                  races: [{
+                    name: 'black',
+                    weight: 1
+                  }],
                   weight: 1
                 }, {
                   name: 'Cuban',
+                  races: [{
+                    name: 'latina',
+                    weight: '1'
+                  }],
                   weight: 1
                 }, {
                   name: 'Puerto Rican',
+                  races: [{
+                    name: 'latina',
+                    weight: 1
+                  }],
                   weight: 1
                 }, {
                   name: 'Jamaican',
+                  races: [{
+                    name: 'black',
+                    weight: 1
+                  }],
                   weight: 1
                 }, {
                   name: 'Guatemalan',
+                  races: [{
+                    name: 'latina',
+                    weight: 1
+                  }, {
+                    name: 'amerindian',
+                    weight: 1
+                  }],
                   weight: 1
                 }, {
                   name: 'Bermudian',
+                  races: [{
+                    name: 'black',
+                    weight: 3
+                  }, {
+                    name: 'white',
+                    weight: 1
+                  }],
                   weight: 1
                 }, {
                   name: 'Greenlandic',
+                  races: [{
+                    name: 'amerindian',
+                    weight: 9
+                  }, {
+                    name: 'white',
+                    weight: 1
+                  }],
                   weight: 1
                 }, {
                   name: 'Belizean',
+                  races: [{
+                    name: 'latina',
+                    weight: 4
+                  }, {
+                    name: 'black',
+                    weight: 2
+                  }, {
+                    name: 'amerindian',
+                    weight: 1
+                  }, {
+                    name: 'white',
+                    weight: 1
+                  }],
                   weight: 1
                 }, {
                   name: 'Grenadian',
+                  races: [{
+                    name: 'black',
+                    weight: 9
+                  }, {
+                    name: 'mixed race',
+                    weight: 1
+                  }],
                   weight: 1
                 }, {
                   name: 'Honduran',
+                  races: [{
+                    name: 'latina',
+                    weight: 9
+                  }, {
+                    name: 'amerindian',
+                    weight: 1
+                  }],
                   weight: 1
                 }, {
                   name: 'Costa Rican',
+                  races: [{
+                    name: 'latina',
+                    weight: 4
+                  }, {
+                    name: 'white',
+                    weight: 1
+                  }],
                   weight: 1
                 }, {
                   name: 'Salvadoran',
+                  races: [{
+                    name: 'latina',
+                    weight: 5
+                  }, {
+                    name: 'white',
+                    weight: 1
+                  }],
                   weight: 1
                 }, {
                   name: 'Nicaraguan',
+                  races: [{
+                    name: 'latina',
+                    weight: 6
+                  }, {
+                    name: 'white',
+                    weight: 2
+                  }, {
+                    name: 'black',
+                    weight: 1
+                  }],
                   weight: 1
                 }, {
                   name: 'Panamanian',
+                  races: [{
+                    name: 'latina',
+                    weight: 6
+                  }, {
+                    name: 'white',
+                    weight: 1
+                  }, {
+                    name: 'black',
+                    weight: 1
+                  }, {
+                    name: 'amerindian',
+                    weight: 1
+                  }, {
+                    name: 'mixed race',
+                    weight: 1
+                  }],
                   weight: 1
                 }]
               },
@@ -128,33 +239,35 @@
           devotion: 0,
           trust: 0,
           indenture: -1,
-          nationality: 'American',
-          race: 'white',
+          // nationality: 'American',
+          // race: 'white',
           voice: 2,
           age: this.randomizeAge()
         };
 
-        slave.birthName = this.randomizeName(slave);
+        slave.nationality = this.weightedRandom(this.continents['North America'].nationalities).name;
+        slave.race = this.weightedRandom(this.continents['North America'].nationalities
+            .find(n => n.name === slave.nationality).races).name;
+        slave.birthName = this.randomName(slave);
         slave.birthSurname = this.randomizeSurname(slave);
 
-/*
-        this._randomizeName();
-        this._randomizeSurname();
-        this._randomizeAge();
-
-        this.set('slave.devotion', 0);
-        this.set('_devotion', 0);
-        this.set('slave.trust', 0);
-        this.set('_trust', 0);
-        this.set('slave.indenture', -1);
-        this.set('slave.nationality', 'American');
-        this.set('slave.race', 'white');
-        this.set('slave.voice', 2);
-*/
         return slave;
       }
 
-      randomizeName(slave) {
+      weightedRandom(array) {
+        let total = array.map(i => i.weight).reduce((x, y) => x + y);
+        let sum = 0, r = Math.random() * total;
+        for (let i = 0; i < array.length; i++) {
+          let item = array[i];
+          sum += item.weight;
+          if (r <= sum) {
+            return item;
+          }
+        }
+        return array[array.length-1];
+      }
+
+      randomName(slave) {
         let names = ["Abigail", "Adalyn", "Addison", "Adeline", "Alaina", "Alexandra", "Alicia", "Allison", "Alyssa", "Amanda", "Amber", "Amelia", "Amy", "Andrea", "Angela", "Anna", "Annabelle", "Anne", "April", "Aria", "Arianna", "Ashley", "Aubrey", "Audrey", "Ava", "Avery", "Bailey", "Bethany", "Brandi", "Brandy", "Brittany", "Brittney", "Brooke", "Brooklyn", "Caitlin", "Callie", "Candice", "Caroline", "Carrie", "Cassandra", "Catherine", "Charlotte", "Chelsea", "Chloe", "Christina", "Christine", "Claire", "Clover", "Courtney", "Crystal", "Cynthia", "Dana", "Danielle", "Diana", "Elena", "Eliana", "Elizabeth", "Ella", "Ellie", "Emily", "Emma", "Erica", "Erika", "Erin", "Eva", "Evelyn", "Gabriella", "Grace", "Hailey", "Hannah", "Harper", "Heather", "Holly", "Isabella", "Isabelle", "Jacqueline", "Jade", "Jamie", "Jane", "Jasmine", "Jenna", "Jennifer", "Jenny", "Jessica", "Joan", "Julia", "Julie", "June", "Kaitlyn", "Karen", "Kate", "Katherine", "Kathleen", "Kathryn", "Katie", "Kayla", "Kaylee", "Keira", "Kelly", "Kennedy", "Kimberly", "Kristen", "Kristin", "Kristina", "Krystal", "Kylie", "Latoya", "Laura", "Lauren", "Laurie", "Layla", "Leah", "Leslie", "Lila", "Liliana", "Lillian", "Lily", "Lindsay", "Lindsey", "Lisa", "Lois", "Lucy", "Mackenzie", "Madelyn", "Madison", "Makayla", "Mandy", "Margaret", "Maria", "Mary", "Maya", "Megan", "Meghan", "Melanie", "Melissa", "Mia", "Michelle", "Mila", "Misty", "Monica", "Natalie", "Natasha", "Nicole", "Nora", "Olivia", "Patricia", "Penelope", "Peyton", "Rachel", "Reagan", "Rebecca", "Riley", "Rose", "Sadie", "Samantha", "Sandra", "Sara", "Sarah", "Savannah", "Scarlett", "Shannon", "Skyler", "Sophia", "Sophie", "Stacey", "Stacy", "Stella", "Stephanie", "Susan", "Tara", "Tiffany", "Tina", "Valerie", "Vanessa", "Veronica", "Victoria", "Violet", "Whitney", "Zoe"];
         return names[Math.floor(Math.random() * names.length)];
       }

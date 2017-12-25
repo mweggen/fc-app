@@ -62,7 +62,9 @@
           </template>
         </paper-listbox>
       </paper-dropdown-menu>
+<!--
       <paper-icon-button style="position:relative; left: -15px; top: -18px; margin-right: -18px" icon="places:casino" onclick="clearInput()"  ></paper-icon-button>
+-->
       <paper-dropdown-menu label="Race">
         <paper-listbox id="races" slot="dropdown-content" attr-for-selected="name" selected="{{slave.race}}">
           <template is="dom-repeat" items="[[_races]]">
@@ -171,7 +173,11 @@
           let races = nationalities
             .find(n => n.name === e.detail.value).races;
           if (races !== undefined) {
-            this.set('_races', races.map(n => n.name).sort());
+            let racesArray = races.map(n => n.name);
+            this.set('_races', racesArray.sort());
+            if (racesArray.indexOf(this.slave.race) < 0) {
+              this.set('slave.race', racesArray[0]);
+            }
           }
         }
       }
@@ -182,7 +188,9 @@
         } else if (e.detail.value === 1 && this.slave.indenture < 0) {
           this.set('slave.indenture', 52);
         }
-        this.set('_isIndentured', this.slave.indenture < 0);
+        if (this.slave) {
+          this.set('_isIndentured', this.slave.indenture < 0);
+        }
       }
 
       _indentureChanged(id) {
@@ -193,7 +201,9 @@
             this.$.indenture.selectIndex(0);
           }
         }
-        this.set('_isIndentured', this.slave.indenture < 0);
+        if (this.slave) {
+          this.set('_isIndentured', this.slave.indenture < 0);
+        }
       }
 
       _devotionImmediateChange(e) {
@@ -217,7 +227,7 @@
       }
 
       _randomizeName() {
-        this.set('slave.birthName', this.$.fcCreateSlaveData.randomizeName(this.slave));
+        this.set('slave.birthName', this.$.fcCreateSlaveData.randomName(this.slave));
       }
       _randomizeSurname() {
         this.set('slave.birthSurname', this.$.fcCreateSlaveData.randomizeSurname(this.slave));
