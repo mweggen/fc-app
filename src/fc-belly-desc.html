@@ -1,0 +1,171 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<dom-module id="fc-belly-desc">
+  <template>
+    <template is="dom-if" if="{{_gt(slave.preg, 30)}}">
+      She is enormously pregnant,
+      <template is="dom-if" if="{{_gte(slave.height, 185)}}">
+        but her tall frame bears her massive, drum-taut belly well.
+      </template>
+      <template is="dom-if" if="{{!_gte(slave.height, 185)}}">
+        <template is="dom-if" if="{{_lt(slave.height, 150)}}">
+          and her massive, drum-taut belly dominates her poor little frame.
+        </template>
+        <template is="dom-if" if="{{!_lt(slave.height, 150)}}">
+          <template is="dom-if" if="{{_gt(slave.muscles, 30)}}">
+            and her fit body bears her massive, drum-taut belly well.
+          </template>
+          <template is="dom-if" if="{{!_gt(slave.muscles, 30)}}">
+            and her massive, drum-taut belly dominates her frame.
+          </template>
+        </template>
+      </template>
+    </template>
+    <template is="dom-if" if="{{!_gt(slave.preg, 30)}}">
+      <template is="dom-if" if="{{_gt(slave.preg, 20)}}">
+        She is heavily pregnant,
+        <template is="dom-if" if="{{_gte(slave.height, 185)}}">
+          but her tall frame bears her swollen belly well.
+        </template>
+        <template is="dom-if" if="{{!_gte(slave.height, 185)}}">
+          <template is="dom-if" if="{{_lt(slave.height, 150)}}">
+            and her swollen belly dominates her poor little frame.
+          </template>
+          <template is="dom-if" if="{{!_lt(slave.height, 150)}}">
+            <template is="dom-if" if="{{_gt(slave.muscles, 30)}}">
+              and her fit body bears her swollen belly well.
+            </template>
+            <template is="dom-if" if="{{!_gt(slave.muscles, 30)}}">
+              and her swollen belly dominates her frame.
+            </template>
+          </template>
+        </template>
+      </template>
+      <template is="dom-if" if="{{!_gt(slave.preg, 20)}}">
+        <template is="dom-if" if="{{_gt(slave.preg, 8)}}">
+          She is visibly pregnant,
+          <template is="dom-if" if="{{_gt(slave.weight, 30)}}">
+            but she's sufficiently overweight that it's not obvious.
+          </template>
+          <template is="dom-if" if="{{!_gt(slave.weight, 30)}}">
+            <template is="dom-if" if="{{_lt(slave.height, 150)}}">
+              and her swelling belly already looks huge on her tiny frame.
+            </template>
+            <template is="dom-if" if="{{!_lt(slave.height, 150)}}">
+              <template is="dom-if" if="{{_lte(slave.weight, -30)}}">
+                her thin form making her swelling belly very obvious.
+              </template>
+              <template is="dom-if" if="{{!_lte(slave.weight, -30)}}">
+                the life growing within her beginning to swell her belly.
+              </template>
+            </template>
+          </template>
+        </template>
+        <template is="dom-if" if="{{!_gt(slave.preg, 8)}}">
+          <template is="dom-if" if="{{_gt(slave.weight, 95)}}">
+            <template is="dom-if" if="{{_gt(slave.muscles, 95)}}">
+              Her massive abs are shrouded by a thick layer of fat.
+            </template>
+            <template is="dom-if" if="{{!_gt(slave.muscles, 95)}}">
+              <template is="dom-if" if="{{_gt(slave.muscles, 30)}}">
+                Her abs are hidden behind a big soft belly.
+              </template>
+              <template is="dom-if" if="{{!_gt(slave.muscles, 30)}}">
+                She carries a lot of her weight on her stomach; she's so fat that her navel is buried in a fold of her belly.
+              </template>
+            </template>
+            <template is="dom-if" if="{{_gt(slave.age, 35)}}">
+              Her fat belly is starting to show its age, and sags a little.
+            </template>
+          </template>
+          <template is="dom-if" if="{{!_gt(slave.weight, 95)}}">
+            <template is="dom-if" if="{{_gt(slave.weight, 30)}}">
+              <template is="dom-if" if="{{_gt(slave.muscles, 95)}}">
+                Her abs are big enough that they're visible behind her well-padded belly.
+              </template>
+              <template is="dom-if" if="{{!_gt(slave.muscles, 95)}}">
+                <template is="dom-if" if="{{_gt(slave.muscles, 5)}}">
+                  She's fit enough to carry her extra weight well, leaving her chubby belly appealingly soft.
+                </template>
+                <template is="dom-if" if="{{!_gt(slave.muscles, 5)}}">
+                  Her chubby belly is nice and soft, hiding the curve of her waist a little.
+                </template>
+              </template>
+            </template>
+            <template is="dom-if" if="{{!_gt(slave.weight, 30)}}">
+              <template is="dom-if" if="{{_gt(slave.weight, 10)}}">
+                <template is="dom-if" if="{{_gt(slave.muscles, 30)}}">
+                  Her ripped abs are only slightly blurred by feminine belly fat.
+                </template>
+                <template is="dom-if" if="{{!_gt(slave.muscles, 30)}}">
+                  <template is="dom-if" if="{{_gt(slave.muscles, 5)}}">
+                    She's fit yet soft, with her toned abs complementing her feminine belly.
+                  </template>
+                  <template is="dom-if" if="{{!_gt(slave.muscles, 5)}}">
+                    Her belly is pleasantly soft.
+                  </template>
+                </template>
+              </template>
+              <template is="dom-if" if="{{!_gt(slave.weight, 10)}}">
+                <template is="dom-if" if="{{_gte(slave.weight, -10)}}">
+                  <template is="dom-if" if="{{_gt(slave.muscles, 30)}}">
+                    Her abs ripple as she moves, each one well-defined under the skin of her midsection.
+                  </template>
+                  <template is="dom-if" if="{{!_gt(slave.muscles, 30)}}">
+                    <template is="dom-if" if="{{_gt(slave.muscles, 5)}}">
+                      She has a nicely toned midsection, promising good stamina.
+                    </template>
+                    <template is="dom-if" if="{{!_gt(slave.muscles, 5)}}">
+                      She has a feminine belly with just a hint of softness.
+                    </template>
+                  </template>
+                </template>
+                <template is="dom-if" if="{{!_gte(slave.weight, -10)}}">
+                  <template is="dom-if" if="{{_gte(slave.weight, -30)}}">
+                    <template is="dom-if" if="{{_gt(slave.muscles, 30)}}">
+                      Her ridiculous abs ripple as she moves, every single striation and vein clearly visible under the
+                      skin of her midsection.
+                    </template>
+                    <template is="dom-if" if="{{!_gt(slave.muscles, 30)}}">
+                      <template is="dom-if" if="{{_gt(slave.muscles, 5)}}">
+                        Her thin midsection highlights her abs, showing off a hint of a six-pack.
+                      </template>
+                      <template is="dom-if" if="{{!_gt(slave.muscles, 5)}}">
+                        She has a model's midsection, without any hint of belly or musculature.
+                      </template>
+                    </template>
+                  </template>
+                  <template is="dom-if" if="{{!_gte(slave.weight, -30)}}">
+                    <template is="dom-if" if="{{_gt(slave.muscles, 5)}}">
+                      Her abs are clearly visible, stretched over her emaciated frame as they are.
+                    </template>
+                    <template is="dom-if" if="{{!_gt(slave.muscles, 5)}}">
+                      Her emaciated belly is perfectly flat.
+                    </template>
+                  </template>
+                </template>
+              </template>
+            </template>
+          </template>
+        </template>
+      </template>
+    </template>
+  </template>
+  <script>
+    class FCBellyDesc extends Polymer.Element {
+      static get is() { return 'fc-belly-desc'; }
+      static get properties() { return {
+        slave: {
+          type: Object
+        }
+      }}
+
+      _gt(v1, v2) { return v1 > v2; }
+      _gte(v1, v2) { return v1 >= v2; }
+      _lt(v1, v2) { return v1 < v2; }
+      _lte(v1, v2) { return v1 <= v2; }
+    }
+
+    customElements.define(FCBellyDesc.is, FCBellyDesc);
+  </script>
+</dom-module>
