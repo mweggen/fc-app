@@ -64,10 +64,10 @@
           </template>
         </paper-listbox>
       </paper-dropdown-menu>
-      <paper-input label="Name" style="width: 120px" value="{{slave.birthName}}">
+      <paper-input label="Name" style="width: 120px" value="{{slave.birthName}}" on-value-changed="_nameValueChanged">
         <paper-icon-button slot="suffix" icon="places:casino" on-click="_randomizeName"></paper-icon-button>
       </paper-input>
-      <paper-input label="Surname" style="width: 150px" value="{{slave.birthSurname}}">
+      <paper-input label="Surname" style="width: 150px" value="{{slave.birthSurname}}" on-value-changed="_surnameValueChanged">
         <paper-icon-button slot="suffix" icon="places:casino" on-click="_randomizeSurname"></paper-icon-button>
       </paper-input>
       <paper-input label="Age" style="width: 50px" value="{{slave.age}}">
@@ -155,6 +155,14 @@
           .find(n => n.name === this.slave.nationality).races.map(n => n.name).sort());
       }
 
+      _nameValueChanged(e) {
+        this.set('slave.slaveName', e.detail.value);
+      }
+
+      _surnameValueChanged(e) {
+        this.set('slave.slaveSurname', e.detail.value);
+      }
+
       _raceChanged(e) {
         this.$.races.select(this.slave.race);
       }
@@ -223,10 +231,14 @@
       }
 
       _randomizeName() {
-        this.set('slave.birthName', this.$.fcCreateSlaveData.randomName(this.slave));
+        let name = this.$.fcCreateSlaveData.randomName(this.slave);
+        this.set('slave.birthName', name);
+        this.set('slave.slaveName', name);
       }
       _randomizeSurname() {
-        this.set('slave.birthSurname', this.$.fcCreateSlaveData.randomizeSurname(this.slave));
+        let surname = this.$.fcCreateSlaveData.randomizeSurname(this.slave);
+        this.set('slave.birthSurname', surname);
+        this.set('slave.slaveSurname', surname);
       }
 
       _randomizeAge() {
