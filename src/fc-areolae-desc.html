@@ -1,0 +1,110 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<dom-module id="fc-areolae-desc">
+  <template>
+    <template is="dom-if" if="{{_eq(slave.areolaePiercing, 0)}}">
+      <template is="dom-if" if="{{_eq(slave.areolae, 1)}}">
+        Her areolae form large, lovely circles of [[_color]] around each nipple.
+      </template>
+      <template is="dom-if" if="{{!_eq(slave.areolae, 1)}}">
+        <template is="dom-if" if="{{_eq(slave.areolae, 2)}}">
+          Her areolae are unusually wide, forming eye-catching circles of [[_color]] skin around each nipple.
+        </template>
+        <template is="dom-if" if="{{!_eq(slave.areolae, 2)}}">
+          <template is="dom-if" if="{{_eq(slave.areolae, 3)}}">
+            Her [[_color]] areolae are unnaturally broad, covering much of the [[_saggyDesc(slave.boobShape)]] of each breast.
+          </template>
+          <template is="dom-if" if="{{!_eq(slave.areolae, 3)}}">
+            <template is="dom-if" if="{{_eq(slave.areolae, 4)}}">
+              Her huge [[_color]] areolae are heart-shaped, an obvious surgical alteration.
+            </template>
+            <template is="dom-if" if="{{!_eq(slave.areolae, 4)}}">
+              <template is="dom-if" if="{{_eq(slave.areolae, 5)}}">
+                Her huge [[_color]] areolae are star-shaped, an obvious surgical alteration.
+              </template>
+              <template is="dom-if" if="{{!_eq(slave.areolae, 5)}}">
+                Her [[slave.nipples]] nipples are surrounded by a minimal [[_color]] areolae.
+              </template>
+            </template>
+          </template>
+        </template>
+      </template>
+    </template>
+    <template is="dom-if" if="{{!_eq(slave.areolaePiercing, 0)}}">
+      <fc-areolae-piercing-desc slave="[[slave]]"></fc-areolae-piercing-desc>
+    </template>
+    <template is="dom-if" if="{{_gt(slave.areolae, 1)}}">
+      <template is="dom-if" if="{{_eq(slave.clothes, 'a string bikini')}}">
+        Her string bikini covers only her nipples, with the rest of her areolae lewdly visible around them.
+      </template>
+      <template is="dom-if" if="{{_eq(slave.clothes, 'slutty business attire')}}">
+        The upper half of each of them is visible above the top of her blouse.
+      </template>
+      <template is="dom-if" if="{{_eq(slave.clothes, 'a string bikini', 'a bunny outfit')}}">
+        The upper half of each of them is visible.
+      </template>
+      <template is="dom-if" if="{{_eq(slave.clothes, 'a leotard')}}">
+        The material of her leotard is so thin and tight that not only are her nipples obvious, the outline of her
+        areolae can be made out, too.
+      </template>
+    </template>
+  </template>
+  <script>
+    class FCAreolaeDesc extends Polymer.Element {
+      static get is() { return 'fc-areolae-desc'; }
+      static get properties() { return {
+        slave: {
+          type: Object,
+          value: function () { return {
+            skin: 'fair',
+            preg: -1,
+            births: 0,
+            lactation: 0,
+            areolaePiercing: 0,
+            areolae: 0,
+            clothes: 'a leotard',
+            boobShape: 'saggy'
+          }}
+        },
+        _color: { computed: '_computeAreolaeColor(slave.skin, slave.preg, slave.births, slave.lactation)' }
+      }}
+
+      _eq(v1, v2) { return v1 === v2; }
+      _eq(v1, v2, v3) { return v1 === v2 || v1 === v3; }
+      _gt(v1, v2) { return v1 > v2; }
+      _saggyDesc(shape) { return shape === 'saggy' ? 'bottom' : 'front'; }
+
+      _computeAreolaeColor(skin, preg, births, lact) {
+        let color;
+        if (skin === 'tanned' || skin === 'fair') {
+          if (preg > 10 || (births > 0 && lact > 0)) {
+            color = 'dark brown';
+          } else {
+            color = 'pink';
+          }
+        } else if (skin === 'pale' || skin === 'white') {
+          if (preg > 10 || (births > 0 && lact > 0)) {
+            color = 'brown';
+          } else {
+            color = 'pink';
+          }
+        } else if (skin === 'brown' || skin === 'black') {
+          if (preg > 10 || (births > 0 && lact > 0)) {
+            color = 'black';
+          } else {
+            color = 'dark brown';
+          }
+        } else {
+          if (preg > 10 || (births > 0 && lact > 0)) {
+            color = 'dark brown';
+          } else {
+            color = 'brown';
+          }
+        }
+        return color;
+      }
+    }
+
+    customElements.define(FCAreolaeDesc.is, FCAreolaeDesc);
+  </script>
+</dom-module>
