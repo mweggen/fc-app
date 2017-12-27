@@ -1,0 +1,82 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<dom-module id="fc-hips-desc">
+  <template>
+    <style>
+      .bad {
+        color: red;
+        font-weight: bold;
+      }
+    </style>
+    <template is="dom-if" if="{{_lt(slave.hips, -1)}}">
+      <template is="dom-if" if="{{_gt(slave.butt, 2)}}">
+        Her butt is <span class="bad">disproportionally large</span> for her narrow hips.
+      </template>
+      <template is="dom-if" if="{{!_gt(slave.butt, 2)}}">Her hips are very narrow.</template>
+    </template>
+    <template is="dom-if" if="{{!_lt(slave.hips, -1)}}">
+      <template is="dom-if" if="{{_lt(slave.hips, 0)}}">
+        <template is="dom-if" if="{{_gt(slave.butt, 4)}}">
+          Her butt is <span class="bad">disproportionally large</span> for her trim hips.
+        </template>
+        <template is="dom-if" if="{{!_gt(slave.butt, 4)}}">Her butt is complemented by her trim hips.</template>
+      </template>
+      <template is="dom-if" if="{{!_lt(slave.hips, 0)}}">
+        <template is="dom-if" if="{{_gt(slave.hips, 1)}}">
+          <template is="dom-if" if="{{_lte(slave.butt, 3)}}">
+            Her butt is <span class="bad">disproportionally small</span> for her very wide hips.
+          </template>
+          <template is="dom-if" if="{{!_lte(slave.butt, 3)}}">Her butt is flattered by her very wide hips.</template>
+        </template>
+        <template is="dom-if" if="{{!_gt(slave.hips, 1)}}">
+          <template is="dom-if" if="{{_gt(slave.hips, 0)}}">
+            <template is="dom-if" if="{{_gt(slave.butt, 8)}}">
+              Her butt is <span class="bad">disproportionally large</span> for her broad hips.
+            </template>
+            <template is="dom-if" if="{{!_gt(slave.butt, 8)}}">
+              <template is="dom-if" if="{{_lte(slave.butt, 2)}}">
+                Her butt is <span class="bad">disproportionally small</span> for her broad hips.
+              </template>
+              <template is="dom-if" if="{{!_lte(slave.butt, 2)}}">
+                Her butt is complemented by her broad hips.
+              </template>
+            </template>
+          </template>
+          <template is="dom-if" if="{{!_gt(slave.hips, 0)}}">
+            <template is="dom-if" if="{{_gt(slave.butt, 6)}}">
+              Her butt is <span class="bad">disproportionally large</span> for her womanly hips.
+            </template>
+            <template is="dom-if" if="{{!_gt(slave.butt, 6)}}">
+              <template is="dom-if" if="{{_lte(slave.butt, 1)}}">
+                Her butt is <span class="bad">disproportionally small</span> for her ample hips.
+              </template>
+              <template is="dom-if" if="{{!_lte(slave.butt, 1)}}">
+                Her butt is complemented by her ample hips.
+              </template>
+            </template>
+          </template>
+        </template>
+      </template>
+    </template>
+  </template>
+  <script>
+    class FCHipsDesc extends Polymer.Element {
+      static get is() { return 'fc-hips-desc'; }
+      static get properties() { return {
+        slave: {
+          type: Object,
+          value() { return {
+            hips: 0,
+            butt: 1
+          }}
+        }
+      }}
+
+      _lt(v1, v2) { return v1 < v2; }
+      _lte(v1, v2) { return v1 <= v2; }
+      _gt(v1, v2) { return v1 > v2; }
+    }
+
+    customElements.define(FCHipsDesc.is, FCHipsDesc);
+  </script>
+</dom-module>

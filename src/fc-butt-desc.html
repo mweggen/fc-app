@@ -1,0 +1,102 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="fc-hips-desc.html">
+
+<dom-module id="fc-butt-desc">
+  <template>
+    <!--clothing-->
+    She's got a
+    <template is="dom-if" if="{{_lte(slave.butt, 1)}}">
+      flat and [[_me(_butt1b, slave.weight)]] ass.
+    </template>
+    <template is="dom-if" if="{{!_lte(slave.butt, 1)}}">
+      <template is="dom-if" if="{{_lte(slave.butt, 2)}}">
+        [[_me(_butt2b, slave.weight)]] rear end.
+      </template>
+      <template is="dom-if" if="{{!_lte(slave.butt, 2)}}">
+        <template is="dom-if" if="{{_lte(slave.butt, 3)}}">
+          [[_me(_butt3, slave.weight)]] derriere.
+        </template>
+        <template is="dom-if" if="{{!_lte(slave.butt, 3)}}">
+          <template is="dom-if" if="{{_lte(slave.butt, 4)}}">
+            [[_me(_butt4, slave.weight)]] butt.
+          </template>
+          <template is="dom-if" if="{{!_lte(slave.butt, 4)}}">
+            <template is="dom-if" if="{{_lte(slave.butt, 5)}}">
+              [[_me(_butt5, slave.weight)]] rear end.
+            </template>
+            <template is="dom-if" if="{{!_lte(slave.butt, 5)}}">
+              <template is="dom-if" if="{{_lte(slave.butt, 6)}}">
+                [[_me(_butt6, slave.weight)]] posterior.
+              </template>
+              <template is="dom-if" if="{{!_lte(slave.butt, 6)}}">
+                <template is="dom-if" if="{{_lte(slave.butt, 7)}}">
+                  [[_me(_butt7, slave.weight)]] ass.
+                </template>
+                <template is="dom-if" if="{{!_lte(slave.butt, 7)}}">
+                  <!--todo-->
+                  ridiculous ass. It's so big it jiggles as she walks.
+                </template>
+              </template>
+            </template>
+          </template>
+        </template>
+      </template>
+    </template>
+
+    <!--hips desc-->
+    <fc-hips-desc slave="[[slave]]"></fc-hips-desc>
+
+    <template is="dom-if" if="{{_eq(slave.buttImplant, 1)}}">
+      Her butt implants make her ass look especially pert no matter how she moves.
+    </template>
+    <template is="dom-if" if="{{_eq(slave.buttImplant, 2)}}">
+      Her big butt implants make her ass jut out curvaceously whatever pose she's in.
+    </template>
+    <template is="dom-if" if="{{_gt(slave.buttImplant, 2)}}">
+      She has [[_implantType(slave.buttImplantType)]] implants, and it shows. Whatever her position, her ass looks just
+      as artificially enticing.
+    </template>
+
+    <template is="dom-if" if="{{_eq(slave.markings, 'heavily freckled')}}">
+      Her freckles are particularly dense across her lower back.
+    </template>
+    <template is="dom-if" if="{{_eq(slave.markings, 'freckles')}}">
+      Her lower back is covered in a light speckling of freckles.
+    </template>
+  </template>
+  <script>
+    class FCButtDesc extends Polymer.Element {
+      static get is() { return 'fc-butt-desc'; }
+      static get properties() { return {
+        slave: {
+          type: Object,
+          value() { return {
+            butt: 3,
+            buttImplant: 0,
+            buttImplantType: 0,
+            markings: ''
+          }}
+        },
+        _butt1a: { value() { return ['fashionable', 'attractive', 'enticing']}},
+        _butt1b: { value() { return ['skinny', 'slim', 'taut']}},
+        _butt2a: { value() { return ['fashionable', 'small and enticing', 'sleek and attractive']}},
+        _butt2b: { value() { return ['small, sleek', 'small but rounded', 'rounded, small']}},
+        _butt3: { value() { return ['big and healthy', 'curved and plump', 'healthy and plump']}},
+        _butt4: { value() { return ['juicy and large', 'big bubble', 'curvy and enticing']}},
+        _butt5: { value() { return ['juicy and huge', 'huge', 'massive and undeniable']}},
+        _butt6: { value() { return ['truly massive', 'enormous']}},
+        _butt7: { value() { return ['gigantic', 'titanic']}},
+      }}
+
+      _implantType(type) { return type === 1 ? 'engorged string' : 'fillable butt'; }
+
+      _me(array, m) { return array ? array[Math.abs(m) % array.length] : ''; }
+
+      _lte(v1, v2) { return v1 <= v2; }
+      _eq(v1, v2) { return v1 === v2; }
+      _gt(v1, v2) { return v1 > v2; }
+    }
+
+    customElements.define(FCButtDesc.is, FCButtDesc);
+  </script>
+</dom-module>
