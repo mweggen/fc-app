@@ -234,49 +234,163 @@
         }
       }
 
-      createSlave() {
-        let slave = {
-          devotion: 0,
-          trust: 0,
-          indenture: -1,
-          voice: 2,
-          birthWeek: 0,
-          age: this.randomizeAge(),
-          health: this._normalRandClampedInt(50),
-          eyes: 0,
-          intelligence: this._normalRandClampedInt(3),
-          intelligenceImplant: 0,
-          eyeColor: 'hazel',
+      createBaseSlave() {
+        return {
+          slaveName: "blank", slaveSurname: 0,
+          birthName: "blank", birthSurname: 0,
+          genes: "XX",
+          weekAcquired: 0,
+          origin: 0,
+          career: 0,
+          ID: 0,
+          prestige: 0,
+          pornFame: 0, pornFameSpending: 0,
+          prestigeDesc: 0,
+          recruiter: 0,
+          relation: 0, relationTarget: 0,
+          relationship: 0, relationshipTarget: 0,
+          rivalry: 0, rivalryTarget: 0,
+          subTarget: 0,
+          father: 0, mother: 0, daughters: 0, sisters: 0,
+          canRecruit: 0,
+          choosesOwnAssignment: 0,
+          assignment: "rest", assignmentVisible: 1,
+          sentence: 0,
+          training: 0,
+          toyHole: "all her holes",
+          indenture: -1, indentureRestrictions: 0,
+          birthWeek: Math.floor(Math.random() * 52), age: 18, ageImplant: 0,
+          health: 0, minorInjury: 0,
+          trust: 0, oldTrust: 0,
+          devotion: 0, oldDevotion: 0,
+          weight: 0,
           muscles: 0,
-          height: Math.floor(this._normalRand() * 7.11 + 162.6),
-          weight: this._normalRandClampedInt(100),
-          boobsImplant: 0,
-          preg: -1,
-          births: 0,
-          lactation: 0,
-          areolae: 0,
-          areolaePiercing: 0,
-          clothes: 'no clothing'
+          height: 170, heightImplant: 0,
+          nationality: "slave", race:"white",
+          markings: "none",
+          eyes: 1, origEye: "brown", eyeColor: "brown", eyewear: "none",
+          origHColor: "brown", hColor: "brown", pubicHColor: "brown",
+          skin: "light",
+          hLength: 60, hStyle: "short", pubicHStyle: "neat",
+          waist: 0,
+          corsetPiercing: 0,
+          amp: 0,
+          PLimb: 0,
+          heels:0,
+          voice: 2, voiceImplant: 0, accent: 0,
+          shoulders: 0, shouldersImplant: 0,
+          boobs: 0, boobsImplant: 0, boobsImplantType: 0, boobShape: "normal",
+          nipples: "cute",  nipplesPiercing: 0,
+          areolae: 0, areolaePiercing: 0, boobsTat: 0,
+          lactation: 0, lactationAdaptation: 0, milk: 0,
+          cum: 0,
+          hips: 0, hipsImplant: 0,
+          butt: 0, buttImplant: 0, buttImplantType: 0, buttTat: 0,
+          face: 0, faceImplant: 0, faceShape: "normal",
+          lips: 15, lipsImplant: 0, lipsPiercing: 0, lipsTat: 0,
+          teeth: "normal", tonguePiercing: 0,
+          vagina: 0, vaginaLube: 1, vaginaPiercing: 0, vaginaTat: 0,
+          preg: -1, pregSource: 0, pregType: 0, labor: 0, births: 0, cSec: 0,
+          bellyAccessory: "none",
+          labia: 0, clit: 0, clitPiercing: 0, clitSetting: "vanilla",
+          foreskin: 0, anus: 0, dick: 0, analArea: 1, dickPiercing: 0, dickTat: 0,
+          prostate: 0, balls: 0, scrotum: 0,
+          ovaries: 1,
+          anusPiercing: 0, anusTat: 0,
+          makeup: 0, nails: 0, brand: 0, brandLocation: 0,
+          earPiercing: 0, nosePiercing: 0, eyebrowPiercing: 0, navelPiercing: 0,
+          shouldersTat: 0, armsTat: 0, legsTat: 0, backTat: 0, stampTat: 0,
+          vaginalSkill: 0, oralSkill: 0, analSkill: 0, whoreSkill: 0, entertainSkill: 0, combatSkill: 0,
+          livingRules: "spare", speechRules: "restrictive", releaseRules: "restrictive", relationshipRules: "restrictive",
+          standardPunishment: "situational", standardReward: "situational",
+          useRulesAssistant: 1,
+          diet: "healthy", dietCum: 0, dietMilk: 0,
+          tired: 0,
+          hormones: 0, drugs: "no drugs", curatives: 0, chem: 0, aphrodisiacs: 0, addict: 0,
+          fuckdoll: 0,
+          choosesOwnClothes: 0, clothes: "no clothing", collar: "none", shoes: "none",
+          vaginalAccessory: "none", dickAccessory: "none", buttplug: "none", buttplugAttachment: "none",
+          intelligence: 0,  intelligenceImplant: 0,
+          energy: 50, need: 0, attrXX: 0, attrXY: 0, attrKnown: 0,
+          fetish: "none", fetishStrength: 70, fetishKnown: 0,
+          behavioralFlaw: "none", behavioralQuirk: "none",
+          sexualFlaw: "none", sexualQuirk: "none",
+          oralCount: 0, vaginalCount: 0, analCount: 0, mammaryCount: 0, penetrativeCount: 0, pitKills: 0,
+          customTat: "", customLabel: "", customDesc: "", customTitle: "", customTitleLisp: "",
+          rudeTitle: 0, customImage: 0, currentRules: []
         };
+      }
 
+      generateXXSlave() {
+        let slave = this.createBaseSlave();
+
+        slave.canRecruit = 1;
+        slave.age = this.randomizeAge();//todo retirement age
+        //todo ID
+        //todo week acquired
+
+        slave.intelligence = this._normalRandClampedInt(3);
         if (Math.random() < 0.5 + 0.2 * slave.intelligence) {
           slave.intelligenceImplant = 1;
         }
-        if (slave.age / 100 > Math.random()) {
-          slave.eyes = -1;
+
+        //todo career
+
+        slave.vaginalSkill = this._normalRandClampedIntEven(7) + 8;
+        slave.analSkill = this._normalRandClampedIntEven(7) + 8;
+        slave.oralSkill = this._normalRandClampedIntEven(7) + 8;
+        slave.entertainSkill = this._normalRandClampedIntEven(7) + 8;
+        slave.whoreSkill = this._normalRandClampedIntEven(7) + 8;
+
+        slave.energy = this._normalRandClampedIntEven(42) + 42;
+
+        //todo attraction
+
+        slave.fetishStrength = this._normalRandClampedInt(45) + 45;
+        slave.fetish = this._randomElement(['none', 'none', 'none', 'none', 'none', 'none', 'none', 'none', 'none',
+          'none', 'none', 'none', 'none', 'submissive', 'submissive', 'cumslut', 'humiliation', 'humiliation',
+          'buttslut', 'boobs', 'pregnancy', 'dom', 'sadist', 'masochist']);
+
+        //todo flaws
+
+        slave.health = this._normalRandClampedInt(50);
+
+        slave.devotion = this._normalRandClampedInt(15) - 75;
+        slave.trust = this._normalRandClampedInt(10) - 35;
+
+        slave.height = Math.floor(this._normalRand() * 7.11 + 162.6);
+
+        if (slave.height >= 169) {
+          slave.hips = this._randomElement([-1, 0, 0, 1, 1, 2, 2]);
+          slave.shoulders = this._randomElement([-1, -1, 0, 0, 0, 1])
+        } else {
+          slave.hips = this._randomElement([-1, 0, 0, 0, 1, 1, 2]);
+          slave.shoulders = this._randomElement([-2, -1, -1, 0, 0, 1])
         }
+
+        slave.weight = this._normalRandClampedInt(100);
         if (slave.weight < -30) {
-          slave.waist = this._normalRandClampedInt(28) - 28;
+          slave.waist = this._normalRandClampedIntEven(27) - 27;
         } else if (slave.weight <= 30) {
           slave.waist = this._normalRandClampedInt(45);
         } else {
-          slave.waist = this._normalRandClampedInt(28) + 28;
+          slave.waist = this._normalRandClampedInt(27) + 28;
         }
+
+        if (slave.age / 100 > Math.random()) {
+          slave.eyes = -1;
+        }
+
         slave.nationality = this.weightedRandom(this.continents['North America'].nationalities).name;
         slave.race = this.weightedRandom(this.continents['North America'].nationalities
             .find(n => n.name === slave.nationality).races).name;
+        //todo name from nationality
+        slave.birthName = this.randomName(slave);
+        slave.birthSurname = this.randomizeSurname(slave);
+        slave.slaveName = slave.birthName;
+        slave.slaveSurname = slave.birthSurname;
+        //todo accent from nationality
 
-        slave.eyeColor = 'brown';
         slave.hStyle = 'neat';
         if (slave.race === 'black') {
           slave.butt = this._randomElement([1, 2, 2, 3, 3, 4, 4]);
@@ -333,9 +447,12 @@
           }
         } else if (Math.random() < 0.125) {
           slave.markings = this._randomElement(['beauty mark', 'birthmark']);
-        } else {
-          slave.markings = '';
         }
+
+        slave.origEye = slave.eyeColor;
+        slave.origHColor = slave.hColor;
+        slave.pubicHColor = slave.hColor;
+        slave.pubicHStyle = this._randomElement(['waxed', 'in a strip', 'neat', 'bushy']);
 
         let shapes = [];
         slave.boobShape = '';
@@ -366,6 +483,33 @@
         slave.navelPiercing = this._randomElement([0, 0, 0, 1]);
         slave.nipplesPiercing = this._randomElement([0, 0, 0, 1]);
 
+        slave.faceShape = this._randomElement(['androgynous', 'cute', 'sensual', 'exotic', 'normal', 'normal']);
+        slave.face = this._normalRandClampedInt(60);
+        if (slave.age > 40) {
+          slave.face -= this._normalRandClampedInt(10) + 10;
+        } else if (slave.age > 35) {
+          slave.face -= this._normalRandClampedInt(5) + 5;
+        } else if (slave.age <= 20) {
+          slave.face += this._normalRandClampedInt(10) + 10;
+        } else if (slave.age <= 25) {
+          slave.face += this._normalRandClampedInt(5) + 5;
+        }
+        if (slave.faceShape === 'sensual' || slave.faceShape === 'cute') {
+          slave.face += this._normalRandClampedInt(10) + 10;
+        } else if (slave.faceShape === 'exotic' || slave.faceShape === 'androgynous') {
+          slave.face += this._normalRandClampedInt(10);
+        }
+        //todo masculine?
+
+        if (slave.weight < -10 && slave.butt > 1) {
+          slave.butt--;
+        } else if (slave.weight > 10 && slave.butt < 4) {
+          slave.butt++;
+        }
+        if (slave.weight < -10 && slave.boobs > 200) {
+          slave.boobs -= 100;
+        }
+
         if (slave.boobs < 250) {
           slave.nipples = this._randomElement(['tiny', 'tiny', 'tiny', 'tiny', 'cute', 'cute', 'puffy', 'partially inverted'])
         } else if (slave.boobs < 500) {
@@ -376,14 +520,33 @@
           slave.nipples = this._randomElement(['cute', 'puffy', 'partially inverted', 'inverted', 'huge'])
         }
 
-        slave.birthName = this.randomName(slave);
-        slave.birthSurname = this.randomizeSurname(slave);
-        if (slave.height >= 169) {
-          slave.hips = this._randomElement([-1, 0, 0, 1, 1, 2, 2]);
-          slave.shoulders = this._randomElement([-1, -1, 0, 0, 0, 1])
-        } else {
-          slave.hips = this._randomElement([-1, 0, 0, 0, 1, 1, 2]);
-          slave.shoulders = this._randomElement([-2, -1, -1, 0, 0, 1])
+        slave.vagina = this._randomElement([0, 0, 1, 1, 1]);
+        if (slave.age < 20) {
+          slave.vagina = this._randomElement([0, 1]);
+        }
+        if (slave.age > 30) {
+          slave.vagina = this._randomElement([1, 1, 1, 1, 2]);
+        }
+        if (slave.vagina === 0) {
+          slave.vaginalSkill = 0;
+        }
+        if (slave.energy < Math.random() * 80 + 1 || slave.age > Math.random() * 26 + 35) {
+          slave.vaginaLube = 0;
+        }
+
+        slave.clit = this._randomElement([0, 0, 0, 0, 0, 0, 1, 1, 2]);
+        slave.labia = this._randomElement([0, 0, 0, 1, 1, 1, 1, 2, 2, 3]);
+        slave.foreskin = this._normalRandClampedIntEven(1) + 2;
+
+        slave.voice = this._randomElement([1, 2, 2, 2, 2, 2, 2, 3, 3, 3]);
+
+        slave.anus = this._randomElement([0, 0, 1, 1, 2]);
+        slave.analArea = slave.anus + this._randomElement([0, 0, 0, 1]);
+
+        if (slave.anus === 0) {
+          slave.analSkill = 0;
+        } else if (Math.random() < 0.25) {
+          slave.anusTat = 'bleached';
         }
 
         console.info(slave);
@@ -415,6 +578,14 @@
 
       randomizeAge() {
         return Math.floor(Math.random() * 24) + 18;
+      }
+
+      _normalRandIntEven(nr) {
+        return Math.floor(this._normalRand() * (nr + 1.5) / 3);
+      }
+
+      _normalRandClampedIntEven(nr) {
+        return Math.min(Math.max(-nr - 1, this._normalRandIntEven(nr)), nr);
       }
 
       _normalRandInt(nr) {

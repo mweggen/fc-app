@@ -215,7 +215,7 @@
       }
 
       _randomizeAll() {
-        let slave = this.$.fcCreateSlaveData.createSlave();
+        let slave = this.$.fcCreateSlaveData.generateXXSlave();
         this.set('_races', this._continents['North America'].nationalities
           .find(n => n.name === slave.nationality).races.map(n => n.name).sort());
         this.set('slave', slave);

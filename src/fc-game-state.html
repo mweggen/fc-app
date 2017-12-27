@@ -3,7 +3,7 @@
 
 <dom-module id="fc-game-state">
   <template>
-    <app-localstorage-document key="fc-game-state" data="{{slaves}}"></app-localstorage-document>
+    <app-localstorage-document key="fc-game-state" data="{{gameState}}"></app-localstorage-document>
   </template>
   <script>
     class FCGameState extends Polymer.Element {
@@ -11,25 +11,19 @@
         return 'fc-game-state';
       }
 
-      static get properties() {
-        return {
-          slaves: {
-            type: Array,
-            value: () => [],
-            notify: true
-          }
+      static get properties() { return {
+        gameState: {
+          type: Object,
+          value() { return {
+            slaves: []
+          }},
+          notify: true
         }
-      }
+      }}
 
       addSlave(slave) {
         console.info(slave);
-        this.push('slaves', slave);
-      }
-
-      generateSlave() {
-        let slave = {};
-        slave.age = Math.floor(Math.random() * 24) + 18;
-        return slave;
+        this.push('gameState.slaves', slave);
       }
     }
 

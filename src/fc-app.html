@@ -26,7 +26,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="lazy-import" href="my-view2.html">
 <link rel="lazy-import" href="my-view3.html">
 <link rel="lazy-import" href="my-view404.html">
-<link rel="import" href="game-state.html">
+<link rel="import" href="fc-game-state.html">
 <link rel="import" href="fc-slave-edit.html">
 
 <dom-module id="fc-app">
@@ -89,9 +89,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
     </style>
 
-    <fc-game-state
-        id="gameState"
-        slaves="{{slaves}}"></fc-game-state>
+    <fc-game-state id="gameState" game-state="{{gameState}}"></fc-game-state>
 
     <app-location
         route="{{route}}"
@@ -131,7 +129,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             fallback-selection="view404"
             role="main">
           <fc-slave-edit name="slave-edit" slave="[[slave]]"></fc-slave-edit>
-          <fc-slave-list name="slave-list" slaves="[[slaves]]"></fc-slave-list>
+          <fc-slave-list name="slave-list" slaves="[[gameState.slaves]]"></fc-slave-list>
           <my-view404 name="view404"></my-view404>
         </iron-pages>
       </app-header-layout>

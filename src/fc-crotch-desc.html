@@ -1,0 +1,59 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<dom-module id="fc-crotch-desc">
+  <template>
+    <!--clothes-->
+    <template is="dom-if" if="{{_gt(slave.vagina, -1)}}">
+      [[slave.slaveName]]'s [[_herma(slave.dick)]] bare and available.
+    </template>
+    <template is="dom-if" if="{{!_gt(slave.vagina, -1)}}">
+      <template is="dom-if" if="{{_gt(slave.dick, 0)}}">
+        [[slave.slaveName]]'s
+        <template is="dom-if" if="{{_eq(slave.dick, 10)}}">inhuman cock hangs naked.</template>
+        <template is="dom-if" if="{{_eq(slave.dick, 9)}}">absurd cock hangs naked.</template>
+        <template is="dom-if" if="{{_eq(slave.dick, 8)}}">titanic[[_flaccid(slave)]] cock hangs naked.</template>
+        <template is="dom-if" if="{{_eq(slave.dick, 7)}}">gigantic[[_flaccid(slave)]] cock hangs naked.</template>
+        <template is="dom-if" if="{{_eq(slave.dick, 6)}}">huge[[_flaccid(slave)]] cock hangs naked.</template>
+        <template is="dom-if" if="{{_eq(slave.dick, 5)}}">imposing[[_flaccid(slave)]] cock swings naked.</template>
+        <template is="dom-if" if="{{_eq(slave.dick, 4)}}">big[[_flaccid(slave)]] cock dangles naked.</template>
+        <template is="dom-if" if="{{_eq(slave.dick, 3)}}">cock[[_flaccid(slave)]] dangles bare.</template>
+        <template is="dom-if" if="{{_eq(slave.dick, 2)}}">little[[_flaccid(slave)]] dick is bare.</template>
+        <template is="dom-if" if="{{_eq(slave.dick, 1)}}">tiny[[_flaccid(slave)]] dick is bare.</template>
+      </template>
+      <template is="dom-if" if="{{!_gt(slave.dick, 0)}}">
+        [[slave.slaveName]]'s [[_balls(slave.balls)]] bare and vulnerable.
+      </template>
+    </template>
+  </template>
+  <script>
+    class FCCrotchDesc extends Polymer.Element {
+      static get is() { return 'fc-crotch-desc'; }
+      static get properties() { return {
+        slave: {
+          type: Object,
+          value() { return {
+            vagina: 0,
+            dick: 0,
+            balls: 0,
+            slaveName: '',
+            hormones: 0
+          }}
+        }
+      }}
+
+      _herma(dick) { return dick > 0 ? 'hermaphroditic genitalia are' : 'pussy is'; }
+      _balls(balls) { return balls > 0 ? 'lonely balls are' : 'featureless groin is'; }
+
+      _flaccid(slave) { return this._canAchieveErection(slave) ? ', flaccid' : ''; }
+
+      _canAchieveErection(slave) {
+        return !slave ? null : slave.dick < 7 && slave.dick > 0 && (slave.balls > 0 ? slave.hormones <= 0 : slave.hormones < 0);
+      }
+
+      _gt(v1, v2) { return v1 > v2; }
+      _eq(v1, v2) { return v1 === v2; }
+    }
+
+    customElements.define(FCCrotchDesc.is, FCCrotchDesc);
+  </script>
+</dom-module>
