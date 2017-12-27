@@ -1,0 +1,475 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<dom-module id="fc-vagina-desc">
+  <template>
+    <style>
+      .virgin {
+        color: lime;
+        font-weight: bold;
+      }
+      .skill {
+        color: aquamarine;
+        font-weight: bold;
+      }
+    </style>
+    <template is="dom-if" if="{{_gt(slave.dick, 0)}}">
+      <template is="dom-if" if="{{_gt(slave.vagina, -1)}}">
+        Her
+        <template is="dom-if" if="{{_eq(slave.ovaries, 1)}}">
+          beautifully natural
+        </template>
+        <template is="dom-if" if="{{!_eq(slave.ovaries, 1)}}">
+          artificial
+        </template>
+        vagina is located beneath the base of her penis,
+        <template is="dom-if" if="{{_gt(slave.fuckdoll, 0)}}">
+          just after the suit's material stops to bare her front hold.
+        </template>
+        <template is="dom-if" if="{{!_gt(slave.fuckdoll, 0)}}">
+          <template is="dom-if" if="{{_gtandlte(slave.scrotum, 3, slave.balls, slave.scrotum)}}">
+            though it is almost completely hidden by her hanging ballsack.
+          </template>
+          <template is="dom-if" if="{{!_gtandlte(slave.scrotum, 3, slave.balls, slave.scrotum)}}">
+            <template is="dom-if" if="{{_gtandgt(slave.scrotum, 1, slave.balls, 0)}}">
+              its upper part concealed by her balls.
+            </template>
+            <template is="dom-if" if="{{!_gtandgt(slave.scrotum, 1, slave.balls, 0)}}">
+              <template is="dom-if" if="{{_canAchieveErection(slave)}}">
+                and merges seamlessly into her shaft.
+              </template>
+              <template is="dom-if" if="{{!_canAchieveErection(slave)}}">
+                <template is="dom-if" if="{{_gt(slave.dick, 3)}}">
+                  though it is almost completely hidden by her soft cockmeat.
+                </template>
+                <template is="dom-if" if="{{!_gt(slave.dick, 3)}}">
+                  which acts as a soft little dickclit for it.
+                </template>
+              </template>
+            </template>
+          </template>
+        </template>
+        <template is="dom-if" if="{{_eq(slave.clit, 0)}}">
+          The base of her cock is located where the clitoris would be on a normal woman.
+        </template>
+      </template>
+    </template>
+
+    <template is="dom-if" if="{{_gt(slave.vagina, -1)}}">
+      <template is="dom-if" if="{{_eq(slave.vagina, 0)}}">
+        She is a <span class="virgin">virgin</span>. Her pussy is fresh,
+      </template>
+      <template is="dom-if" if="{{_eq(slave.vagina, 1)}}">
+        Her pussy is tight and appealing,
+      </template>
+      <template is="dom-if" if="{{_eq(slave.vagina, 2)}}">
+        Her pussy is reasonably tight,
+      </template>
+      <template is="dom-if" if="{{_eq(slave.vagina, 3)}}">
+        Her pussy is loose,
+      </template>
+      <template is="dom-if" if="{{_gt(slave.vagina, 3)}}">
+        Her pussy is utterly cavernous,
+      </template>
+      with
+      <template is="dom-if" if="{{_eq(slave.labia, 0)}}">
+        minimal
+      </template>
+      <template is="dom-if" if="{{_eq(slave.labia, 1)}}">
+        big puffy
+      </template>
+      <template is="dom-if" if="{{_eq(slave.labia, 2)}}">
+        huge
+      </template>
+      <template is="dom-if" if="{{_gt(slave.labia, 2)}}">
+        huge dangling
+      </template>
+
+      <template is="dom-if" if="{{_eq(slave.race, 'white')}}">pink</template>
+      <template is="dom-if" if="{{!_eq(slave.race, 'white')}}">
+        <template is="dom-if" if="{{_eq(slave.race, 'asian')}}">dark [[slave.race]]</template>
+        <template is="dom-if" if="{{!_eq(slave.race, 'asian')}}">
+          <template is="dom-if" if="{{_eq(slave.race, 'middle eastern')}}">dark [[slave.race]]</template>
+          <template is="dom-if" if="{{!_eq(slave.race, 'middle eastern')}}">
+            <template is="dom-if" if="{{_eq(slave.race, 'latina')}}">dark [[slave.race]]</template>
+            <template is="dom-if" if="{{!_eq(slave.race, 'latina')}}">
+              <template is="dom-if" if="{{_eq(slave.race, 'black')}}">dark [[slave.race]]</template>
+              <template is="dom-if" if="{{!_eq(slave.race, 'black')}}">
+                [[slave.skin]]
+              </template>
+            </template>
+          </template>
+        </template>
+      </template>
+      pussylips.
+
+      <template is="dom-if" if="{{_gt(slave.vagina, -1)}}">
+        <template is="dom-if" if="{{_eq(slave.vaginaLube, 0)}}">
+          <template is="dom-if" if="{{_gtandneq(slave.vagina, 0, slave.vaginalAccessory, 'chastity belt')}}">
+            She produces very little natural wetness, so she is
+            <template is="dom-if" if="{{_eq(slave.fuckdoll, 0)}}">required to keep herself</template>
+            <template is="dom-if" if="{{!_eq(slave.fuckdoll, 0)}}">is kept</template>
+            artificially lubricated for anyone who wishes to use her cunt.
+          </template>
+          <template is="dom-if" if="{{!_gtandneq(slave.vagina, 0, slave.vaginalAccessory, 'chastity belt')}}">
+            She produces very little natural wetness.
+          </template>
+          <template is="dom-if" if="{{!_eq(slave.prostate, 0)}}">
+            <template is="dom-if" if="{{_eq(slave.dick, 0)}}">
+              In stark contrast, however, she's been given a functional prostate gland. It's attached to her urethra,
+              of course, so despite her dryness, she squirts [[_fluid(slave.balls)]] when she orgasms.
+            </template>
+          </template>
+        </template>
+        <template is="dom-if" if="{{_eq(slave.vaginaLube, 1)}}">
+          <template is="dom-if" if="{{_gt(slave.aphrodisiacs, 0)}}">
+            The aphrodisiacs have them <template is="dom-if" if="{{_gt(slave.aphrodisiacs, 1)}}">sopping</template> wet.
+          </template>
+          <template is="dom-if" if="{{!_gt(slave.aphrodisiacs, 0)}}">
+            <template is="dom-if" if="{{_gt(slave.energy, 95)}}">
+              As a nympho, she's almost constantly wet.
+            </template>
+            <template is="dom-if" if="{{!_gt(slave.energy, 95)}}">
+              <template is="dom-if" if="{{_gtandeq(slave.fetishStrength, 60, fetishKnown, 1)}}">
+                Judging by how wet she is, she's probably fantasizing about [[_fetish(slave.fetish, slave.preg)]].
+              </template>
+              <template is="dom-if" if="{{!_gtandeq(slave.fetishStrength, 60, fetishKnown, 1)}}">
+                <template is="dom-if" if="{{_gt(slave.devotion, 50)}}">
+                  As a devoted sex slave, she has no trouble keeping herself wet for her Master.<!--todo title-->
+                </template>
+                <template is="dom-if" if="{{!_gt(slave.devotion, 50)}}">
+                  <template is="dom-if" if="{{_gt(slave.devotion, 20)}}">
+                    As an obedient sex slave, she does her best to keep herself wet for her Master.<!--todo title-->
+                  </template>
+                </template>
+              </template>
+            </template>
+          </template>
+          <template is="dom-if" if="{{!_eq(slave.prostate, 0)}}">
+            <template is="dom-if" if="{{_eq(slave.dick, 0)}}">
+              Bizarrely, she's been given a functional prostate gland. It's attached to her urethra, of course,
+              <template is="dom-if" if="{{_gt(slave.balls, 0)}}">
+                which in combination with her testicles make her squirt copious amounts of fluids and semen with each
+                orgasm.
+              </template>
+              <template is="dom-if" if="{{!_gt(slave.balls, 0)}}">so she squirts copiously when she orgasms.</template>
+            </template>
+          </template>
+        </template>
+        <template is="dom-if" if="{{_gt(slave.vaginaLube, 1)}}">
+          <template is="dom-if" if="{{_gt(slave.aphrodisiacs, 0)}}">
+            The combination of the aphrodisiacs and her natural tendency to produce a lot of female lubricant is having
+            a drastic effect. Her cunt is absolutely beribboned with femcum, and she smells strongly of wet, clean pussy.
+          </template>
+          <template is="dom-if" if="{{!_gt(slave.aphrodisiacs, 0)}}">
+            <template is="dom-if" if="{{_gt(slave.energy, 95)}}">
+              She has a naturally wet cunt, and in combination with her nymphomania, it's soaking.
+              She smells of good clean female arousal.
+            </template>
+            <template is="dom-if" if="{{!_gt(slave.energy, 95)}}">
+              <template is="dom-if" if="{{_gtandeq(slave.fetishStrength, 60, fetishKnown, 1)}}">
+                Her naturally wet cunt is almost dripping female lubricant, and she smells of good clean female arousal.
+                She's probably fantasizing about [[_fetish(slave.fetish, slave.preg)]].
+              </template>
+              <template is="dom-if" if="{{!_gtandeq(slave.fetishStrength, 60, fetishKnown, 1)}}">
+                Her cunt is almost always soaking wet,
+                <template is="dom-if" if="{{_gt(slave.devotion, 50)}}">but being near you has her almost dripping.</template>
+                <template is="dom-if" if="{{!_gt(slave.devotion, 50)}}">
+                  <template is="dom-if" if="{{_gt(slave.devotion, 20)}}">and being near you isn't affecting that.</template>
+                  <template is="dom-if" if="{{!_gt(slave.devotion, 20)}}">regardless of her feelings.</template>
+                </template>
+              </template>
+            </template>
+          </template>
+          <template is="dom-if" if="{{!_eq(slave.prostate, 0)}}">
+            <template is="dom-if" if="{{_eq(slave.dick, 0)}}">
+              Bizarrely, she's been given a functional prostate gland. It's attached to her urethra, of course,
+              <template is="dom-if" if="{{_gt(slave.balls, 0)}}">
+                which in combination with her testicles make her squirt unreasonable volume of fluids and semen with
+                each orgasm.
+              </template>
+              <template is="dom-if" if="{{!_gt(slave.balls, 0)}}">
+                meaning that when she orgasms, she squirts an unreasonable volume of fluid.
+              </template>
+            </template>
+          </template>
+        </template>
+      </template>
+      <!--todo vaginal acc desc-->
+    </template>
+
+    <template is="dom-if" if="{{_eq(slave.pubicHStyle, 'waxed')}}">
+      <template is="dom-if" if="{{_gt(slave.fuckdoll, 0)}}">Her public hair has been removed to prevent chafing.</template>
+      <template is="dom-if" if="{{!_gt(slave.fuckdoll, 0)}}">She's waxed and smooth.</template>
+    </template>
+    <template is="dom-if" if="{{_eq(slave.pubicHStyle, 'bald')}}">
+      <template is="dom-if" if="{{_gt(slave.fuckdoll, 0)}}">Her public hair has been removed to prevent chafing.</template>
+      <template is="dom-if" if="{{!_gt(slave.fuckdoll, 0)}}">She's hairless and smooth.</template>
+    </template>
+    <template is="dom-if" if="{{_eq(slave.pubicHStyle, 'in a strip')}}">
+      Her [[slave.pubicHColor]] pubic hair is waxed into a narrow strip above her [[_genital(slave.dick, slave.vagina)]].
+    </template>
+    <template is="dom-if" if="{{_eq(slave.pubicHStyle, 'neat')}}">
+      Her [[slave.pubicHColor]] pubic hair is waxed into a neat patch above her [[_genital(slave.dick, slave.vagina)]].
+    </template>
+    <template is="dom-if" if="{{_eq(slave.pubicHStyle, 'bushy')}}">
+      Her [[slave.pubicHColor]] pubic hair forms a natural bush above her [[_genital(slave.dick, slave.vagina)]].
+    </template>
+
+    <template is="dom-if" if="{{_eq(slave.dick, 0)}}">
+      <template is="dom-if" if="{{_gt(slave.clit, 0)}}">
+        <template is="dom-if" if="{{_eq(slave.clit, 1)}}">
+          <template is="dom-if" if="{{_gt(slave.devotion, 50)}}">Her clit is quite large and visibly hard.</template>
+          <template is="dom-if" if="{{!_gt(slave.devotion, 50)}}">Her clit is quite large.</template>
+        </template>
+        <template is="dom-if" if="{{_eq(slave.clit, 2)}}">
+          <template is="dom-if" if="{{_gt(slave.devotion, 50)}}">Her clit is huge and visibly erect.</template>
+          <template is="dom-if" if="{{!_gt(slave.devotion, 50)}}">Her clit is huge.</template>
+        </template>
+        <template is="dom-if" if="{{_eq(slave.clit, 3)}}">
+          <template is="dom-if" if="{{_gt(slave.devotion, 50)}}">
+            Her clit is enormous, and since it's erect with arousal, it juts out proudly.
+          </template>
+          <template is="dom-if" if="{{!_gt(slave.devotion, 50)}}">Her clit is enormous, almost a pseudophallus.</template>
+        </template>
+        <template is="dom-if" if="{{_eq(slave.clit, 4)}}">
+          <template is="dom-if" if="{{_gt(slave.devotion, 50)}}">
+            Her clit has reached the size of an average penis, it stands at attention but due to lack of erectile
+            tissues it can't reach the same hardness a penis would.
+          </template>
+          <template is="dom-if" if="{{!_gt(slave.devotion, 50)}}">Her clit has reached the size of an average penis.</template>
+        </template>
+        <template is="dom-if" if="{{_gt(slave.clit, 4)}}">
+          <template is="dom-if" if="{{_gt(slave.devotion, 50)}}">
+            Her clit is massive, having reached the size of a large penis. It is semi-erect since lack of erectile
+            tissues means it can never become fully erect.
+          </template>
+          <template is="dom-if" if="{{!_gt(slave.devotion, 50)}}">
+            Her clit is massive, having reached the size of a large penis.
+          </template>
+        </template>
+        <template is="dom-if" if="{{_eq(slave.foreskin, 0)}}">
+          <template is="dom-if" if="{{_eq(slave.clit, 1)}}">
+            Her lack of hood makes it even more prominent.
+          </template>
+          <template is="dom-if" if="{{_gt(slave.clit, 1)}}">
+            Lack of hood combined with its size mans she can't wear any clothes without being constantly stimulated.
+          </template>
+        </template>
+        <template is="dom-if" if="{{_eq(slave.foreskin, 1)}}">
+          <template is="dom-if" if="{{_eq(slave.clit, 1)}}">
+            Her clitoral hood is stretched thin trying to cover it.
+          </template>
+          <template is="dom-if" if="{{_eq(slave.clit, 2)}}">
+            Her small hood is no longer able to cover it completely and large part of her clitoris is always exposed.
+          </template>
+          <template is="dom-if" if="{{_gt(slave.clit, 2)}}">
+            Her hood can no longer contain it and has slid back causing her clitoris to be always exposed.
+          </template>
+        </template>
+        <template is="dom-if" if="{{_eq(slave.foreskin, 2)}}">
+          <template is="dom-if" if="{{_eq(slave.clit, 1)}}">It is completely covered by its hood.</template>
+          <template is="dom-if" if="{{_eq(slave.clit, 2)}}">
+            Its hood is stretched thin trying to cover it.
+          </template>
+          <template is="dom-if" if="{{_eq(slave.clit, 3)}}">
+            It's large enough that the hood can cover only half of it.
+          </template>
+          <template is="dom-if" if="{{_gt(slave.clit, 3)}}">
+            Her hood can no longer contain it and has slid back causing her clitoris to be always exposed.
+          </template>
+        </template>
+        <template is="dom-if" if="{{_eq(slave.foreskin, 3)}}">
+          <template is="dom-if" if="{{_eq(slave.clit, 1)}}">
+            The hood covering it is quite large making stimulation difficult.
+          </template>
+          <template is="dom-if" if="{{_eq(slave.clit, 2)}}">
+            Her large hood completely covers it.
+          </template>
+          <template is="dom-if" if="{{_eq(slave.clit, 3)}}">
+            Her large hood covers all but the tip of her clit even when aroused.
+          </template>
+          <template is="dom-if" if="{{_eq(slave.clit, 4)}}">
+            Even her large hood can't cover it, leaving over half of the clit exposed.
+          </template>
+          <template is="dom-if" if="{{_gt(slave.clit, 4)}}">
+            Her hood can no longer contain it and has slid back causing her clitoris to be always exposed.
+          </template>
+        </template>
+        <template is="dom-if" if="{{_gt(slave.foreskin, 3)}}">
+          <template is="dom-if" if="{{_eq(slave.clit, 1)}}">
+            Her large thick hood covering it makes any stimulation difficult.
+          </template>
+          <template is="dom-if" if="{{_eq(slave.clit, 2)}}">
+            Her large thick hood covering it makes any stimulation difficult.
+          </template>
+          <template is="dom-if" if="{{_eq(slave.clit, 3)}}">
+            Matching its size is the thick hood covering it.
+          </template>
+          <template is="dom-if" if="{{_eq(slave.clit, 4)}}">
+            Her large hood covering of half of it adds to its penis-like appearance.
+          </template>
+          <template is="dom-if" if="{{_gt(slave.clit, 4)}}">
+            Not even its large hood can contain it, leaving over half of it exposed.
+          </template>
+        </template>
+      </template>
+    </template>
+
+    <!--todo vag piercing desc-->
+    <!--todo clit piercing desc-->
+    <!--todo vag tat desc-->
+    <!--todo dick piercing desc-->
+
+    <template is="dom-if" if="{{_eq(slave.fuckdoll, 0)}}">
+      <template is="dom-if" if="{{_eq(slave.releaseRules, 'permissive')}}">
+        <template is="dom-if" if="{{_gt(slave.aphrodisiacs, 0)}}">
+          <template is="dom-if" if="{{_gt(slave.aphrodisiacs, 1)}}">
+            <template is="dom-if" if="{{!_eq(slave.dick, 0)}}">
+              <template is="dom-if" if="{{_gt(slave.hormones, 0)}}">
+                <template is="dom-if" if="{{_eq(slave.amp, 1)}}">
+                  The extreme dose of aphrodisiacs combined with the hormones that keep her flaccid have her in a state
+                  of extreme sexual frustration; she's unconsciously humping her ass against whatever's next to her for
+                  anal stimulation and humping her limp dick against whatever she can manage to mount without limbs.
+                </template>
+                <template is="dom-if" if="{{!_eq(slave.amp, 1)}}">
+                  The extreme dose of aphrodisiacs combined with the hormones that keep her flaccid have her in a state
+                  of extreme sexual frustration; she's rubbing her limp dick distractedly and unconsciously humping her
+                  ass against whatever's next to her for anal stimulation.
+                </template>
+              </template>
+              <template is="dom-if" if="{{!_gt(slave.hormones, 0)}}">
+                <template is="dom-if" if="{{_eq(slave.balls, 0)}}">
+                  <template is="dom-if" if="{{_eq(slave.amp, 1)}}">
+                    The extreme dose of aphrodisiacs combined with the lack of balls that keeps her flaccid have her in
+                    a state of extreme sexual frustration; she's unconsciously humping her ass against whatever's next
+                    to her for anal stimulation and humping her limp dick against whatever she can manage to mount
+                    without limbs.
+                  </template>
+                  <template is="dom-if" if="{{!_eq(slave.amp, 1)}}">
+                    The extreme dose of aphrodisiacs combined with the lack of balls that keeps her flaccid have her in
+                    a state of extreme sexual frustration; she's rubbing her limp dick distractedly and unconsciously
+                    humping her ass against whatever's next to her for anal stimulation.
+                  </template>
+                </template>
+                <template is="dom-if" if="{{!_eq(slave.balls, 0)}}">
+                  The extreme dose of aphrodisiacs has her cock painfully erect and precum drips from its head.
+                </template>
+              </template>
+            </template>
+          </template>
+          <template is="dom-if" if="{{!_gt(slave.aphrodisiacs, 1)}}">
+            <template is="dom-if" if="{{!_eq(slave.dick, 0)}}">
+              <template is="dom-if" if="{{_gt(slave.hormones, 0)}}">
+                <template is="dom-if" if="{{_eq(slave.amp, 1)}}">
+                  The aphrodisiacs combined with the hormones that keep her flaccid have her sexually frustrated; she's
+                  unconsciously rubbing her ass against whatever's next to her, and humping her dick against
+                  whatever she can manage to mount without limbs.
+                </template>
+                <template is="dom-if" if="{{!_eq(slave.amp, 1)}}">
+                  The aphrodisiacs combined with the hormones that keep her flaccid have her sexually frustrated; she's
+                  touching her limp dick distractedly and unconsciously rubbing her ass against whatever's next to her.
+                </template>
+              </template>
+              <template is="dom-if" if="{{!_gt(slave.hormones, 0)}}">
+                <template is="dom-if" if="{{_eq(slave.balls, 0)}}">
+                  <template is="dom-if" if="{{_eq(slave.amp, 1)}}">
+                    The aphrodisiacs combined with the lack of balls that keeps her flaccid have her sexually frustrated;
+                    she's unconsciously rubbing her ass against whatever's next to her, and humping her dick against
+                    whatever she can manage to mount without limbs.
+                  </template>
+                  <template is="dom-if" if="{{!_eq(slave.amp, 1)}}">
+                    The aphrodisiacs combined with the lack of balls that keeps her flaccid have her sexually frustrated;
+                    she's touching her limp dick distractedly and unconsciously rubbing her ass against whatever's next
+                    to her.
+                  </template>
+                </template>
+              </template>
+            </template>
+          </template>
+        </template>
+      </template>
+    </template>
+
+    <template is="dom-if" if="{{_gt(slave.fuckdoll, 0)}}">
+      <template is="dom-if" if="{{_gt(slave.vagina, 0)}}">
+        Her front hole
+        <template is="dom-if" if="{{!_gt(slave.fuckdoll, 45)}}">
+          is mostly useful when it's restrained for rape.
+        </template>
+        <template is="dom-if" if="{{_gt(slave.fuckdoll, 45)}}">
+          will massage<!--todo-->
+        </template>
+      </template>
+    </template>
+    <template is="dom-if" if="{{!_gt(slave.fuckdoll, 0)}}">
+      <template is="dom-if" if="{{_eq(slave.vagina, -1)}}">
+        <template is="dom-if" if="{{!_eq(slave.anus, 0)}}"><!--todo seeDicks-->
+          Since she lacks a vagina, she takes it up her [[slave.race]] ass instead.
+        </template>
+      </template>
+      <template is="dom-if" if="{{!_eq(slave.vagina, -1)}}">
+        <template is="dom-if" if="{{_gt(slave.vaginalSkill, 99)}}">
+          She is a <span class="skill">vanilla sex master</span>.
+        </template>
+        <template is="dom-if" if="{{!_gt(slave.vaginalSkill, 99)}}">
+          <template is="dom-if" if="{{_gt(slave.vaginalSkill, 60)}}">
+            She is a <span class="skill">vanilla sex expert</span>.
+          </template>
+          <template is="dom-if" if="{{!_gt(slave.vaginalSkill, 60)}}">
+            <template is="dom-if" if="{{_gt(slave.vaginalSkill, 30)}}">
+              She is <span class="skill">skilled at vanilla sex</span>.
+            </template>
+            <template is="dom-if" if="{{!_gt(slave.vaginalSkill, 30)}}">
+              <template is="dom-if" if="{{_gt(slave.vaginalSkill, 10)}}">
+                She has <span class="skill">basic knowledge about vanilla sex</span>.
+              </template>
+              <template is="dom-if" if="{{!_gt(slave.vaginalSkill, 10)}}">She is unskilled at vaginal sex.</template>
+            </template>
+          </template>
+        </template>
+      </template>
+    </template>
+
+  </template>
+  <script>
+    class FCVaginaDesc extends Polymer.Element {
+      static get is() { return 'fc-vagina-desc'; }
+      static get properties() { return {
+        slave: {
+          type: Object,
+          value() { return {
+
+          }}
+        }
+      }}
+
+      _genital(dick, vagina) { return dick > 0 ? 'cock' : vagina === -1 ? 'smoothness' : 'pussy'; }
+      _fluid(balls) { return balls > 0 ? 'semen' : 'fluid'; }
+      _fetish(fetish, preg) {
+        return fetish === 'buttslut' ? 'being buttfucked'
+          : fetish === 'cumslut' ? 'being facefucked'
+          : fetish === 'humiliation' ? 'being humiliated'
+          : fetish === 'submissive' ? 'submission'
+          : fetish === 'dom' ? 'dominating someone'
+          : fetish === 'sadist' ? 'hurting someone'
+          : fetish === 'masochist' ? 'pain'
+          : fetish === 'pregnancy' ? (preg > 5 ? 'growing rounder' : 'getting pregnant')
+          : fetish === 'boobs' ? 'boobs'
+          : 'getting fucked'
+      }
+
+      _gt(v1, v2) { return v1 > v2; }
+      _eq(v1, v2) { return v1 === v2; }
+      _gtandlte(v1, v2, v3, v4) { return v1 > v2 && v3 <= v4; }
+      _gtandgt(v1, v2, v3, v4) { return v1 > v2 && v3 > v4; }
+      _gtandneq(v1, v2, v3, v4) { return v1 > v2 && v3 !== v4; }
+      _gtandeq(v1, v2, v3, v4) { return v1 > v2 && v3 === v4; }
+
+      _canAchieveErection(slave) {
+        return !slave ? null : slave.dick < 7 && slave.dick > 0 && (slave.balls > 0 ? slave.hormones <= 0 : slave.hormones < 0);
+      }
+    }
+
+    customElements.define(FCVaginaDesc.is, FCVaginaDesc);
+  </script>
+</dom-module>
