@@ -250,7 +250,10 @@
           muscles: 0,
           height: Math.floor(this._normalRand() * 7.11 + 162.6),
           weight: this._normalRandClampedInt(100),
-          boobsImplant: 0
+          boobsImplant: 0,
+          preg: -1,
+          births: 0,
+          lactation: 0
         };
 
         if (Math.random() < 0.5 + 0.2 * slave.intelligence) {
@@ -350,6 +353,24 @@
           if (Math.random() * 3 < 1) {
             slave.boobShape = this._randomElement(shapes);
           }
+        }
+
+        slave.earPiercing = this._randomElement([0, 1]);
+        slave.nosePiercing = this._randomElement([0, 0, 0, 1]);
+        slave.eyebrowPiercing = this._randomElement([0, 0, 0, 0, 0, 1]);
+        slave.clitPiercing = this._randomElement([0, 0, 0, 0, 0, 1]);
+        slave.lipsPiercing = this._randomElement([0, 0, 0, 0, 0, 1]);
+        slave.navelPiercing = this._randomElement([0, 0, 0, 1]);
+        slave.nipplesPiercing = this._randomElement([0, 0, 0, 1]);
+
+        if (slave.boobs < 250) {
+          slave.nipples = this._randomElement(['tiny', 'tiny', 'tiny', 'tiny', 'cute', 'cute', 'puffy', 'partially inverted'])
+        } else if (slave.boobs < 500) {
+          slave.nipples = this._randomElement(['tiny', 'cute', 'cute', 'cute', 'puffy', 'partially inverted'])
+        } else if (slave.boobs < 1000) {
+          slave.nipples = this._randomElement(['tiny', 'cute', 'cute', 'cute', 'puffy', 'puffy', 'partially inverted', 'inverted'])
+        } else {
+          slave.nipples = this._randomElement(['cute', 'puffy', 'partially inverted', 'inverted', 'huge'])
         }
 
         slave.birthName = this.randomName(slave);

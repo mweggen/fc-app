@@ -1,0 +1,114 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<dom-module id="fc-nipples-desc">
+  <template>
+    Her [[_nippleColor]] nipples are
+    <template is="dom-if" if="{{_eq(slave.nipples, 'tiny')}}">tiny little nubs.</template>
+    <template is="dom-if" if="{{!_eq(slave.nipples, 'tiny')}}">
+      <template is="dom-if" if="{{_eq(slave.nipples, 'puffy')}}">
+        puffy, the soft flesh around each swelling outward to a promontory.
+      </template>
+      <template is="dom-if" if="{{!_eq(slave.nipples, 'puffy')}}">
+        <template is="dom-if" if="{{_eq(slave.nipples, 'partially inverted')}}">
+          <template is="dom-if" if="{{_eq(slave.nipplesPiercing, 0)}}">
+            partially inverted: when soft, they rest flush with the front of the breast.
+          </template>
+          <template is="dom-if" if="{{!_eq(slave.nipplesPiercing, 0)}}">
+            partially inverted, or would be if they weren't pierced. The metal is holding them protruded, causing
+            some discomfort.
+          </template>
+        </template>
+        <template is="dom-if" if="{{!_eq(slave.nipples, 'partially inverted')}}">
+          <template is="dom-if" if="{{_eq(slave.nipples, 'inverted')}}">
+            <template is="dom-if" if="{{_eq(slave.nipplesPiercing, 0)}}">
+              inverted: they are completely swallowed by the surrounding breastflesh.
+            </template>
+            <template is="dom-if" if="{{!_eq(slave.nipplesPiercing, 0)}}">
+              inverted, or would be if they weren't pierced. The metal is holding them protruded, to the slave's
+              considerable discomfort.
+            </template>
+          </template>
+          <template is="dom-if" if="{{!_eq(slave.nipples, 'inverted')}}">
+            <template is="dom-if" if="{{_eq(slave.nipples, 'huge')}}">
+              <template is="dom-if" if="{{_trueSize(slave.boobs, slave.boobsImplant)}}">
+                in proportion with her breasts: they've grown
+                <template is="dom-if" if="{{_smallDick(slave.dick)}}">
+                  bigger than her little girlcock.
+                </template>
+                <template is="dom-if" if="{{!_smallDick(slave.dick)}}">
+                  <template is="dom-if" if="{{_smallHands(slave.height, slave.amp)}}">
+                    almost as large as her little fists.
+                  </template>
+                  <template is="dom-if" if="{{!_smallHands(slave.height, slave.amp)}}">
+                    large enough to be jerked off.
+                  </template>
+                </template>
+              </template>
+              <template is="dom-if" if="{{!_trueSize(slave.boobs, slave.boobsImplant)}}">
+                the size of the last joint of her thumbs when erect.
+              </template>
+            </template>
+            <template is="dom-if" if="{{!_eq(slave.nipples, 'huge')}}">pretty normal.</template>
+          </template>
+        </template>
+      </template>
+    </template>
+  </template>
+  <script>
+    class FCNipplesDesc extends Polymer.Element {
+      static get is() { return 'fc-nipples-desc'; }
+      static get properties() { return {
+        slave: {
+          type: Object,
+          value: function() { return {
+            nipples: 'huge',
+            skin: 'fair',
+            preg: 0,
+            births: 0,
+            lactation: 0,
+            energy: 50,
+            boobs: 500,
+            boobsImplant: 0
+          }}
+        },
+        _nippleColor: { computed: '_computeNippleColor(slave.skin, slave.preg, slave.births, slave.lactation)' }
+      }}
+
+      _smallDick(dick) { return dick > 0 & dick < 3; }
+      _smallHands(height, amp) { return height < 156 && amp !== 1; }
+      _trueSize(boobs, boobsImplant) { return boobs - boobsImplant > 7500; }
+      _eq(v1, v2) { return v1 === v2; }
+      _computeNippleColor(skin, preg, births, lact) {
+        let color;
+        if (skin === 'tanned' || skin === 'fair') {
+          if (preg > 10 || (births > 0 && lact > 0)) {
+            color = 'dark brown';
+          } else {
+            color = 'pink';
+          }
+        } else if (skin === 'pale' || skin === 'white') {
+          if (preg > 10 || (births > 0 && lact > 0)) {
+            color = 'brown';
+          } else {
+            color = 'pink';
+          }
+        } else if (skin === 'brown' || skin === 'black') {
+          if (preg > 10 || (births > 0 && lact > 0)) {
+            color = 'black';
+          } else {
+            color = 'dark brown';
+          }
+        } else {
+          if (preg > 10 || (births > 0 && lact > 0)) {
+            color = 'dark brown';
+          } else {
+            color = 'brown';
+          }
+        }
+        return color;
+      }
+    }
+
+    customElements.define(FCNipplesDesc.is, FCNipplesDesc);
+  </script>
+</dom-module>
