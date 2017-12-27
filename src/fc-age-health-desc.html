@@ -1,0 +1,112 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+
+<dom-module id="fc-age-health-desc">
+  <template>
+    <style>
+      iron-pages { display: inline }
+      .bad {
+        color: red;
+        font-weight: bold;
+      }
+      .ok {
+        color: yellow;
+        font-weight: bold;
+      }
+      .good {
+        color: green;
+        font-weight: bold;
+      }
+    </style>
+    <iron-pages selected="[[_healthIndex]]">
+      <span>She is nearly unresponsive. She's obviously <span class="bad">dangerously sick</span>,</span>
+      <span>She seems <span class="bad">very sick</span>,</span>
+      <span>She seems <span class="bad">ill</span>,</span>
+      <span>She seems reasonably <span class="ok">healthy</span>,</span>
+      <span>She shines with <span class="good">good health</span>,</span>
+      <span>She almost gleams; she's in the absolute <span class="good">best of health</span>,</span>
+    </iron-pages>
+    and she's
+    <iron-pages selected="[[_ageIndex1]]">
+      <span>going to turn [[slave.age + 1]] this week,</span>
+      <span>
+        <iron-pages selected="[[_ageIndex2]]">
+          <span>just turned 18 this week, which many citizens find especially appealing.</span>
+          <span>only turned 18 this month.</span>
+          <span>18 years old.</span>
+        </iron-pages>
+      </span>
+      <span>
+        in her final year as a teenager at age 19; her birthday is
+        <iron-pages selected="[[_ageIndex3]]">
+          <span>next week</span>
+          <span>in [[_weeksRemaining]] weeks</span></iron-pages>.
+      </span>
+      <span>
+        a young woman, [[slave.age]] years old; her birthday is
+        <iron-pages selected="[[_ageIndex3]]">
+          <span>next week</span>
+          <span>in [[_weeksRemaining]] weeks</span></iron-pages>.
+      </span>
+      <span>
+        a younger woman, [[slave.age]] years old; her birthday is
+        <iron-pages selected="[[_ageIndex3]]">
+          <span>next week</span>
+          <span>in [[_weeksRemaining]] weeks</span></iron-pages>.
+      </span>
+      <span>
+        [[slave.age]] years old; her birthday is
+        <iron-pages selected="[[_ageIndex3]]">
+          <span>next week</span>
+          <span>in [[_weeksRemaining]] weeks</span></iron-pages>.
+      </span>
+      <span>
+        middle-aged for a slave, at [[slave.age]] years old; her birthday is
+        <iron-pages selected="[[_ageIndex3]]">
+          <span>next week</span>
+          <span>in [[_weeksRemaining]] weeks</span></iron-pages>.
+      </span>
+      <span>
+        mature for a slave, at [[slave.age]] years old; her birthday is
+        <iron-pages selected="[[_ageIndex3]]">
+          <span>next week</span>
+          <span>in [[_weeksRemaining]] weeks</span></iron-pages>.
+      </span>
+    </iron-pages>
+  </template>
+  <script>
+    class FCAgeHealthDesc extends Polymer.Element {
+      static get is() { return 'fc-age-health-desc'; }
+      static get properties() { return {
+        slave: {
+          type: Object,
+          value() { return {
+              health: 0,
+              birthWeek: 0,
+              age: 25
+          }}
+        },
+        _healthIndex: { computed: '_computeHealthIndex(slave.health)' },
+        _ageIndex1: { computed: '_computeAgeIndex1(slave.age, slave.birthWeek)' },
+        _ageIndex2: { computed: '_computeAgeIndex2(slave.birthWeek)' },
+        _ageIndex3: { computed: '_computeAgeIndex3(slave.birthWeek)' },
+        _weeksRemaining: { computed: '_computeWeeksRemaining(slave.birthWeek)' }
+      }}
+
+      _computeWeeksRemaining(birthWeek) { return 52 - birthWeek; }
+
+      _computeAgeIndex1(age, birthWeek) {
+        return birthWeek >= 52 ? 0 : age < 19 ? 1 : age < 20 ? 2 : age < 26 ? 3 : age < 30 ? 4 : age < 36 ? 5 : age < 40 ? 6 : 7;
+      }
+
+      _computeAgeIndex2(birthWeek) { return birthWeek === 0 ? 0 : birthWeek < 4 ? 1 : 2; }
+      _computeAgeIndex3(birthWeek) { return birthWeek === 51 ? 0 : 1; }
+
+      _computeHealthIndex(health) {
+        return health < -90 ? 0 : health < -50 ? 1 : health < -20 ? 2 : health <= 20 ? 3 : health <= 50 ? 4 : 5;
+      }
+    }
+
+    customElements.define(FCAgeHealthDesc.is, FCAgeHealthDesc);
+  </script>
+</dom-module>

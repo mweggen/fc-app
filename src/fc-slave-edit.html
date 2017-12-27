@@ -11,8 +11,8 @@
 <link rel="import" href="../bower_components/paper-slider/paper-slider.html">
 <link rel="import" href="fc-devotion.html">
 <link rel="import" href="fc-trust.html">
-<link rel="import" href="fc-slave-title.html">
 <link rel="import" href="fc-create-slave-data.html">
+<link rel="import" href="fc-slave-long-desc.html">
 
 <dom-module id="fc-slave-edit">
   <template>
@@ -47,12 +47,7 @@
     </style>
     <fc-create-slave-data id="fcCreateSlaveData" continents="{{_continents}}"></fc-create-slave-data>
     <style include="iron-flex"></style>
-    <div style="padding: 15px">
-      <b>[[slave.birthName]] [[slave.birthSurname]]</b> is
-      <fc-devotion article="true" value="[[slave.devotion]]"></fc-devotion>,
-      <fc-trust value="[[slave.trust]]"></fc-trust>
-      <fc-slave-title slave="[[slave]]"></fc-slave-title>.
-    </div>
+    <fc-slave-long-desc slave="[[slave]]"></fc-slave-long-desc>
     <div class="layout horizontal" style="align-items: flex-end">
       <paper-dropdown-menu label="Nationality">
         <paper-listbox slot="dropdown-content" attr-for-selected="name" selected="{{slave.nationality}}"
@@ -62,9 +57,6 @@
           </template>
         </paper-listbox>
       </paper-dropdown-menu>
-<!--
-      <paper-icon-button style="position:relative; left: -15px; top: -18px; margin-right: -18px" icon="places:casino" onclick="clearInput()"  ></paper-icon-button>
--->
       <paper-dropdown-menu label="Race">
         <paper-listbox id="races" slot="dropdown-content" attr-for-selected="name" selected="{{slave.race}}">
           <template is="dom-repeat" items="[[_races]]">
@@ -223,7 +215,11 @@
       }
 
       _randomizeAll() {
-        this.set('slave', this.$.fcCreateSlaveData.createSlave());
+        let slave = this.$.fcCreateSlaveData.createSlave();
+        this.set('_races', this._continents['North America'].nationalities
+          .find(n => n.name === slave.nationality).races.map(n => n.name).sort());
+        this.set('slave', slave);
+        this.set('slave.race', slave.race);
       }
 
       _randomizeName() {

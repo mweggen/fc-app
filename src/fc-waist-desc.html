@@ -1,0 +1,99 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/paper-tooltip/paper-tooltip.html">
+
+<dom-module id="fc-waist-desc">
+  <template>
+    <style>
+      iron-pages {
+        display: inline;
+      }
+      .bad {
+        color: red;
+      }
+      .good {
+        color: pink;
+      }
+      .waist {
+        cursor: pointer;
+        font-weight: bold;
+      }
+    </style>
+    She has
+    <iron-pages selected="[[_waistIndex]]">
+      <span>
+        a badly <span id="waist0" class="waist bad">masculine waist</span> that ruins her
+        figure<template is="dom-if" if="{{_isOverweight}}"> and greatly exaggerates how fat she
+        is</template><template is="dom-if" if="{{_isUnderweight}}"> despite how thin she is</template>.
+      </span>
+      <span>
+        a broad, <span id="waist1" class="waist bad">ugly waist</span> that makes her look
+        mannish<template is="dom-if" if="{{_isOverweight}}"> and exaggerates how fat she
+        is</template><template is="dom-if" if="{{_isUnderweight}}"> despite how thin she is</template>.
+      </span>
+      <span>
+        an <span id="waist2" class="waist bad">unattractive waist</span> that conceals her
+        <template is="dom-if" if="{{_isGirlish}}">girlish</template>
+        <template is="dom-if" if="{{!_isGirlish}}">womanly</template>
+        figure<template is="dom-if" if="{{_isOverweight}}"> and accentuates how fat she
+        is</template><template is="dom-if" if="{{_isUnderweight}}"> despite how thin she is</template>.
+      </span>
+      <span>
+        an <span id="waist3" class="waist">average</span> waist for a
+        <template is="dom-if" if="{{_isGirlish}}">girl</template><template is="dom-if" if="{{!_isGirlish}}">woman</template><template is="dom-if" if="{{_isOverweight}}">,
+        though it looks broader since she's fat</template><template is="dom-if" if="{{_isUnderweight}}">,
+        though it looks narrower since she's thin</template>.
+      </span>
+      <span>
+        a nice <span id="waist4" class="waist good">feminine waist</span> that gives her a
+        <template is="dom-if" if="{{_isGirlish}}">girlish</template>
+        <template is="dom-if" if="{{!_isGirlish}}">womanly</template>
+        figure<template is="dom-if" if="{{_isOverweight}}"> despite her extra
+        weight</template><template is="dom-if" if="{{_isUnderweight}}"> and accentuates how thin she is</template>.
+      </span>
+      <span>
+        a hot <span id="waist5" class="waist good">wasp waist</span> that gives her an hourglass
+        figure<template is="dom-if" if="{{_isOverweight}}"> despite her extra
+        weight</template><template is="dom-if" if="{{_isUnderweight}}"> further accentuated by how thin she is</template>.
+      </span>
+      <span>
+        an <span id="waist6" class="waist good">absurdly narrow waist</span> that gives her a cartoonishly hourglass
+        figure<template is="dom-if" if="{{_isOverweight}}"> made even more ludicrous by her extra
+        weight</template><template is="dom-if" if="{{_isUnderweight}}"> made even more ludicrous by how thin she is</template>.
+      </span>
+    </iron-pages>
+    <paper-tooltip for="[[_waistId]]" position="top">[[slave.waist]]</paper-tooltip>
+  </template>
+  <script>
+    class FCWaistDesc extends Polymer.Element {
+      static get is() { return 'fc-waist-desc'; }
+      static get properties() { return {
+        slave: {
+          type: Object,
+          values() { return {
+            waist: 0, weight: 0, age: 25
+          }}
+        },
+        _waistIndex: { computed: '_computedWaistIndex(slave.waist)' },
+        _isOverweight: { computed: '_computeIsOverweight(slave.weight)' },
+        _isUnderweight: { computed: '_computeIsUnderweight(slave.weight)' },
+        _isGirlish: { computed: '_computeIsGirlish(slave.age)' },
+        _waistId: { computed: '_computeWaistId(_waistIndex)' }
+      }}
+
+      _computedWaistIndex(w) {
+        return w > 95 ? 0 : w > 40 ? 1 : w > 10 ? 2 : w >= -10 ? 3 : w >= -40 ? 4 : w >= -95 ? 5 : 6;
+      }
+
+      _computeWaistId(w) {
+        return "waist" + w;
+      }
+
+      _computeIsOverweight(w) { return w > 30; }
+      _computeIsUnderweight(w) { return w < -30; }
+      _computeIsGirlish(a) { return a <= 25; }
+    }
+
+    customElements.define(FCWaistDesc.is, FCWaistDesc);
+  </script>
+</dom-module>

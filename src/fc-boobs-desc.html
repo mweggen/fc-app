@@ -1,0 +1,110 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<dom-module id="fc-boobs-desc">
+  <template>
+    <template is="dom-if" if="{{_eq(slave.clothes, 'a slutty outfit')}}">
+      [[slave.slaveName]]
+      <template is="dom-if" if="{{_gt(slave.boobs, 12000)}}">has given up trying to contain her immense bust and is now choosing outfits that allow her breasts to hang free.</template>
+      <template is="dom-if" if="{{!_gt(slave.boobs, 12000)}}">
+        <template is="dom-if" if="{{_gt(slave.boobs, 4000)}}">has to be careful choosing slutty outfits that can restrain her massive breasts.</template>
+        <template is="dom-if" if="{{!_gt(slave.boobs, 4000)}}">
+          <template is="dom-if" if="{{_gt(slave.boobs, 800)}}">has to be careful choosing slutty outfits that can handle her big breasts.</template>
+          <template is="dom-if" if="{{!_gt(slave.boobs, 800)}}">
+            <template is="dom-if" if="{{_lt(slave.boobs, 300)}}">chooses slutty outfits that go well on a girl with no tits.</template>
+            <template is="dom-if" if="{{!_lt(slave.boobs, 300)}}">chooses slutty outfits that accentuate her breasts.</template>
+          </template>
+        </template>
+      </template>
+    </template>
+    <template is="dom-if" if="{{_eq(slave.clothes, 'slave gown')}}">
+      [[slave.slaveName]]'s slave gown
+      <template is="dom-if" if="{{_gt(slave.boobs, 12000)}}">is no longer able to cover her immense breasts. Instead, it has been redesigned to draw the eye to them.</template>
+      <template is="dom-if" if="{{!_gt(slave.boobs, 12000)}}">
+        <template is="dom-if" if="{{_gt(slave.boobs, 4000)}}">is carefully engineered and is somehow able to cover the enormous mass of her breasts.</template>
+        <template is="dom-if" if="{{!_gt(slave.boobs, 4000)}}">
+          <template is="dom-if" if="{{_gt(slave.boobs, 800)}}">is carefully tailored, tastefully covering yet enhancing her big breasts.</template>
+          <template is="dom-if" if="{{!_gt(slave.boobs, 800)}}">
+            <template is="dom-if" if="{{_lt(slave.boobs, 300)}}">is carefully tailored to closely hug her flat chest.</template>
+            <template is="dom-if" if="{{!_lt(slave.boobs, 300)}}">subtly accentuates her breasts.</template>
+          </template>
+        </template>
+      </template>
+    </template>
+
+    Her
+    <template is="dom-if" if="{{_lt(slave.boobs, 300)}}">breasts are practically non-existent.</template>
+    <template is="dom-if" if="{{!_lt(slave.boobs, 300)}}">
+      <template is="dom-if" if="{{_lt(slave.boobs, 400)}}">[[_me(_cupA, slave.weight)]] breasts, [[slave.boobs]] CCs each, would only fill A cups.</template>
+      <template is="dom-if" if="{{!_lt(slave.boobs, 400)}}">
+        <template is="dom-if" if="{{_lt(slave.boobs, 500)}}">[[_me(_cupB, slave.weight)]] [[_me(_tits1, slave.weight)]], [[slave.boobs]] CCs each, would fill B cups.</template>
+        <template is="dom-if" if="{{!_lt(slave.boobs, 500)}}">
+          <template is="dom-if" if="{{_lt(slave.boobs, 650)}}">[[_me(_cupC, slave.weight)]] [[_me(_tits1, slave.weight)]], [[slave.boobs]] CCs each, would fill C cups.</template>
+          <template is="dom-if" if="{{!_lt(slave.boobs, 650)}}">
+            <template is="dom-if" if="{{_lt(slave.boobs, 800)}}">[[_me(_cupD, slave.weight)]] [[_me(_tits1, slave.weight)]], [[slave.boobs]] CCs each, would fill D cups.</template>
+            <template is="dom-if" if="{{!_lt(slave.boobs, 800)}}">
+              <template is="dom-if" if="{{_lt(slave.boobs, 1000)}}">[[_me(_cupE, slave.weight)]] [[_me(_tits1, slave.weight)]], [[slave.boobs]] CCs each, would fill DD cups.</template>
+              <template is="dom-if" if="{{!_lt(slave.boobs, 1000)}}">
+                <template is="dom-if" if="{{_lt(slave.boobs, 1200)}}">[[_me(_cupF, slave.weight)]] [[_me(_tits2, slave.weight)]], [[slave.boobs]] CCs each, would fill F cups.</template>
+                <template is="dom-if" if="{{!_lt(slave.boobs, 1200)}}">
+                  <template is="dom-if" if="{{_lt(slave.boobs, 1400)}}">[[_me(_cupG, slave.weight)]] [[_me(_tits3, slave.weight)]], [[slave.boobs]] CCs each, would fill G cups.</template>
+                  <template is="dom-if" if="{{!_lt(slave.boobs, 1400)}}">
+                    <template is="dom-if" if="{{_lt(slave.boobs, 1600)}}">[[_me(_cupH, slave.weight)]] [[_me(_tits3, slave.weight)]], [[slave.boobs]] CCs each, would fill H cups.</template>
+                    <template is="dom-if" if="{{!_lt(slave.boobs, 1600)}}">
+                      <template is="dom-if" if="{{_lt(slave.boobs, 1800)}}">[[_me(_cupI, slave.weight)]] [[_me(_tits3, slave.weight)]], [[slave.boobs]] CCs each, would fill I cups.</template>
+                      <template is="dom-if" if="{{!_lt(slave.boobs, 1800)}}">
+                        <template is="dom-if" if="{{_lt(slave.boobs, 2050)}}">[[_me(_cupJ, slave.weight)]] [[_me(_tits3, slave.weight)]], [[slave.boobs]] CCs each, would fill J cups.</template>
+                        <template is="dom-if" if="{{!_lt(slave.boobs, 2050)}}">
+
+                        </template>
+                      </template>
+                    </template>
+                  </template>
+                </template>
+              </template>
+            </template>
+          </template>
+        </template>
+      </template>
+    </template>
+  </template>
+  <script>
+    class FCBoobsDesc extends Polymer.Element {
+      static get is() { return 'fc-boobs-desc'; }
+      static get properties() { return {
+        slave: {
+          type: Object,
+          value() { return {
+            boobs: 500,
+            clothes: 'a slave gown',
+            slaveName: 'Slave'
+          }}
+        },
+        _cupA: { value() { return ['pointy', 'tiny'] }},
+        _cupB: { value() { return ['perky', 'small'] }},
+        _cupC: { value() { return ['healthy', 'curved'] }},
+        _cupD: { value() { return ['big', 'sizable'] }},
+        _cupE: { value() { return ['large', 'big'] }},
+        _cupF: { value() { return ['proud', 'hefty'] }},
+        _cupG: { value() { return ['hefty', 'huge'] }},
+        _cupH: { value() { return ['massive', 'huge'] }},
+        _cupI: { value() { return ['enormous', 'massive'] }},
+        _cupJ: { value() { return ['titanic', 'enormous'] }},
+
+        _tits1: { value() { return ['tits', 'breasts', 'boobs', 'bosoms'] }},
+        _tits2: { value() { return ['tits', 'breasts', 'mammaries', 'udders', 'boobs'] }},
+        _tits3: { value() { return ['tits', 'breasts', 'mammaries', 'udders'] }},
+        _tits4: { value() { return ['boobs', 'breasts', 'mammaries', 'udders'] }},
+        _tits5: { value() { return ['tits', 'boobs', 'mammaries'] }},
+        _tits6: { value() { return ['tits', 'boobs', 'mammaries', 'udders'] }},
+      }}
+
+    _me(array, m) { return array ? array[Math.abs(m) % array.length] : ''; }
+
+      _gt(v1, v2) { return v1 > v2; }
+      _lt(v1, v2) { return v1 < v2; }
+      _eq(v1, v2) { return v1 === v2; }
+    }
+
+    customElements.define(FCBoobsDesc.is, FCBoobsDesc);
+  </script>
+</dom-module>

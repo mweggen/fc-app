@@ -1,0 +1,135 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/paper-tooltip/paper-tooltip.html">
+<link rel="import" href="fc-devotion.html">
+<link rel="import" href="fc-trust.html">
+<link rel="import" href="fc-slave-title.html">
+<link rel="import" href="fc-age-health-desc.html">
+<link rel="import" href="fc-eye-desc.html">
+<link rel="import" href="fc-waist-desc.html">
+<link rel="import" href="fc-skin-desc.html">
+<link rel="import" href="fc-boobs-desc.html">
+<link rel="import" href="fc-boobs-shape-desc.html">
+<link rel="import" href="fc-boobs-extra-desc.html">
+<link rel="import" href="fc-shoulders-desc.html">
+
+<dom-module id="fc-slave-long-desc">
+  <template>
+    <style>
+      .bad {
+        color: red;
+      }
+      .good {
+        color: pink;
+      }
+      iron-pages {
+        display: inline;
+      }
+      .desc {
+        cursor: pointer;
+        font-weight: bold;
+      }
+      p {
+        text-indent: 1em;
+      }
+    </style>
+    <div style="padding: 15px">
+      <p>
+        <b>[[slave.birthName]] [[slave.birthSurname]]</b> is
+        <fc-devotion article="true" value="[[slave.devotion]]"></fc-devotion>,
+        <fc-trust value="[[slave.trust]]"></fc-trust>
+        <fc-slave-title slave="[[slave]]"></fc-slave-title>.
+        <fc-age-health-desc slave="[[slave]]"></fc-age-health-desc>
+        <fc-eye-desc slave="[[slave]]"></fc-eye-desc>
+        She is
+        <iron-pages selected="[[_heightDescIndex]]">
+          <span>petite</span>
+          <span>short</span>
+          <span>an average height</span>
+          <span>tall</span>
+          <span>very tall</span>
+        </iron-pages>
+        at [[slave.height]] cm, and
+        <iron-pages selected="[[_weightDescIndex]]">
+          <span><span class="desc bad">[[_weight0Desc]]</span>.</span>
+          <span>[[_weight1ADesc]], but her motherly hips make the extra weight attractive on her.</span>
+          <span><span class="desc bad">[[_weight1BDesc]]</span>.</span>
+          <span>[[_weight2Desc]].</span>
+          <span>[[_weight3Desc]].</span>
+          <span>[[_weight4Desc]].</span>
+          <span>[[_weight5ADesc]], but her trim hips make her look like a model.</span>
+          <span><span class="desc bad">[[_weight5BDesc]]</span>.</span>
+          <span><span class="desc bad">[[_weight6Desc]]</span>.</span>
+        </iron-pages>
+        <fc-waist-desc slave="[[slave]]"></fc-waist-desc>
+        <iron-pages selected="[[_musclesIndex]]">
+          <span>She is <span id="muscles0" class="desc good">extremely muscular</span>, with defined pecs, powerful glutes, and massive traps.</span>
+          <span>She is <span id="muscles1" class="desc good">quite muscular</span>, with ripped abs, strong shoulders, and defined lats.</span>
+          <span>She is <span id="muscles2" class="desc good">well built</span>, yet feminine, with just-visible muscles.</span>
+        </iron-pages>
+        <paper-tooltip for="[[_musclesId]]" position="top">[[slave.muscles]]</paper-tooltip>
+        <fc-skin-desc slave="[[slave]]"></fc-skin-desc>
+      </p>
+      <p>
+        <fc-boobs-desc slave="[[slave]]"></fc-boobs-desc>
+        <fc-boobs-shape-desc slave="[[slave]]"></fc-boobs-shape-desc>
+        <fc-boobs-extra-desc slave="[[slave]]"></fc-boobs-extra-desc>
+        <fc-shoulders-desc slave="[[slave]]"></fc-shoulders-desc>
+      </p>
+    </div>
+  </template>
+  <script>
+    class FCSlaveLongDesc extends Polymer.Element {
+      static get is() { return "fc-slave-long-desc"; }
+      static get properties() { return {
+        slave: Object,
+
+        _heightDescIndex: { computed: '_computeHeightDescIndex(slave.height)' },
+        _weightDescIndex: { computed: '_computeWeightDescIndex(slave.weight, slave.hips)' },
+        _musclesIndex: { computed: '_computeMusclesIndex(slave.muscles)' },
+        _musclesId: { computed: '_computeMusclesId(_musclesIndex)' },
+
+        _bigHips: { computed: '_computeBigHips(slave.hips)' },
+        _smallHips: { computed: '_computeSmallHips(slave.hips)' },
+
+        _weight0Descs: { value() { return ['overweight', 'carrying a lot of extra weight', 'fat'] }},
+        _weight1ADescs: { value() { return ['quite curvy', 'very plush'] }},
+        _weight1BDescs: { value() { return ['chubby', 'carrying extra weight'] }},
+        _weight2Descs: { value() { return ['pleasingly curvy', 'nicely plush'] }},
+        _weight3Descs: { value() { return ['a healthy weight', 'neither too fat nor too skinny', 'an attractive weight'] }},
+        _weight4Descs: { value() { return ['pleasingly thin', 'appealingly skinny'] }},
+        _weight5ADescs: { value() { return ['very thin', 'quite skinny'] }},
+        _weight5BDescs: { value() { return ['rail thin', 'underweight', 'too skinny'] }},
+        _weight6Descs: { value() { return ['emaciated', 'dangerously skinny'] }},
+
+        _weight0Desc: { computed: '_moduloElement(_weight0Descs, slave.weight)' },
+        _weight1ADesc: { computed: '_moduloElement(_weight1ADescs, slave.weight)' },
+        _weight1BDesc: { computed: '_moduloElement(_weight1BDescs, slave.weight)' },
+        _weight2Desc: { computed: '_moduloElement(_weight2Descs, slave.weight)' },
+        _weight3Desc: { computed: '_moduloElement(_weight3Descs, slave.weight)' },
+        _weight4Desc: { computed: '_moduloElement(_weight4Descs, slave.weight)' },
+        _weight5ADesc: { computed: '_moduloElement(_weight5ADescs, slave.weight)' },
+        _weight5BDesc: { computed: '_moduloElement(_weight5BDescs, slave.weight)' },
+        _weight6Desc: { computed: '_moduloElement(_weight6Descs, slave.weight)' }
+      }}
+
+      _moduloElement(array, m) { return array ? array[Math.abs(m) % array.length] : ''; }
+
+      _computeBigHips(h) { return h > 1; }
+
+      _computeSmallHips(h) { return h < -1; }
+
+      _computeMusclesIndex(m) { return m > 95 ? 0 : m > 30 ? 1 : m > 5 ? 2 : 3; }
+
+      _computeMusclesId(m) { return "muscles" + m; }
+
+      _computeHeightDescIndex(h) { return h < 149 ? 0 : h < 156 ? 1 : h < 169 ? 2 : h < 176 ? 3 : 4; }
+
+      _computeWeightDescIndex(w, h) {
+        return w > 95 ? 0 : w > 30 ? (h > 1 ? 1 : 2) : w > 10 ? 3 : w >= -10 ? 4 : w >= -30 ? 5 : w >= -95 ? (h < -1 ? 6 : 7) : 8;
+      }
+    }
+
+    customElements.define(FCSlaveLongDesc.is, FCSlaveLongDesc);
+  </script>
+</dom-module>

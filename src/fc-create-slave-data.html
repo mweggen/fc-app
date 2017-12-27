@@ -239,18 +239,130 @@
           devotion: 0,
           trust: 0,
           indenture: -1,
-          // nationality: 'American',
-          // race: 'white',
           voice: 2,
-          age: this.randomizeAge()
+          birthWeek: 0,
+          age: this.randomizeAge(),
+          health: this._normalRandClampedInt(50),
+          eyes: 0,
+          intelligence: this._normalRandClampedInt(3),
+          intelligenceImplant: 0,
+          eyeColor: 'hazel',
+          muscles: 0,
+          height: Math.floor(this._normalRand() * 7.11 + 162.6),
+          weight: this._normalRandClampedInt(100),
+          boobsImplant: 0
         };
 
+        if (Math.random() < 0.5 + 0.2 * slave.intelligence) {
+          slave.intelligenceImplant = 1;
+        }
+        if (slave.age / 100 > Math.random()) {
+          slave.eyes = -1;
+        }
+        if (slave.weight < -30) {
+          slave.waist = this._normalRandClampedInt(28) - 28;
+        } else if (slave.weight <= 30) {
+          slave.waist = this._normalRandClampedInt(45);
+        } else {
+          slave.waist = this._normalRandClampedInt(28) + 28;
+        }
         slave.nationality = this.weightedRandom(this.continents['North America'].nationalities).name;
         slave.race = this.weightedRandom(this.continents['North America'].nationalities
             .find(n => n.name === slave.nationality).races).name;
+
+        slave.eyeColor = 'brown';
+        slave.hStyle = 'neat';
+        if (slave.race === 'black') {
+          slave.butt = this._randomElement([1, 2, 2, 3, 3, 4, 4]);
+          slave.boobs = this._randomBoobVolume(150);
+          slave.lips = this._normalRandClampedInt(18) + 23;
+          slave.skin = this._randomElement(['black', 'brown', 'light brown']);
+          slave.hColor = this._randomElement(['black', 'black', 'black', 'brown']);
+          slave.hStyle = this._randomElement(['neat', 'crinkled']);
+        } else if (slave.race === 'white') {
+          slave.butt = this._randomElement([1, 2, 2, 3, 3, 4]);
+          slave.boobs = this._randomBoobVolume(50);
+          slave.lips = this._normalRandClampedInt(10) + 15;
+          // todo specific nationalities
+          slave.skin = this._randomElement(['pale', 'tanned', 'fair']);
+          slave.eyeColor = this._randomElement(['blue', 'brown', 'green']);
+          slave.hColor = this._randomElement(['black', 'blonde', 'red', 'brown']);
+        } else if (slave.race === 'latina') {
+          slave.butt = this._randomElement([1, 2, 2, 3, 3, 4]);
+          slave.boobs = this._randomBoobVolume(0);
+          slave.lips = this._normalRandClampedInt(10) + 15;
+          slave.skin = this._randomElement(['olive', 'brown', 'light brown']);
+          slave.hColor = this._randomElement(['black', 'black', 'brown', 'brown']);
+        } else if (slave.race === 'indo-aryan' || slave.race === 'malay'
+            || slave.race === 'pacific islander' || slave.race === 'amerindian') {
+          slave.butt = this._randomElement([1, 2, 2, 3, 3]);
+          slave.boobs = this._randomBoobVolume(0);
+          slave.lips = this._normalRandClampedInt(10) + 15;
+          slave.skin = this._randomElement(['dark', 'light']);
+          slave.hColor = this._randomElement(['black']);
+        } else if (slave.race === 'asian') {
+          slave.butt = this._randomElement([1, 2, 2, 3, 3]);
+          slave.boobs = this._randomBoobVolume(-100);
+          slave.lips = this._normalRandClampedInt(10) + 15;
+          slave.skin = this._randomElement(['pale', 'dark', 'light']);
+          slave.hColor = this._randomElement(['black']);
+        } else if (slave.race === 'middle eastern' || slave.race === 'semitic' || slave.race === 'southern european') {
+          slave.butt = this._randomElement([1, 2, 2, 3, 3]);
+          slave.boobs = this._randomBoobVolume(0);
+          slave.lips = this._normalRandClampedInt(10) + 15;
+          slave.skin = this._randomElement(['pale', 'dark', 'light']);
+          slave.hColor = this._randomElement(['black']);
+        } else {
+          slave.butt = this._randomElement([1, 2, 2, 3, 3, 4]);
+          slave.boobs = this._randomBoobVolume(0);
+          slave.lips = this._normalRandClampedInt(10) + 15;
+          slave.skin = this._randomElement(['pale', 'dark', 'light']);
+          slave.hColor = this._randomElement(['black', 'black', 'black', 'black', 'brown', 'brown', 'blonde', 'red']);
+        }
+
+        if (slave.skin === 'pale' || slave.skin === 'fair') {
+          if (Math.random() < 0.25) {
+            slave.markings = this._randomElement(['freckles', 'freckles', 'freckles', 'heavily freckled',
+                'beauty mark', 'beauty mark', 'birthmark', 'birthmark']);
+          }
+        } else if (Math.random() < 0.125) {
+          slave.markings = this._randomElement(['beauty mark', 'birthmark']);
+        } else {
+          slave.markings = '';
+        }
+
+        let shapes = [];
+        slave.boobShape = '';
+        if (slave.boobs > 250 && slave.boobs < 800) {
+          shapes.push('perky', 'downward-facing');
+        }
+        if (slave.boobs > 400 && slave.boobs < 1200) {
+          shapes.push('torpedo-shaped', 'wide-set');
+        }
+        if (slave.boobs > 800 && slave.age > Math.floor(Math.random() * 41) + 10) {
+          shapes.push('saggy');
+        }
+        if (shapes.length === 1) {
+          if (Math.random() < 0.5) {
+            slave.boobShape = shapes[0];
+          }
+        } else if (shapes.length > 1) {
+          if (Math.random() * 3 < 1) {
+            slave.boobShape = this._randomElement(shapes);
+          }
+        }
+
         slave.birthName = this.randomName(slave);
         slave.birthSurname = this.randomizeSurname(slave);
+        if (slave.height >= 169) {
+          slave.hips = this._randomElement([-1, 0, 0, 1, 1, 2, 2]);
+          slave.shoulders = this._randomElement([-1, -1, 0, 0, 0, 1])
+        } else {
+          slave.hips = this._randomElement([-1, 0, 0, 0, 1, 1, 2]);
+          slave.shoulders = this._randomElement([-2, -1, -1, 0, 0, 1])
+        }
 
+        console.info(slave);
         return slave;
       }
 
@@ -279,6 +391,37 @@
 
       randomizeAge() {
         return Math.floor(Math.random() * 24) + 18;
+      }
+
+      _normalRandInt(nr) {
+        return Math.floor(this._normalRand() * (nr + 1) / 3 + 0.5);
+      }
+
+      _normalRandClampedInt(nr) {
+        return Math.min(Math.max(-nr, this._normalRandInt(nr)), nr);
+      }
+
+      _normalRand() {
+        return Math.sqrt(-2 * Math.log(Math.random()))*Math.cos((2*Math.PI) * Math.random());
+      }
+
+      _randomElement(array) { return array[Math.floor(Math.random() * array.length)]; }
+
+      _randomBoobVolume(mod) {
+        let volume = [0, 300, 500, 650, 800, 1000, 1200, 1400, 1600, 1800, 2050, 2300, 2600, 2900, 3250, 3600, 3950, 4300, 4700, 5100, 5500, 5900];
+        let volume_dist = [90000, 470000, 720000, 840000, 908574, 947759, 970151, 982946, 990258, 994436, 996824, 998188, 998968, 999414, 999669, 999814, 999897, 999945, 999972, 999987, 999995, 1000000];
+        let randomRoll = Math.floor(Math.random() * 1000000) + 1;
+        let actualSize = 0;
+        while (randomRoll > volume_dist[actualSize]) {
+          actualSize = actualSize + 1
+        }
+        let minorSizeAdjustment = 0;
+        if (Math.random() < 0.5) {
+          minorSizeAdjustment = (Math.floor(Math.random() * 2) + 1) * 50
+        }
+        let volResult = volume[actualSize] + minorSizeAdjustment + mod;
+        if (volResult < 0) {volResult = 0}
+        return volResult
       }
     }
 

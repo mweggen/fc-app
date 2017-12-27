@@ -1,0 +1,150 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+
+<dom-module id="fc-eye-desc">
+  <template>
+    <style>
+      iron-pages {
+        display: inline;
+      }
+      .highint {
+        color: deepskyblue;
+        font-weight: bold;
+      }
+      .lowint {
+        color: orangered;
+        font-weight: bold;
+      }
+    </style>
+    <template is="dom-if" if="{{_isBlind}}">
+      <template is="dom-if" if="{{_emptyEyeColor}}">Her eyes are dull and unfocused,</template>
+      <template is="dom-if" if="{{!_emptyEyeColor}}">Her gaze is empty,</template>
+      <iron-pages selected="[[_intIndex]]">
+        <span>
+          but her facial expressions reveal she is incisive, quick cunning;
+          <template is="dom-if" if="{{!_hasIntImplant}}">she is so <span class="highint">brilliant</span> that her lack of education is unimportant.</template>
+          <template is="dom-if" if="{{_hasIntImplant}}">she is both <span class="highint">brilliant</span> and well educated.</template>
+        </span>
+        <span>
+          but her face is alive with intelligence; she is
+          <template is="dom-if" if="{{!_hasIntImplant}}">so <span class="highint">highly intelligent</span> that her lack of education is unimportant.</template>
+          <template is="dom-if" if="{{_hasIntImplant}}">both <span class="highint">highly intelligent</span> and well educated.</template>
+        </span>
+        <span>
+          but her facial expressions reveal her cleverness; she is of <span class="highint">above average intelligence</span>
+          <template is="dom-if" if="{{!_hasIntImplant}}">despite being undereducated.</template>
+          <template is="dom-if" if="{{_hasIntImplant}}">due to being well educated.</template>
+        </span>
+        <span>
+          but her facial expressions reveal her alertness; she is of average intelligence
+          <template is="dom-if" if="{{!_hasIntImplant}}">and is undereducated.</template>
+          <template is="dom-if" if="{{_hasIntImplant}}">due to being well educated.</template>
+        </span>
+        <span>
+          but her facial expressions reveal she is rather dim; she is of <span class="lowint">below average intelligence</span>
+          <template is="dom-if" if="{{!_hasIntImplant}}">and is undereducated.</template>
+          <template is="dom-if" if="{{_hasIntImplant}}">due to being well educated.</template>
+        </span>
+        <span>
+          but her facial expressions reveal she is as dull as her eyes; she is <span class="lowint">quite stupid</span>
+          <template is="dom-if" if="{{!_hasIntImplant}}">and ignorant.</template>
+          <template is="dom-if" if="{{_hasIntImplant}}">despite having some education.</template>
+        </span>
+        <span>
+          though you doubt it would be much different if she could see; she is <span class="lowint">a moron</span>,
+          <template is="dom-if" if="{{!_hasIntImplant}}">and ignorant to boot.</template>
+          <template is="dom-if" if="{{_hasIntImplant}}">yet somehow still remembers the basics of an education.</template>
+        </span>
+      </iron-pages>
+    </template>
+    <template is="dom-if" if="{{!_isBlind}}">
+      <iron-pages selected="[[_intIndex]]">
+        <span>
+          Her [[slave.eyeColor]]-eyed gaze is incisive, quick, cunning; she is
+          <template is="dom-if" if="{{!_hasIntImplant}}">so <span class="highint">brilliant</span> that her lack of education is unimportant.</template>
+          <template is="dom-if" if="{{_hasIntImplant}}">both <span class="highint">brilliant</span> and well educated.</template>
+        </span>
+        <span>
+          Her [[slave.eyeColor]] eyes are alive with intelligence; she is
+          <template is="dom-if" if="{{!_hasIntImplant}}">so <span class="highint">highly intelligent</span> that her lack of education is unimportant.</template>
+          <template is="dom-if" if="{{_hasIntImplant}}">both <span class="highint">highly intelligent</span> and well educated.</template>
+        </span>
+        <span>
+          Her [[slave.eyeColor]] eyes are clever; she is of <span class="highint">above average intelligence</span>
+          <template is="dom-if" if="{{!_hasIntImplant}}">despite being undereducated.</template>
+          <template is="dom-if" if="{{_hasIntImplant}}">due to being well educated.</template>
+        </span>
+        <span>
+          Her [[slave.eyeColor]] eyes are alert; she is of average intelligence
+          <template is="dom-if" if="{{!_hasIntImplant}}">and is undereducated.</template>
+          <template is="dom-if" if="{{_hasIntImplant}}">due to being well educated.</template>
+        </span>
+        <span>
+          Her [[slave.eyeColor]] eyes are dim; she is of <span class="lowint">below average intelligence</span>
+          <template is="dom-if" if="{{!_hasIntImplant}}">and is undereducated.</template>
+          <template is="dom-if" if="{{_hasIntImplant}}">due to being well educated.</template>
+        </span>
+        <span>
+          Her [[slave.eyeColor]] eyes are dull; she is <span class="lowint">quite stupid</span>
+          <template is="dom-if" if="{{!_hasIntImplant}}">and ignorant.</template>
+          <template is="dom-if" if="{{_hasIntImplant}}">despite having some education.</template>
+        </span>
+        <span>
+          Her [[slave.eyeColor]]-eyed gaze betrays near-total insensibility; she is <span class="lowint">a moron</span>,
+          <template is="dom-if" if="{{!_hasIntImplant}}">and ignorant to boot.</template>
+          <template is="dom-if" if="{{_hasIntImplant}}">yet somehow still remembers the basics of an education.</template>
+        </span>
+      </iron-pages>
+    </template>
+  </template>
+  <script>
+    class FCEyeDesc extends Polymer.Element {
+      static get is() { return 'fc-eye-desc'; }
+      static get properties() { return {
+        slave: {
+          type: Object,
+          value() { return {
+            eyes: 0,
+            eyeColor: 'blue',
+            intelligence: 3,
+            intelligenceImplant: 1
+          }}
+        },
+        _isBlind: {
+          type: Boolean,
+          computed: '_computeIsBlind(slave.eyes)'
+        },
+        _emptyEyeColor: {
+          type: Boolean,
+          computed: '_computeEmptyEyeColor(slave.eyeColor)'
+        },
+        _hasIntImplant: {
+          type: Boolean,
+          computed: '_computeHasIntImplant(slave.intelligenceImplant)'
+        },
+        _intIndex: {
+          type: Number,
+          computed: '_computeIntIndex(slave.intelligence)'
+        }
+      }}
+
+      _computeIntIndex(int) {
+        return int >= 3 ? 0 : int >= 2 ? 1 : int >= 1 ? 2 : int >= 0 ? 3 : int >= -1 ? 4 : int >= -2 ? 5 : 6;
+      }
+
+      _computeHasIntImplant(implant) {
+        return implant === 1;
+      }
+
+      _computeIsBlind(eyes) {
+        return eyes === -2;
+      }
+
+      _computeEmptyEyeColor(eyeColor) {
+        return eyeColor === 'empty';
+      }
+    }
+
+    customElements.define(FCEyeDesc.is, FCEyeDesc);
+  </script>
+</dom-module>

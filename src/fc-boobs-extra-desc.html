@@ -1,0 +1,94 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<dom-module id="fc-boobs-extra-desc">
+  <template>
+    <template is="dom-if" if="{{_gt(slave.boobs, 20000)}}">
+      <template is="dom-if" if="{{_canWalk(slave)}}">
+        Her breasts are so massive that it is difficult for her to move.
+        <template is="dom-if" if="{{_gt(slave.muscles, 95)}}">
+          However, she is so powerfully built that she can manage it with effort, using her arms to support them.
+        </template>
+        <template is="dom-if" if="{{!_gt(slave.muscles, 95)}}">
+          <template is="dom-if" if="{{_gt(slave.muscles, 30)}}">
+            She can barely manage to get to her feet unaided, and usually walks with her arms crossed under her tits to
+            help take their weight.
+          </template>
+          <template is="dom-if" if="{{!_gt(slave.muscles, 30)}}">
+            <template is="dom-if" if="{{_gt(slave.muscles, 5)}}">
+              She requires assistance to get to her feet, and uses a stand to support them when she must remain upright
+              for more than a short time.
+            </template>
+            <template is="dom-if" if="{{!_gt(slave.muscles, 5)}}">
+              She cannot get to her feet unaided, and uses a wheeled stand to support her boobs when she must walk or
+              remain upright.
+            </template>
+          </template>
+        </template>
+      </template>
+      <template is="dom-if" if="{{!_canWalk(slave)}}">
+        <template is="dom-if" if="{{_gt(slave.boobs, 40000)}}">They each are easily as big as her, making her mostly boob.</template>
+        <template is="dom-if" if="{{!_gt(slave.boobs, 40000)}}">
+          Together they are nearly the same size as her torso, making her about half boob.
+        </template>
+      </template>
+    </template>
+
+    <template is="dom-if" if="{{_eq(slave.markings, 'heavily freckled')}}">
+      <template is="dom-if" if="{{_gt(slave.boobs, 2000)}}">
+        They're covered in freckles, though her tits are so big that the freckles are spaced widely across the breadth
+        of each boob.
+      </template>
+      <template is="dom-if" if="{{!_gt(slave.boobs, 2000)}}">
+        <template is="dom-if" if="{{_gt(slave.boobs, 250)}}">
+          They're covered in freckles, which are particularly dense in the cleft between them.
+        </template>
+        <template is="dom-if" if="{{!_gt(slave.boobs, 250)}}">Her chest is covered in dense freckles.</template>
+      </template>
+    </template>
+    <template is="dom-if" if="{{_eq(slave.markings, 'freckles')}}">
+      <template is="dom-if" if="{{_gt(slave.boobs, 250)}}">The tops of her breasts and her cleavage are lightly freckled.</template>
+      <template is="dom-if" if="{{!_gt(slave.boobs, 250)}}">Her chest is covered in a light spray of freckles.</template>
+    </template>
+  </template>
+  <script>
+    class FCBoobsExtraDesc extends Polymer.Element {
+      static get is() { return 'fc-boobs-extra-desc' }
+      static get properties() { return {
+        slave: {
+          type: Object,
+          value: function() { return {
+            boobs: 500,
+            muscles: 0,
+            heels: 0,
+            shoes: '',
+            markings: ''
+          }}
+        }
+      }}
+
+      _gt(v1, v2) { return v1 > v2; }
+      _eq(v1, v2) { return v1 === v2; }
+      _canWalk(slave) {
+        if (!slave) {
+          return null;
+        } else if (slave.amp === 1)  {
+          return false;
+        } else if (slave.boobs > 30000 + (slave.muscles * 100)) {
+          return false;
+        } else if (slave.heels === 0) {
+          return true;
+        } else if (slave.shoes === "heels") {
+          return true;
+        } else if (slave.shoes === "extreme heels") {
+          return true;
+        } else if (slave.shoes === "boots") {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    }
+
+    customElements.define(FCBoobsExtraDesc.is, FCBoobsExtraDesc);
+  </script>
+</dom-module>

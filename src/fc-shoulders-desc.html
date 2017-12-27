@@ -1,0 +1,81 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<dom-module id="fc-shoulders-desc">
+  <template>
+    <style>
+      .bad {
+        color: red;
+        font-weight: bold;
+      }
+    </style>
+    <template is="dom-if" if="{{_lt(slave.shoulders, -1)}}">
+      Her shoulders and chest are very narrow and
+      <template is="dom-if" if="{{_gt(slave.boobs, 2000)}}">
+        feminine, forcing her pressed-together tits to spread far beyond her sides.
+      </template>
+      <template is="dom-if" if="{{!_gt(slave.boobs, 2000)}}">feminine.</template>
+    </template>
+    <template is="dom-if" if="{{!_lt(slave.shoulders, -1)}}">
+      <template is="dom-if" if="{{_lt(slave.shoulders, 0)}}">
+        Her shoulders and chest are quite
+        <template is="dom-if" if="{{_gt(slave.boobs, 1200)}}">
+          feminine, causing a lot of cleavage and pressing her boobs outward beyond her sides.
+        </template>
+        <template is="dom-if" if="{{!_gt(slave.boobs, 1200)}}">feminine.</template>
+      </template>
+      <template is="dom-if" if="{{!_lt(slave.shoulders, 0)}}">
+        <template is="dom-if" if="{{_gt(slave.shoulders, 1)}}">
+          Her shoulders and chest are very
+          <template is="dom-if" if="{{_gt(slave.boobs, 600)}}">
+            broad, making her boobs look a lot smaller than they actually are.
+          </template>
+          <template is="dom-if" if="{{!_gt(slave.boobs, 600)}}">broad.</template>
+        </template>
+        <template is="dom-if" if="{{!_gt(slave.shoulders, 1)}}">
+          <template is="dom-if" if="{{_gt(slave.shoulders, 0)}}">
+            Her shoulders and chest are fairly
+            <template is="dom-if" if="{{_gt(slave.boobs, 600)}}">
+              broad, making her tits look smaller than they actually are.
+            </template>
+            <template is="dom-if" if="{{!_gt(slave.boobs, 600)}}">broad.</template>
+          </template>
+          <template is="dom-if" if="{{!_gt(slave.shoulders, 0)}}">
+            Her shoulders and chest are
+            <template is="dom-if" if="{{_gt(slave.boobs, 800)}}">
+              feminine, flattering her breasts.
+            </template>
+            <template is="dom-if" if="{{!_gt(slave.boobs, 800)}}">feminine.</template>
+          </template>
+        </template>
+      </template>
+    </template>
+    <template is="dom-if" if="{{_gt(slave.shoulders, slave.hips)}}">
+      They're wider than her hips,
+      <template is="dom-if" if="{{_tooBig(slave.boobs, slave.shoulders, slave.hips)}}">
+        but her massive breasts make it hard to discern.
+      </template>
+      <template is="dom-if" if="{{!_tooBig(slave.boobs, slave.shoulders, slave.hips)}}">
+        giving her an <span class="bad">unattractive, somewhat mannish, appearance</span>.
+      </template>
+    </template>
+  </template>
+  <script>
+    class FCShouldersDesc extends Polymer.Element {
+      static get is() { return 'fc-shoulders-desc'; }
+      static get properties() { return {
+        slave: {
+          type: Object,
+          value: function() { return {
+            shoulders: 0,
+            boobs: 500
+          }}
+        }
+      }}
+      _lt(v1, v2) { return v1 < v2; }
+      _gt(v1, v2) { return v1 > v2; }
+      _tooBig(boobs, shoulders, hips) { return boobs > 2000 * (shoulders - hips); }
+    }
+
+    customElements.define(FCShouldersDesc.is, FCShouldersDesc);
+  </script>
+</dom-module>

@@ -1,0 +1,53 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+
+<dom-module id="fc-skin-desc">
+  <template>
+    <style>
+      .nationality {
+        color: tan;
+        font-weight: bold;
+      }
+      iron-pages { display: inline }
+    </style>
+    <iron-pages selected="[[_nationalityIndex]]">
+      <span>Ethnically, she's</span>
+      <span>She's been chattel long enough that slavery is effectively her nationality; ethnically she's</span>
+      <span>She's originally <span class="nationality">[[slave.nationality]]</span>; ethnically, she's</span>
+    </iron-pages>
+    <span class="nationality">[[slave.race]]</span>, and her skin is
+    [[slave.skin]]<template is="dom-if" if="{{_isFreckled}}">
+    and lightly freckled</template><template is="dom-if" if="{{_isHeavilyFreckled}}">
+    and heavily freckled</template><template is="dom-if" if="{{_isAttractiveCombination}}">,
+    an attractive combination</template>.
+  </template>
+  <script>
+    class FCSkinDesc extends Polymer.Element {
+      static get is() { return "fc-skin-desc"; }
+      static get properties() { return {
+        slave: {
+          type: Object,
+          value() { return {
+            nationality: undefined,
+            race: 'white',
+            skin: 'pale',
+            markings: 'freckles'
+          }}
+        },
+        _nationalityIndex: { computed: '_computeNationalityIndex(slave.nationality)' },
+        _isFreckled: { computed: '_computeIsFreckled(slave.markings)' },
+        _isHeavilyFreckled: { computed: '_computeIsHeavilyFreckled(slave.markings)' },
+        _isAttractiveCombination: { computed: '_computeIsAttractiveCombination(slave.markings, slave.skin, slave.hColor)' }
+      }}
+
+      _computeNationalityIndex(n) { return n === undefined ? 0 : n === 'slave' ? 1 : 2; }
+      _computeIsFreckled(m) { return m === 'freckles'; }
+      _computeIsHeavilyFreckled(m) { return m === 'heavily freckled'; }
+      _computeIsAttractiveCombination(m, s, hc) {
+        return (m === 'freckles' || m === 'heavily freckled') && (s === 'pale' || s === 'fair') && hc !== 'red';
+      }
+    }
+
+    customElements.define(FCSkinDesc.is, FCSkinDesc);
+  </script>
+</dom-module>
