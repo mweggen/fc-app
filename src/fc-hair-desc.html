@@ -1,0 +1,125 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="fc-hair-clothing-desc.html">
+
+<dom-module id="fc-hair-desc">
+  <template>
+    Her
+    <template is="dom-if" if="{{_eq(slave.fuckdoll, 0)}}">
+
+      <template is="dom-if" if="{{_eq(slave.hStyle, 'bald')}}">head is completely bald.</template>
+      <template is="dom-if" if="{{!_eq(slave.hStyle, 'bald')}}">
+        <template is="dom-if" if="{{_eq(slave.hStyle, 'shaved bald')}}">
+          head has been shaved. If her hair were visible, it would be [[slave.hColor]].
+        </template>
+        <template is="dom-if" if="{{!_eq(slave.hStyle, 'shaved bald')}}">
+          <template is="dom-if" if="{{_eq(slave.hStyle, 'buzzcut')}}">[[slave.hColor]] hair is a short buzzcut.</template>
+          <template is="dom-if" if="{{!_eq(slave.hStyle, 'buzzcut')}}">
+            <template is="dom-if" if="{{_eq(slave.hStyle, 'trimmed')}}">[[slave.hColor]] hair is trimmed short</template>
+            <template is="dom-if" if="{{!_eq(slave.hStyle, 'trimmed')}}">
+              <template is="dom-if" if="{{_eq(slave.hStyle, 'afro')}}">
+                [[slave.hColor]] hair is in a
+                <template is="dom-if" if="{{_gt(slave.hLength, 100)}}">
+                  gigantic puffed-up afro and looks ridiculous.
+                </template>
+                <template is="dom-if" if="{{!_gt(slave.hLength, 100)}}">
+                  <template is="dom-if" if="{{_gt(slave.hLength, 30)}}">puffy afro.</template>
+                  <template is="dom-if" if="{{!_gt(slave.hLength, 30)}}">short afro.</template>
+                </template>
+              </template>
+              <template is="dom-if" if="{{!_eq(slave.hStyle, 'afro')}}">
+                <template is="dom-if" if="{{_eq(slave.hStyle, 'cornrows')}}">
+                  [[slave.hColor]] hair is formed tightly into cornrows in a decorative pattern on her head, dangling
+                  <template is="dom-if" if="{{_gte(slave.hLength, 150)}}">down calf-length,</template>
+                  <template is="dom-if" if="{{!_gte(slave.hLength, 150)}}">
+                    <template is="dom-if" if="{{_gte(slave.hLength, 100)}}">down ass-length,</template>
+                    <template is="dom-if" if="{{!_gte(slave.hLength, 100)}}">
+                      <template is="dom-if" if="{{_gte(slave.hLength, 30)}}">down long,</template>
+                      <template is="dom-if" if="{{!_gte(slave.hLength, 30)}}">
+                        <template is="dom-if" if="{{_gte(slave.hLength, 10)}}">down shoulder-length,</template>
+                        <template is="dom-if" if="{{!_gte(slave.hLength, 10)}}">down,</template>
+                      </template>
+                    </template>
+                  </template>
+                  with colorful beads interspersed in them.
+                </template>
+                <template is="dom-if" if="{{!_eq(slave.hStyle, 'cornrows')}}">
+                  <template is="dom-if" if="{{_eq(slave.hStyle, 'bun')}}">
+                    [[slave.hColor]] hair is
+                    <template is="dom-if" if="{{_gte(slave.hLength, 100)}}">packed tightly into a huge puffy</template>
+                    <template is="dom-if" if="{{!_gte(slave.hLength, 100)}}">
+                      <template is="dom-if" if="{{_gte(slave.hLength, 30)}}">packed into a large</template>
+                      <template is="dom-if" if="{{!_gte(slave.hLength, 30)}}">
+                        <template is="dom-if" if="{{_gte(slave.hLength, 10)}}">tied into a small</template>
+                        <template is="dom-if" if="{{!_gte(slave.hLength, 10)}}">tied into a</template>
+                      </template>
+                    </template>
+                    bun.
+                  </template>
+                  <template is="dom-if" if="{{!_eq(slave.hStyle, 'bun')}}">
+                    <template is="dom-if" if="{{_long(slave.hStyle)}}">
+                      [[_lengthDesc(slave.hLength, slave.height)]] [[slave.hColor]] hair
+                      <fc-hair-clothing-desc slave="[[slave]]"></fc-hair-clothing-desc>
+                    </template>
+                    <template is="dom-if" if="{{!_long(slave.hStyle)}}">
+                      [[slave.hColor]] hair is [[slave.hStyle]].
+                    </template>
+                  </template>
+                </template>
+              </template>
+            </template>
+          </template>
+        </template>
+      </template>
+
+    </template>
+    <template is="dom-if" if="{{!_eq(slave.fuckdoll, 0)}}">
+      <template is="dom-if" if="{{_gt(slave.hLength, 20)}}">
+        hair sticks out of the suit in two
+        <template is="dom-if" if="{{_gt(slave.hLength, 100)}}">extremely long</template>
+        <template is="dom-if" if="{{!_gt(slave.hLength, 100)}}">
+          <template is="dom-if" if="{{_gt(slave.hLength, 40)}}">long</template>
+          <template is="dom-if" if="{{!_gt(slave.hLength, 40)}}">short</template>
+        </template>
+        tails, which can be used as handles when using the Fuckdoll's
+        <template is="dom-if" if="{{_gt(slave.vagina, -1)}}">lower holes.</template>
+        <template is="dom-if" if="{{!_gt(slave.vagina, -1)}}">rear hole.</template>
+      </template>
+      <template is="dom-if" if="{{!_gt(slave.hLength, 20)}}">
+        <template is="dom-if" if="{{_gt(slave.hLength, 5)}}">short hair is tightly covered by the suit.</template>
+        <template is="dom-if" if="{{!_gt(slave.hLength, 5)}}">scalp is tightly covered by the suit.</template>
+      </template>
+    </template>
+
+  </template>
+  <script>
+    class FCHairDesc extends Polymer.Element {
+      static get is() { return 'fc-hair-desc'; }
+      static get properties() { return {
+        slave: {
+          type: Object,
+          value() { return {
+
+          }}
+        }
+      }}
+
+      _lengthDesc(length, height) {
+        let rel = length / height;
+        console.info('rel='+rel);
+        return rel > 0.9 ? 'floor-length,' : rel > 0.8 ? 'calf-length,' : rel > 0.7 ? 'knee-length,'
+            : rel >= 0.6 ? 'thigh-length,' : rel >= 0.4 ? 'ass-length,' : rel >= 0.2 ? 'long,'
+            : rel >= 0.15 ? 'shoulder-length,' : 'short,';
+      }
+
+      _long(style) {
+        return ['neat', 'strip', 'tails', 'up', 'ponytail', 'braided', 'dreadlocks', 'permed', 'curled', 'luxurious'].indexOf(style) !== -1;
+      }
+
+      _gt(v1, v2) { return v1 > v2; }
+      _gte(v1, v2) { return v1 >= v2; }
+      _eq(v1, v2) { return v1 === v2; }
+    }
+
+    customElements.define(FCHairDesc.is, FCHairDesc);
+  </script>
+</dom-module>

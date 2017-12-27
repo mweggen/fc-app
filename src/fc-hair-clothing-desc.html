@@ -1,0 +1,159 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+
+<dom-module id="fc-hair-clothing-desc">
+  <template>
+    <style>
+      iron-pages { display: inline; }
+    </style>
+    <template is="dom-if" if="{{_eq(slave.fuckdoll, 0)}}">
+      <template is="dom-if" if="{{_eq(slave.hStyle, 'neat')}}">
+        <template is="dom-if" if="{{_gt(slave.hLength, 100)}}">
+          <iron-pages selected="[[_cloth1(slave.clothing)]]">
+            <span>is caught painfully in her chains here and there.</span>
+            <span>rampages down her back in the glorious feathering of an 80's perm.</span>
+            <span>cascades down her back, ornamented with little silver talismans here and there.</span>
+            <span>flows down her back, rustling freely in the wind.</span>
+            <span>is allowed a gap at the back of her head so it can escape to cascade down her back.</span>
+            <span>cascades down her back, covered by a flimsy hairnet.</span>
+            <span>cascades gorgeously down her bare back.</span>
+            <span>cascades elegantly down her back, kept sensibly in place by a set of ivory hairpins.</span>
+            <span>is not visible under her modest head covering.</span>
+            <span>is long and loose, but is decorated with little black bows here and there.</span>
+            <span>is kept out of her face by a couple of simple barrettes.</span>
+            <span>is kept out of her face by a couple of gaudy golden barrettes.</span>
+            <span>is kept out of her face by a couple of sturdy hairpins.</span>
+            <span>is kept out of her face by a pastel-colored headband.</span>
+            <span>is topped by a traditional white nurse's headband, complete with red cross.</span>
+            <span>cascades out from under a cowboy hat.</span>
+            <span>flows back in a mane, with a flower tucked behind one ear: <!--todo flower desc--></span>
+            <span>cascades almost to the ground.</span>
+          </iron-pages>
+        </template>
+        <template is="dom-if" if="{{!_gt(slave.hLength, 100)}}">
+          <template is="dom-if" if="{{_gt(slave.hLength, 30)}}">
+            <iron-pages selected="[[_cloth2(slave.clothing)]]">
+              <span>is in a big, classic 80's perm.</span>
+              <span>is brushed back over her shoulders, ornamented with little silver talismans here and there.</span>
+              <span>flows down her shoulders, giving her a very innocent look.</span>
+              <span>is allowed a gap at the back of her head so it can escape down her back.</span>
+              <span>flows doen her back, covered by a flimsy hairnet.</span>
+              <span>flows fashionably down her bare back.</span>
+              <span>flows elegantly down her back, kept sensibly in place by a set of ivory hairpins.</span>
+              <span>is not visible under her modest head covering.</span>
+              <span>is decorated with a little black bow in back.</span>
+              <span>is kept out of her face by a couple of simple barrettes.</span>
+              <span>is kept out of her face by a couple of gaudy golden barrettes.</span>
+              <span>is kept out of her face by a couple of sturdy hairpins.</span>
+              <span>is kept out of her face by a pastel-colored headband.</span>
+              <span>is topped by a traditional white nurse's headband, complete with red cross.</span>
+              <span>flows out from under a cowboy hat.</span>
+              <span>is tucked back by a flower, tucked behind one ear: <!--todo flower desc--></span>
+              <span>is brushed back over her shoulders.</span>
+            </iron-pages>
+          </template>
+          <template is="dom-if" if="{{!_gt(slave.hLength, 30)}}">
+            <template is="dom-if" if="{{_gt(slave.hLength, 10)}}">
+              <iron-pages selected="[[_cloth2(slave.clothing)]]">
+                <span>is in a classic 80's perm.</span>
+                <span>is brushed back and ornamented with a little jade talisman.</span>
+                <span>is short and neat, giving her an innocent look.</span>
+                <span>is crammed under her latex hood.</span>
+                <span>is covered by a flimsy hairnet.</span>
+                <span>follows the latest fashion.</span>
+                <span>is kept sensibly in place by a set of ivory hairpins.</span>
+                <span>is not visible under her modest head covering.</span>
+                <span>is decorated with a little black bow in back.</span>
+                <span>is kept out of her face by a simple barrette.</span>
+                <span>is kept out of her face by a gaudy golden barrette.</span>
+                <span>is kept out of her face by a sturdy hairpin.</span>
+                <span>is kept out of her face by a pastel-colored headband.</span>
+                <span>is topped by a traditional white nurse's headband, complete with red cross.</span>
+                <span>is topped by a cowboy hat.</span>
+                <span>bears a flower tucked behind one ear: <!--todo flower desc--></span>
+                <span>is brushed back.</span>
+              </iron-pages>
+            </template>
+            <template is="dom-if" if="{{!_gt(slave.hLength, 10)}}">
+              <iron-pages selected="[[_cloth3(slave.clothing)]]">
+                <span>is in a classic 80's perm.</span>
+                <span>fits under her latex hood.</span>
+                <span>is covered by a flimsy hairnet.</span>
+                <span>is gelled into a fashionable wave.</span>
+                <span>is gelled into a fashionable wave.</span>
+                <span>is gelled into a fashionable wave.</span>
+                <span>is not visible under her modest head covering.</span>
+                <span>is parted on the side.</span>
+                <span>is parted in the middle.</span>
+                <span>is in a utilitarian cut.</span>
+                <span>is hidden by a traditional white nurse's headband, complete with red cross.</span>
+                <span>is hidden by a cowboy hat.</span>
+                <span>is short, and has a flower tucked behind one ear: <!--todo flower desc--></span>
+                <span>is neatly brushed.</span>
+              </iron-pages>
+            </template>
+          </template>
+        </template>
+      </template>
+      <!--todo add other clothing-->
+    </template><!--end of fuckdolll-->
+  </template>
+  <script>
+    class FCHairClothingDesc extends Polymer.Element {
+      static get is() { return 'fc-hair-clothing-desc'; }
+      static get properties() { return {
+        slave: {
+          type: Object,
+          value() { return {
+            fuckdoll: 0,
+            hStyle: 'neat'
+          }}
+        }
+      }}
+
+      _cloth2(clothing) {
+        return clothing === 'body oil' ? 0
+          : clothing === 'a slutty qipao' ? 1
+          : clothing === 'a huipil' ? 2
+          : clothing === 'restrictive latex' || clothing === 'a latex catsuit' ? 3
+          : clothing === 'harem gauze' ? 4
+          : clothing === 'a halter top dress' || clothing === 'a ball gown' || clothing === 'a slave gown' ? 5
+          : clothing === 'a kimono' ? 6
+          : clothing === 'a hijab and abaya' || clothing === 'a penitent nuns habit'
+                        || clothing === 'a fallen nuns habit' || clothing === 'a chattel habit' ? 7
+          : clothing === 'a slutty maid outfit' || clothing === 'a nice maid outfit' ? 8
+          : clothing === 'conservative clothing' || clothing === 'nice business attire' ? 9
+          : clothing === 'slutty business attire' ? 10
+          : clothing === 'battledress' || clothing === 'a military uniform' ? 11
+          : clothing === 'a schoolgirl outfit' ? 12
+          : clothing === 'a slutty nurse outfit' || clothing === 'a nice nurse outfit' ? 13
+          : clothing === 'Western clothing' ? 14
+          : clothing === 'a string bikini' || clothing === 'attractive lingerie' ? 15 : 16;
+      }
+
+      _cloth3(clothing) {
+        return clothing === 'body oil' ? 0
+          : clothing === 'restrictive latex' || clothing === 'a latex catsuit' ? 1
+          : clothing === 'harem gauze' ? 2
+          : clothing === 'a slave gown' ? 3
+          : clothing === 'a halter top dress' ? 4
+          : clothing === 'a ball gown' ? 5
+          : clothing === 'a hijab and abaya' || clothing === 'a penitent nuns habit'
+                        || clothing === 'a fallen nuns habit' || clothing === 'a chattel habit' ? 6
+          : clothing === 'conservative clothing' || clothing === 'nice business attire' ? 7
+          : clothing === 'slutty business attire' ? 8
+          : clothing === 'battledress' || clothing === 'a military uniform' ? 9
+          : clothing === 'a slutty nurse outfit' || clothing === 'a nice nurse outfit' ? 10
+          : clothing === 'Western clothing' ? 11
+          : clothing === 'a string bikini' || clothing === 'attractive lingerie' ? 12 : 13;
+      }
+
+      _cloth1(clothing) { return clothing === 'chains' ? 0 : this._cloth2(clothing) + 1; }
+
+      _eq(v1, v2) { return v1 === v2; }
+      _gt(v1, v2) { return v1 > v2; }
+    }
+
+    customElements.define(FCHairClothingDesc.is, FCHairClothingDesc);
+  </script>
+</dom-module>
