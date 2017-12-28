@@ -350,7 +350,22 @@
           'none', 'none', 'none', 'none', 'submissive', 'submissive', 'cumslut', 'humiliation', 'humiliation',
           'buttslut', 'boobs', 'pregnancy', 'dom', 'sadist', 'masochist']);
 
-        //todo flaws
+        slave.behavioralFlaw = this._randomElement(["none", "none", "none", "arrogant", "bitchy", "odd", "hates men",
+          "hates women", "hates women", "anorexic", "gluttonous", "devout", "liberated"]);
+        if (slave.behavioralFlaw === 'devout') {
+          slave.sexualFlaw = this._randomElement(["none", "repressed",  "shamefast", "apathetic", "crude", "judgemental"]);
+        } else {
+          slave.sexualFlaw = this._randomElement(["none", "none", "none", "none", "hates oral", "hates anal",
+            "hates penetration", "repressed", "idealistic", "shamefast", "apathetic", "crude", "judgemental"]);
+        }
+        if (slave.behavioralFlaw === 'none' && Math.random() < 0.1) {
+          slave.behavioralQuirk = this._randomElement(["confident", "cutting", "funny", "adores women", "adores men",
+            "fitness", "insecure", "sinful", "advocate"]);
+        }
+        if (slave.sexualFlaw === 'none' && Math.random() < 0.1) {
+          slave.sexualQuirk = this._randomElement(["gagfuck queen", "painal queen", "strugglefuck queen", "tease",
+            "romantic", "perverted", "caring", "unflinching", "size queen"]);
+        }
 
         slave.health = this._normalRandClampedInt(50);
 

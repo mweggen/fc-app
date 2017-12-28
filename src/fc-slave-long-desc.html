@@ -29,9 +29,13 @@
     <style>
       .bad {
         color: red;
+        font-weight: bold;
       }
       .good {
         color: pink;
+      }
+      .great {
+        color: green;
       }
       iron-pages {
         display: inline;
@@ -84,14 +88,180 @@
               <span>She is <span class="bad">bitchy</span> and constantly tries to get a word in edgewise.</span>
               <span>Since she is well broken, she tries to confine her <span class="bad">bitchy</span> remarks to your other slaves.</span>
             </iron-pages>
-            <span></span><!--liberated-->
-            <span></span><!--devout-->
+            <iron-pages selected="[[_broken(slave.devotion, slave.trust)]]"><!--liberated-->
+              <span>She strongly believes that <span class="bad">slavery is wrong</span>, and resists it as best she can.</span>
+              <span>She strongly believes that <span class="bad">slavery is wrong</span>, but usually keeps quiet out of fear.</span>
+              <span>She strongly believes that <span class="bad">slavery is wrong</span>, and rarely misses a chance to complain about it.</span>
+              <span>She strongly believes that <span class="bad">slavery is wrong</span>, but has learned to keep it to herself.</span>
+            </iron-pages>
+            <span>She is <span class="bad">devoutly religious</span>,<!--devout-->
+              <iron-pages selected="[[_broken(slave.devotion, slave.trust)]]">
+                <span>and uses her faith as a wellspring of resistance.</span>
+                <span>and uses her faith as a place of refuge.</span>
+                <span>and uses her faith as a private place within herself.</span>
+                <span>but has learned to keep her faith private.</span>
+              </iron-pages>
+            </span>
             <span>She behaves <span class="bad">oddly</span>, saying and doing random things.</span><!--odd-->
-            <span></span><!--hates men-->
-            <span></span><!--hates women-->
+            <span><!--hates men-->
+              She <span class="bad">strongly dislikes</span> being around
+              <iron-pages selected="[[_attr(slave.attrXY, slave.energy)]]">
+                <span>men; since she loves the dick, she's forced to put up with them.</span>
+                <span>men; since she likes the dick, she reluctantly puts up with them.</span>
+                <span>men.</span>
+              </iron-pages>
+            </span>
+            <span><!--hates women-->
+              She <span class="bad">strongly dislikes</span> being around
+              <iron-pages selected="[[_attr(slave.attrXX, slave.energy)]]">
+                <span>women; since she loves pussy, she's forced to put up with them.</span>
+                <span>women; since she likes pussy, she reluctantly puts up with them.</span>
+                <span>women.</span>
+              </iron-pages>
+            </span>
             <span>She suffers from <span class="bad">anorexia</span>.</span><!--anorexic-->
             <span>She <span class="bad">tends to overeat</span> whenever she can, reacting to the rigors of sexual slavery with overeating.</span><!--gluttonous-->
           </iron-pages>
+
+          <iron-pages selected="[[_behavioralQuirk(slave.behavioralQuirk)]]">
+            <span>She's <span class="great">confident</span>, and believes that she has something of value to offer, even as a slave.</span><!--confident-->
+            <span>She often has a witty or <span class="great">cutting</span> remark ready, but knows when to keep them to herself.</span><!--cutting-->
+            <span>She's <span class="great">funny</span>, often providing a little comic relief.</span><!--funny-->
+            <span>She <span class="great">adores women</span>, and loves spending time with them.</span><!--adores women-->
+            <span>She <span class="great">adores men</span>, and loves spending time with them.</span><!--adores men-->
+            <span>She's a <span class="great">fitness fanatic</span>, and almost gets off to a hard workout.</span><!--fitness-->
+            <span>She's <span class="great">insecure</span>, defining her self worth by how much others want to fuck her.</span><!--insecure-->
+            <span><!--sinful-->
+              She's delightfully <span class="great">sinful</span>, taking real pleasure in breaking cultural mores.
+              <!--todo fs-->
+            </span>
+            <span>She's an <span class="great">advocate</span> for slavery, and can articulate what it's done for her.</span><!--advocate-->
+          </iron-pages>
+
+          <iron-pages selected="[[_sexualFlaw(slave.sexualFlaw)]]">
+            <span>She <span class="bad">hates</span> oral sex and tries to avoid it.</span>
+            <span>She <span class="bad">hates</span> anal sex and tries to avoid it.</span>
+            <span>She <span class="bad">hates</span> penetration and tries to avoid it.</span>
+            <span>
+              She is <span class="bad">sexually repressed</span>, retaining a fundamental distaste for sex from her
+              upbringing.
+            </span>
+            <span>
+              She is <span class="bad">sexually idealistic</span>, retaining a belief that sex should be based on love
+              and consent.
+            </span>
+            <span>She is <span class="bad">shamefast</span>, suffering crippling anxiety when naked.</span>
+            <span>She is <span class="bad">sexually apathetic</span>, often slipping into inertness during sex.</span>
+            <span>
+              She is <span class="bad">sexually crude</span>, and has little sense of what partners find disgusting
+              during sex.
+            </span>
+            <span>
+              She is <span class="bad">sexually judgemental</span>, and often denigrates her sexual partners'
+              performance.
+            </span>
+            <span>
+              She's a <span class="ok">cum addict</span>: she has a deep psychological addiction to semen and becomes
+              anxious if she goes for a few hours without drinking any.<!--todo pussyjuice-->
+            </span>
+            <span>
+              She's an <span class="ok">anal addict</span>: she has a deep psychological need to be fucked in the ass
+              and becomes anxious if she goes for a few hours without anal.
+            </span>
+            <span>
+              She's an <span class="ok">attention whore</span>: shocking and titillating spectators is more important to
+              her than the actual pleasure of sex.
+            </span>
+            <span>
+              She has a <span class="ok">breast growth obsession</span>: she's nearly incapable of believing that her
+              breasts are big enough.
+            </span>
+            <span>
+              She's sexually <span class="ok">abusive</span>: she prefers taking sexual pleasure by force to having it
+              offered to her.
+            </span>
+            <span>She's sexually <span class="ok">malicious</span>: she gets off on others' anguish.</span>
+            <span>
+              She's filled with <span class="ok">self hatred</span>, and is disturbingly willing to comply with things
+              that might hurt her.
+            </span>
+            <span>
+              She's sexually <span class="ok">self neglectful</span>, and often shows no interest in getting off
+              herself.
+            </span>
+            <span>
+              She's <span class="ok">obsessed with being bred</span> to the point of fetishizing pregnancy itself as
+              much as any act that leads to it.
+            </span>
+          </iron-pages>
+          <iron-pages selected="[[_sexualQuirk(slave.sexualQuirk)]]">
+            <span>She's a <span class="great">gagfuck queen</span>: she's able to safely take a rough facefuck.</span>
+            <span>She's a <span class="great">painal queen</span>: she knows exactly how much she can take without getting hurt.</span>
+            <span>She's a <span class="great">strugglefuck queen</span>: she can gauge exactly how much resistance her partners want.</span>
+            <span>She's a <span class="great">tease</span>, and often displays a little flash of herself followed by a blush.</span>
+            <span>She's a <span class="great">romantic</span>, and persists in innocent pleasure in the closeness of sex.</span>
+            <span>She's <span class="great">perverted</span>, and enjoys breaking sexual boundaries.</span>
+            <span>She's <span class="great">caring</span>, and enjoys bringing partners pleasure more than getting off herself.</span>
+            <span>She's <span class="great">unflinching</span>, willing to do anything, even by the standards of sex slaves.</span>
+            <span>She's a <span class="great">size queen</span>; preferring big cock is almost her trademark.</span>
+          </iron-pages>
+
+          <template is="dom-if" if="[[_eq(slave.fetishKnown, 1)]]">
+            <iron-pages selected="[[_fetish(slave.fetish)]]">
+              <span><!--submissive-->
+                <template is="dom-if" if="[[_eq(slave.sexualFlaw, 'apathetic')]]">
+                  This sexual apathy plays into her preference for <span class="coral">submission</span>.
+                </template>
+                <template is="dom-if" if="[[!_eq(slave.sexualFlaw, 'apathetic')]]">
+                  <template is="dom-if" if="[[_eq(slave.behavioralFlaw, 'arrogant')]]">
+                    Her arrogance is really just a thin shell to protect her true need to <span class="coral">submit</span>.
+                  </template>
+                  <template is="dom-if" if="[[!_eq(slave.behavioralFlaw, 'arrogant')]]">
+                    <iron-pages selected="[[_fetishStrength(slave.fetishStrength)]]">
+                      <span>She's an extreme <span class="coral">submissive</span>, and relishes the strictures of slavery.</span>
+                      <span>She's a confirmed <span class="coral">submissive</span>, and enjoys the strictures of slavery.</span>
+                      <span>She has <span class="coral">submissive</span> tendencies, and likes the strictures of slavery.</span>
+                    </iron-pages>
+                  </template>
+                </template>
+              </span>
+              <span><!--cumslut-->
+                <template is="dom-if" if="[[_eq(slave.sexualFlaw, 'hates oral')]]">
+                  She's torn between her <span class="coral">love of semen</span> and her dislike of having cocks in her mouth.
+                </template>
+                <template is="dom-if" if="[[!_eq(slave.sexualFlaw, 'hates oral')]]">
+                  <iron-pages selected="[[_fetishStrength(slave.fetishStrength)]]">
+                    <span>She's a <span class="coral">cumslut</span>, and loves giving blowjobs and receiving facials.</span>
+                    <span>She <span class="coral">prefers giving oral</span>, and enjoys sucking dick and receiving facials.</span>
+                    <span>She has an <span class="coral">oral fixation</span>, and likes giving blowjobs and receiving facials.</span>
+                  </iron-pages>
+                </template>
+              </span>
+              <span><!--humiliation-->
+                <template is="dom-if" if="[[_eq(slave.behavioralFlaw, 'bitchy')]]">
+                  Her bitchiness is really just an expression of her deep need to be <span class="coral">humiliated</span> herself.
+                </template>
+                <template is="dom-if" if="[[!_eq(slave.behavioralFlaw, 'bitchy')]]">
+                  <template is="dom-if" if="[[_eq(slave.sexualFlaw, 'shamefast')]]">
+                    Her shame is genuine, and it is with real self-loathing that she <span class="coral">gets off on humiliation</span>.
+                  </template>
+                  <template is="dom-if" if="[[!_eq(slave.sexualFlaw, 'shamefast')]]">
+                    <iron-pages selected="[[_fetishStrength(slave.fetishStrength)]]">
+                      <span>She's a slut for <span class="coral">cumslut</span>, and gets off on having others see her enslavement.</span>
+                      <span>She enjoys <span class="coral">humiliating</span> sex.</span>
+                      <span>She likes <span class="coral">embarrassing</span> sex.</span>
+                    </iron-pages>
+                  </template>
+                </template>
+              </span>
+              <!--todo other fetishes-->
+            </iron-pages>
+          </template>
+          <template is="dom-if" if="[[!_eq(slave.fetishKnown, 1)]]">Her fetishes, if any, are not known to you.</template>
+
+          <!--todo energy-->
+          <!--todo attr-->
+
         </template>
         <!--end mental report-->
       </p>
@@ -355,9 +525,29 @@
         return ['arrogant', 'bitchy', 'liberated', 'devout', 'odd',
           'hates men', 'hates women', 'anorexic', 'gluttonous'].indexOf(flaw);
       }
+      _behavioralQuirk(quirk) {
+        return ['confident', 'cutting', 'funny', 'adores women',
+          'adores men', 'fitness', 'insecure', 'sinful', 'advocate'].indexOf(quirk);
+      }
+      _sexualFlaw(flaw) {
+        return ['hates oral', 'hates anal', 'hates penetration', 'repressed', 'idealistic', 'shamefast', 'apathetic',
+          'crude', 'judgemental', 'cum addict', 'anal addict', 'attention whore', 'breast growth', 'abusive', 'malicious',
+          'self hating', 'neglectful', 'breeder'].indexOf(flaw);
+      }
+      _sexualQuirk(quirk) {
+        return ['gagfuck queen', 'painal queen', 'strugglefuck queen', 'tease',
+          'romantic', 'perverted', 'caring', 'unflinching', 'size queen'].indexOf(quirk);
+      }
+      _fetish(fetish) {
+        let arr = ['submissive', 'cumslut', 'humiliation', 'buttslut', 'boobs', 'pregnancy', 'dom', 'sadist', 'masochist'];
+        let i = arr.indexOf(fetish);
+        return i < 0 ? arr.length : i;
+      }
       _broken(devotion, trust) {
         return devotion < -20 && trust >= -20 ? 0 : devotion < -20 ? 1 : devotion <= 20 ? 2 : 3;
       }
+      _attr(attr, energy) { return attr >= 85 && energy >= 40 ? 0 : attr >= 65 && energy >= 40 ? 1 : 2; }
+      _fetishStrength(strength) { return strength > 95 ? 0 : strength > 60 ? 1 : 2; }
 
       _moduloElement(array, m) { return array ? array[Math.abs(m) % array.length] : ''; }
 
