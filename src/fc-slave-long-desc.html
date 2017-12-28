@@ -20,6 +20,7 @@
 <link rel="import" href="fc-vagina-desc.html">
 <link rel="import" href="fc-upper-face-desc.html">
 <link rel="import" href="fc-hair-desc.html">
+<link rel="import" href="fc-face-desc.html">
 
 <dom-module id="fc-slave-long-desc">
   <template>
@@ -180,6 +181,8 @@
         <!--todo ear/nose/eyebrow piercing desc-->
 
         <!--todo face desc-->
+        <fc-face-desc slave="[[slave]]"></fc-face-desc>
+
         <!--todo mouth desc-->
 
       </p>
@@ -194,7 +197,10 @@
         <fc-butt-desc slave="[[slave]]"></fc-butt-desc>
       </p>
       <p>
-        <fc-crotch-desc slave="[[slave]]"></fc-crotch-desc>
+        <fc-crotch-desc
+            slave="[[slave]]"
+            sale-description="[[saleDescription]]">
+        </fc-crotch-desc>
         <fc-vagina-desc slave="[[slave]]"></fc-vagina-desc>
       </p>
     </div>

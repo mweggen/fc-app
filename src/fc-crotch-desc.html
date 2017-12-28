@@ -1,27 +1,106 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 
 <dom-module id="fc-crotch-desc">
   <template>
-    <!--todo clothes-->
-    <template is="dom-if" if="{{_gt(slave.vagina, -1)}}">
-      [[slave.slaveName]]'s [[_herma(slave.dick)]] bare and available.
-    </template>
-    <template is="dom-if" if="{{!_gt(slave.vagina, -1)}}">
-      <template is="dom-if" if="{{_gt(slave.dick, 0)}}">
-        [[slave.slaveName]]'s
-        <template is="dom-if" if="{{_eq(slave.dick, 10)}}">inhuman cock hangs naked.</template>
-        <template is="dom-if" if="{{_eq(slave.dick, 9)}}">absurd cock hangs naked.</template>
-        <template is="dom-if" if="{{_eq(slave.dick, 8)}}">titanic[[_flaccid(slave)]] cock hangs naked.</template>
-        <template is="dom-if" if="{{_eq(slave.dick, 7)}}">gigantic[[_flaccid(slave)]] cock hangs naked.</template>
-        <template is="dom-if" if="{{_eq(slave.dick, 6)}}">huge[[_flaccid(slave)]] cock hangs naked.</template>
-        <template is="dom-if" if="{{_eq(slave.dick, 5)}}">imposing[[_flaccid(slave)]] cock swings naked.</template>
-        <template is="dom-if" if="{{_eq(slave.dick, 4)}}">big[[_flaccid(slave)]] cock dangles naked.</template>
-        <template is="dom-if" if="{{_eq(slave.dick, 3)}}">cock[[_flaccid(slave)]] dangles bare.</template>
-        <template is="dom-if" if="{{_eq(slave.dick, 2)}}">little[[_flaccid(slave)]] dick is bare.</template>
-        <template is="dom-if" if="{{_eq(slave.dick, 1)}}">tiny[[_flaccid(slave)]] dick is bare.</template>
+    <style>
+      iron-pages {
+        display: inline;
+      }
+    </style>
+    <template is="dom-if" if="{{!saleDescription}}">
+      <iron-pages selected="[[_clothes(slave.clothes)]]">
+        <span><!--Fuckdoll suit-->
+          [[slave.slaveName]]'s
+          <template is="dom-if" if="{{_gt(slave.dick, 0)}}">
+            <template is="dom-if" if="{{_gt(slave.dick, 6)}}">absurd</template>
+            <template is="dom-if" if="{{!_gt(slave.dick, 6)}}">
+              <template is="dom-if" if="{{_gt(slave.dick, 4)}}">big</template>
+              <template is="dom-if" if="{{!_gt(slave.dick, 4)}}">
+                <template is="dom-if" if="{{_gt(slave.dick, 2)}}">modest</template>
+                <template is="dom-if" if="{{!_gt(slave.dick, 2)}}">pathetic</template>
+              </template>
+            </template>
+            <template is="dom-if" if="{{_canAchieveErection(slave)}}">
+              cock is kept painfully erect by the Fuckdoll suit's systems. It's tightly wrapped in a condom-shaped
+              extension of the suit's protective material, preventing it from feeling any real pleasure.
+              <template is="dom-if" if="{{_gt(slave.scrotum, 0)}}">
+                Her ballsack has its own uncomfortably tight pouch in the suit.
+              </template>
+            </template>
+            <template is="dom-if" if="{{!_canAchieveErection(slave)}}">
+              soft cock
+              <template is="dom-if" if="{{_gt(slave.scrotum, 0)}}">and balls are</template>
+              <template is="dom-if" if="{{!_gt(slave.scrotum, 0)}}">is</template>
+              trapped up against its abdomen, under the Fuckdoll suit's protective material.
+            </template>
+          </template>
+          <template is="dom-if" if="{{_gt(slave.vagina, -1)}}">
+            <template is="dom-if" if="{{_gt(slave.dick, 0)}}">
+              her front hole, meanwhile, is left completely bare.
+            </template>
+            <template is="dom-if" if="{{!_gt(slave.dick, 0)}}">
+              front hole is left completely bare by the Fuckdoll suit's protective material.
+            </template>
+          </template>
+          <template is="dom-if" if="{{!_gt(slave.vagina, -1)}}">
+            <template is="dom-if" if="{{_eq(slave.dick, 0)}}">
+              groin is covered by featureless Fuckdoll material; there's nothing of interest there.
+            </template>
+          </template>
+        </span>
+        <span><!--conservative clothing-->
+          <template is="dom-if" if="{{_gt(slave.dick, 6)}}">
+            There is an absurd bulge at the crotch of [[slave.slaveName]]'s pants.
+          </template>
+          <template is="dom-if" if="{{!_gt(slave.dick, 6)}}">
+            <template is="dom-if" if="{{_gt(slave.dick, 3)}}">
+              There is a distinct bulge at the crotch of [[slave.slaveName]]'s pants.
+            </template>
+            <template is="dom-if" if="{{!_gt(slave.dick, 3)}}">
+              <template is="dom-if" if="{{_gt(slave.dick, 1)}}">
+                There is a modest bulge at the crotch of [[slave.slaveName]]'s pants.
+              </template>
+            </template>
+          </template>
+        </span>
+        <span><!--chains-->
+          <template is="dom-if" if="{{_gt(slave.dick, 0)}}">
+            [[slave.slaveName]] has chain dangling from around her waist to end next to her cock, so that when she
+            moves, it occasionally strikes her in the dick.
+          </template>
+          <template is="dom-if" if="{{!_gt(slave.dick, 0)}}">
+            <template is="dom-if" if="{{_eq(slave.vagina, -1)}}">
+              [[slave.slaveName]]'s chains leave her featureless groin bare; there's nothing there to restrain.
+            </template>
+            <template is="dom-if" if="{{!_eq(slave.vagina, -1)}}">
+              [[slave.slaveName]]'s pussy has a chain running tightly between her pussylips.
+            </template>
+          </template>
+        </span>
+        <!--todo clothes-->
+      </iron-pages>
+
+      <template is="dom-if" if="{{_gt(slave.vagina, -1)}}">
+        [[slave.slaveName]]'s [[_herma(slave.dick)]] bare and available.
       </template>
-      <template is="dom-if" if="{{!_gt(slave.dick, 0)}}">
-        [[slave.slaveName]]'s [[_balls(slave.balls)]] bare and vulnerable.
+      <template is="dom-if" if="{{!_gt(slave.vagina, -1)}}">
+        <template is="dom-if" if="{{_gt(slave.dick, 0)}}">
+          [[slave.slaveName]]'s
+          <template is="dom-if" if="{{_eq(slave.dick, 10)}}">inhuman cock hangs naked.</template>
+          <template is="dom-if" if="{{_eq(slave.dick, 9)}}">absurd cock hangs naked.</template>
+          <template is="dom-if" if="{{_eq(slave.dick, 8)}}">titanic[[_flaccid(slave)]] cock hangs naked.</template>
+          <template is="dom-if" if="{{_eq(slave.dick, 7)}}">gigantic[[_flaccid(slave)]] cock hangs naked.</template>
+          <template is="dom-if" if="{{_eq(slave.dick, 6)}}">huge[[_flaccid(slave)]] cock hangs naked.</template>
+          <template is="dom-if" if="{{_eq(slave.dick, 5)}}">imposing[[_flaccid(slave)]] cock swings naked.</template>
+          <template is="dom-if" if="{{_eq(slave.dick, 4)}}">big[[_flaccid(slave)]] cock dangles naked.</template>
+          <template is="dom-if" if="{{_eq(slave.dick, 3)}}">cock[[_flaccid(slave)]] dangles bare.</template>
+          <template is="dom-if" if="{{_eq(slave.dick, 2)}}">little[[_flaccid(slave)]] dick is bare.</template>
+          <template is="dom-if" if="{{_eq(slave.dick, 1)}}">tiny[[_flaccid(slave)]] dick is bare.</template>
+        </template>
+        <template is="dom-if" if="{{!_gt(slave.dick, 0)}}">
+          [[slave.slaveName]]'s [[_balls(slave.balls)]] bare and vulnerable.
+        </template>
       </template>
     </template>
   </template>
@@ -38,8 +117,22 @@
             slaveName: '',
             hormones: 0
           })
-        }
+        },
+        saleDescription: Boolean
       }}
+
+      _clothes(clothes) {
+        let arr = ['a Fuckdoll suit', 'conservative clothing', 'chains', 'Western clothing', 'body oil', 'a toga',
+        'a huipil', 'a slutty qipao', 'uncomfortable straps', 'shibari ropes', 'restrictive latex', 'attractive lingerie',
+        'a succubus outfit', 'a string bikini', 'clubslut netting', 'a cheerleader outfit', 'cutoffs and a t-shirt',
+        'a slave gown', 'a halter top dress', 'a ball gown', 'slutty business attire', 'nice business attire',
+        'a comfortable bodysuit', 'a latex catsuit', 'a military uniform', 'a mini dress', 'a leotard', 'a bunny outfit',
+        'a slutty maid outfit', 'a nice maid outfit', 'a nice nurse outfit', 'a slutty nurse outfit', 'a schoolgirl outfit',
+        'a kimono', 'a hijab and abaya', 'battledress', 'a fallen nuns habit', 'a chattel habit', 'a penitent nuns habit',
+        'harem gauze'];
+        let i = arr.indexOf(clothes);
+        return i < 0 ? arr.length : i;
+      }
 
       _herma(dick) { return dick > 0 ? 'hermaphroditic genitalia are' : 'pussy is'; }
       _balls(balls) { return balls > 0 ? 'lonely balls are' : 'featureless groin is'; }

@@ -1,0 +1,168 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+
+<dom-module id="fc-face-desc">
+  <template>
+    <style>
+      iron-pages {
+        display: inline;
+      }
+      .good {
+        color: pink;
+      }
+    </style>
+    Her
+    <span class="good">
+      face is
+      <iron-pages selected="[[_faceShape(slave.faceShape)]]">
+        <iron-pages selected="[[_face(slave.face)]]"><!--masculine-->
+          <span>so ugly and masculine that her designation as a slave girl is a mockery.</span>
+          <span>ugly and masculine, making her a poor slave girl by appearance.</span>
+          <span>unattractively masculine.</span>
+          <span>masculine, but not entirely unappealing.</span>
+          <span>attractive masculine.</span>
+          <span>quite handsome in a masculine way.</span>
+          <span>the height of masculine handsomeness.</span>
+        </iron-pages>
+        <iron-pages selected="[[_face(slave.face)]]"><!--androgynous-->
+          <span>disturbingly androgynous and terribly ugle.</span>
+          <span>ugly and androgynous; she has neither masculine or feminine appeal.</span>
+          <span>strangely androgynous, and rather unattractive.</span>
+          <span>strangely androgynous.</span>
+          <span>androgynous, and attractive enough that this ambiguity is interesting.</span>
+          <span>gorgeously androgynous in a complex way that captures the eye.</span>
+          <span>so gorgeously androgynous that she tends to induce sexual confusion.</span>
+        </iron-pages>
+        <iron-pages selected="[[_face(slave.face)]]"><!--cute-->
+          <span>very ugly, yet somehow cute; she's so unattractive that she inspires pity.</span>
+          <span>ugly, but cute, with a pitiable appeal.</span>
+          <span>not attractive, but is appealingly cute.</span>
+          <span>merely average, but is appealingly cute.</span>
+          <span>both attractive and appealingly cute.</span>
+          <span>beautiful, yet somehow also approachably cute.</span>
+          <span>an impossibly perfect combination of beauty and girl-next-door cuteness.</span>
+        </iron-pages>
+        <iron-pages selected="[[_face(slave.face)]]"><!--sensual-->
+          <span>very ugly, yet naturally slutty, promising a decent fuck despite its appearance.</span>
+          <span>ugly, but also slutty, promising a good fuck despite its appearance.</span>
+          <span>not attractive, but it has a certain sensual appeal.</span>
+          <span>merely average, but undeniably sensual.</span>
+          <span>both attractive and naturally sultry.</span>
+          <span>both beautiful and sultry, bringing sex to mind naturally.</span>
+          <span>very beautiful in a consummately sexual way.</span>
+        </iron-pages>
+        <iron-pages selected="[[_face(slave.face)]]"><!--exotic-->
+          <span>very ugly and unusual, a real tragedy in flesh.</span>
+          <span>ugly and unusual, a real misfortune.</span>
+          <span>unattractive, and distinctive in its unattractiveness.</span>
+          <span>quite average, but not uninteresting.</span>
+          <span>attractive in an exotic and interesting way.</span>
+          <span>exotic and beautiful, capable of catching the eye and keeping its gaze.</span>
+          <span>very beautiful and exotic, almost to the point of alien fascination.</span>
+        </iron-pages>
+        <iron-pages selected="[[_face(slave.face)]]"><!--normal-->
+          <span>very ugly.</span>
+          <span>quite ugly.</span>
+          <span>unattractive.</span>
+          <span>average and conventionally feminine.</span>
+          <span>conventionally attractive.</span>
+          <span>conventionally beautiful.</span>
+          <span>the height of conventional feminine beauty.</span>
+        </iron-pages>
+      </iron-pages>
+    </span>
+    <template is="dom-if" if="{{_gt(slave.fuckdoll, 0)}}">
+      However,
+      <template is="dom-if" if="{{_gt(-1, slave.face)}}">
+        it's hard to see this past the suit, since its face is padded to make her seem less ugly.
+      </template>
+      <template is="dom-if" if="{{!_gt(-1, slave.face)}}">
+        <template is="dom-if" if="{{_gt(1, slave.face)}}">
+          it's hard to see this past the suit, since its face is shaped to make her seem prettier.
+        </template>
+        <template is="dom-if" if="{{!_gt(1, slave.face)}}">
+          the suit obscures all but the shape of her pretty face.
+        </template>
+      </template>
+    </template>
+    <template is="dom-if" if="{{!_gt(slave.fuckdoll, 0)}}">
+      <template is="dom-if" if="{{_eq(slave.markings, 'beauty mark')}}">
+        <iron-pages selected="[[_face(slave.face)]]">
+          <span>It bears a severly disfiguring, discolored mark.</span>
+          <span>It bears a couple of unsightly moles.</span>
+          <span>It bears an ugly mole.</span>
+          <span>She has a distinctive beauty mark.</span>
+          <span>She has a nice beauty mark.</span>
+          <span>She has a beauty mark that adds to her distinctiveness.</span>
+          <span>She has a beauty mark that makes her really memorable.</span>
+        </iron-pages>
+      </template>
+    </template>
+    <template is="dom-if" if="{{_gt(slave.faceImplant, 5)}}">
+      She's
+      <template is="dom-if" if="{{_gt(slave.faceImplant, 95)}}">
+        had so much cosmetic surgery that her face is located at the bottom of the uncanny valley,
+        <template is="dom-if" if="{{_gt(-10, slave.face)}}">
+          in addition to its ugliness.
+        </template>
+        <template is="dom-if" if="{{!_gt(-10, slave.face)}}">
+          <template is="dom-if" if="{{!_gt(slave.face, 10)}}">
+            the only thing really distinctive about it.
+          </template>
+          <template is="dom-if" if="{{_gt(slave.face, 10)}}">
+            its attractiveness notwithstanding.
+          </template>
+        </template>
+      </template>
+      <template is="dom-if" if="{{!_gt(slave.faceImplant, 95)}}">
+        <template is="dom-if" if="{{_gt(slave.faceImplant, 60)}}">
+          obviously gotten a lot of facial cosmetic surgery.
+        </template>
+        <template is="dom-if" if="{{!_gt(slave.faceImplant, 60)}}">
+          <template is="dom-if" if="{{_gt(slave.faceImplant, 30)}}">
+            noticeably received facial cosmetic surgery.
+          </template>
+          <template is="dom-if" if="{{!_gt(slave.faceImplant, 30)}}">
+            had some facial cosmetic surgery, though it's subtle.
+            <!--todo pc medicine-->
+          </template>
+        </template>
+      </template>
+
+      <!--todo FS-->
+
+      <template is="dom-if" if="{{_gt(slave.faceImplant, 30)}}">
+        The effect is enough to reduce her attractiveness.
+      </template>
+    </template>
+
+    <!--todo makeup desc-->
+
+    <!--todo lips tat desc-->
+
+  </template>
+  <script>
+    class FCFaceDesc extends Polymer.Element {
+      static get is() { return 'fc-face-desc'; }
+      static get properties() { return {
+        slave: {
+          type: Object,
+          value: () => ({
+
+          })
+        }
+      }}
+      _gt(v1, v2) { return v1 > v2; }
+      _faceShape(shape) {
+        let arr = ['masculine', 'androgynous', 'cute', 'sensual', 'exotic'];
+        let i = arr.indexOf(shape);
+        return i < 0 ? arr.length : i;
+      }
+      _face(face) {
+        return face < -95 ? 0 : face < -40 ? 1 : face < -10 ? 2 : face <= 10 ? 3 : face <= 40 ? 4 : face <= 95 ? 5 : 6;
+      }
+    }
+
+    customElements.define(FCFaceDesc.is, FCFaceDesc);
+  </script>
+</dom-module>
