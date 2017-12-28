@@ -254,14 +254,99 @@
                   </template>
                 </template>
               </span>
-              <!--todo other fetishes-->
+              <span><!--buttslut-->
+                <template is="dom-if" if="[[_eq(slave.sexualFlaw, 'hates anal')]]">
+                  Her hatred is just pretense to cover her shame about how much she really loves getting <span class="coral">fucked in the butt</span>.
+                </template>
+                <template is="dom-if" if="[[!_eq(slave.sexualFlaw, 'hates anal')]]">
+                  <iron-pages selected="[[_fetishStrength(slave.fetishStrength)]]">
+                    <span>She's a <span class="coral">buttslut</span>, happy to have anyone put anything up her ass.</span>
+                    <span>She <span class="coral">prefers anal</span>.</span>
+                    <span>She has an <span class="coral">anal fixation</span>.</span>
+                  </iron-pages>
+                </template>
+              </span>
+              <span><!--boobs-->
+                <iron-pages selected="[[_fetishStrength(slave.fetishStrength)]]">
+                  <span>
+                    She <span class="coral">prefers mammary intercourse</span> to any other kind of sex, and readily
+                    climaxes to nipple stimulation.
+                  </span>
+                  <span>She enjoys <span class="coral">breast play</span>, and is rapidly aroused by nipple stimulation.</span>
+                  <span>She <span class="coral">really likes boobs</span>, hers and others.</span>
+                </iron-pages>
+              </span>
+              <span><!--pregnancy-->
+                <iron-pages selected="[[_fetishStrength(slave.fetishStrength)]]">
+                  <span>She has a <span class="coral">pregnancy fetish</span>, and finds anything related to reproduction sexy.</span>
+                  <span>She has an <span class="coral">impregnation fantasy</span>, and enjoys bareback sex.</span>
+                  <span>She has a recurring <span class="coral">impregnation fantasy</span>.</span>
+                </iron-pages>
+              </span>
+              <span><!--dom-->
+                <template is="dom-if" if="[[_eq(slave.sexualFlaw, 'apathetic')]]">
+                  She is at war with herself, since her habitual apathy during sex barely masks a desire to
+                  <span class="coral">dominate</span>.
+                </template>
+                <template is="dom-if" if="[[!_eq(slave.sexualFlaw, 'apathetic')]]">
+                  <iron-pages selected="[[_fetishStrength(slave.fetishStrength)]]">
+                    <span>
+                      She is a <span class="coral">complete dom</span>; with other slaves this is expressed as a strong
+                      preference to top, and with her betters she's an almost competitive lover.
+                    </span>
+                    <span>
+                      She likes to take an active, powerful role in sex; with other slave this is expressed as
+                      <span class="coral">dominance</span>, and with her betters she's a very energetic lover.
+                    </span>
+                    <span>She prefers to take a <span class="coral">dominant</span> sexual role.</span>
+                  </iron-pages>
+                </template>
+              </span>
+              <span><!--sadist-->
+                <iron-pages selected="[[_fetishStrength(slave.fetishStrength)]]">
+                  <span>
+                    She is an <span class="coral">aggressive sadist</span>; she's constantly plotting to control, abuse,
+                    and hurt other slaves.
+                  </span>
+                  <span>
+                    She has <span class="coral">sadistic tendencies</span>; she enjoys watching other slaves in pain,
+                    but truly loves causing pain herself.
+                  </span>
+                  <span>
+                    She gets off on <span class="coral">the suffering of others</span>; she enjoys watching other slaves
+                    in pain.
+                  </span>
+                </iron-pages>
+              </span>
+              <span><!--masochist-->
+                <iron-pages selected="[[_fetishStrength(slave.fetishStrength)]]">
+                  <span>She is a <span class="coral">pain slut</span>.</span>
+                  <span>She <span class="coral">gets off on pain</span>, showing strong masochistic tendencies.</span>
+                  <span>She <span class="coral">doesn't mind pain</span>, and shows some masochistic tendencies.</span>
+                </iron-pages>
+              </span>
+              <span>Her sexual tastes are <span class="coral">quite normal</span>.</span><!--normal-->
             </iron-pages>
           </template>
           <template is="dom-if" if="[[!_eq(slave.fetishKnown, 1)]]">Her fetishes, if any, are not known to you.</template>
 
-          <!--todo energy-->
-          <!--todo attr-->
+          <template is="dom-if" if="[[_eq(slave.attrKnown, 1)]]">
+            <iron-pages selected="[[_energy(slave.energy)]]">
+              <span>She's a <span class="great">nymphomaniac</span>.</span>
+              <span>She's a <span class="great">sex addict</span>.</span>
+              <span>She has a <span class="great">powerful appetite for sex</span>.</span>
+              <span>She has a <span class="ok">healthy sex drive</span>.</span>
+              <span>She has a <span class="bad">weak sex drive</span>.</span>
+              <span>She's <span class="bad">frigid</span>, with little interest in sex.</span>
+            </iron-pages>
 
+            <!--todo attr-->
+          </template>
+          <template is="dom-if" if="[[!_eq(slave.attrKnown, 1)]]">You do not understand her sexuality very well.</template>
+
+        </template>
+        <template is="dom-if" if="[[!_eq(slave.fuckdoll, 0)]]">
+          <!--todo fuckdoll mental-->
         </template>
         <!--end mental report-->
       </p>
@@ -548,6 +633,7 @@
       }
       _attr(attr, energy) { return attr >= 85 && energy >= 40 ? 0 : attr >= 65 && energy >= 40 ? 1 : 2; }
       _fetishStrength(strength) { return strength > 95 ? 0 : strength > 60 ? 1 : 2; }
+      _energy(e) { return e > 95 ? 0 : e > 80 ? 1 : e > 60 ? 3 : e > 40 ? 4 : e > 20 ? 5 : 6; }
 
       _moduloElement(array, m) { return array ? array[Math.abs(m) % array.length] : ''; }
 
