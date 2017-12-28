@@ -1,0 +1,54 @@
+<script>
+  function canGetPregnant(slave) {
+    return !slave ? null : slave.preg === -1 || isFertile(slave) === false ? false
+      : (slave.ovaries === 1) && (canDoVaginal(slave) === true);
+  }
+
+  function canImpreg(slave1, slave2) {
+    return !slave1 || !slave2 ? null
+      : slave2.dick < 1 || slave2.balls < 1
+        || slave2.dickAccessory === "chastity" || slave2.dickAccessory === "combined chastity" ? false
+      : canGetPregnant(slave1) !== false;
+  }
+
+  function isFertile(slave) {
+    return !slave ? null : slave.preg > 0 || slave.preg < -1 ? false : slave.ovaries === 1;
+  }
+
+  function canAchieveErection(slave) {
+    return !slave ? null : slave.dick < 7 && slave.dick > 0 && (slave.balls > 0 ? slave.hormones <= 0 : slave.hormones < 0);
+  }
+
+  function canPenetrate(slave) {
+    return !slave ? null : canAchieveErection(slave) === false
+        || slave.dickAccessory === "chastity" || slave.dickAccessory === "combined chastity" ? false
+      : slave.dick <= 7;
+  }
+
+  function canSee(slave) {
+    return !slave ? null : slave.eyes > -2;
+  }
+
+  function canWalk(slave) {
+    return !slave ? null
+      : slave.amp === 1 || slave.boobs > 30000 + (slave.muscles * 100) ? false
+      : slave.heels === 0 || slave.shoes === "heels" || slave.shoes === "extreme heels" || slave.shoes === "boots";
+  }
+
+  function canTalk(slave) {
+    return !slave ? null
+      : slave.accent <= 2 && slave.voice !== 0 && slave.lips <= 95 && slave.collar !== "dildo gag"
+        && slave.collar !== "massive dildo gag" && slave.collar !== "ball gag" && slave.collar !== "bit gag";
+  }
+
+  function canDoAnal(slave) {
+    return !slave ? null
+      : slave.vaginalAccessory !== "anal chastity" && slave.dickAccessory !== "anal chastity"
+        && slave.vaginalAccessory !== "combined chastity" && slave.dickAccessory !== "combined chastity";
+  }
+
+  function canDoVaginal(slave) {
+    return !slave ? null
+      : slave.vagina >= 0 && slave.vaginalAccessory !== "chastity belt" && slave.vaginalAccessory !== "combined chastity";
+  }
+</script>

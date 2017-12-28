@@ -1,0 +1,133 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="fc-util.html">
+
+<dom-module id="fc-sex-score">
+  <script>
+    class FCSexScore extends Polymer.Element {
+      static get is() { return 'fc-sex-score'; }
+      static get properties() { return {
+        slave: Object,
+        sexScore: {
+          type: Number,
+          notify: true,
+          readOnly: true,
+          computed: '_computeSexScore(slave)'
+        },
+      }}
+
+      _computeSexScore(slave) {
+        let sexScore = (3 - slave.anus) + (slave.muscles / 30);
+
+        let oralUseWeight = 5, vaginalUseWeight = 5, analUseWeight = 5;//todo
+
+        let totalWeight = oralUseWeight + vaginalUseWeight + analUseWeight;
+
+        if (totalWeight > 0) {
+          let cumAddict = slave.sexualFlaw === 'cum addict' ? 1 : 0;
+          sexScore += (6 + slave.tonguePiercing + cumAddict) * (oralUseWeight / totalWeight) * (slave.oralSkill / 30);
+          if (slave.vagina > -1 && slave.vaginalAccessory !== 'chastity belt') {
+            sexScore += 6 * (vaginalUseWeight / totalWeight) * (slave.vaginalSkill / 30);
+            sexScore += (3 - slave.vagina);
+            sexScore += slave.vaginaLube;
+          }
+          let analAddict = slave.sexualFlaw === 'anal addict' ? 1 : 0;
+          sexScore += (6 + analAddict) * (analUseWeight / totalWeight) * (slave.analSkill / 30);
+        }
+
+        if (slave.fuckdoll === 0) {
+
+
+          //todo family testing/relationships
+
+          if (slave.clitPiercing > 2) {
+            sexScore++;
+          }
+
+          if (slave.fetishKnown === 1 && slave.fetishStrength > 60 && slave.fetish !== 'none') {
+            sexScore += slave.fetishStrength / 5;
+          }
+          if (slave.attrKnown === 1) {
+            sexScore += Math.floor(slave.attrXX / 20);
+            sexScore += Math.floor(slave.attrXY / 20);
+            if (slave.energy > 95) {
+              sexScore += 3;
+            } else if (slave.energy > 80) {
+              sexScore += 2;
+            } else if (slave.energy > 60) {
+              sexScore += 1;
+            } else if (slave.energy <= 40) {
+              sexScore -= 1;
+            } else if (slave.energy <= 20) {
+              sexScore -= 2;
+            }
+          }
+
+          if (slave.sexualFlaw !== 'none') {
+            sexScore -= 2;
+          }
+          if (slave.sexualQuirk !== 'none') {
+            sexScore += 2;
+          }
+          if (slave.behavioralFlaw !== 'none') {
+            sexScore -= 2;
+          }
+          if (slave.behavioralQuirk !== 'none') {
+            sexScore += 2;
+          }
+
+          //todo career
+          if (slave.oralCount + slave.analCount + slave.vaginalCount + slave.mammaryCount + slave.penetrativeCount >= 1000) {
+            sexScore++;
+          }
+
+          if (!canSee(slave)) {
+            sexScore -= 3;
+          } else if (slave.eyes <= -1) {
+            if (slave.eyewear !== 'corrective glasses' && slave.eyewear !== 'corrective contacts') {
+              sexScore--;
+            }
+          } else if (slave.eyewear === 'blurring glasses' || slave.eyewear === 'blurring contacts') {
+            sexScore--;
+          }
+
+          //todo egyptian racial variety
+
+        } else {
+          sexScore += slave.fuckdoll / 10;
+        }
+
+        sexScore += slave.aphrodisiacs * 2;
+
+        if (slave.lactation > 0) {
+          sexScore++;
+        }
+
+        //todo see age
+        if (slave.age === 18) {
+          sexScore++;
+          if (slave.birthWeek === 0) {
+            sexScore *= 1.5;
+          } else if (slave.birthWeek < 4) {
+            sexScore *= 1.1;
+          }
+        }
+
+        if (slave.fetish === 'mindbroken') {
+          sexScore = Math.floor(sexScore * 0.4);
+        } else {
+          sexScore = Math.floor(sexScore * 0.7);
+        }
+
+        if (slave.amp === 1) {
+          sexScore -= 2;
+        } else if (slave.amp !== 0 && slave.amp !== -2 && slave.amp !== -5) {
+          sexScore--;
+        }
+
+        return Math.max(2, sexScore);
+      }
+    }
+
+    customElements.define(FCSexScore.is, FCSexScore);
+  </script>
+</dom-module>

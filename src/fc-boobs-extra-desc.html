@@ -1,4 +1,5 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="fc-util.html">
 
 <dom-module id="fc-boobs-extra-desc">
   <template>
@@ -69,14 +70,7 @@
       _gt(v1, v2) { return v1 > v2; }
       _eq(v1, v2) { return v1 === v2; }
       _canWalk(slave) {
-        if (!slave) {
-          return null;
-        } else if (slave.amp === 1 || slave.boobs > 30000 + (slave.muscles * 100)) {
-          return false;
-        } else {
-          return slave.heels === 0 || slave.shoes === "heels"
-            || slave.shoes === "extreme heels" || slave.shoes === "boots";
-        }
+        canWalk(slave);
       }
     }
 

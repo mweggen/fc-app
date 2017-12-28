@@ -1,0 +1,60 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<dom-module id="fc-mod-score">
+  <script>
+    class FCModScore extends Polymer.Element {
+      static get is() { return 'fc-mod-score'; }
+      static get properties() { return {
+        slave: {
+          type: Object
+        },
+        modScore: {
+          type: Number,
+          readOnly: true,
+          notify: true,
+          // value: 0,
+          computed: '_computeModScore(slave)'
+        }
+      }}
+
+      _computeModScore(slave) {
+        let piercingScore = 0, tatScore = 0;
+
+        if (slave.earPiercing > 0) { piercingScore += slave.earPiercing * 0.75 - 0.5; }
+        if (slave.nosePiercing > 0) { piercingScore += slave.nosePiercing * 0.75 - 0.5; }
+        if (slave.eyebrowPiercing > 0) { piercingScore += slave.eyebrowPiercing * 0.75 - 0.5; }
+        if (slave.navelPiercing > 0) { piercingScore += slave.navelPiercing * 0.75 - 0.5; }
+        if (slave.corsetPiercing > 0) { piercingScore += slave.corsetPiercing * 0.75 + 0.5; }
+        if (slave.nipplesPiercing > 0) { piercingScore += slave.nipplesPiercing * 0.75 - 0.25; }
+        if (slave.areolaePiercing > 0) { piercingScore += slave.areolaePiercing * 0.75 + 0.5; }
+        if (slave.lipsPiercing > 0) { piercingScore += slave.lipsPiercing * 0.75 - 0.25; }
+        if (slave.tonguePiercing > 0) { piercingScore += slave.tonguePiercing * 0.75 - 0.25; }
+        if (slave.clitPiercing === 3) { piercingScore += 1.25; /*smart piercing*/}
+        else if (slave.clitPiercing > 0) { piercingScore += slave.clitPiercing * 0.75 - 0.25; }
+        if (slave.vaginaPiercing > 0) { piercingScore += slave.vaginaPiercing * 0.75 - 0.25; }
+        if (slave.dickPiercing > 0) { piercingScore += slave.dickPiercing * 0.75 - 0.25; }
+        if (slave.anusPiercing > 0) { piercingScore += slave.anusPiercing * 0.75 - 0.25; }
+
+        if (slave.boobsTat !== 0) { tatScore += 1.25; }
+        if (slave.buttTat !== 0) { tatScore += 1.25; }
+        if (slave.lipsTat !== 0) { tatScore += 1.25; }
+        if (slave.shouldersTat !== 0) { tatScore += 1; }
+        if (slave.backTat !== 0) { tatScore += 1.25; }
+        if (slave.armsTat !== 0) { tatScore += 1; }
+        if (slave.legsTat !== 0) { tatScore += 1; }
+        if (slave.stampTat !== 0) { tatScore += 1; }
+        if (slave.vaginaTat !== 0) { tatScore += 1; }
+        if (slave.dickTat !== 0) { tatScore += 1; }
+        if (slave.anusTat === 'bleached') { tatScore += 0.5; }
+        else if (slave.anusTat !== 0) { tatScore += 1.25; }
+
+        console.info(piercingScore + tatScore);
+
+        return piercingScore + tatScore;
+      }
+
+    }
+
+    customElements.define(FCModScore.is, FCModScore);
+  </script>
+</dom-module>

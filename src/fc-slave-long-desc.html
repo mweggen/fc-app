@@ -22,6 +22,8 @@
 <link rel="import" href="fc-hair-desc.html">
 <link rel="import" href="fc-face-desc.html">
 
+<link rel="import" href="fc-sex-score.html">
+
 <dom-module id="fc-slave-long-desc">
   <template>
     <style>
@@ -41,6 +43,18 @@
       p {
         text-indent: 1em;
       }
+      .bold {
+        font-weight: bold;
+      }
+      .coral {
+        color: lightcoral;
+      }
+      .underline {
+        text-decoration: underline;
+      }
+      .skill {
+        color: aquamarine;
+      }
     </style>
     <div style="padding: 15px">
       <p>
@@ -49,9 +63,96 @@
         <fc-trust value="[[slave.trust]]"></fc-trust>
         <fc-slave-title slave="[[slave]]"></fc-slave-title>.
         <fc-age-health-desc slave="[[slave]]"></fc-age-health-desc>
-        <fc-eye-desc slave="[[slave]]"></fc-eye-desc>
+
+        <!--mental report-->
+        <template is="dom-if" if="[[_eq(slave.fuckdoll, 0)]]">
+          <fc-eye-desc slave="[[slave]]"></fc-eye-desc>
+          <template is="dom-if" if="[[_eq(slave.fetish, 'mindbroken')]]">
+            However, her mind is fundamentally broken; everything she experiences will quickly be forgotten.
+          </template>
+
+          <iron-pages selected="[[_behavioralFlaw(slave.behavioralFlaw)]]">
+            <iron-pages selected="[[_broken(slave.devotion, slave.trust)]]"><!--arrogant-->
+              <span>She is <span class="bad">arrogant</span> and clings to her dignity.</span>
+              <span>She is still <span class="bad">arrogant</span> at heart, but does her best to hide it out of fear.</span>
+              <span>She is <span class="bad">arrogant</span> and seems to think slavery beneath her.</span>
+              <span>Despite being well broken, she seems to retain hints of <span class="bad">arrogance</span>.</span>
+            </iron-pages>
+            <iron-pages selected="[[_broken(slave.devotion, slave.trust)]]"><!--bitchy-->
+              <span>She is <span class="bad">bitchy</span> and insults you every chance she gets.</span>
+              <span>She is still <span class="bad">bitchy</span> at times, but does her best to keep quiet out of fear.</span>
+              <span>She is <span class="bad">bitchy</span> and constantly tries to get a word in edgewise.</span>
+              <span>Since she is well broken, she tries to confine her <span class="bad">bitchy</span> remarks to your other slaves.</span>
+            </iron-pages>
+            <span></span><!--liberated-->
+            <span></span><!--devout-->
+            <span>She behaves <span class="bad">oddly</span>, saying and doing random things.</span><!--odd-->
+            <span></span><!--hates men-->
+            <span></span><!--hates women-->
+            <span>She suffers from <span class="bad">anorexia</span>.</span><!--anorexic-->
+            <span>She <span class="bad">tends to overeat</span> whenever she can, reacting to the rigors of sexual slavery with overeating.</span><!--gluttonous-->
+          </iron-pages>
+        </template>
+        <!--end mental report-->
       </p>
-      <p></p>
+      <p>
+        <template is="dom-if" if="{{!saleDescription}}">
+          <template is="dom-if" if="{{!slave.origin}}">[[slave.origin]]</template>
+        </template>
+        <!--todo career-->
+        <!--todo prestige-->
+        <!--todo skills-->
+
+        <template is="dom-if" if="[[_gt(slave.fuckdoll, 0)]]">
+        </template>
+        <template is="dom-if" if="[[!_gt(slave.fuckdoll, 0)]]">
+          <template is="dom-if" if="[[_gt(slave.entertainSkill, 10)]]">
+            <template is="dom-if" if="[[!_gt(slave.entertainSkill, 30)]]">
+              She is <span class="skill">reasonably
+              entertaining</span></template><template is="dom-if" if="[[_gt(slave.entertainSkill, 30)]]">
+              <template is="dom-if" if="[[!_gt(slave.entertainSkill, 60)]]">
+                She is a <span class="skill">skilled
+                entertainer</span></template><template is="dom-if" if="[[_gt(slave.entertainSkill, 60)]]">
+                <template is="dom-if" if="[[_gt(100, slave.entertainSkill)]]">
+                  She is an <span class="skill">expert
+                  entertainer</span></template><template is="dom-if" if="[[!_gt(100, slave.entertainSkill)]]">
+                  She is a <span class="skill">master of
+            entertainment</span></template></template></template><template is="dom-if"
+                                                                           if="[[!_gt(slave.whoreSkill, 10)]]">.</template>
+            <template is="dom-if" if="[[_gt(slave.whoreSkill, 10)]]">and</template>
+          </template>
+          <template is="dom-if" if="[[_gt(slave.whoreSkill, 10)]]">
+            <template is="dom-if" if="[[!_gt(slave.entertainSkill, 10)]]">She</template>
+            <template is="dom-if" if="[[!_gt(slave.whoreSkill, 30)]]">
+              has <span class="skill">basic experience as a prostitute</span>.
+            </template>
+            <template is="dom-if" if="[[_gt(slave.whoreSkill, 30)]]">
+              <template is="dom-if" if="[[!_gt(slave.entertainSkill, 10)]]">is</template>
+              <template is="dom-if" if="[[!_gt(slave.whoreSkill, 60)]]">
+                a <span class="skill">skilled streetwalker</span>.
+              </template>
+              <template is="dom-if" if="[[_gt(slave.whoreSkill, 60)]]">
+                <template is="dom-if" if="[[_gt(100, slave.whoreSkill)]]">
+                  an <span class="skill">expert working girl</span>.
+                </template>
+                <template is="dom-if" if="[[!_gt(100, slave.whoreSkill)]]">
+                  a <span class="skill">masterful whore</span>.
+                </template>
+              </template>
+            </template>
+          </template>
+        </template>
+        <!--todo custom desc-->
+
+        <!--todo fs ideal-->
+
+        <template is="dom-if" if="[[showScores]]">
+          <fc-sex-score slave="[[slave]]" sex-score="{{sexScore}}"></fc-sex-score>
+          Currently, she has an <span class="good"><span class="bold">attractiveness score</span> of
+          <span class="bold underline">[[beautyScore]]</span></span> and a
+          <span class="coral"><span class="bold">sexual score</span> of <span class="bold underline">[[sexScore]]</span></span>.
+        </template>
+      </p>
       <p>
         <template is="dom-if" if="{{!saleDescription}}">She</template>
         <template is="dom-if" if="{{saleDescription}}">[[slave.slaveName]]</template>
@@ -212,6 +313,10 @@
         slave: Object,
         hideClothing: Boolean,
         saleDescription: Boolean,
+        showScores: {
+          type: Boolean,
+          value: true//todo
+        },
 
         _heightDescIndex: { computed: '_computeHeightDescIndex(slave.height)' },
         _weightDescIndex: { computed: '_computeWeightDescIndex(slave.weight, slave.hips)' },
@@ -245,6 +350,14 @@
       _eq(v1, v2) { return v1 === v2; }
       _eqor(v1, v2, v3) { return v1 === v2 || v1 === v3; }
       _gt(v1, v2) { return v1 > v2; }
+
+      _behavioralFlaw(flaw) {
+        return ['arrogant', 'bitchy', 'liberated', 'devout', 'odd',
+          'hates men', 'hates women', 'anorexic', 'gluttonous'].indexOf(flaw);
+      }
+      _broken(devotion, trust) {
+        return devotion < -20 && trust >= -20 ? 0 : devotion < -20 ? 1 : devotion <= 20 ? 2 : 3;
+      }
 
       _moduloElement(array, m) { return array ? array[Math.abs(m) % array.length] : ''; }
 
