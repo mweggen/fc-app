@@ -14,7 +14,7 @@
         float:left;
       }
       .info {
-        /*margin-left: 200px;*/
+        margin-left: 150px;
       }
     </style>
 
@@ -43,22 +43,15 @@
         }
       }
 
+      ready() {
+        super.ready();
+        if (this.slaves && this.slaves.length > 0) {
+          this.selectedSlave = this.slaves[0];
+        }
+      }
+
       _onClick(event) {
         this.selectedSlave = event.model.item;
-      }
-
-      _addSlave() {
-        this.dispatchEvent(new CustomEvent('add-slave', {
-          bubbles: true, composed: true, detail: {
-            name: 'test name'
-          }
-        }));
-      }
-
-      _generateSlave() {
-        this.dispatchEvent(new CustomEvent('generate-slave', {
-          bubbles: true, composed: true, detail: {}
-        }));
       }
 
       getSlaveFullName(slave) {

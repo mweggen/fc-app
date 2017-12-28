@@ -21,6 +21,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="my-icons.html">
 
 <link rel="lazy-import" href="my-view1.html">
@@ -114,12 +115,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]">
         <app-toolbar>Menu</app-toolbar>
         <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-          <template is="dom-if" if="{{gameState.canEndWeek}}">
-            <a name="end-week" on-click="_endWeek" href="[[rootPath]]reports">End Week</a>
-          </template>
-          <template is="dom-if" if="[[!gameState.canEndWeek]]">
-            <a name="reports-list" href="[[rootPath]]reports">Reports</a>
-          </template>
+          <a name="reports-list" href="[[rootPath]]reports">Reports</a>
           <a name="slave-list" href="[[rootPath]]slave-list">Slave List</a>
           <a name="slave-edit" href="[[rootPath]]slave-edit">Edit Slave</a>
         </iron-selector>
@@ -132,6 +128,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <app-toolbar>
             <paper-icon-button icon="my-icons:menu" drawer-toggle></paper-icon-button>
             <div main-title>Free Cities</div>
+            <paper-icon-button icon="icons:today" title="End Week" on-click="_endWeek"></paper-icon-button>
           </app-toolbar>
         </app-header>
 
@@ -182,6 +179,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       _endWeek(e) {
+        this.set('route.path', '/reports');
         this.$.gameState.endWeek();
       }
 
