@@ -1,0 +1,63 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<dom-module id="fc-rest-report">
+  <template>
+    <style>
+      .green {
+        color: green;
+        font-weight: bold;
+      }
+      .aqua {
+        color: mediumaquamarine;
+        font-weight: bold;
+      }
+    </style>
+    takes the week off.
+    <template is="dom-if" if="[[_gt(_s.health, 90)]]">
+      Her health is so outstanding that rest does not improve it.
+    </template>
+    <template is="dom-if" if="[[!_gt(_s.health, 90)]]">
+      <template is="dom-if" if="[[_gt(_s.health, -100)]]">
+        Her <span class="green">health recovers</span> with rest.
+      </template>
+    </template>
+
+    <template is="dom-if" if="[[_eq(_s.fuckdoll, 0)]]">
+      <template is="dom-if" if="[[!_eq(_s.fetish, 'mindbroken')]]">
+        <template is="dom-if" if="[[_gt(_s.devotion, 20)]]">
+          <template is="dom-if" if="[[!_eq(_s.trust, 20)]]">
+            Being allowed to rest <span class="aqua">reduces her fear</span> of you.
+          </template>
+          <template is="dom-if" if="[[_eq(_s.trust, 20)]]">
+            <template is="dom-if" if="[[!_eq(_s.trust, 50)]]">
+              Being allowed to rest <span class="aqua">builds her trust</span> in you.
+            </template>
+            <template is="dom-if" if="[[_eq(_s.trust, 50)]]">
+              Being allowed to rest <span class="aqua">confirms her trust</span> in you.
+            </template>
+          </template>
+        </template>
+        <template is="dom-if" if="[[!_gt(_s.devotion, 20)]]">
+          <template is="dom-if" if="[[_gt(-20, _s.trust)]]">
+            Being allowed to rest <span class="aqua">reduces her fear</span> of you.
+          </template>
+        </template>
+      </template>
+    </template>
+
+  </template>
+  <script>
+    class FCRestReport extends Polymer.Element {
+      static get is() { return 'fc-rest-report'; }
+      static get properties() { return {
+        slaveReport: Object,
+        _s: { computed: '_cs(slaveReport.slave)' }
+      }}
+      _cs(s) { return s; }
+      _eq(v1, v2) { return v1 === v2; }
+      _gt(v1, v2) { return v1 > v2; }
+    }
+
+    customElements.define(FCRestReport.is, FCRestReport);
+  </script>
+</dom-module>

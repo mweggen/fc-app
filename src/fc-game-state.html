@@ -15,11 +15,63 @@
         gameState: {
           type: Object,
           value: () => ({
-            slaves: []
+            slaves: [],
+            canEndWeek: true
           }),
           notify: true
-        }
+        },
+        slaveReports: {
+          type: Array,
+          notify: true
+        },
       }}
+
+      ready() {
+        super.ready();
+      }
+
+      endWeek() {
+        console.info('running onEndWeek');
+        this.set('slaveReports', []);
+        for (let i = 0; i < this.gameState.slaves.length; i++) {
+          let slave = this.gameState.slaves[i];
+          let report = {};
+          if (slave.assignment === 'whore') {
+            report = this._whore(slave);
+          } else {
+            report = this._rest(slave);
+          }
+          this.push('slaveReports', report);
+        }
+        console.info(this.slaveReports);
+      }
+
+      _whore(slave) {
+
+      }
+
+      _rest(slave) {
+        let report = {
+          slave: JSON.parse(JSON.stringify(slave)),
+          assignment: 'rest',
+        };
+        if (slave.health <= 90 && slave.health > -100) {
+          slave.health += 10;
+        }
+        if (slave.fuckdoll === 0 && slave.fetish !== 'mindbroken') {
+          if (slave.devotion > 20) {
+            if (slave.trust <= 20) {
+              slave.trust += 4;
+            } else {
+              slave.trust += 2;
+            }
+          } else if (slave.trust < -20) {
+            slave.trust += 4;
+          }
+        }
+        return report;
+      }
+
 
       addSlave(slave) {
         console.info(slave);

@@ -25,8 +25,8 @@
           <span>the height of masculine handsomeness.</span>
         </iron-pages>
         <iron-pages selected="[[_face(slave.face)]]"><!--androgynous-->
-          <span>disturbingly androgynous and terribly ugle.</span>
-          <span>ugly and androgynous; she has neither masculine or feminine appeal.</span>
+          <span>disturbingly androgynous and terribly ugly.</span>
+          <span>ugly and androgynous; she has neither masculine nor feminine appeal.</span>
           <span>strangely androgynous, and rather unattractive.</span>
           <span>strangely androgynous.</span>
           <span>androgynous, and attractive enough that this ambiguity is interesting.</span>
@@ -88,7 +88,7 @@
     <template is="dom-if" if="{{!_gt(slave.fuckdoll, 0)}}">
       <template is="dom-if" if="{{_eq(slave.markings, 'beauty mark')}}">
         <iron-pages selected="[[_face(slave.face)]]">
-          <span>It bears a severly disfiguring, discolored mark.</span>
+          <span>It bears a severely disfiguring, discolored mark.</span>
           <span>It bears a couple of unsightly moles.</span>
           <span>It bears an ugly mole.</span>
           <span>She has a distinctive beauty mark.</span>
@@ -153,6 +153,7 @@
         }
       }}
       _gt(v1, v2) { return v1 > v2; }
+      _eq(v1, v2) { return v1 === v2; }
       _faceShape(shape) {
         let arr = ['masculine', 'androgynous', 'cute', 'sensual', 'exotic'];
         let i = arr.indexOf(shape);

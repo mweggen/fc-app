@@ -1,0 +1,33 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="fc-rest-report.html">
+
+<dom-module id="fc-reports">
+  <template>
+    <style>
+      .pink {
+        color: pink;
+        text-decoration: underline;
+        font-weight: bold;
+      }
+    </style>
+    <template is="dom-repeat" items="[[slaveReports]]">
+      <p>
+        <span class="pink">[[item.slave.slaveName]] [[item.slave.slaveSurname]]</span>
+        <template is="dom-if" if="[[_eq(item.assignment, 'rest')]]">
+          <fc-rest-report slave-report="[[item]]"></fc-rest-report>
+        </template>
+      </p>
+    </template>
+  </template>
+  <script>
+    class FCReports extends Polymer.Element {
+      static get is() { return 'fc-reports'; }
+      static get properties() { return {
+        slaveReports: Array
+      }}
+      _eq(v1, v2) { return v1 === v2; }
+    }
+
+    customElements.define(FCReports.is, FCReports);
+  </script>
+</dom-module>
