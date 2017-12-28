@@ -80,11 +80,11 @@
       static get properties() { return {
         slave: {
           type: Object,
-          value() { return {
+          value: () => ({
               health: 0,
               birthWeek: 0,
               age: 25
-          }}
+          })
         },
         _healthIndex: { computed: '_computeHealthIndex(slave.health)' },
         _ageIndex1: { computed: '_computeAgeIndex1(slave.age, slave.birthWeek)' },

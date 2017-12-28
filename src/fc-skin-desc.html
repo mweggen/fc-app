@@ -27,12 +27,12 @@
       static get properties() { return {
         slave: {
           type: Object,
-          value() { return {
+          value: () => ({
             nationality: undefined,
             race: 'white',
             skin: 'pale',
             markings: 'freckles'
-          }}
+          })
         },
         _nationalityIndex: { computed: '_computeNationalityIndex(slave.nationality)' },
         _isFreckled: { computed: '_computeIsFreckled(slave.markings)' },

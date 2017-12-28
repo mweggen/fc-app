@@ -70,22 +70,22 @@
       static get properties() { return {
         slave: {
           type: Object,
-          value() { return {
+          value: () => ({
             butt: 3,
             buttImplant: 0,
             buttImplantType: 0,
             markings: ''
-          }}
+          })
         },
-        _butt1a: { value() { return ['fashionable', 'attractive', 'enticing']}},
-        _butt1b: { value() { return ['skinny', 'slim', 'taut']}},
-        _butt2a: { value() { return ['fashionable', 'small and enticing', 'sleek and attractive']}},
-        _butt2b: { value() { return ['small, sleek', 'small but rounded', 'rounded, small']}},
-        _butt3: { value() { return ['big and healthy', 'curved and plump', 'healthy and plump']}},
-        _butt4: { value() { return ['juicy and large', 'big bubble', 'curvy and enticing']}},
-        _butt5: { value() { return ['juicy and huge', 'huge', 'massive and undeniable']}},
-        _butt6: { value() { return ['truly massive', 'enormous']}},
-        _butt7: { value() { return ['gigantic', 'titanic']}},
+        _butt1a: { value:() => (['fashionable', 'attractive', 'enticing']) },
+        _butt1b: { value:() => (['skinny', 'slim', 'taut']) },
+        _butt2a: { value:() => (['fashionable', 'small and enticing', 'sleek and attractive']) },
+        _butt2b: { value:() => (['small, sleek', 'small but rounded', 'rounded, small']) },
+        _butt3: { value:() => (['big and healthy', 'curved and plump', 'healthy and plump']) },
+        _butt4: { value:() => (['juicy and large', 'big bubble', 'curvy and enticing']) },
+        _butt5: { value:() => (['juicy and huge', 'huge', 'massive and undeniable']) },
+        _butt6: { value:() => (['truly massive', 'enormous']) },
+        _butt7: { value:() => (['gigantic', 'titanic']) },
       }}
 
       _implantType(type) { return type === 1 ? 'engorged string' : 'fillable butt'; }

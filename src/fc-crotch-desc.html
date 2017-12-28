@@ -2,7 +2,7 @@
 
 <dom-module id="fc-crotch-desc">
   <template>
-    <!--clothes-->
+    <!--todo clothes-->
     <template is="dom-if" if="{{_gt(slave.vagina, -1)}}">
       [[slave.slaveName]]'s [[_herma(slave.dick)]] bare and available.
     </template>
@@ -31,13 +31,13 @@
       static get properties() { return {
         slave: {
           type: Object,
-          value() { return {
+          value: () => ({
             vagina: 0,
             dick: 0,
             balls: 0,
             slaveName: '',
             hormones: 0
-          }}
+          })
         }
       }}
 
@@ -47,7 +47,8 @@
       _flaccid(slave) { return this._canAchieveErection(slave) ? ', flaccid' : ''; }
 
       _canAchieveErection(slave) {
-        return !slave ? null : slave.dick < 7 && slave.dick > 0 && (slave.balls > 0 ? slave.hormones <= 0 : slave.hormones < 0);
+        return !slave ? null : slave.dick < 7 && slave.dick > 0
+          && (slave.balls > 0 ? slave.hormones <= 0 : slave.hormones < 0);
       }
 
       _gt(v1, v2) { return v1 > v2; }

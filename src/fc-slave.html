@@ -9,7 +9,10 @@
     class FCSlave extends Polymer.Element {
       static get is() { return 'fc-slave'; }
       static get properties() { return {
-        slave: Object
+        slave: Object,
+        value: () => ({
+          name: 'unnamed'
+        })
       }}
     }
     customElements.define(FCSlave.is, FCSlave);

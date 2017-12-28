@@ -65,10 +65,10 @@
       static get properties() { return {
         slave: {
           type: Object,
-          value() { return {
+          value: () => ({
             hips: 0,
             butt: 1
-          }}
+          })
         }
       }}
 

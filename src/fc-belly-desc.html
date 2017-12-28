@@ -156,7 +156,14 @@
       static get is() { return 'fc-belly-desc'; }
       static get properties() { return {
         slave: {
-          type: Object
+          type: Object,
+          value: () => ({
+            weight: 0,
+            muscles: 0,
+            age: 18,
+            preg: -1,
+            height: 170
+          })
         }
       }}
 

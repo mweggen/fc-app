@@ -14,9 +14,9 @@
       static get properties() { return {
         gameState: {
           type: Object,
-          value() { return {
+          value: () => ({
             slaves: []
-          }},
+          }),
           notify: true
         }
       }}

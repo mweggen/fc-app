@@ -52,7 +52,9 @@
       </p>
       <p></p>
       <p>
-        She is
+        <template is="dom-if" if="{{!saleDescription}}">She</template>
+        <template is="dom-if" if="{{saleDescription}}">[[slave.slaveName]]</template>
+        is
         <iron-pages selected="[[_heightDescIndex]]">
           <span>petite</span>
           <span>short</span>
@@ -80,8 +82,106 @@
         </iron-pages>
         <paper-tooltip for="[[_musclesId]]" position="top">[[slave.muscles]]</paper-tooltip>
         <fc-skin-desc slave="[[slave]]"></fc-skin-desc>
-        <fc-upper-face-desc slave="[[slave]]"></fc-upper-face-desc>
-        <fc-hair-desc slave="[[slave]]"></fc-hair-desc>
+        <template is="dom-if" if="{{saleDescription}}">
+          <!--todo accent desc-->
+        </template>
+
+        <template is="dom-if" if="{{_eq(slave.fuckdoll, 0)}}">
+          <template is="dom-if" if="{{_eq(slave.markings, 'birthmark')}}">
+            She has a large, liver-colored birthmark, detracting from her beauty.
+          </template>
+          <template is="dom-if" if="{{_eq(slave.skin, 'tanned')}}">
+            <template is="dom-if" if="{{!_eq(slave.releaseRules, 'restrictive')}}">
+              <template is="dom-if" if="{{_gt(slave.fetishStrength, 60)}}">
+                <template is="dom-if" if="{{_eq(slave.fetishKnown, 1)}}">
+                  Her tan is slightly uneven, since she enjoys
+                  <template is="dom-if" if="{{_eq(slave.fetish, 'buttslut')}}">
+                    letting other tanned slaves share a tanning bed with her so they can sodomize her while she tans.
+                  </template>
+                  <template is="dom-if" if="{{!_eq(slave.fetish, 'buttslut')}}">
+                    <template is="dom-if" if="{{_eq(slave.fetish, 'cumslut')}}">
+                      letting other tanned slaves share a tanning bed with her so they get oral from her while she tans.
+                    </template>
+                    <template is="dom-if" if="{{!_eq(slave.fetish, 'cumslut')}}">
+                      <template is="dom-if" if="{{_eq(slave.fetish, 'sadist')}}">
+                        forcing inferior slaves into the tanning beds with her so she can sodomize them while she tans.
+                      </template>
+                      <template is="dom-if" if="{{!_eq(slave.fetish, 'sadist')}}">
+                        <template is="dom-if" if="{{_eq(slave.fetish, 'dom')}}">
+                          bringing other slaves into the tanning beds with her so she can fuck them while she tans.
+                        </template>
+                        <template is="dom-if" if="{{!_eq(slave.fetish, 'dom')}}">
+                          <template is="dom-if" if="{{_eqor(slave.fetish, 'masochist', 'submissive')}}">
+                            letting other slaves into the tanning beds with her so they can fuck her while she tans.
+                          </template>
+                          <template is="dom-if" if="{{!_eqor(slave.fetish, 'masochist', 'submissive')}}">
+                            <template is="dom-if" if="{{_eq(slave.fetish, 'boobs')}}">
+                              bringing other slaves into the tanning beds with her so she can tittyfuck them while she tans.
+                            </template>
+                            <template is="dom-if" if="{{!_eq(slave.fetish, 'boobs')}}">
+                              <template is="dom-if" if="{{_eq(slave.fetish, 'pregnancy')}}"><!--todo seeDicks-->
+                                letting slaves with dicks into the tanning beds with her so they can cum inside her while she tans.
+                              </template>
+                              <template is="dom-if" if="{{!_eq(slave.fetish, 'pregnancy')}}">
+                                bringing other slaves into the tanning beds with her to have sex while she tans.
+                              </template>
+                            </template>
+                          </template>
+                        </template>
+                      </template>
+                    </template>
+                  </template>
+                </template>
+              </template>
+            </template>
+          </template>
+        </template>
+
+        <template is="dom-if" if="{{!saleDescription}}">
+          <fc-upper-face-desc slave="[[slave]]"></fc-upper-face-desc>
+          <fc-hair-desc slave="[[slave]]"></fc-hair-desc>
+        </template>
+        <template is="dom-if" if="{{saleDescription}}">Her hair is [[slave.hColor]].</template>
+
+        <template is="dom-if" if="{{_eq(slave.fuckdoll, 0)}}">
+          <template is="dom-if" if="{{_eq(slave.hColor, 'red')}}">
+            <template is="dom-if" if="{{!_gt(10, slave.hLength)}}">
+              <template is="dom-if" if="{{_eqor(slave.markings, 'freckles', 'heavily freckled')}}">
+                <template is="dom-if" if="{{_eqor(slave.skin, 'pale', 'fair')}}">
+                  It goes perfectly with her [[slave.skin]] skin and freckles.
+                </template>
+              </template>
+            </template>
+          </template>
+        </template>
+
+        <template is="dom-if" if="{{_eq(slave.voice, 0)}}">
+          She is <span class="good">completely silent</span>, which is understandable, since she's mute.
+        </template>
+        <template is="dom-if" if="{{!_eq(slave.voice, 0)}}">
+          <template is="dom-if" if="{{_gt(slave.lips, 95)}}">
+            She is <span class="good">effectively mute</span>, since her lips are so large that she can no longer speak intelligibly.
+            She can still
+            <template is="dom-if" if="{{_gt(slave.devotion, 50)}}">
+              moan
+            </template>
+            <template is="dom-if" if="{{!_gt(slave.devotion, 50)}}">
+              <template is="dom-if" if="{{!_gt(20, slave.devotion)}}">
+                whimper
+              </template>
+              <template is="dom-if" if="{{_gt(20, slave.devotion)}}">
+                scream
+              </template>
+            </template>
+            through them, though.
+          </template>
+        </template>
+
+        <!--todo ear/nose/eyebrow piercing desc-->
+
+        <!--todo face desc-->
+        <!--todo mouth desc-->
+
       </p>
       <p>
         <fc-boobs-desc slave="[[slave]]"></fc-boobs-desc>
@@ -104,6 +204,8 @@
       static get is() { return "fc-slave-long-desc"; }
       static get properties() { return {
         slave: Object,
+        hideClothing: Boolean,
+        saleDescription: Boolean,
 
         _heightDescIndex: { computed: '_computeHeightDescIndex(slave.height)' },
         _weightDescIndex: { computed: '_computeWeightDescIndex(slave.weight, slave.hips)' },
@@ -133,6 +235,10 @@
         _weight5BDesc: { computed: '_moduloElement(_weight5BDescs, slave.weight)' },
         _weight6Desc: { computed: '_moduloElement(_weight6Descs, slave.weight)' }
       }}
+
+      _eq(v1, v2) { return v1 === v2; }
+      _eqor(v1, v2, v3) { return v1 === v2 || v1 === v3; }
+      _gt(v1, v2) { return v1 > v2; }
 
       _moduloElement(array, m) { return array ? array[Math.abs(m) % array.length] : ''; }
 

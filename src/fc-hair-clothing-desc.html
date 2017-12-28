@@ -104,10 +104,10 @@
       static get properties() { return {
         slave: {
           type: Object,
-          value() { return {
+          value: () => ({
             fuckdoll: 0,
             hStyle: 'neat'
-          }}
+          })
         }
       }}
 

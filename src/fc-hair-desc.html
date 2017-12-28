@@ -97,22 +97,27 @@
       static get properties() { return {
         slave: {
           type: Object,
-          value() { return {
-
-          }}
+          value: () => ({
+            vagina: 1,
+            hLength: 10,
+            fuckdoll: 0,
+            hStyle: 'neat',
+            hColor: 'black'
+          })
         }
       }}
 
       _lengthDesc(length, height) {
         let rel = length / height;
-        console.info('rel='+rel);
+        console.info('rel=' + rel);
         return rel > 0.9 ? 'floor-length,' : rel > 0.8 ? 'calf-length,' : rel > 0.7 ? 'knee-length,'
             : rel >= 0.6 ? 'thigh-length,' : rel >= 0.4 ? 'ass-length,' : rel >= 0.2 ? 'long,'
             : rel >= 0.15 ? 'shoulder-length,' : 'short,';
       }
 
       _long(style) {
-        return ['neat', 'strip', 'tails', 'up', 'ponytail', 'braided', 'dreadlocks', 'permed', 'curled', 'luxurious'].indexOf(style) !== -1;
+        return ['neat', 'strip', 'tails', 'up', 'ponytail', 'braided',
+          'dreadlocks', 'permed', 'curled', 'luxurious'].indexOf(style) !== -1;
       }
 
       _gt(v1, v2) { return v1 > v2; }

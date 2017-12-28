@@ -336,11 +336,11 @@
 
         //todo career
 
-        slave.vaginalSkill = this._normalRandClampedIntEven(7) + 8;
-        slave.analSkill = this._normalRandClampedIntEven(7) + 8;
-        slave.oralSkill = this._normalRandClampedIntEven(7) + 8;
-        slave.entertainSkill = this._normalRandClampedIntEven(7) + 8;
-        slave.whoreSkill = this._normalRandClampedIntEven(7) + 8;
+        slave.vaginalSkill = Math.floor(Math.random() * 16);
+        slave.analSkill = Math.floor(Math.random() * 16);
+        slave.oralSkill = Math.floor(Math.random() * 16);
+        slave.entertainSkill = Math.floor(Math.random() * 16);
+        slave.whoreSkill = Math.floor(Math.random() * 16);
 
         slave.energy = this._normalRandClampedIntEven(42) + 42;
 
@@ -615,8 +615,8 @@
           minorSizeAdjustment = (Math.floor(Math.random() * 2) + 1) * 50
         }
         let volResult = volume[actualSize] + minorSizeAdjustment + mod;
-        if (volResult < 0) {volResult = 0}
-        return volResult
+
+        return Math.max(0, volResult);
       }
     }
 

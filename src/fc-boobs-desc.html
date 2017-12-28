@@ -54,7 +54,22 @@
                       <template is="dom-if" if="{{!_lt(slave.boobs, 1800)}}">
                         <template is="dom-if" if="{{_lt(slave.boobs, 2050)}}">[[_me(_cupJ, slave.weight)]] [[_me(_tits3, slave.weight)]], [[slave.boobs]] CCs each, would fill J cups.</template>
                         <template is="dom-if" if="{{!_lt(slave.boobs, 2050)}}">
+                          <template is="dom-if" if="{{_lt(slave.boobs, 2300)}}">[[_me(_cupK, slave.weight)]] [[_me(_tits3, slave.weight)]], [[slave.boobs]] CCs each, would fill K cups.</template>
+                          <template is="dom-if" if="{{!_lt(slave.boobs, 2300)}}">
+                            <template is="dom-if" if="{{_lt(slave.boobs, 2600)}}">[[_me(_cupL, slave.weight)]] [[_me(_tits3, slave.weight)]], [[slave.boobs]] CCs each, would fill L cups.</template>
+                            <template is="dom-if" if="{{!_lt(slave.boobs, 2600)}}">
+                              <template is="dom-if" if="{{_lt(slave.boobs, 2900)}}">[[_me(_cupM, slave.weight)]] [[_me(_tits3, slave.weight)]], [[slave.boobs]] CCs each, would fill M cups.</template>
+                              <template is="dom-if" if="{{!_lt(slave.boobs, 2900)}}">
+                                <template is="dom-if" if="{{_lt(slave.boobs, 3250)}}">[[_me(_cupN, slave.weight)]] [[_me(_tits3, slave.weight)]], [[slave.boobs]] CCs each, would fill N cups.</template>
+                                <template is="dom-if" if="{{!_lt(slave.boobs, 3250)}}">
+                                  <template is="dom-if" if="{{_lt(slave.boobs, 3600)}}">[[_me(_cupO, slave.weight)]] [[_me(_tits3, slave.weight)]], [[slave.boobs]] CCs each, would fill O cups.</template>
+                                  <template is="dom-if" if="{{!_lt(slave.boobs, 3600)}}">
 
+                                  </template>
+                                </template>
+                              </template>
+                            </template>
+                          </template>
                         </template>
                       </template>
                     </template>
@@ -73,29 +88,34 @@
       static get properties() { return {
         slave: {
           type: Object,
-          value() { return {
+          value: () => ({
             boobs: 500,
             clothes: 'a slave gown',
             slaveName: 'Slave'
-          }}
+          })
         },
-        _cupA: { value() { return ['pointy', 'tiny'] }},
-        _cupB: { value() { return ['perky', 'small'] }},
-        _cupC: { value() { return ['healthy', 'curved'] }},
-        _cupD: { value() { return ['big', 'sizable'] }},
-        _cupE: { value() { return ['large', 'big'] }},
-        _cupF: { value() { return ['proud', 'hefty'] }},
-        _cupG: { value() { return ['hefty', 'huge'] }},
-        _cupH: { value() { return ['massive', 'huge'] }},
-        _cupI: { value() { return ['enormous', 'massive'] }},
-        _cupJ: { value() { return ['titanic', 'enormous'] }},
+        _cupA: { value: () => (['pointy', 'tiny']) },
+        _cupB: { value: () => (['perky', 'small']) },
+        _cupC: { value: () => (['healthy', 'curved']) },
+        _cupD: { value: () => (['big', 'sizable']) },
+        _cupE: { value: () => (['large', 'big']) },
+        _cupF: { value: () => (['proud', 'hefty']) },
+        _cupG: { value: () => (['hefty', 'huge']) },
+        _cupH: { value: () => (['massive', 'huge']) },
+        _cupI: { value: () => (['enormous', 'massive']) },
+        _cupJ: { value: () => (['titanic', 'enormous']) },
+        _cupK: { value: () => (['stupendous', 'titanic']) },
+        _cupL: { value: () => (['magnificent', 'stupendous']) },
+        _cupM: { value: () => (['impressive', 'magnificent']) },
+        _cupN: { value: () => (['awe-inspiring', 'impressive']) },
+        _cupO: { value: () => (['absurd', 'awe-inspiring']) },
 
-        _tits1: { value() { return ['tits', 'breasts', 'boobs', 'bosoms'] }},
-        _tits2: { value() { return ['tits', 'breasts', 'mammaries', 'udders', 'boobs'] }},
-        _tits3: { value() { return ['tits', 'breasts', 'mammaries', 'udders'] }},
-        _tits4: { value() { return ['boobs', 'breasts', 'mammaries', 'udders'] }},
-        _tits5: { value() { return ['tits', 'boobs', 'mammaries'] }},
-        _tits6: { value() { return ['tits', 'boobs', 'mammaries', 'udders'] }},
+        _tits1: { value: () => (['tits', 'breasts', 'boobs', 'bosoms']) },
+        _tits2: { value: () => (['tits', 'breasts', 'mammaries', 'udders', 'boobs']) },
+        _tits3: { value: () => (['tits', 'breasts', 'mammaries', 'udders']) },
+        _tits4: { value: () => (['boobs', 'breasts', 'mammaries', 'udders']) },
+        _tits5: { value: () => (['tits', 'boobs', 'mammaries']) },
+        _tits6: { value: () => (['tits', 'boobs', 'mammaries', 'udders']) },
       }}
 
       _me(array, m) { return array ? array[Math.abs(m) % array.length] : ''; }

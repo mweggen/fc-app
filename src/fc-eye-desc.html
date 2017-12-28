@@ -103,12 +103,12 @@
       static get properties() { return {
         slave: {
           type: Object,
-          value() { return {
+          value: () => ({
             eyes: 0,
             eyeColor: 'blue',
             intelligence: 3,
             intelligenceImplant: 1
-          }}
+          })
         },
         _isBlind: {
           type: Boolean,

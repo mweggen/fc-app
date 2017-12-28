@@ -65,12 +65,13 @@
       static get properties() { return {
         slave: {
           type: Object,
-          value() { return {
+          value: () => ({
             shoulders: 0,
             boobs: 500
-          }}
+          })
         }
       }}
+
       _lt(v1, v2) { return v1 < v2; }
       _gt(v1, v2) { return v1 > v2; }
       _tooBig(boobs, shoulders, hips) { return boobs > 2000 * (shoulders - hips); }

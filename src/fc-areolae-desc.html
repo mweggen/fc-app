@@ -55,7 +55,7 @@
       static get properties() { return {
         slave: {
           type: Object,
-          value() { return {
+          value: () => ({
             skin: 'fair',
             preg: -1,
             births: 0,
@@ -64,7 +64,7 @@
             areolae: 0,
             clothes: 'a leotard',
             boobShape: 'saggy'
-          }}
+          })
         },
         _color: { computed: '_computeAreolaeColor(slave.skin, slave.preg, slave.births, slave.lactation)' }
       }}

@@ -47,7 +47,10 @@
     </style>
     <fc-create-slave-data id="fcCreateSlaveData" continents="{{_continents}}"></fc-create-slave-data>
     <style include="iron-flex"></style>
-    <fc-slave-long-desc slave="[[slave]]"></fc-slave-long-desc>
+    <fc-slave-long-desc
+        sale-description
+        slave="[[slave]]">
+    </fc-slave-long-desc>
     <div class="layout horizontal" style="align-items: flex-end">
       <paper-dropdown-menu label="Nationality">
         <paper-listbox slot="dropdown-content" attr-for-selected="name" selected="{{slave.nationality}}"
@@ -130,7 +133,15 @@
 
       static get properties() {
         return {
-          slave: Object,
+          slave: {
+            type: Object,
+            value: () => ({
+              devotion: 0,
+              trust: 0,
+              indenture: -1,
+              slaveName: 'unknown'
+            })
+          },
           _devotion: Number,
           _trust: Number,
           _isIndentured: Boolean,

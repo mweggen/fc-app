@@ -256,12 +256,12 @@
       static get properties() { return {
         slave: {
           type: Object,
-          value() { return {
+          value: () => ({
             boobs: 500,
             boobShape: 'perky',
             boobsImplant: 0,
             boobsImplantType: 0
-          }}
+          })
         }
       }}
       _eq(v1, v2) { return v1 === v2; }
