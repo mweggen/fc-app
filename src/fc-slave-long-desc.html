@@ -60,13 +60,17 @@
       .skill {
         color: aquamarine;
       }
+      .slaveTitle {
+        color: coral;
+        font-weight: bold;
+      }
     </style>
     <div style="padding: 15px">
       <p>
         <b>[[slave.birthName]] [[slave.birthSurname]]</b> is
         <fc-devotion article="true" value="[[slave.devotion]]"></fc-devotion>,
         <fc-trust value="[[slave.trust]]"></fc-trust>
-        <fc-slave-title slave="[[slave]]"></fc-slave-title>.
+        <fc-slave-title class="slaveTitle" slave="[[slave]]"></fc-slave-title>.
         <fc-age-health-desc slave="[[slave]]"></fc-age-health-desc>
 
         <!--mental report-->
@@ -650,7 +654,7 @@
 
       _computeMusclesId(m) { return "muscles" + m; }
 
-      _computeHeightDescIndex(h) { return h < 149 ? 0 : h < 156 ? 1 : h < 169 ? 2 : h < 176 ? 3 : 4; }
+      _computeHeightDescIndex(h) { return h < 147 ? 0 : h < 157 ? 1 : h <= 167 ? 2 : h <= 177 ? 3 : 4; }
 
       _computeWeightDescIndex(w, h) {
         return w > 95 ? 0 : w > 30 ? (h > 1 ? 1 : 2) : w > 10 ? 3 : w >= -10 ? 4 : w >= -30 ? 5 : w >= -95 ? (h < -1 ? 6 : 7) : 8;

@@ -9,228 +9,183 @@
 
       static get properties() {
         return {
+          nationalities: {
+            value: () => ([
+              {
+                name: 'American',
+                races: [
+                  {name: 'white', weight: 3},
+                  {name: 'black', weight: 1},
+                  {name: 'middle eastern', weight: 1},
+                  {name: 'latina', weight: 2},
+                  {name: 'asian', weight: 1},
+                  {name: 'amerindian', weight: 1},
+                  {name: 'mixed race', weight: 1},
+                ]
+              }, {
+                name: 'Canadian',
+                races: [
+                  {name: 'white', weight: 73},
+                  {name: 'asian', weight: 15},
+                  {name: 'amerindian', weight: 5},
+                  {name: 'black', weight: 3.5},
+                  {name: 'mixed race', weight: 1.5},
+                  {name: 'latina', weight: 1},
+                  {name: 'middle eastern', weight: 1},
+                ]
+              }, {
+                name: 'Mexican',
+                races: [
+                  {name: 'latina', weight: 79},
+                  {name: 'amerindian', weight: 20},
+                  {name: 'black', weight: 1}
+                ]
+              },
+              {
+                name: 'Haitian', races: [
+                  {name: 'black', weight: 1}
+                ]
+              },
+              {
+                name: 'Cuban', races: [
+                  {name: 'latina', weight: 1}
+                ]
+              },
+              {
+                name: 'Puerto Rican', races: [
+                  {name: 'latina', weight: 1}
+                ]
+              },
+              {
+                name: 'Jamaican', races: [
+                  {name: 'black', weight: 1}
+                ]
+              },
+              {
+                name: 'Guatemalan',
+                races: [
+                  {name: 'latina', weight: 1},
+                  {name: 'amerindian', weight: 1}
+                ]
+              }, {
+                name: 'Bermudian',
+                races: [
+                  {name: 'black', weight: 3},
+                  {name: 'white', weight: 1}
+                ]
+              }, {
+                name: 'Greenlandic',
+                races: [
+                  {name: 'amerindian', weight: 9},
+                  {name: 'white', weight: 1}
+                ]
+              }, {
+                name: 'Belizean',
+                races: [
+                  {name: 'latina', weight: 4},
+                  {name: 'black', weight: 2},
+                  {name: 'amerindian', weight: 1},
+                  {name: 'white', weight: 1}
+                ]
+              }, {
+                name: 'Grenadian',
+                races: [
+                  {name: 'black', weight: 9},
+                  {name: 'mixed race', weight: 1}
+                ]
+              }, {
+                name: 'Honduran',
+                races: [
+                  {name: 'latina', weight: 9},
+                  {name: 'amerindian', weight: 1}
+                ]
+              }, {
+                name: 'Costa Rican',
+                races: [
+                  {name: 'latina', weight: 4},
+                  {name: 'white', weight: 1}
+                ]
+              }, {
+                name: 'Salvadoran',
+                races: [
+                  {name: 'latina', weight: 5},
+                  {name: 'white', weight: 1}
+                ]
+              }, {
+                name: 'Nicaraguan',
+                races: [
+                  {name: 'latina', weight: 6},
+                  {name: 'white', weight: 2},
+                  {name: 'black', weight: 1}
+                ]
+              }, {
+                name: 'Panamanian',
+                races: [
+                  {name: 'latina', weight: 6},
+                  {name: 'white', weight: 1},
+                  {name: 'black', weight: 1},
+                  {name: 'amerindian', weight: 1},
+                  {name: 'mixed race', weight: 1}
+                ]
+              }
+            ]),
+            notify: true
+          },
           continents: {
-            type: Object,
-            value: {
-              'North America': {
+            value: () => ([
+              {name:'North America',
                 'supremacistRace': 'white',
                 'subjugationistRace': 'black',
-                'nationalities': [{
-                  name: 'American',
-                  races: [{
-                    name: 'white',
-                    weight: 3
-                  }, {
-                    name: 'black',
-                    weight: 1
-                  }, {
-                    name: 'middle eastern',
-                    weight: 1
-                  }, {
-                    name: 'latina',
-                    weight: 2
-                  }, {
-                    name: 'asian',
-                    weight: 1
-                  }, {
-                    name: 'amerindian',
-                    weight: 1
-                  }, {
-                    name: 'mixed race',
-                    weight: 1
-                  }],
-                  weight: 4
-                }, {
-                  name: 'Mexican',
-                  races: [{
-                    name: 'latina',
-                    weight: 5
-                  }, {
-                    name: 'amerindian',
-                    weight: 1
-                  }],
-                  weight: 2
-                }, {
-                  name: 'Haitian',
-                  races: [{
-                    name: 'black',
-                    weight: 1
-                  }],
-                  weight: 1
-                }, {
-                  name: 'Cuban',
-                  races: [{
-                    name: 'latina',
-                    weight: '1'
-                  }],
-                  weight: 1
-                }, {
-                  name: 'Puerto Rican',
-                  races: [{
-                    name: 'latina',
-                    weight: 1
-                  }],
-                  weight: 1
-                }, {
-                  name: 'Jamaican',
-                  races: [{
-                    name: 'black',
-                    weight: 1
-                  }],
-                  weight: 1
-                }, {
-                  name: 'Guatemalan',
-                  races: [{
-                    name: 'latina',
-                    weight: 1
-                  }, {
-                    name: 'amerindian',
-                    weight: 1
-                  }],
-                  weight: 1
-                }, {
-                  name: 'Bermudian',
-                  races: [{
-                    name: 'black',
-                    weight: 3
-                  }, {
-                    name: 'white',
-                    weight: 1
-                  }],
-                  weight: 1
-                }, {
-                  name: 'Greenlandic',
-                  races: [{
-                    name: 'amerindian',
-                    weight: 9
-                  }, {
-                    name: 'white',
-                    weight: 1
-                  }],
-                  weight: 1
-                }, {
-                  name: 'Belizean',
-                  races: [{
-                    name: 'latina',
-                    weight: 4
-                  }, {
-                    name: 'black',
-                    weight: 2
-                  }, {
-                    name: 'amerindian',
-                    weight: 1
-                  }, {
-                    name: 'white',
-                    weight: 1
-                  }],
-                  weight: 1
-                }, {
-                  name: 'Grenadian',
-                  races: [{
-                    name: 'black',
-                    weight: 9
-                  }, {
-                    name: 'mixed race',
-                    weight: 1
-                  }],
-                  weight: 1
-                }, {
-                  name: 'Honduran',
-                  races: [{
-                    name: 'latina',
-                    weight: 9
-                  }, {
-                    name: 'amerindian',
-                    weight: 1
-                  }],
-                  weight: 1
-                }, {
-                  name: 'Costa Rican',
-                  races: [{
-                    name: 'latina',
-                    weight: 4
-                  }, {
-                    name: 'white',
-                    weight: 1
-                  }],
-                  weight: 1
-                }, {
-                  name: 'Salvadoran',
-                  races: [{
-                    name: 'latina',
-                    weight: 5
-                  }, {
-                    name: 'white',
-                    weight: 1
-                  }],
-                  weight: 1
-                }, {
-                  name: 'Nicaraguan',
-                  races: [{
-                    name: 'latina',
-                    weight: 6
-                  }, {
-                    name: 'white',
-                    weight: 2
-                  }, {
-                    name: 'black',
-                    weight: 1
-                  }],
-                  weight: 1
-                }, {
-                  name: 'Panamanian',
-                  races: [{
-                    name: 'latina',
-                    weight: 6
-                  }, {
-                    name: 'white',
-                    weight: 1
-                  }, {
-                    name: 'black',
-                    weight: 1
-                  }, {
-                    name: 'amerindian',
-                    weight: 1
-                  }, {
-                    name: 'mixed race',
-                    weight: 1
-                  }],
-                  weight: 1
-                }]
+                'nationalities': [
+                  {name:'American', weight: 320},
+                  {name:'Mexican', weight: 120 },
+                  {name:'Canadian', weight: 36 },
+                  {name:'Guatemalan',weight: 16},
+                  {name:'Cuban', weight: 11},
+                  {name:'Haitian', weight: 11},
+                  {name:'Dominican', weight: 10},
+                  {name:'Honduran',weight: 9.0},
+                  {name:'Nicaraguan',weight: 6.5},
+                  {name:'Salvadoran',weight: 6.5},
+                  {name:'Costa Rican',weight: 4.9},
+                  {name:'Panamanian',weight: 3.8},
+                  {name:'Puerto Rican',weight: 3.5},
+                  {name:'Jamaican',weight: 2.7},
+                  {name:'Belizean',weight: 0.37},
+                  {name:'Grenadian',weight: 0.10},
+                  {name:'Bermudian',weight: 0.065},
+                  {name:'Greenlandic',weight: 0.056},
+                ]
               },
-              'South America': {
+              {name: 'South America',
                 'supremacistRace': 'latina',
                 'subjugationistRace': 'black',
-                'nationalities': [{
-                  name: 'Brazilian',
-                  weight: 4
-                }, {
-                  name: 'Argentinian',
-                  weight: 2
-                }, {
-                  name: 'Colombian',
-                  weight: 2
-                }, {
-                  name: 'Peruvian',
-                  weight: 1
-                }, {
-                  name: 'Venezuelan',
-                  weight: 1
-                }, {
-                  name: 'Bolivian',
-                  weight: 1
-                }, {
-                  name: 'Chilean',
-                  weight: 1
-                }, {
-                  name: 'Uruguayan',
-                  weight: 1
-                }]
+                'nationalities': [
+                  {name: 'Brazilian', weight: 204},
+                  {name: 'Colombian', weight: 48},
+                  {name: 'Argentinian', weight: 43},
+                  {name: 'Peruvian', weight: 31},
+                  {name: 'Venezuelan', weight: 30},
+                  {name: 'Chilean', weight: 18},
+                  {name: 'Uruguayan', weight: 16},
+                  {name: 'Bolivian', weight: 10},
+                  {name: 'Paraguayan', weight: 7}
+                ]
               }
-            },
+            ]),
             notify: true
+          },
+          allNationalities: {
+            type: Array,
+            value: () => ([]),
+            computed: '_allNationalities(continents)'
           }
         }
+      }
+
+      _allNationalities(continents) {
+        let nat = [].concat.apply([], continents.map(c => c.nationalities)).map(n => n.name);
+        return nat;
       }
 
       createBaseSlave() {
@@ -258,7 +213,7 @@
           training: 0,
           toyHole: "all her holes",
           indenture: -1, indentureRestrictions: 0,
-          birthWeek: Math.floor(Math.random() * 52), age: 18, ageImplant: 0,
+          birthWeek: this.randomizeBirthWeek(), age: 18, ageImplant: 0,
           health: 0, minorInjury: 0,
           trust: 0, oldTrust: 0,
           devotion: 0, oldDevotion: 0,
@@ -318,6 +273,26 @@
           customTat: "", customLabel: "", customDesc: "", customTitle: "", customTitleLisp: "",
           rudeTitle: 0, customImage: 0, currentRules: []
         };
+      }
+
+      randomizeBirthWeek() {
+        return Math.floor(Math.random() * 52);
+      }
+
+      generateStartingGirl() {
+        let slave = this.generateNewSlave();
+        slave.health = 0;
+        slave.devotion = 0;
+        slave.trust = 0;
+        slave.sexualQuirk = 'none';
+        slave.behavioralQuirk = 'none';
+        slave.fetishKnown = 1;
+        return slave;
+      }
+
+      generateNewSlave() {
+        //TODO XY slave
+        return this.generateXXSlave();
       }
 
       generateXXSlave() {
@@ -395,9 +370,12 @@
           slave.eyes = -1;
         }
 
-        slave.nationality = this.weightedRandom(this.continents['North America'].nationalities).name;
-        slave.race = this.weightedRandom(this.continents['North America'].nationalities
-            .find(n => n.name === slave.nationality).races).name;
+        if (this.continents) {
+          slave.nationality = this.weightedRandom(this.continents.find(n => n.name === 'North America').nationalities).name;
+        }
+        if (this.nationalities) {
+          slave.race = this.weightedRandom(this.nationalities.find(n => n.name === slave.nationality).races).name;
+        }
         //todo name from nationality
         slave.birthName = this.randomName(slave);
         slave.birthSurname = this.randomizeSurname(slave);

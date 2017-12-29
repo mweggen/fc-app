@@ -44,14 +44,166 @@
         height: 24px;
         padding: 0 4px;
       }
+      .bad {
+        color: red;
+        font-weight: bold;
+      }
+      .good {
+        color: green;
+        font-weight: bold;
+      }
+      .ok {
+        color: yellow;
+        font-weight: bold;
+      }
+      .goodmuscles {
+        color: pink;
+        font-weight: bold;
+      }
+      .normal {
+        color: var(--primary-text-color);
+        font-weight: bold;
+      }
+      iron-pages {
+        display: inline;
+      }
+      .caption {
+        color: var(--secondary-text-color);
+        transform: translateX(-6.8%) scale(0.75);
+        width: 133%;
+      }
+      .slider200 {
+        width: 233px;
+      }
+      .slider100 {
+        width: 133px;
+      }
+      .indenture {
+        align-items: flex-end;
+      }
+      .indenture span {
+        padding: 20px 0;
+      }
+      .indenture paper-input {
+        width: 30px;
+        display: inline;
+      }
     </style>
-    <fc-create-slave-data id="fcCreateSlaveData" continents="{{_continents}}"></fc-create-slave-data>
+    <fc-create-slave-data id="fcCreateSlaveData" continents="{{_continents}}" nationalities="{{_nat}}"></fc-create-slave-data>
     <style include="iron-flex"></style>
     <fc-slave-long-desc
         sale-description
         slave="[[slave]]">
     </fc-slave-long-desc>
-    <div class="layout horizontal" style="align-items: flex-end">
+    <div class="layout horizontal wrap" style="align-items: flex-end">
+      <paper-input label="Name" style="width: 120px" value="{{slave.birthName}}" on-value-changed="_nameValueChanged">
+        <paper-icon-button slot="suffix" icon="places:casino" on-click="_randomizeName"></paper-icon-button>
+      </paper-input>
+      <paper-input label="Surname" style="width: 150px" value="{{slave.birthSurname}}" on-value-changed="_surnameValueChanged">
+        <paper-icon-button slot="suffix" icon="places:casino" on-click="_randomizeSurname"></paper-icon-button>
+      </paper-input>
+      <div>
+        <div class="caption">
+          Devotion:
+          <fc-devotion value="[[_devotion]]"></fc-devotion>
+          ([[_devotion]])
+        </div>
+        <paper-slider class="slider200" on-immediate-value-change="_devotionImmediateChange" id="devotion"
+                      min="-100" value="{{slave.devotion}}" secondary-progress="-100"></paper-slider>
+      </div>
+      <div>
+        <div class="caption">
+          Trust:
+          <fc-trust value="[[_trust]]"></fc-trust>
+          ([[_trust]])
+        </div>
+        <paper-slider class="slider200" on-immediate-value-change="_trustImmediateChange" id="trust"
+                      min="-100" value="{{slave.trust}}" secondary-progress="-100"></paper-slider>
+      </div>
+      <div>
+        <div class="caption">
+          Health:
+          <iron-pages selected="[[_healthIndex]]">
+            <span><span class="bad">dangerously unhealthy</span></span>
+            <span><span class="bad">very unhealthy</span></span>
+            <span><span class="bad">unhealthy</span></span>
+            <span><span class="ok">healthy</span></span>
+            <span><span class="good">very healthy</span></span>
+            <span><span class="good">extremely healthy</span></span>
+          </iron-pages>
+          ([[_health]])
+        </div>
+        <paper-slider class="slider200" on-immediate-value-change="_healthImmediateChange" id="health"
+                      min="-100" value="{{slave.health}}" secondary-progress="-100"></paper-slider>
+      </div>
+      <paper-input label="Age" style="width: 50px" value="{{slave.age}}">
+        <paper-icon-button slot="suffix" icon="places:casino" on-click="_randomizeAge"></paper-icon-button>
+      </paper-input>
+      <paper-input label="Birth week" style="width: 60px" value="{{slave.birthWeek}}">
+        <paper-icon-button slot="suffix" icon="places:casino" on-click="_randomizeBirthWeek"></paper-icon-button>
+      </paper-input>
+      <div>
+        <div class="caption">Height:
+          <iron-pages selected="[[_heightIndex]]">
+            <span class="normal">petite</span>
+            <span class="normal">short</span>
+            <span class="normal">average</span>
+            <span class="normal">tall</span>
+            <span class="normal">very tall</span>
+          </iron-pages>
+          ([[_height]] cm)
+        </div>
+        <paper-slider class="slider100" on-immediate-value-change="_heightImmediateChange" id="height"
+                      min="133" max="192" value="{{slave.height}}" secondary-progress="133"></paper-slider>
+      </div>
+      <div>
+        <div class="caption">
+          Weight:
+          <iron-pages selected="[[_weightIndex]]">
+            <span class="bad">fat</span>
+            <span class="bad">chubby</span>
+            <span class="normal">plush</span>
+            <span class="normal">average</span>
+            <span class="normal">thin</span>
+            <span class="bad">skinny</span>
+            <span class="bad">emaciated</span>
+          </iron-pages>
+          ([[_weight]])
+        </div>
+        <paper-slider class="slider200" on-immediate-value-change="_weightImmediateChange" id="weight"
+                      min="-100" value="{{slave.weight}}" secondary-progress="-100"></paper-slider>
+      </div>
+      <div>
+        <div class="caption">
+          Waist:
+          <iron-pages selected="[[_waistIndex]]">
+            <span class="bad">masculine</span>
+            <span class="bad">ugly</span>
+            <span class="bad">unattractive</span>
+            <span class="normal">average</span>
+            <span class="goodmuscles">feminine</span>
+            <span class="goodmuscles">wasp</span>
+            <span class="goodmuscles">absurdly narrow</span>
+          </iron-pages>
+          ([[_waist]])
+        </div>
+        <paper-slider class="slider200" on-immediate-value-change="_waistImmediateChange" id="waist"
+                      min="-100" value="{{slave.waist}}" secondary-progress="-100"></paper-slider>
+      </div>
+      <div>
+        <div class="caption">
+          Muscles:
+          <iron-pages selected="[[_musclesIndex]]">
+            <span><span class="normal">normal</span></span>
+            <span><span class="goodmuscles">toned</span></span>
+            <span><span class="goodmuscles">ripped</span></span>
+            <span><span class="goodmuscles">extreme</span></span>
+          </iron-pages>
+          ([[_muscles]])
+        </div>
+        <paper-slider class="slider100" on-immediate-value-change="_musclesImmediateChange" id="muscles"
+                      value="{{slave.muscles}}" secondary-progress="0"></paper-slider>
+      </div>
       <paper-dropdown-menu label="Nationality">
         <paper-listbox slot="dropdown-content" attr-for-selected="name" selected="{{slave.nationality}}"
                        on-selected-changed="_nationalityChanged">
@@ -67,32 +219,47 @@
           </template>
         </paper-listbox>
       </paper-dropdown-menu>
-      <paper-input label="Name" style="width: 120px" value="{{slave.birthName}}" on-value-changed="_nameValueChanged">
-        <paper-icon-button slot="suffix" icon="places:casino" on-click="_randomizeName"></paper-icon-button>
-      </paper-input>
-      <paper-input label="Surname" style="width: 150px" value="{{slave.birthSurname}}" on-value-changed="_surnameValueChanged">
-        <paper-icon-button slot="suffix" icon="places:casino" on-click="_randomizeSurname"></paper-icon-button>
-      </paper-input>
-      <paper-input label="Age" style="width: 50px" value="{{slave.age}}">
-        <paper-icon-button slot="suffix" icon="places:casino" on-click="_randomizeAge"></paper-icon-button>
-      </paper-input>
-    </div>
-    <div class="layout horizontal">
+      <paper-dropdown-menu label="Skin">
+        <paper-listbox id="skin" slot="dropdown-content" attr-for-selected="name" selected="{{slave.skin}}"
+                       on-items-changed="_skinItemsChanged">
+          <template is="dom-repeat" items="[[_skin]]">
+            <paper-item name="[[item]]">[[item]]</paper-item>
+          </template>
+        </paper-listbox>
+      </paper-dropdown-menu>
+      <paper-dropdown-menu label="Voice">
+        <paper-listbox slot="dropdown-content" selected="{{slave.voice}}">
+          <paper-item>Mute</paper-item>
+          <paper-item>Deep</paper-item>
+          <paper-item>Normal</paper-item>
+          <paper-item>High</paper-item>
+        </paper-listbox>
+      </paper-dropdown-menu>
+      <paper-dropdown-menu label="Facial appearance">
+        <paper-listbox slot="dropdown-content" attr-for-selected="name" selected="{{slave.faceShape}}">
+          <paper-item name="normal">Normal</paper-item>
+          <paper-item name="masculine">Masucline</paper-item>
+          <paper-item name="androgynous">Androgynous</paper-item>
+          <paper-item name="cute">Cute</paper-item>
+          <paper-item name="sensual">Sensual</paper-item>
+          <paper-item name="exotic">Exotic</paper-item>
+        </paper-listbox>
+      </paper-dropdown-menu>
       <div>
-        <div style="padding: 0 15px" class="caption">Devotion:
-          <fc-devotion value="[[_devotion]]"></fc-devotion>
-          ([[_devotion]])
+        <div class="caption">Attractiveness:
+          <iron-pages selected="[[_faceIndex]]">
+            <span class="goodmuscles">Very ugly</span>
+            <span class="goodmuscles">Ugly</span>
+            <span class="goodmuscles">Unattractive</span>
+            <span class="goodmuscles">Average</span>
+            <span class="goodmuscles">Attractive</span>
+            <span class="goodmuscles">Beautiful</span>
+            <span class="goodmuscles">Very beautiful</span>
+          </iron-pages>
+          ([[_face]])
         </div>
-        <paper-slider on-immediate-value-change="_devotionImmediateChange" id="devotion" min="-100"
-                      value="{{slave.devotion}}" secondary-progress="-100"></paper-slider>
-      </div>
-      <div>
-        <div style="padding: 0 15px" class="caption">Trust:
-          <fc-trust value="[[_trust]]"></fc-trust>
-          ([[_trust]])
-        </div>
-        <paper-slider on-immediate-value-change="_trustImmediateChange" id="trust" min="-100"
-                      value="{{slave.trust}}" secondary-progress="-100"></paper-slider>
+        <paper-slider class="slider200" on-immediate-value-change="_faceImmediateChange" id="face" min="-100"
+                      value="{{slave.face}}" secondary-progress="-100"></paper-slider>
       </div>
     </div>
     <div class="layout horizontal">
@@ -103,22 +270,12 @@
         </paper-listbox>
       </paper-dropdown-menu>
       <div hidden$="{{_isIndentured}}">
-        <div class="layout horizontal" style="align-items: flex-end">
-          <span style="padding: 20px 0">with</span>
-          <paper-input style="width: 30px; display: inline" value="{{slave.indenture}}"></paper-input>
-          <span style="padding: 20px 0">weeks remaining.</span>
+        <div class="layout horizontal indenture">
+          <span>with</span>
+          <paper-input value="{{slave.indenture}}"></paper-input>
+          <span>weeks remaining.</span>
         </div>
       </div>
-    </div>
-    <div class="layout horizontal">
-      <paper-dropdown-menu label="Voice">
-        <paper-listbox slot="dropdown-content" attr-for-selected="name" selected="{{slave.voice}}">
-          <paper-item name="0">Mute</paper-item>
-          <paper-item name="1">Deep</paper-item>
-          <paper-item name="2">Normal</paper-item>
-          <paper-item name="3">High</paper-item>
-        </paper-listbox>
-      </paper-dropdown-menu>
     </div>
     <div class="layout horizontal">
       <paper-button raised class="green" on-click="_addSlave">Add Slave</paper-button>
@@ -144,9 +301,26 @@
           },
           _devotion: Number,
           _trust: Number,
+          _health: Number,
+          _healthIndex: { computed: '_computeHealthIndex(_health)' },
+          _muscles: Number,
+          _musclesIndex: { computed: '_computeMusclesIndex(_muscles)' },
+          _waist: Number,
+          _waistIndex: { computed: '_computeWaistIndex(_waist)' },
+          _weight: Number,
+          _weightIndex: { computed: '_computeWeightIndex(_weight)' },
+          _face: Number,
+          _faceIndex: { computed: '_computeFaceIndex(_face)' },
+          _height: Number,
+          _heightIndex: { computed: '_computeHeightIndex(_height)' },
           _isIndentured: Boolean,
           _nationalities: Array,
-          _races: Array
+          _races: {
+            type: Array
+          },
+          _skin: {
+            computed: '_computeSkin(slave.race)'
+          }
         }
       }
 
@@ -154,6 +328,12 @@
         return [
           '_devotionChanged(slave.devotion)',
           '_trustChanged(slave.trust)',
+          '_healthChanged(slave.health)',
+          '_musclesChanged(slave.muscles)',
+          '_waistChanged(slave.waist)',
+          '_weightChanged(slave.weight)',
+          '_faceChanged(slave.face)',
+          '_heightChanged(slave.height)',
           '_indentureChanged(slave.indenture)'
         ]
       }
@@ -161,9 +341,12 @@
       ready() {
         super.ready();
         this._randomizeAll();
-        this.set('_nationalities', this._continents['North America'].nationalities.map(n => n.name).sort());
-        this.set('_races', this._continents['North America'].nationalities
-          .find(n => n.name === this.slave.nationality).races.map(n => n.name).sort());
+        if (this._continents) {
+          this.set('_nationalities', this._continents.find(n => n.name === 'North America').nationalities.map(n => n.name).sort());
+        }
+        if (this._nat) {
+          this.set('_races', this._nat.find(n => n.name === this.slave.nationality).races.map(n => n.name).sort());
+        }
       }
 
       _nameValueChanged(e) {
@@ -178,11 +361,28 @@
         this.$.races.select(this.slave.race);
       }
 
+      _computeSkin(race){
+        let skin;
+        if (race === 'black') {
+          skin = ['black', 'brown', 'light brown'];
+        } else if (race === 'white') {
+          skin = ['pale', 'tanned', 'fair'];
+        } else if (race === 'latina') {
+          skin = ['olive', 'brown', 'light brown'];
+        } else if (race === 'indo-aryan' || race === 'malay' || race === 'pacific islander' || race === 'amerindian') {
+          skin = ['dark', 'light'];
+        } else {
+          skin = ['pale', 'dark', 'light'];
+        }
+        if (skin.indexOf(this.slave.skin) < 0) {
+          this.set('slave.skin', skin[0]);//todo based on race
+        }
+        return skin;
+      }
+
       _nationalityChanged(e) {
-        let nationalities = this._continents['North America'].nationalities;
-        if (nationalities !== undefined) {
-          let races = nationalities
-            .find(n => n.name === e.detail.value).races;
+        if (this._nat) {
+          let races = this._nat.find(n => n.name === e.detail.value).races;
           if (races !== undefined) {
             let racesArray = races.map(n => n.name);
             this.set('_races', racesArray.sort());
@@ -233,12 +433,86 @@
         this._trust = trust;
       }
 
+      _healthImmediateChange(e) {
+        this._healthChanged(this.$.health.immediateValue);
+      }
+
+      _healthChanged(health) {
+        this._health = health;
+      }
+
+      _computeHealthIndex(h) {
+        return h < -90 ? 0 : h < -50 ? 1 : h < -20 ? 2 : h <= 20 ? 3 : h <= 50 ? 4 : 5;
+      }
+
+      _musclesImmediateChange(e) {
+        this._musclesChanged(this.$.muscles.immediateValue);
+      }
+
+      _musclesChanged(muscles) {
+        this._muscles = muscles;
+      }
+
+      _computeMusclesIndex(m) {
+        return m <= 5 ? 0 : m <= 30 ? 1 : m <= 95 ? 2 : 3;
+      }
+
+      _waistImmediateChange(e) {
+        this._waistChanged(this.$.waist.immediateValue);
+      }
+
+      _waistChanged(waist) {
+        this._waist = waist;
+      }
+
+      _computeWaistIndex(w) {
+        return w > 95 ? 0 : w > 40 ? 1 : w > 10 ? 2 : w >= -10 ? 3 : w >= -40 ? 4 : w >= -95 ? 5 : 6;
+      }
+
+      _weightImmediateChange(e) {
+        this._weightChanged(this.$.weight.immediateValue);
+      }
+
+      _weightChanged(weight) {
+        this._weight = weight;
+      }
+
+      _computeWeightIndex(w) {
+        return w > 95 ? 0 : w > 30 ? 1 : w > 10 ? 2 : w >= -10 ? 3 : w >= -30 ? 4 : w >= -95 ? 5 : 6;
+      }
+
+      _faceImmediateChange(e) {
+        this._faceChanged(this.$.face.immediateValue);
+      }
+
+      _faceChanged(face) {
+        this._face = face;
+      }
+
+      _computeFaceIndex(w) {
+        return w < -95 ? 0 : w < -40 ? 1 : w < -10 ? 2 : w <= 10 ? 3 : w <= 40 ? 4 : w <= 95 ? 5 : 6;
+      }
+
+      _heightImmediateChange(e) {
+        this._heightChanged(this.$.height.immediateValue);
+      }
+
+      _heightChanged(height) {
+        this._height = height;
+      }
+
+      _computeHeightIndex(h) {
+        return h < 147 ? 0 : h < 157 ? 1 : h <= 167 ? 2 : h <= 177 ? 3 : 4;
+      }
+
       _randomizeAll() {
-        let slave = this.$.fcCreateSlaveData.generateXXSlave();
-        this.set('_races', this._continents['North America'].nationalities
-          .find(n => n.name === slave.nationality).races.map(n => n.name).sort());
+        let slave = this.$.fcCreateSlaveData.generateStartingGirl();
+        if (this._nat) {
+          this.set('_races', this._nat.find(n => n.name === slave.nationality).races.map(n => n.name).sort());
+        }
+        this.set('_skin', this._computeSkin(slave.race));
         this.set('slave', slave);
-        this.set('slave.race', slave.race);
+        // this.set('slave.race', slave.race);
       }
 
       _randomizeName() {
@@ -254,6 +528,10 @@
 
       _randomizeAge() {
         this.set('slave.age', this.$.fcCreateSlaveData.randomizeAge());
+      }
+
+      _randomizeBirthWeek() {
+        this.set('slave.birthWeek', this.$.fcCreateSlaveData.randomizeBirthWeek());
       }
 
       _addSlave() {
