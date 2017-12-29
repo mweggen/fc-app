@@ -213,54 +213,107 @@
         </paper-listbox>
       </paper-dropdown-menu>
       <paper-dropdown-menu label="Race">
-        <paper-listbox id="races" slot="dropdown-content" attr-for-selected="name" selected="{{slave.race}}">
+        <paper-listbox id="races" slot="dropdown-content" attr-for-selected="name" selected="{{slave.race}}"
+                        on-selected-changed="_onRaceChanged">
           <template is="dom-repeat" items="[[_races]]">
             <paper-item name="[[item]]">[[item]]</paper-item>
           </template>
         </paper-listbox>
       </paper-dropdown-menu>
       <paper-dropdown-menu label="Skin">
-        <paper-listbox id="skin" slot="dropdown-content" attr-for-selected="name" selected="{{slave.skin}}"
-                       on-items-changed="_skinItemsChanged">
-          <template is="dom-repeat" items="[[_skin]]">
+        <paper-listbox id="skin" slot="dropdown-content" attr-for-selected="name" selected="{{slave.skin}}">
+          <template id="skinTemplate" is="dom-repeat" items="[[_skin]]">
             <paper-item name="[[item]]">[[item]]</paper-item>
           </template>
         </paper-listbox>
       </paper-dropdown-menu>
       <paper-dropdown-menu label="Voice">
         <paper-listbox slot="dropdown-content" selected="{{slave.voice}}">
-          <paper-item>Mute</paper-item>
-          <paper-item>Deep</paper-item>
-          <paper-item>Normal</paper-item>
-          <paper-item>High</paper-item>
+          <paper-item>mute</paper-item>
+          <paper-item>deep</paper-item>
+          <paper-item>normal</paper-item>
+          <paper-item>high</paper-item>
+        </paper-listbox>
+      </paper-dropdown-menu>
+      <paper-dropdown-menu label="Markings">
+        <paper-listbox slot="dropdown-content" attr-for-selected="name" selected="{{slave.markings}}">
+          <paper-item name="none">none</paper-item>
+          <template is="dom-if" if="[[_eqor(slave.skin, 'pale', 'fair')]]">
+            <paper-item name="freckles">freckles</paper-item>
+            <paper-item name="heavily freckled">heavily freckled</paper-item>
+          </template>
+          <paper-item name="beauty mark">beauty mark</paper-item>
+          <paper-item name="birthmark">birthmark</paper-item>
         </paper-listbox>
       </paper-dropdown-menu>
       <paper-dropdown-menu label="Facial appearance">
         <paper-listbox slot="dropdown-content" attr-for-selected="name" selected="{{slave.faceShape}}">
-          <paper-item name="normal">Normal</paper-item>
-          <paper-item name="masculine">Masucline</paper-item>
-          <paper-item name="androgynous">Androgynous</paper-item>
-          <paper-item name="cute">Cute</paper-item>
-          <paper-item name="sensual">Sensual</paper-item>
-          <paper-item name="exotic">Exotic</paper-item>
+          <paper-item name="normal">normal</paper-item>
+          <paper-item name="masculine">masucline</paper-item>
+          <paper-item name="androgynous">androgynous</paper-item>
+          <paper-item name="cute">cute</paper-item>
+          <paper-item name="sensual">sensual</paper-item>
+          <paper-item name="exotic">exotic</paper-item>
         </paper-listbox>
       </paper-dropdown-menu>
       <div>
         <div class="caption">Attractiveness:
           <iron-pages selected="[[_faceIndex]]">
-            <span class="goodmuscles">Very ugly</span>
-            <span class="goodmuscles">Ugly</span>
-            <span class="goodmuscles">Unattractive</span>
-            <span class="goodmuscles">Average</span>
-            <span class="goodmuscles">Attractive</span>
-            <span class="goodmuscles">Beautiful</span>
-            <span class="goodmuscles">Very beautiful</span>
+            <span class="goodmuscles">very ugly</span>
+            <span class="goodmuscles">ugly</span>
+            <span class="goodmuscles">unattractive</span>
+            <span class="goodmuscles">average</span>
+            <span class="goodmuscles">attractive</span>
+            <span class="goodmuscles">beautiful</span>
+            <span class="goodmuscles">very beautiful</span>
           </iron-pages>
           ([[_face]])
         </div>
         <paper-slider class="slider200" on-immediate-value-change="_faceImmediateChange" id="face" min="-100"
                       value="{{slave.face}}" secondary-progress="-100"></paper-slider>
       </div>
+      <div>
+        <div class="caption">Breasts:
+          <iron-pages selected="[[_boobsIndex]]">
+            <span class="normal">flat</span>
+            <span class="normal">healthy</span>
+            <span class="normal">large</span>
+            <span class="normal">very large</span>
+            <span class="normal">huge</span>
+            <span class="normal">massive</span>
+            <span class="normal">monstrous</span>
+            <span class="normal">science experiment</span>
+          </iron-pages>
+          ([[_boobs]] CCs)
+        </div>
+        <paper-slider class="slider200" on-immediate-value-change="_boobsImmediateChange" id="boobs" min="50"
+                      step="50" max="2000" value="{{slave.boobs}}" on-change="_boobsChangedEvent" secondary-progress="50"></paper-slider>
+      </div>
+      <paper-dropdown-menu label="Lactation">
+        <paper-listbox slot="dropdown-content" selected="{{slave.lactation}}">
+          <paper-item>none</paper-item>
+          <paper-item>natural</paper-item>
+          <paper-item>artificial</paper-item>
+        </paper-listbox>
+      </paper-dropdown-menu>
+      <paper-dropdown-menu label="Nipples">
+        <paper-listbox slot="dropdown-content" attr-for-selected="name" selected="{{slave.nipples}}">
+          <paper-item name="tiny">tiny</paper-item>
+          <paper-item name="cute">cute</paper-item>
+          <paper-item name="puffy">puffy</paper-item>
+          <paper-item name="partially inverted">partially inverted</paper-item>
+          <paper-item name="inverted">inverted</paper-item>
+          <paper-item name="huge">huge</paper-item>
+        </paper-listbox>
+      </paper-dropdown-menu>
+      <paper-dropdown-menu label="Areolae">
+        <paper-listbox slot="dropdown-content" selected="{{slave.areolae}}">
+          <paper-item>normal</paper-item>
+          <paper-item>large</paper-item>
+          <paper-item>wide</paper-item>
+          <paper-item>huge</paper-item>
+        </paper-listbox>
+      </paper-dropdown-menu>
     </div>
     <div class="layout horizontal">
       <paper-dropdown-menu label="Legal status" id="indenture-menu">
@@ -313,13 +366,18 @@
           _faceIndex: { computed: '_computeFaceIndex(_face)' },
           _height: Number,
           _heightIndex: { computed: '_computeHeightIndex(_height)' },
+          _boobs: Number,
+          _boobsIndex: { computed: '_computeBoobsIndex(_boobs)' },
           _isIndentured: Boolean,
           _nationalities: Array,
           _races: {
             type: Array
           },
           _skin: {
-            computed: '_computeSkin(slave.race)'
+            type: Array,
+            value: () => ([]),
+            notify: true,
+            observer: '_observeSkin'
           }
         }
       }
@@ -333,6 +391,7 @@
           '_waistChanged(slave.waist)',
           '_weightChanged(slave.weight)',
           '_faceChanged(slave.face)',
+          '_boobsChanged(slave.boobs)',
           '_heightChanged(slave.height)',
           '_indentureChanged(slave.indenture)'
         ]
@@ -349,16 +408,14 @@
         }
       }
 
+      _eqor(v1, v2, v3) { return v1 === v2 || v1 === v3; }
+
       _nameValueChanged(e) {
         this.set('slave.slaveName', e.detail.value);
       }
 
       _surnameValueChanged(e) {
         this.set('slave.slaveSurname', e.detail.value);
-      }
-
-      _raceChanged(e) {
-        this.$.races.select(this.slave.race);
       }
 
       _computeSkin(race){
@@ -374,10 +431,21 @@
         } else {
           skin = ['pale', 'dark', 'light'];
         }
-        if (skin.indexOf(this.slave.skin) < 0) {
-          this.set('slave.skin', skin[0]);//todo based on race
-        }
         return skin;
+      }
+
+      _observeSkin() {
+        let selected = this._skin.indexOf(this.$.skin.selected);
+        this.$.skin.selected = undefined;
+        if (selected < this._skin.length) {
+          this.$.skinTemplate.render();
+          this.$.skin.forceSynchronousItemUpdate();
+          this.$.skin.selected = this._skin[selected < 0 ? 0 : selected] ;
+        }
+      }
+
+      _onRaceChanged(e) {
+        this._skin = this._computeSkin(e.detail.value);
       }
 
       _nationalityChanged(e) {
@@ -481,6 +549,25 @@
         return w > 95 ? 0 : w > 30 ? 1 : w > 10 ? 2 : w >= -10 ? 3 : w >= -30 ? 4 : w >= -95 ? 5 : 6;
       }
 
+      _boobsImmediateChange(e) {
+        this._boobsChanged(this.$.boobs.immediateValue);
+      }
+
+      _boobsChanged(boobs) {
+        this._boobs = boobs;
+      }
+
+      _boobsChangedEvent(e) {
+        let max = Math.min(Math.max(2000, Math.trunc(this.slave.boobs * 2 / 50) * 50), 50000);
+        if (max > 0 && max !== this.$.boobs.max) {
+          this.$.boobs.max = max;
+        }
+      }
+
+      _computeBoobsIndex(b) {
+        return b <= 200 ? 0 : b <= 500 ? 1 : b <= 800 ? 2 : b <= 1200 ? 3 : b <= 2000 ? 4 : b <= 4000 ? 5 : b <= 6000 ? 6 : 7;
+      }
+
       _faceImmediateChange(e) {
         this._faceChanged(this.$.face.immediateValue);
       }
@@ -510,9 +597,9 @@
         if (this._nat) {
           this.set('_races', this._nat.find(n => n.name === slave.nationality).races.map(n => n.name).sort());
         }
-        this.set('_skin', this._computeSkin(slave.race));
+        this._skin = this._computeSkin(this.slave.race);
         this.set('slave', slave);
-        // this.set('slave.race', slave.race);
+        this.set('slave.skin', this._skin[0]);
       }
 
       _randomizeName() {

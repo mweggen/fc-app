@@ -71,6 +71,46 @@
         <fc-devotion article="true" value="[[slave.devotion]]"></fc-devotion>,
         <fc-trust value="[[slave.trust]]"></fc-trust>
         <fc-slave-title class="slaveTitle" slave="[[slave]]"></fc-slave-title>.
+
+        <template is="dom-if" if="[[!saleDescription]]">
+          <template is="dom-if" if="[[_gt(slave.fuckdoll, 0)]]">
+            You order another slave to bring it before your desk so you can inspect it.
+          </template>
+          <template is="dom-if" if="[[!_gt(slave.fuckdoll, 0)]]">
+            <!--todo dairy-->
+            She comes to you for an inspection
+            <iron-pages selected="[[_assignmentIndex(slave.assignment)]]">
+              <span>between customers.</span><!--whore-->
+              <span>from where she was offering herself publicly.</span><!--serve the public-->
+              <span>straight from confinement in a glory hole.</span><!--work a glory hole-->
+              <span>between milkings.</span><!--get milked-->
+              <span>from where she was resting.</span><!--rest-->
+              <span>from where she was offering herself to you.</span><!--please you-->
+              <span>straight from orally servicing another slave.</span><!--be a subordinate slave-->
+              <span>straight from bathing another slave.</span><!--be a servant-->
+              <span>between slave training contracts.</span><!--train slaves-->
+              <span>straight from her confinement.</span><!--stay confined-->
+              <span>armed and alert.</span><!--guard you-->
+              <span>after she finishes cybering with a prospective recruit.</span><!--recruit girls-->
+              <span>with updates on your other slaves ready for your review.</span><!--be your Head Girl-->
+              <span>as quickly as she can.</span><!--default-->
+            </iron-pages>
+          </template>
+
+          <template is="dom-if" if="[[_gt(slave.sentence, 0)]]">
+            <template is="dom-if" if="[[_eq(slave.assignment, 'work a glory hole)]]">
+              Her sentence lasts another
+              <template is="dom-if" if="[[_gt(slave.sentence, 1)]]">[[slave.sentence]] weeks.</template>
+              <template is="dom-if" if="[[!_gt(slave.sentence, 1)]]">week.</template>
+            </template>
+          </template>
+
+          <!--todo voice-->
+          <!--todo relationship-->
+          <!--todo release rules-->
+
+        </template>
+
         <fc-age-health-desc slave="[[slave]]"></fc-age-health-desc>
 
         <!--mental report-->
@@ -658,6 +698,14 @@
 
       _computeWeightDescIndex(w, h) {
         return w > 95 ? 0 : w > 30 ? (h > 1 ? 1 : 2) : w > 10 ? 3 : w >= -10 ? 4 : w >= -30 ? 5 : w >= -95 ? (h < -1 ? 6 : 7) : 8;
+      }
+
+      _assignmentIndex(assignment) {
+        let arr = ['whore', 'serve the public', 'work a glory hole', 'get milked', 'rest', 'please you',
+          'be a subordinate slave', 'be a servant', 'train slaves', 'stay confined', 'guard you', 'recruit girls',
+          'be your Head Girl'];
+        let i = arr.indexOf(assignment);
+        return i < 0 ? arr.length : i;
       }
     }
 
