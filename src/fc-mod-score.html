@@ -5,20 +5,48 @@
     class FCModScore extends Polymer.Element {
       static get is() { return 'fc-mod-score'; }
       static get properties() { return {
-        slave: {
-          type: Object
+        slave: Object,
+        piercingScore: {
+          type: Number,
+          readOnly: true,
+          notify: true,
+          computed: '_computePiercingScore(slave, slave.earPiercing, slave.nosePiercing, slave.eyebrowPiercing, ' +
+          'slave.navelPiercing, slave.corsetPiercing, slave.nipplesPiercing, slave.areolaePiercing, slave.lipsPiercing, ' +
+          'slave.tonguePiercing, slave.clitPiercing, slave.vaginaPiercing, slave.dickPiercing, slave.anusPiercing)'
+        },
+        tatScore: {
+          type: Number,
+          readOnly: true,
+          notify: true,
+          computed: '_computeTatScore(slave, slave.boobsTat, slave.buttTat, slave.lipsTat, slave.shouldersTat, ' +
+          'slave.backTat, slave.armsTat, slave.legsTat, slave.stampTat, slave.vaginaTat, slave.dickTat, slave.anusTat)'
         },
         modScore: {
           type: Number,
           readOnly: true,
           notify: true,
-          // value: 0,
-          computed: '_computeModScore(slave)'
+          computed: '_computeModScore(slave, slave.earPiercing, slave.nosePiercing, slave.eyebrowPiercing, ' +
+          'slave.navelPiercing, slave.corsetPiercing, slave.nipplesPiercing, slave.areolaePiercing, slave.lipsPiercing, ' +
+          'slave.tonguePiercing, slave.clitPiercing, slave.vaginaPiercing, slave.dickPiercing, slave.anusPiercing, ' +
+          'slave.boobsTat, slave.buttTat, slave.lipsTat, slave.shouldersTat, slave.backTat, slave.armsTat, slave.legsTat, ' +
+          'slave.stampTat, slave.vaginaTat, slave.dickTat, slave.anusTat)'
         }
       }}
 
+      _computePiercingScore(slave) {
+        return this.calcPiercingScore(slave);
+      }
+
+      _computeTatScore(slave) {
+        return this.calcTatScore(slave);
+      }
+
       _computeModScore(slave) {
-        let piercingScore = 0, tatScore = 0;
+        return this.calcModScore(slave);
+      }
+
+      calcPiercingScore(slave) {
+        let piercingScore = 0;
 
         if (slave.earPiercing > 0) { piercingScore += slave.earPiercing * 0.75 - 0.5; }
         if (slave.nosePiercing > 0) { piercingScore += slave.nosePiercing * 0.75 - 0.5; }
@@ -35,6 +63,12 @@
         if (slave.dickPiercing > 0) { piercingScore += slave.dickPiercing * 0.75 - 0.25; }
         if (slave.anusPiercing > 0) { piercingScore += slave.anusPiercing * 0.75 - 0.25; }
 
+        return piercingScore;
+      }
+
+      calcTatScore(slave) {
+        let tatScore = 0;
+
         if (slave.boobsTat !== 0) { tatScore += 1.25; }
         if (slave.buttTat !== 0) { tatScore += 1.25; }
         if (slave.lipsTat !== 0) { tatScore += 1.25; }
@@ -48,12 +82,14 @@
         if (slave.anusTat === 'bleached') { tatScore += 0.5; }
         else if (slave.anusTat !== 0) { tatScore += 1.25; }
 
-        console.info(piercingScore + tatScore);
-
-        return piercingScore + tatScore;
+        return tatScore;
       }
 
+      calcModScore(slave) {
+        return this.calcPiercingScore(slave) + this.calcTatScore(slave);
+      }
     }
+
 
     customElements.define(FCModScore.is, FCModScore);
   </script>

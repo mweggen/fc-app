@@ -9,32 +9,205 @@
         slave: Object,
         _title: {
           type: String,
-          value: "slave"
+          value: "slave",
+          computed: '_computeTitle(slave, slave.dick, slave.vagina, slave.boobs, slave.age, slave.lactation, slave.butt)'
         }
       }};
-      static get observers() {
-        return [
-          '_slaveChanged(slave.age)'
-        ];
-      }
-      ready() {
-        super.ready();
-        this._slaveChanged(this.slave);
-      }
-      _slaveChanged() {
-        if (this.slave) {
-          let desc = "";
-          if (this.slave.age > 35) {
-            desc += "MILF";
-          } else if (this.slave.age >= 25) {
-            desc += "slave";
-          } else {
-            desc += "slavegirl";
+
+      _computeTitle(slave) {
+        let title = '';
+
+        if (slave.dick === 0 && slave.vagina === -1) {
+          title = 'null';
+          if (slave.lactation > 0 && slave.boobs > 2000) {
+            title += ' cow';
+          } else if (slave.boobsImplant > 0 && slave.buttImplant > 0) {
+            title += ' bimbo ';
+          } else if (slave.boobs > 6000) {
+            title += ' boob';
+          } else if (slave.butt > 6) {
+            title += ' ass';
+          } else if (slave.muscles > 30 && slave.height < 176) {
+            title += ' muscle';
           }
-          this._title = desc;
-        } else {
-          this._title = "slave";
+          if (slave.age > 35) {
+            title += 'MILF';
+          } else if (slave.age >= 25) {
+            title += 'slave';
+          } else {
+            title += 'girl';
+          }
         }
+
+        if (slave.dick === 0 && slave.vagina !== -1) {
+          if (slave.age > 35) {
+            title += 'MILF';
+          } else if (slave.age >= 25) {
+            title += 'slave';
+          } else {
+            title += 'slavegirl';
+          }
+          if (slave.muscles > 30 && slave.height < 176) {
+            title = 'muscle ' + title;
+          } else if (slave.lactation > 0 && slave.boobs > 2000) {
+            title += ' cow';
+          } else if (slave.boobsImplant > 0 && slave.buttImplant > 0) {
+            title += ' bimbo ';
+          } else if (slave.boobs > 6000) {
+            title = 'boob' + title;
+          } else if (slave.butt > 6) {
+            title = 'ass' + title;
+          }
+        }
+
+        if (slave.dick !== 0 && slave.vagina !== -1) {
+          if (slave.balls > 0) {
+            title = 'futanari ';
+          } else {
+            title = 'futa ';
+          }
+          if (slave.lactation > 0 && slave.boobs > 2000) {
+            title += 'cow';
+          } else if (slave.boobsImplant > 0 && slave.buttImplant > 0) {
+            title += 'bimbo ';
+          } else if (slave.boobs > 6000) {
+            title += 'boob';
+          } else if (slave.butt > 6) {
+            title += 'ass';
+          } else if (slave.muscles > 30 && slave.height < 176) {
+            title += 'muscle';
+          }
+          if (slave.age > 35) {
+            title += 'MILF';
+          } else if (slave.age >= 25) {
+            title += 'slave';
+          } else {
+            title += 'girl';
+          }
+          if (slave.dick > 5 && slave.balls > 5 && slave.boobs > 5000) {
+            title = 'hyper ' + title;
+          }
+        }
+
+        if (slave.dick !== 0 && slave.vagina === -1 && slave.balls > 0 && slave.boobs > 300 && slave.butt > 2) {
+          if (slave.age > 35) {
+            title = 'sheMILF';
+          } else if (slave.age >= 25) {
+            title = 'shemale';
+          } else {
+            title = 'tgirl';
+          }
+          if (slave.muscles > 30 && slave.height < 176) {
+            title = 'muscle' + title;
+          } else if (slave.lactation > 0 && slave.boobs > 2000) {
+            title += ' cow';
+          } else if (slave.boobsImplant > 0 && slave.buttImplant > 0) {
+            title += ' bimbo ';
+          } else if (slave.boobs > 6000) {
+            title = 'topheavy ' + title;
+          } else if (slave.butt > 6) {
+            title = 'bottomheavy ' + title;
+          }
+        }
+
+        if (slave.boobs < 300 || slave.butt < 2) {
+          if (slave.dick !== 0 && slave.vagina === -1 && slave.balls > 0) {
+            if (slave.shoulders < 1 || slave.muscles <= 30) {
+              if (slave.faceShape === 'masculine' || slave.faceShape === 'androgynous') {/*sissies*/
+                if (slave.age > 35) {
+                  title = 'sissyMILF';
+                } else {
+                  title = 'sissy';
+                }
+              } else {/*traps*/
+                if (slave.age > 35) {
+                  title = 'trapMILF';
+                } else if (slave.age >= 25) {
+                  title = 'trap';
+                } else {
+                  title = 'trapgirl';
+                }
+              }
+              if (slave.lactation > 0 && slave.boobs > 2000) {
+                title += ' cow';
+              } else if (slave.boobsImplant > 0 && slave.buttImplant > 0) {
+                title += ' bimbo ';
+              }
+            }
+          }
+        }
+
+        if (slave.boobs < 300 || slave.butt < 2) {
+          if (slave.dick !== 0 && slave.vagina === -1 && slave.balls > 0) {
+            if (slave.shoulders > 1 || slave.muscles >= 30) {
+              title = 'bitch';
+              if (slave.muscles > 30 && slave.height < 176) {
+                title = 'muscle' + title;
+              } else if (slave.lactation > 0) {
+                title += 'cow';
+              } else if (slave.boobsImplant > 0 && slave.buttImplant > 0) {
+                title = 'bimbo ' + title;
+              }
+              if (slave.age > 35) {
+                title = 'mature ' + title;
+              } else if (slave.age < 25) {
+                title = 'young ' + title;
+              }
+            }
+          }
+        }
+
+        if (slave.dick !== 0 && slave.vagina === -1 && slave.balls === 0) {
+          title = 'dick';
+          if (slave.age > 35) {
+            title += 'MILF';
+          } else if (slave.age >= 25) {
+            title += 'slave';
+          } else {
+            title += 'girl';
+          }
+          if (slave.muscles > 30 && slave.height < 176) {
+            title = 'muscle' + title;
+          } else if (slave.lactation > 0 && slave.boobs > 2000) {
+            title += ' cow';
+          } else if (slave.boobsImplant > 0 && slave.buttImplant > 0) {
+            title += ' bimbo ';
+          } else if (slave.boobs > 6000) {
+            title = 'boob ' + title;
+          } else if (slave.butt > 6) {
+            title = 'ass ' + title;
+          }
+        }
+
+        if (slave.muscles > 30 && slave.height >= 176) {
+          title = 'amazon ' + title;
+        } else if (slave.muscles < 30 && slave.height >= 176) {
+          title = 'statuesque ' + title;
+        } else if (slave.boobs < 800 && slave.height < 149) {
+          title = 'petite ' + title;
+        } else if (slave.boobs > 800 && slave.height < 149) {
+          title = 'shortstack ' + title;
+        }
+
+        if (slave.births >= 5) {
+          title += ' broodmother';
+        } else if (slave.births >= 2) {
+          title += ' breeder';
+        }
+
+        if (slave.indenture > -1) {
+          title = 'indentured ' + title;
+        }
+
+        if (slave.preg > 10) {
+          title = 'pregnant ' + title;
+        }
+
+        if (slave.fuckdoll > 0) {
+          title += ' fuckdoll';
+        }
+
+        return title;
       }
     }
     customElements.define(FCSlaveTitle.is, FCSlaveTitle);

@@ -27,7 +27,17 @@
       </template>
     </div>
     <div class="info">
-      <fc-slave-long-desc slave="[[selectedSlave]]"/>
+      <fc-slave-long-desc slave="[[selectedSlave]]"></fc-slave-long-desc>
+      <paper-dropdown-menu label="Assignment">
+        <paper-listbox
+            slot="dropdown-content"
+            attr-for-selected="name"
+            selected="{{selectedSlave.assignment}}"
+            on-selected-changed="_assignmentChanged">
+          <paper-item name="whore">whore</paper-item>
+          <paper-item name="rest">rest</paper-item>
+        </paper-listbox>
+      </paper-dropdown-menu>
     </div>
   </template>
   <script>
@@ -39,7 +49,10 @@
       static get properties() {
         return {
           slaves: Array,
-          selectedSlave: Object
+          selectedSlave: {
+            type: Object,
+            notify: true
+          }
         }
       }
 
@@ -49,6 +62,14 @@
           this.selectedSlave = this.slaves[0];
         }
       }
+
+      _assignmentChanged(e) {
+        this.splice('slaves', this.slaves.indexOf(this.selectedSlave), 1, this.selectedSlave);
+        this.dispatchEvent(new CustomEvent('update-slave', {
+          bubbles: true, composed: true, detail: this.selectedSlave
+        }));
+      }
+
 
       _onClick(event) {
         this.selectedSlave = event.model.item;

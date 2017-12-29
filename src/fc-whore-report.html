@@ -1,0 +1,111 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+
+<dom-module id="fc-whore-report">
+  <template>
+    <style>
+      iron-pages { display: inline; }
+      .devotion {
+        color: hotpink;
+        font-weight: bold;
+      }
+      .bad {
+        color: red;
+        font-weight: bold;
+      }
+    </style>
+    <iron-pages selected="[[_enth(report.slave.devotion, report.slave.energy, report.slave.trust)]]">
+      <span>enthusiastically sells</span>
+      <span>willingly sells</span>
+      <span>obediently sells</span>
+      <span>reluctantly sells</span>
+      <span>is forced to sell</span>
+    </iron-pages>
+    her body.
+
+    Her appearance attracted [[report.beautyScore]] customers ([[_perDay(report)]] a
+    day)<template is="dom-if" if="[[_gt(report.beautyScore, 160)]]">,
+      so many that each of her holes was often filled by more than one cock</template><template is="dom-if"
+      if="[[!_gt(report.beautyScore, 160)]]"><template is="dom-if" if="[[_gt(report.beautyScore, 140)]]">,
+        so many that she spent much of her time getting gangbanged</template><template is="dom-if"
+        if="[[!_gt(report.beautyScore, 140)]]"><template is="dom-if" if="[[_gt(report.beautyScore, 120)]]">,
+          so many that customers often spitroasted the slut</template><template is="dom-if"
+          if="[[!_gt(report.beautyScore, 120)]]"><template is="dom-if" if="[[_gt(report.beautyScore, 100)]]">,
+            so many that she frequently had sex with multiple customers at once</template><template is="dom-if"
+            if="[[!_gt(report.beautyScore, 100)]]"><template is="dom-if" if="[[_gt(report.beautyScore, 70)]]">,
+              so many that she occasionally had sex with multiple customers at
+    once</template></template></template></template></template>.
+    They paid ¤[[report.sexScore]] on average.
+
+    <!--todo see age-->
+    <template is="dom-if" if="[[_eq(report.slave.age, 18)]]">
+      <template is="dom-if" if="[[_eq(report.slave.birthWeek, 0)]]">
+        She just turned 18 this week, giving her an immense boost to both popularity and price.
+      </template>
+      <template is="dom-if" if="[[!_eq(report.slave.birthWeek, 0)]]">
+        <template is="dom-if" if="[[_gt(4, report.slave.birthWeek)]]">
+          This is still the first month in which it's legal to pay to fuck her, giving her a boost to both popularity
+          and price.
+        </template>
+      </template>
+    </template>
+
+    <iron-pages selected="[[_quirk(report.slave.behavioralQuirk, report.slave.sexualQuirk)]]">
+      <span><!--sinful-->
+        [[report.slave.slaveName]] <span class="devotion">secretly enjoys</span> how utterly sinful and depraved it is
+        for her to sell her body.
+      </span>
+      <span><!--cutting-->
+        [[report.slave.slaveName]] <span class="devotion">openly enjoys</span> the direct, frank language of
+        prostitution, and delights customers with cutting remarks even as they fuck her.
+      </span>
+      <span><!--caring-->
+        [[report.slave.slaveName]] sees her role as helping people with their sexual needs, and she
+        <span class="trust">trusts that her place</span> in society is an important one.
+      </span>
+    </iron-pages>
+
+    <template is="dom-if" if="[[!_eq(report.slave.assignment, 'work in the brothel')]]">
+      <iron-pages selected="[[_cura(report.slave)]]">
+        <span>The drugs she's on protect her from the wear of whoring.</span>
+        <span>The stress of whoring while ill is <span class="bad">very hard on her</span>.</span>
+        <span>The stress of whoring while ill is <span class="bad">hard on her</span>.</span>
+        <span>
+          She's such an expert whore that she copes with the stress of being a
+          <fc-slave-title slave="[[report.slave]]"></fc-slave-title> prostitute.
+        </span>
+        <span>
+          The stress of being a <fc-slave-title slave="[[report.slave]]"></fc-slave-title> prostitute is
+          <span class="bad">hard on her</span>.
+        </span>
+        <span>She's such an expert whore that she copes with the stress of being limited to buttsex and oral.</span>
+        <span>The stress of being limited to buttsex and oral is <span class="bad">hard on her</span>.</span>
+      </iron-pages>
+    </template>
+
+  </template>
+  <script>
+    class FCWhoreReport extends Polymer.Element {
+      static get is() { return 'fc-whore-report'; }
+      static get properties() { return {
+        report: Object
+      }}
+      _enth(devotion, energy, trust) {
+        return devotion > 95 || energy > 95 ? 0 : devotion > 50 ? 1 : devotion > 20 ? 2 : trust < -20 ? 3 : 4;
+      }
+      _perDay(report) { return Math.floor(report.beautyScore / 7); }
+      _gt(v1, v2) { return v1 > v2; }
+      _eq(v1, v2) { return v1 === v2; }
+      _quirk(bq, sq) { return bq === 'sinful' ? 0 : bq === 'cutting' ? 1 : sq === 'caring' ? 2 : -1 };
+      _cura(slave) {
+        return slave.curatives > 0 ? 0 : slave.health < -50 ? 1 : this.report.r1 ? 2
+          : slave.vagina < 0 ? (slave.analSkill + slave.oralSkill >= 200 ? 3
+            : this.report.r2 ? 4 : -1)
+          : slave.vaginalAccessory === 'chastity belt'
+            ? (slave.analSkill + slave.oralSkill >= 200 ? 5 : this.report.r2 ? 6 : -1) : -1;
+      }
+    }
+
+    customElements.define(FCWhoreReport.is, FCWhoreReport);
+  </script>
+</dom-module>

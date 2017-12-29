@@ -1,15 +1,17 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/app-storage/app-localstorage/app-localstorage-document.html">
+<link rel="import" href="fc-sex-score.html">
+<link rel="import" href="fc-beauty-score.html">
 
 <dom-module id="fc-game-state">
   <template>
     <app-localstorage-document key="fc-game-state" data="{{gameState}}"></app-localstorage-document>
+    <fc-beauty-score id="fcBeautyScore"></fc-beauty-score>
+    <fc-sex-score id="fcSexScore"></fc-sex-score>
   </template>
   <script>
     class FCGameState extends Polymer.Element {
-      static get is() {
-        return 'fc-game-state';
-      }
+      static get is() { return 'fc-game-state'; }
 
       static get properties() { return {
         gameState: {
@@ -47,7 +49,267 @@
       }
 
       _whore(slave) {
+        let report = {
+          slave: JSON.parse(JSON.stringify(slave)),
+          assignment: 'whore',
+        };
+        let sexScore = this.$.fcSexScore.calcSexScore(slave);
+        if (slave.releaseRules === 'restrictive' && slave.standardReward !== 'orgasm') {
+          sexScore += 2;
+        }
+        //todo Acitizens/Aslaves
+        let beautyScore = this.$.fcBeautyScore.calcBeautyScore2(slave);
+        if (slave.sexualFlaw === 'neglectful') {
+          beautyScore *= 1.1;
+        }
+        //todo Madam
+        //todo brothel
 
+        report.beautyScore = beautyScore;
+        report.sexScore = sexScore;
+
+        if (slave.behavioralQuirk === 'sinful' || slave.behavioralQuirk === 'cutting') {
+          slave.devotion++;
+        }
+        if (slave.sexualQuirk === 'caring') {
+          slave.trust++;
+        }
+        let injury = 0;
+        if (slave.curatives <= 0) {
+          if (slave.health < -50) {
+            slave.health -= 10;
+            injury = 1;
+          } else if (slave.health < -20 && Math.random() < 0.5) {
+            report.r1 = true;
+            slave.health -= 7;
+            injury = 1
+          } else if (slave.vagina < 0 || slave.vaginalAccessory === 'chastity belt') {
+            if ((slave.analSkill + slave.oralSkill) < 200) {
+              if (Math.random() * 10 > 3.9 + slave.analSkill + slave.oralSkill) {
+                report.r2 = true;
+                slave.health -= 7;
+                injury = 1;
+              }
+            }
+          } else if (slave.analSkill + slave.oralSkill + slave.vaginalSkill < 300) {
+            if (Math.random() * 1000 > 90 + slave.analSkill + slave.oralSkill + slave.vaginalSkill) {
+              report.r3 = true;
+              injury = 1;
+            }
+          }
+          if (injury === 1) {
+            slave.health -= 3;
+            let rnd = Math.random();
+            if (canDoAnal(slave)) {
+              rnd *= 100;
+            } else {
+              rnd *= 80;
+            }
+            rnd++;
+            let injuryResponse;
+            if (rnd > 80) {
+              slave.minorInjury = 'sore ass';
+              report.i1 = true;
+              injuryResponse = true;
+            } else if (rnd > 60) {
+              slave.minorInjury = 'black eye';
+              report.i2 = true;
+              injuryResponse = true;
+            } else if (rnd > 40) {
+              slave.minorInjury = 'split lip';
+              report.i3 = true;
+              injuryResponse = true;
+            } else if (rnd > 20) {
+              slave.minorInjury = 'bad bruise';
+              report.i4 = true;
+              injuryResponse = true;
+            } else {
+              slave.minorInjury = 'sore muscle';
+              report.i5 = true;
+            }
+            if (injuryResponse) {
+              //todo FS degr/patern
+              //todo drones/grid
+              if (slave.whoreSkill > Math.random() * 100 + 1) {
+                //todo cash +10
+                report.ir3 = true;
+              } else if (slave.combatSkill > 0) {
+                //todo cash +10
+              }
+            }
+          }
+        }
+
+        if (slave.vagina !== -1 && canDoVaginal(slave)) {
+          if (slave.vagina === 0) {
+            slave.vagina = 1;
+            sexScore += 10;
+            if (slave.aphrodisiacs > 1 || slave.devotion > 20) {
+              slave.devotion += 4;
+            } else {
+              slave.devotion -= 10;
+              slave.trust -= 10;
+            }
+          } else if (slave.vagina < 3) {
+            if (Math.random() * 100 + 1 > (170 - beautyScore) + slave.vagina * 10 + slave.vaginalSkill / 3) {
+              report.v1 = true;
+              slave.vagina += 1;
+            }
+          }
+        }
+
+        if (canDoAnal(slave)) {
+          if (slave.anus === 0) {
+            slave.anus = 2;
+            sexScore += 5;
+            if (slave.aphrodisiacs > 1 || slave.devotion > 20) {
+              slave.devotion += 4;
+            } else {
+              slave.devotion -= 5;
+              slave.trust -= 5;
+            }
+          } else if (slave.anus < 3) {
+            let mod = 0;
+            if (slave.vagina < 0 || slave.vaginalAccessory === 'chastity belt') {
+              mod = 10;
+            }
+            if (Math.random() * 100 + 1 > ((160 - mod - beautyScore) + (slave.anus * 10) + (slave.analSkill / 6))) {
+              slave.anus += 1;
+              report.a1 = true;
+            }
+          }
+        }
+
+        if (slave.aphrodisiacs > 1) {
+          slave.devotion += 4;
+        } else if (slave.devotion <= 20 && slave.energy <= 95) {
+          if (slave.trust >= -20) {
+            slave.devotion -= 5;
+            slave.trust -= 5;
+          } else {
+            slave.devotion += 4;
+          }
+        } else {
+          if (slave.oralSkill + slave.analSkill < 200 || slave.vaginalSkill < 100 && canDoVaginal(slave) !== false) {
+            //todo useweights
+            slave.oralSkill += 5 + slave.intelligence + 5;
+            if (canDoAnal(slave)) {
+              slave.analSkill += 5 + slave.intelligence + 5;
+            }
+            if (canDoVaginal(slave)) {
+              slave.vaginalSkill += 5 + slave.intelligence + 5;
+            }
+          }
+          if (slave.amp !== 1 && slave.whoreSkill < 100) {
+            slave.whoreSkill += 10 + slave.intelligence;
+          }
+        }
+
+        if (slave.minorInjury !== 0) {
+          beautyScore--;
+        }
+
+        //todo showEWM
+        if (slave.attrKnown === 1) {
+          if (slave.energy > 95) {
+            slave.need -= beautyScore;
+          }
+        }
+
+        if (slave.sexualFlaw === 'none' && slave.devotion < 10 && Math.random() < 0.3) {
+          report.sf = true;
+          if (slave.vaginalSkill <= 30 && slave.vagina !== -1 && slave.vaginalAccessory !== 'chastity belt') {
+            slave.sexualFlaw = 'hates penetration';
+          } else if (slave.analSkill <= 30) {
+            slave.sexualFlaw = 'hates anal';
+          } else if (slave.oralSkill <= 30) {
+            slave.sexualFlaw = 'hates oral';
+          }
+        }
+        report.cash = Math.floor(beautyScore * sexScore);
+
+        this.set('gameState.cash', this.gameState.cash + Math.floor((beautyScore * sexScore) * (1 + (0.002 * slave.whoreSkill))));
+
+        //¤
+
+        let oralUse = 5 + (slave.oralSkill / 30) + slave.lips;
+        let analUse = 0;
+        if (canDoAnal(slave)) {
+          analUse = 5 + (slave.analSkill / 30) - slave.anus;
+        }
+        let vaginalUse = 0;
+        if (canDoVaginal(slave)) {
+          vaginalUse = 5 + (slave.vaginalSkill / 30) - slave.vagina;
+        }
+        let mammaryUse = 5;
+        if (slave.boobs > 10000) {
+          mammaryUse += 5;
+        } else if (slave.boobs > 2000) {
+          mammaryUse += slave.boobs / 2000;
+        }
+        let penetrativeUse = 5;
+        if (slave.clit > 1) {
+          penetrativeUse += (slave.vaginalSkill / 30) + slave.clit;
+        }
+        if (slave.dick > 0 && canAchieveErection(slave) && slave.dickAccessory !== 'chastity belt') {
+          penetrativeUse += (slave.dick + slave.balls) / 4;
+        }
+        let demand = oralUse + analUse + vaginalUse + mammaryUse + penetrativeUse;
+        oralUse = Math.floor(oralUse / demand) * beautyScore;
+        analUse = Math.floor(analUse / demand) * beautyScore;
+        vaginalUse = Math.floor(vaginalUse / demand) * beautyScore;
+        mammaryUse = Math.floor(mammaryUse / demand) * beautyScore;
+        penetrativeUse = Math.floor(penetrativeUse / demand) * beautyScore;
+
+        //todo totals
+        slave.oralCount += oralUse;
+        slave.publicCount += oralUse;
+        slave.analCount += analUse;
+        slave.publicCount += oralUse;
+        slave.vaginalCount += vaginalUse;
+        slave.publicCount += oralUse;
+        slave.mammaryCount += mammaryUse;
+        slave.publicCount += oralUse;
+        slave.penetrativeCount += penetrativeUse;
+        slave.publicCount += oralUse;
+
+        if (slave.need && slave.fetishKnown) {
+          switch (slave.fetish) {
+            case 'submissive':
+            case 'masochist':
+              if (analUse + vaginalUse > 0) {
+                slave.need -= analUse + vaginalUse;
+              }
+              break;
+            case 'dom':
+            case 'sadist':
+              if (penetrativeUse > 0) {
+                slave.need -= 2 * penetrativeUse;
+              }
+              break;
+            case 'cumslut':
+              if (oralUse > 0) {
+                slave.need -= oralUse;
+              }
+              break;
+            case 'buttslut':
+              if (analUse > 0) {
+                slave.need -= analUse;
+              }
+              break;
+            case 'pregnancy':
+              if (vaginalUse > 0) {
+                slave.need -= vaginalUse;
+              }
+              break;
+            case 'humiliation':
+              slave.need -= beautyScore;
+          }
+        }
+
+        //todo vignettes
+
+        return report;
       }
 
       _rest(slave) {
@@ -71,7 +333,6 @@
         }
         return report;
       }
-
 
       addSlave(slave) {
         console.info(slave);

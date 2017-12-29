@@ -1,5 +1,6 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="fc-rest-report.html">
+<link rel="import" href="fc-whore-report.html">
 
 <dom-module id="fc-reports">
   <template>
@@ -13,6 +14,9 @@
     <template is="dom-repeat" items="[[slaveReports]]">
       <p>
         <span class="pink">[[item.slave.slaveName]] [[item.slave.slaveSurname]]</span>
+        <template is="dom-if" if="[[_eq(item.assignment, 'whore')]]">
+          <fc-whore-report report="[[item]]"></fc-whore-report>
+        </template>
         <template is="dom-if" if="[[_eq(item.assignment, 'rest')]]">
           <fc-rest-report slave-report="[[item]]"></fc-rest-report>
         </template>

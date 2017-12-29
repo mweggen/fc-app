@@ -4,14 +4,14 @@
   <template>
     <template is="dom-if" if="{{_gt(slave.preg, 30)}}">
       She is enormously pregnant,
-      <template is="dom-if" if="{{_gte(slave.height, 185)}}">
+      <template is="dom-if" if="{{_gte(slave.height, 176)}}">
         but her tall frame bears her massive, drum-taut belly well.
       </template>
-      <template is="dom-if" if="{{!_gte(slave.height, 185)}}">
-        <template is="dom-if" if="{{_lt(slave.height, 150)}}">
+      <template is="dom-if" if="{{!_gte(slave.height, 176)}}">
+        <template is="dom-if" if="{{_lt(slave.height, 149)}}">
           and her massive, drum-taut belly dominates her poor little frame.
         </template>
-        <template is="dom-if" if="{{!_lt(slave.height, 150)}}">
+        <template is="dom-if" if="{{!_lt(slave.height, 149)}}">
           <template is="dom-if" if="{{_gt(slave.muscles, 30)}}">
             and her fit body bears her massive, drum-taut belly well.
           </template>
@@ -24,14 +24,14 @@
     <template is="dom-if" if="{{!_gt(slave.preg, 30)}}">
       <template is="dom-if" if="{{_gt(slave.preg, 20)}}">
         She is heavily pregnant,
-        <template is="dom-if" if="{{_gte(slave.height, 185)}}">
+        <template is="dom-if" if="{{_gte(slave.height, 176)}}">
           but her tall frame bears her swollen belly well.
         </template>
-        <template is="dom-if" if="{{!_gte(slave.height, 185)}}">
-          <template is="dom-if" if="{{_lt(slave.height, 150)}}">
+        <template is="dom-if" if="{{!_gte(slave.height, 176)}}">
+          <template is="dom-if" if="{{_lt(slave.height, 149)}}">
             and her swollen belly dominates her poor little frame.
           </template>
-          <template is="dom-if" if="{{!_lt(slave.height, 150)}}">
+          <template is="dom-if" if="{{!_lt(slave.height, 149)}}">
             <template is="dom-if" if="{{_gt(slave.muscles, 30)}}">
               and her fit body bears her swollen belly well.
             </template>
@@ -48,10 +48,10 @@
             but she's sufficiently overweight that it's not obvious.
           </template>
           <template is="dom-if" if="{{!_gt(slave.weight, 30)}}">
-            <template is="dom-if" if="{{_lt(slave.height, 150)}}">
+            <template is="dom-if" if="{{_lt(slave.height, 149)}}">
               and her swelling belly already looks huge on her tiny frame.
             </template>
-            <template is="dom-if" if="{{!_lt(slave.height, 150)}}">
+            <template is="dom-if" if="{{!_lt(slave.height, 149)}}">
               <template is="dom-if" if="{{_lte(slave.weight, -30)}}">
                 her thin form making her swelling belly very obvious.
               </template>

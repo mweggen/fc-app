@@ -16,6 +16,10 @@
       }}
 
       _computeSexScore(slave) {
+        return this.calcSexScore(slave);
+      }
+
+      calcSexScore(slave) {
         let sexScore = (3 - slave.anus) + (slave.muscles / 30);
 
         let oralUseWeight = 5, vaginalUseWeight = 5, analUseWeight = 5;//todo

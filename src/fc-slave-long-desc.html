@@ -22,6 +22,7 @@
 <link rel="import" href="fc-hair-desc.html">
 <link rel="import" href="fc-face-desc.html">
 
+<link rel="import" href="fc-beauty-score.html">
 <link rel="import" href="fc-sex-score.html">
 
 <dom-module id="fc-slave-long-desc">
@@ -352,7 +353,7 @@
       </p>
       <p>
         <template is="dom-if" if="{{!saleDescription}}">
-          <template is="dom-if" if="{{!slave.origin}}">[[slave.origin]]</template>
+          <template is="dom-if" if="{{!_eq(slave.origin, 0)}}">[[slave.origin]]</template>
         </template>
         <!--todo career-->
         <!--todo prestige-->
@@ -374,7 +375,7 @@
                   She is a <span class="skill">master of
             entertainment</span></template></template></template><template is="dom-if"
                                                                            if="[[!_gt(slave.whoreSkill, 10)]]">.</template>
-            <template is="dom-if" if="[[_gt(slave.whoreSkill, 10)]]">and</template>
+            <template is="dom-if" if="[[_gt(slave.whoreSkill, 10)]]"> and</template>
           </template>
           <template is="dom-if" if="[[_gt(slave.whoreSkill, 10)]]">
             <template is="dom-if" if="[[!_gt(slave.entertainSkill, 10)]]">She</template>
@@ -402,6 +403,7 @@
         <!--todo fs ideal-->
 
         <template is="dom-if" if="[[showScores]]">
+          <fc-beauty-score slave="[[slave]]" beauty-score="{{beautyScore}}"></fc-beauty-score>
           <fc-sex-score slave="[[slave]]" sex-score="{{sexScore}}"></fc-sex-score>
           Currently, she has an <span class="good"><span class="bold">attractiveness score</span> of
           <span class="bold underline">[[beautyScore]]</span></span> and a
@@ -409,8 +411,8 @@
         </template>
       </p>
       <p>
-        <template is="dom-if" if="{{!saleDescription}}">She</template>
-        <template is="dom-if" if="{{saleDescription}}">[[slave.slaveName]]</template>
+        <template is="dom-if" if="[[!saleDescription]]">She</template>
+        <template is="dom-if" if="[[saleDescription]]">[[slave.slaveName]]</template>
         is
         <iron-pages selected="[[_heightDescIndex]]">
           <span>petite</span>
@@ -567,7 +569,10 @@
       static get properties() { return {
         slave: Object,
         hideClothing: Boolean,
-        saleDescription: Boolean,
+        saleDescription: {
+          type: Boolean,
+          value: false
+        },
         showScores: {
           type: Boolean,
           value: true//todo

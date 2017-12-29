@@ -109,7 +109,7 @@
 
       _lengthDesc(length, height) {
         let rel = length / height;
-        console.info('rel=' + rel);
+        // console.info('rel=' + rel);
         return rel > 0.9 ? 'floor-length,' : rel > 0.8 ? 'calf-length,' : rel > 0.7 ? 'knee-length,'
             : rel >= 0.6 ? 'thigh-length,' : rel >= 0.4 ? 'ass-length,' : rel >= 0.2 ? 'long,'
             : rel >= 0.15 ? 'shoulder-length,' : 'short,';
