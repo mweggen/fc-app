@@ -1,5 +1,6 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="fc-util.html">
 
 <dom-module id="fc-whore-report">
   <template>
@@ -11,6 +12,26 @@
       }
       .bad {
         color: red;
+        font-weight: bold;
+      }
+      .good {
+        color: green;
+        font-weight: bold;
+      }
+      .skill {
+        color: aquamarine;
+        font-weight: bold;
+      }
+      .brokenin {
+        color: lime;
+        font-weight: bold;
+      }
+      .hate {
+        color: mediumorchid;
+        font-weight: bold;
+      }
+      .fear {
+        color: gold;
         font-weight: bold;
       }
     </style>
@@ -82,6 +103,167 @@
         <span>The stress of being limited to buttsex and oral is <span class="bad">hard on her</span>.</span>
       </iron-pages>
     </template>
+    <iron-pages selected="[[_minorInjury(report)]]">
+      <span>Rough anal with a careless customer left her with a <span class="bad">[[report.minorInjury]]</span>.</span>
+      <span>A violent customer left her with a <span class="bad">[[report.minorInjury]]</span>.</span>
+      <span>An abusive customer left her with a <span class="bad">[[report.minorInjury]]</span>.</span>
+      <span>A rough customer left her with a <span class="bad">[[report.minorInjury]]</span>.</span>
+      <span>The hard labor of constant sex left her with a <span class="bad">[[report.minorInjury]]</span>.</span>
+    </iron-pages>
+
+    <template is="dom-if" if="[[!_eq(report.slave.vagina, -1)]]">
+      <template is="dom-if" if="[[_canDoVaginal(report.slave)]]">
+        <template is="dom-if" if="[[_eq(report.slave.vagina, 0)]]">
+          Her virginity goes to the highest bidder, earning ¤[[_mult(report.beauty, 10)]].
+          <template is="dom-if" if="[[_gt(report.slave.aphrodisiacs, 1)]]">
+            She's so full of aphrodisiacs that she <span class="devotion">enjoys the experience</span>.
+          </template>
+          <template is="dom-if" if="[[!_gt(report.slave.aphrodisiacs, 1)]]">
+            <template is="dom-if" if="[[_gt(report.slave.devotion, 20)]]">
+              Losing her virginity in this way <span class="devotion">confirms her submission to you</span>.
+            </template>
+            <template is="dom-if" if="[[!_gt(report.slave.devotion, 20)]]">
+              She tries to resist, and losing her virginity to rape makes her <span class="hate">hate</span> and <span class="fear">fear</span> you a great deal.
+            </template>
+          </template>
+          <span class="brokenin">Her pussy is now broken in.</span>
+        </template>
+        <template is="dom-if" if="[[report.v1]]">
+          <span class="brokenin">Her pussy gets loosened by the intense use.</span>
+        </template>
+      </template>
+    </template>
+
+    <template is="dom-if" if="[[_canDoAnal(report.slave)]]">
+      <template is="dom-if" if="[[_eq(report.slave.anus, 0)]]">
+        Her tight little anus goes to the highest bidder, earning ¤[[_mult(report.beauty, 5)]].
+        <template is="dom-if" if="[[_gt(report.slave.aphrodisiacs, 1)]]">
+          She's so full of aphrodisiacs that she <span class="devotion">enjoys the experience</span>.
+        </template>
+        <template is="dom-if" if="[[!_gt(report.slave.aphrodisiacs, 1)]]">
+          <template is="dom-if" if="[[_gt(report.slave.devotion, 20)]]">
+            The pain and humiliation <span class="devotion">confirm her submission to you</span>.
+          </template>
+          <template is="dom-if" if="[[!_gt(report.slave.devotion, 20)]]">
+            The pain and humiliation increase her <span class="hate">hatred</span> and <span class="fear">fear</span> for you.
+          </template>
+        </template>
+        Her fresh asshole is fucked all week, and by the end of it <span class="brokenin">she won't sit down</span>.
+      </template>
+      <template is="dom-if" if="[[report.a1]]">
+        <template is="dom-if" if="[[_gt(0, report.slave.vagina)]]">
+          <span class="brokenin">Her asshole sees constant use in place of a pussy and loosens.</span>
+        </template>
+        <template is="dom-if" if="[[!_gt(0, report.slave.vagina)]]">
+          <template is="dom-if" if="[[_eq(report.slave.vaginalAccessory, 'chastity belt')]]">
+            <span class="brokenin">Her asshole sees constant use in place of her protected pussy and loosens.</span>
+          </template>
+          <template is="dom-if" if="[[!_eq(report.slave.vaginalAccessory, 'chastity belt')]]">
+            <span class="brokenin">Her asshole loosens with constant use.</span>
+          </template>
+        </template>
+      </template>
+    </template>
+
+    <template is="dom-if" if="[[!_gt(report.slave.devotion, 20)]]">
+      <template is="dom-if" if="[[!_canWalk(report.slave)]]">
+        Since she can't walk, she spends all of her time in her own room in the brothel. Customers come in, fuck her, and leave.
+        <template is="dom-if" if="[[_gt(report.slave.whoreSkill, 10)]]">
+          <template is="dom-if" if="[[!_gt(report.slave.whoreSkill, 30)]]">
+            As a skilled prostitute, she gets a little more money out of customers.
+          </template>
+          <template is="dom-if" if="[[_gt(report.slave.whoreSkill, 30)]]">
+            <template is="dom-if" if="[[!_gt(report.slave.whoreSkill, 60)]]">
+              As an expert prostitute, she gets more money out of customers.
+            </template>
+            <template is="dom-if" if="[[_gt(report.slave.whoreSkill, 60)]]">
+              <template is="dom-if" if="[[!_gt(report.slave.whoreSkill, 100)]]">
+                As a masterful prostitute, she makes more money.
+              </template>
+            </template>
+          </template>
+        </template>
+      </template>
+    </template>
+
+    <template is="dom-if" if="[[_gt(report.slave.aphrodisiacs, 1)]]">
+      The aphrodisiac cocktail has her so desperately horny that regardless of her personal feelings, she
+      <span class="devotion">gets off with customers all week</span>. In her drug-addled stat she doesn't remember
+      enough to learn sexual skills.
+    </template>
+    <template is="dom-if" if="[[!_gt(report.slave.aphrodisiacs, 1)]]">
+      <template is="dom-if" if="[[!_gtorgt(report.slave.devotion, 20, report.slave.energy, 95)]]">
+        <template is="dom-if" if="[[!_gt(-20, report.slave.trust)]]">
+          She tries to refuse being sold as a whore, so she is restrained for sale. She loses a bit of herself to a week
+          of rape, but remembers enough to know <span class="hate">you're responsible</span> and
+          <span class="fear">can force her if necessary</span>.
+        </template>
+        <template is="dom-if" if="[[_gt(-20, report.slave.trust)]]">
+          She doesn't show much enthusiasm, but the habit of slave prostitution
+          <span class="devotion">wears away at her will</span>.
+        </template>
+      </template>
+      <template is="dom-if" if="[[_gtorgt(report.slave.devotion, 20, report.slave.energy, 95)]]">
+
+        <template is="dom-if" if="[[_sexualMaster(report.slave)]]">
+          She's a <span class="skill">sexual master</span>
+          <template is="dom-if" if="[[_canDoVaginal(report.slave)]]">whose</template>
+          <template is="dom-if" if="[[!_canDoVaginal(report.slave)]]">
+            and despite
+            <template is="dom-if" if="[[_gt(0, report.slave.vagina)]]">her lack of a</template>
+            <template is="dom-if" if="[[!_gt(0, report.slave.vagina)]]">the inaccessibility of her</template>
+            front hole, her
+          </template>
+          body commands <span class="highprice">a high price</span>. When she's not
+          <template is="dom-if" if="[[report.sm1]]">
+            pleasing the rich with her
+            <template is="dom-if" if="[[_gt(report.slave.prestige, 0)]]">prestigious</template>
+            <template is="dom-if" if="[[!_gt(report.slave.prestige, 0)]]">popular</template>
+            pussy,
+          </template>
+          <template is="dom-if" if="[[report.sm2]]">getting gangbanged,</template>
+          <template is="dom-if" if="[[report.sm3]]">
+            performing one of her
+            <template is="dom-if" if="[[_gt(report.slave.prestige, 0)]]">famous</template>
+            <template is="dom-if" if="[[!_gt(report.slave.prestige, 0)]]">top-tier</template>
+            blowjobs,
+          </template>
+          <template is="dom-if" if="[[report.sm4]]">
+            selling access to her
+            <template is="dom-if" if="[[_gt(report.slave.prestige, 0)]]">legendary</template>
+            <template is="dom-if" if="[[!_gt(report.slave.prestige, 0)]]">notorious</template>
+            anus,
+          </template>
+          she works social gatherings and high society.
+        </template>
+
+        <template is="dom-if" if="[[!_sexualMaster(report.slave)]]">
+          She shows diligence, and her sexual skills improve, according to what the customers
+          demand<template is="dom-if" if="[[!_canDoVaginal(report.slave)]]">and
+          what's possible for her</template>.
+        </template>
+
+        <template is="dom-if" if="[[!_eq(report.slave.amp, -1)]]">
+          <template is="dom-if" if="[[_gt(100, report.slave.whoreSkill)]]">
+            She gains experience as a prostitute.
+            <template is="dom-if" if="[[report.w1]]">
+              <span class="good">She now has basic knowledge about how to whore</span>, and can avoid some potentially
+              dangerous situations.
+            </template>
+            <template is="dom-if" if="[[report.w2]]">
+              <span class="good">She now has some skill as a whore</span>, and knows how to sell her body at a good price.
+            </template>
+            <template is="dom-if" if="[[report.w3]]">
+              <span class="good">She is now an expert whore</span>, and can often make clients forget that she's a
+              prostitute they're paying for.
+            </template>
+            <template is="dom-if" if="[[report.w4]]">
+              <span class="good">She is now a masterful whore</span>, and can learn nothing more about prostitution.
+            </template>
+          </template>
+        </template>
+      </template>
+    </template>
 
   </template>
   <script>
@@ -95,14 +277,36 @@
       }
       _perDay(report) { return Math.floor(report.beautyScore / 7); }
       _gt(v1, v2) { return v1 > v2; }
+      _gtorgt(v1, v2, v3, v4) { return v1 > v2 || v3 > v4; }
       _eq(v1, v2) { return v1 === v2; }
       _quirk(bq, sq) { return bq === 'sinful' ? 0 : bq === 'cutting' ? 1 : sq === 'caring' ? 2 : -1 };
+      _mult(v1, v2) { return v1 * v2; }
+
+      _sexualMaster(slave) {
+        return slave.oralSkill + slave.analSkill >= 200
+          && (slave.vaginalSkill >= 100 || canDoVaginal(slave) === false);
+      }
+
       _cura(slave) {
-        return slave.curatives > 0 ? 0 : slave.health < -50 ? 1 : this.report.r1 ? 2
+        return slave.curatives > 0 ? 0 : slave.health < -50 ? 1
+          : this.report.r1 ? 2
           : slave.vagina < 0 ? (slave.analSkill + slave.oralSkill >= 200 ? 3
             : this.report.r2 ? 4 : -1)
           : slave.vaginalAccessory === 'chastity belt'
-            ? (slave.analSkill + slave.oralSkill >= 200 ? 5 : this.report.r2 ? 6 : -1) : -1;
+            ? (slave.analSkill + slave.oralSkill >= 200 ?
+                  5 : this.report.r2 ? 6 : -1) : -1;
+      }
+      _minorInjury(report) {
+        return report.i1 ? 0 : report.i2 ? 1 : report.i3 ? 2 : report.i4 ? 3 : report.i5 ? 4 : -1;
+      }
+      _canDoVaginal(slave) {
+        return canDoVaginal(slave);
+      }
+      _canDoAnal(slave) {
+        return canDoAnal(slave);
+      }
+      _canWalk(slave) {
+        return canWalk(slave);
       }
     }
 

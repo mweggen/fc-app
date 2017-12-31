@@ -34,6 +34,7 @@
       }
       .good {
         color: pink;
+        font-weight: bold;
       }
       .great {
         color: green;
@@ -67,7 +68,7 @@
     </style>
     <div style="padding: 15px">
       <p>
-        <b>[[slave.birthName]] [[slave.birthSurname]]</b> is
+        <span class="good">[[slave.birthName]] [[slave.birthSurname]]</span> is
         <fc-devotion article="true" value="[[slave.devotion]]"></fc-devotion>,
         <fc-trust value="[[slave.trust]]"></fc-trust>
         <fc-slave-title class="slaveTitle" slave="[[slave]]"></fc-slave-title>.
@@ -98,7 +99,7 @@
           </template>
 
           <template is="dom-if" if="[[_gt(slave.sentence, 0)]]">
-            <template is="dom-if" if="[[_eq(slave.assignment, 'work a glory hole)]]">
+            <template is="dom-if" if="[[_eq(slave.assignment, 'work a glory hole')]]">
               Her sentence lasts another
               <template is="dom-if" if="[[_gt(slave.sentence, 1)]]">[[slave.sentence]] weeks.</template>
               <template is="dom-if" if="[[!_gt(slave.sentence, 1)]]">week.</template>

@@ -5,7 +5,7 @@
 
 <dom-module id="fc-game-state">
   <template>
-    <app-localstorage-document key="fc-game-state" data="{{gameState}}"></app-localstorage-document>
+    <app-localstorage-document id="storage" key="fc-game-state" data="{{gameState}}"></app-localstorage-document>
     <fc-beauty-score id="fcBeautyScore"></fc-beauty-score>
     <fc-sex-score id="fcSexScore"></fc-sex-score>
   </template>
@@ -18,7 +18,127 @@
           type: Object,
           value: () => ({
             slaves: [],
-            canEndWeek: true
+            canEndWeek: true,
+
+            organs: [],
+
+            arcadeIds: [], brothelIds: [], cellblockIds: [], clinicIds: [], clubIds: [], dairyIds: [],
+            hgSuiteIds: [], masterSuiteIds: [], schoolRoomIds: [], servantQuarterIds: [], spaIds: [],
+
+            pc: {
+              name: 'Anonymous', surname: '',
+              title: 1, dick: 1, vagina: 0, voiceImplant: 0, accent: 0, shoulders: 0, shouldersImplant: 0,
+              boobs: 0, career: 'capitalist', rumor: 'wealth', indenture: -1, indentureRestrictions: 0,
+              birthWeek: Math.floor(Math.random() * 52), age: 1, sexualEnergy: 4, refreshment: 'cigar',
+              refreshmentType: 0, trading: 0, warfare: 0, slaving: 0, engineering: 0, medicine: 0
+            },
+
+            cash: 10000,
+            girls: 2,
+
+            autosave: true,
+
+            seeExtreme: false,
+            seeCircumcision: true,
+            seeAge: true,   // if slaves will age
+            seeDicks: 25, // chance of slaves having dicks
+            seeRace: true,  // if ethnicity will occasionally be mentioned
+            seeNationality: true, // if nationality will occasionally be mentioned
+            showSexualHistory: true,
+            showBodyMods: false,  // if cosmetic body mods are shown
+            showImplantEffects: true,
+            showClothing: true,
+            showAgeDetail: true,
+            showBoobCCs: true,
+            showHeightCMs: true,
+            showDickCMs: true,
+            showScores: true, // if attractiveness and sexual scores are shown
+            showAssignToScenes: true,  // if slave reactions to facility assignments are shown
+
+            universalRulesConsent: false, // if slaves are required to get consent before fucking other slaves
+
+            plot: true,
+            continent: 'North America',
+            terrain: 'rural',
+            language: 'English',
+
+            dormitory: 20,  // capacity of dormitory
+            dormitoryPopulation: 0,
+            rooms: 5,
+            roomsPopulation: 0,
+
+            brothelSlaves: 0,
+            brothel: 0,
+
+            freeSexualEnergy: 0,
+            averageDick: 0,
+            hgSuite: 0,
+
+            headGirl: 0,  // id of head girl
+
+            idNr: 1,  // id of next added slave
+
+            week: 1,
+            month: 'January',
+            day: 19,
+            year: 2037,
+
+            ui: 'start',
+
+            brandTarget: 'buttocks',
+            brandDesign: 'your initials',
+
+            oralTotal: 0,
+            vaginalTotal: 0,
+            analTotal: 0,
+            mammaryTotal: 0,
+            penetrativeTotal: 0,
+            milkTotal: 0,
+            cumTotal: 0,
+            birthsTotal: 0,
+            pitKillsTotal: 0,
+
+            saleDescription: 0,
+
+            economy: 1,
+            neighboringArcologies: 3,
+            internationalTrade: true,
+            internationalVariety: false,
+            rep: 1000,
+
+            aCitizens: 4000,
+            aSlaves: 1000,
+
+            oralUseWeight: 5,
+            vaginalUseWeight: 5,
+            analUseWeight: 5,
+
+            familyTesting: false,
+            weightAffectsAssets: true,
+            curativeSideEffects: true,
+
+            upgradeMultiplierArcology: 1,
+            upgradeMultiplierMedicine: 1,
+
+            clothesBoughtBelly: false,
+
+            trinkets: [],
+            arcologyUpgrade: {
+              drones: false,
+              hydro: false,
+              apron: false,
+              grid: false,
+              spire: false
+            },
+            arcologies: [{
+              fsSupremacist: "unset", fsSupremacistRace: 0, fsSubjugationist: "unset", fsSubjugationistRace: 0,
+              fsGenderRadicalist: "unset", fsGenderFundamentalist: "unset", fsPaternalist: "unset", fsDegradationist: "unset",
+              fsBodyPurist: "unset", fsTransformationFetishist: "unset", fsYouthPreferentialist: "unset",
+              fsMaturityPreferentialist: "unset", fsSlimnessEnthusiast: "unset", fsAssetExpansionist: "unset",
+              fsPastoralist: "unset", fsPhysicalIdealist: "unset", fsChattelReligionist: "unset", fsRomanRevivalist: "unset",
+              fsAztecRevivalist: "unset", fsEgyptianRevivalist: "unset", fsEdoRevivalist: "unset", fsArabianRevivalist: "unset",
+              fsChineseRevivalist: "unset"
+            }]
           }),
           notify: true
         },
@@ -26,10 +146,26 @@
           type: Array,
           notify: true
         },
+        _fakeBellies: {
+          value: () => ([])
+          //todo
+        }
       }}
+
+      static get observers() {
+        return [
+          '_gameStateChanged(gameState.*)'
+        ]
+      }
+
+      _gameStateChanged(changeRecord) {
+        console.log('observed change to: ' + changeRecord.path);
+        console.log(changeRecord.value);
+      }
 
       ready() {
         super.ready();
+        console.info(this.gameState);
       }
 
       endWeek() {
@@ -43,14 +179,880 @@
           } else {
             report = this._rest(slave);
           }
+          //todo SA rules
+          report.rules = this._saRules(slave);
+          //todo SA chooses own clothes
+          report.coc = this._saChoosesOwnClothes(slave);
+          //todo SA diet
+          //todo SA long term effects
+          //todo SA drugs
+          //todo SA relationships
+          //todo SA rivalries
+          //todo SA PA
+          //todo SA HG appl
+          //todo SA devotion
           this.push('slaveReports', report);
         }
         console.info(this.slaveReports);
       }
 
+      _saChoosesOwnClothes(slave) {
+        let devotion = 0, report = {};
+
+        if (slave.choosesOwnClothes) {
+          if (slave.fetish === 'mindbroken') {
+            report.a = 0;
+            if (slave.amp !== 1 && slave.heels === 1) {
+              report.aa1a = true;
+              //aaa
+              slave.shoes = ['heels', 'extreme heels', 'boots'][Math.floor(Math.random() * 3)];
+            }
+            if (this.gameState.arcologies[0].fsChattelReligionist > 0) {
+              report.aa2 = 0;
+              //aa2a
+              slave.clothes = 'a chattel habit';
+            } else if (this.gameState.arcologies[0].fsEgyptianRevivalist > 0 && Math.random * 3 < 1) {
+              report.aa2 = 1;
+              //aa2b
+              slave.clothes = 'slutty jewelry';
+            } else if (this.gameState.arcologies[0].fsRomanRevivalist > 0 && Math.random * 3 < 1) {
+              report.aa2 = 2;
+              //aa2c
+              slave.clothes = 'a toga';
+            } else if (this.gameState.arcologies[0].fsAztecRevivalist > 0 && Math.random * 3 < 1) {
+              report.aa2 = 3;
+              //aa2d
+              slave.clothes = 'a huipil';
+            } else if (this.gameState.arcologies[0].fsEdoRevivalist > 0 && Math.random * 3 < 1) {
+              report.aa2 = 4;
+              //aa2e
+              slave.clothes = 'a kimono';
+            } else if (this.gameState.arcologies[0].fsArabianRevivalist > 0 && Math.random * 3 < 1) {
+              report.aa2 = 5;
+              //aa2f
+              slave.clothes = 'harem gauze';
+            } else if (this.gameState.arcologies[0].fsChineseRevivalist > 0 && Math.random * 3 < 1) {
+              report.aa2 = 6;
+              //aa2g
+              slave.clothes = 'a slutty qipao';
+            } else if (this.gameState.arcologies[0].fsGenderFundamentalist > 0 && Math.random * 3 < 1) {
+              report.aa2 = 7;
+              //aa2h
+              slave.clothes = ['a cheerleader outfit', 'a schoolgirl outfit'][Math.floor(Math.random() * 2)];
+            } else if (this.gameState.arcologies[0].fsGenderFundamentalist > 0 && Math.random * 3 < 1) {
+              report.aa2 = 8;
+              //aa2i
+              slave.clothes = 'a bunny outfit';
+            } else if (this.gameState.arcologies[0].fsPaternalist > 0 && Math.random * 3 < 1) {
+              report.aa2 = 9;
+              //aa2j
+              slave.clothes = 'conservative clothing';
+            } else if (this.gameState.arcologies[0].fsMaturityPreferentialist > 0 && Math.random * 3 < 1) {
+              report.aa2 = 10;
+              //aa2k
+              slave.clothes = ['slutty business attire', 'a nice maid outfit', 'a military uniform',
+                'nice business attire'][Math.floor(Math.random() * 4)];
+            } else if (this.gameState.arcologies[0].fsYouthPreferentialist > 0 && Math.random * 3 < 1) {
+              report.aa2 = 11;
+              //aa2l
+              slave.clothes = ['a cheerleader outfit', 'a schoolgirl outfit'][Math.floor(Math.random() * 2)];
+            } else if (this.gameState.arcologies[0].fsDegradationist > 0 && Math.random * 3 < 1) {
+              report.aa2 = 12;
+              //aa2m
+              slave.clothes = ['chains', 'uncomfortable straps', 'shibari ropes'][Math.floor(Math.random() * 3)];
+            } else if (this.gameState.arcologies[0].fsPhysicalIdealist > 0 && Math.random * 3 < 1) {
+              report.aa2 = 13;
+              //aa2n
+              slave.clothes = ['body oil', 'no clothing', 'no clothing'][Math.floor(Math.random() * 3)];
+            } else if (this.gameState.arcologies[0].fsPastoralist > 0 && Math.random * 3 < 1) {
+              report.aa2 = 14;
+              //aa2o
+              slave.clothes = 'Western clothing';
+            } else if (this.gameState.arcologies[0].fsBodyPurist > 0 && Math.random * 3 < 1) {
+              report.aa2 = 15;
+              //aa2p
+              slave.clothes = ['a leotard', 'a string bikini', 'a slave gown', 'a comfortable bodysuit',
+                'restrictive latex', 'clubslut netting', 'a leotard', 'a halter top dress'][Math.floor(Math.random() * 8)];
+            } else {
+              report.aa2 = 16;
+              //aa2q
+              slave.clothes = 'attractive lingerie';
+            }
+          } else {//fetish !== mindbroken
+            report.a = 1;
+            //ab
+            if (slave.devotion <= 20) {
+              report.ab = 0;
+              //aba1
+              slave.clothes = 'cutoffs and a t-shirt';
+              if (slave.amp !== 1) {
+                report.abaa = true;
+                //abaa
+                if (slave.heels === 0) {
+                  report.abaa1 = 0;
+                  //abaaa
+                  slave.shoes = 'flats';
+                } else {
+                  report.abaa1 = 1;
+                  //abaab
+                  slave.shoes = 'heels';
+                }
+              }
+              devotion -= 5;
+            } else {// devotion > 20
+              report.ab = 1;
+              //abb
+              devotion++;
+              if (this.gameState.arcologies[0].fsEgyptianRevivalist > 0) {
+                report.abb1 = true;
+                //abb1a
+                slave.collar = 'ancient Egyptian';
+              }
+
+              report.abb2 = -1;//since no else {
+              if (slave.preg <= 10 && slave.fetish === 'pregnancy'
+                && this.gameState.clothesBoughtBelly && slave.sexualFlaw !== 'breeder') {
+                report.abb2 = 0;
+                //abb2a
+                report.abb2a = -1;
+                if (slave.fetishStrength <= 60) {
+                  report.abb2a = 0;
+                  //abb2aa
+                  let belly = Math.floor(Math.random() * 3);
+                  if (belly === 0) {
+                    report.abb2aa = 0;
+                    //abb2aaa
+                    slave.bellyAccessory = 'a small empathy belly';
+                  } else if (belly === 1) {
+                    report.abb2aa = 1;
+                    //abb2aab
+                    slave.bellyAccessory = 'a medium empathy belly';
+                  } else {
+                    report.abb2aa = 2;
+                    //abb2aac
+                    slave.bellyAccessory = 'a large empathy belly';
+                  }
+                } else if (slave.fetishStrength > 60) {
+                  report.abb2a = 1;
+                  if (Math.random() < 0.5) {
+                    report.abb2ab = 0;
+                    //abb2aba
+                    slave.bellyAccessory = 'a large empathy belly';
+                  } else {
+                    report.abb2ab = 1;
+                    //abb2abb
+                    slave.bellyAccessory = 'a huge empathy belly';
+                  }
+                }
+              } else if (this._fakeBellies.indexOf(slave.bellyAccessory) >= 0 && slave.fetish !== 'pregnancy') {
+                report.abb2 = 1;
+                //abb2b
+                slave.bellyAccessory = 'none';
+              } else if (this._fakeBellies.indexOf(slave.bellyAccessory) >= 0 && slave.sexualFlaw !== 'breeder') {
+                report.abb2 = 2;
+                //abb2c
+                slave.bellyAccessory = 'none';
+              }
+
+              if (this.gameState.arcologies[0].fsChattelReligionist > 0) {
+                report.abb3 = 0;
+                //abb3a
+                slave.clothes = 'a chattel habit';
+              } else if (this.gameState.arcologies[0].fsEgyptianRevivalist > 0 && Math.random() * 3 < 1) {
+                report.abb3 = 1;
+                //abb3b
+                slave.clothes = 'slutty jewelry';
+              } else if (this.gameState.arcologies[0].fsRomanRevivalist > 0 && Math.random() * 3 < 1) {
+                report.abb3 = 2;
+                //abb3c
+                slave.clothes = 'a toga';
+              } else if (this.gameState.arcologies[0].fsEdoRevivalist > 0 && Math.random * 3 < 1) {
+                report.abb3 = 3;
+                //abb3d
+                slave.clothes = 'a kimono';
+              } else if (this.gameState.arcologies[0].fsArabianRevivalist > 0 && Math.random * 3 < 1) {
+                report.abb3 = 4;
+                //abb3e
+                slave.clothes = 'harem gauze';
+              } else if (this.gameState.arcologies[0].fsChineseRevivalist > 0 && Math.random * 3 < 1) {
+                report.abb3 = 5;
+                //abb3f
+                slave.clothes = 'a slutty qipao';
+              } else if (this.gameState.arcologies[0].fsGenderFundamentalist > 0 && Math.random * 3 < 1) {
+                report.abb3 = 6;
+                //abb3g
+                slave.clothes = 'a cheerleader outfit';
+              } else if (this.gameState.arcologies[0].fsGenderFundamentalist > 0 && Math.random * 3 < 1) {
+                report.abb3 = 7;
+                //abb3h
+                slave.clothes = 'a bunny outfit';
+              } else if (this.gameState.arcologies[0].fsPaternalist > 0 && Math.random * 3 < 1) {
+                report.abb3 = 8;
+                //abb3i
+                slave.clothes = 'conservative clothing';
+              } else if (this.gameState.arcologies[0].fsMaturityPreferentialist > 0 && Math.random * 3 < 1) {
+                report.abb3 = 9;
+                //abb3j
+                slave.clothes = 'slutty business attire';
+              } else if (this.gameState.arcologies[0].fsYouthPreferentialist > 0 && Math.random * 3 < 1) {
+                report.abb3 = 10;
+                //abb3k
+                slave.clothes = 'a schoolgirl outfit';
+              } else if (this.gameState.arcologies[0].fsDegradationist > 0 && Math.random * 3 < 1) {
+                report.abb3 = 11;
+                //abb3l
+                slave.clothes = 'chains';
+              } else if (this.gameState.arcologies[0].fsPhysicalIdealist > 0 && Math.random * 3 < 1) {
+                report.abb3 = 12;
+                //abb3m
+                slave.clothes = 'body oil';
+              } else if (this.gameState.arcologies[0].fsPastoralist > 0 && Math.random * 3 < 1) {
+                report.abb3 = 13;
+                //abb3n
+                slave.clothes = 'Western clothing';
+              } else if (this.gameState.arcologies[0].fsBodyPurist > 0 && Math.random * 3 < 1) {
+                report.abb3 = 14;
+                //abb3o
+                slave.clothes = 'a leotard';
+              } else if (slave.behavioralQuirk === 'sinful' && Math.random * 3 < 1) {
+                report.abb3 = 15;
+                //abb3p
+                slave.clothes = 'a succubus outfit';
+              } else if (slave.assignment === 'guard you') {
+                report.abb3 = 16;
+                //abb3q
+                if (Math.random() < 0.5) {
+                  report.abb3q = 0;
+                  //abb3qa
+                  slave.clothes = 'a comfortable bodysuit';
+                } else {
+                  report.abb3q = 1;
+                  //abb3qb
+                  slave.clothes = 'a military uniform';
+                }
+              } else if (slave.assignment === 'be the Nurse') {
+                report.abb3 = 17;
+                //abb3r
+                slave.clothes = 'a nice nurse outfit';
+              } else if (slave.assignment === 'be your Recruiter') {
+                report.abb3 = 18;
+                //abb3s
+                slave.clothes = 'a mini dress';
+              } else if (slave.assignment === 'be the Madam') {
+                report.abb3 = 19;
+                //abb3t
+                slave.clothes = 'slutty business attire';
+              } else if (slave.assignment === 'be the DJ') {
+                report.abb3 = 20;
+                //abb3u
+                slave.clothes = 'clubslut netting';
+              } else if (slave.assignment === 'be the Milkmaid' && canPenetrate(slave) && this.gameState.cumSlaves > 2) {
+                report.abb3 = 21;
+                //abb3v
+                slave.clothes = 'a slutty nurse outfit';
+              } else if (slave.assignment === 'be the Milkmaid') {
+                report.abb3 = 22;
+                //abb3v
+                slave.clothes = 'a nice maid outfit';
+              } else if (slave.assignment === 'be your Head Girl') {
+                report.abb3 = 23;
+                //abb3w
+                slave.clothes = 'nice business attire';
+              } else if (slave.assignment === 'be the Schoolteacher') {
+                report.abb3 = 24;
+                //abb3x
+                slave.clothes = 'a schoolgirl outfit';
+              } else if (slave.assignment === 'be the Attendant') {
+                report.abb3 = 25;
+                //abb3y
+                slave.clothes = 'a string bikini';
+              } else if (slave.assignment === 'be the Wardeness') {
+                report.abb3 = 26;
+                //abb3z
+                slave.clothes = 'battledress';
+              } else if (slave.assignment === 'be your concubine') {
+                report.abb3 = 27;
+                //abb3A
+                slave.clothes = 'no clothing';
+              } else if (slave.fetishKnown === 1 && slave.fetish === 'submissive') {
+                report.abb3 = 28;
+                //abb3B
+                if (Math.random() < 0.5) {
+                  report.abb3B = 0;
+                  //abb3Ba
+                  slave.clothes = 'restrictive latex';
+                } else {
+                  report.abb3B = 1;
+                  //abb3Bb
+                  slave.clothes = 'shibari ropes';
+                }
+              } else if (slave.fetishKnown === 1 && slave.fetish === 'dom') {
+                report.abb3 = 29;
+                //abb3C
+                if (Math.random() < 0.5) {
+                  report.abb3C = 0;
+                  //abb3Ca
+                  slave.clothes = 'restrictive latex';
+                } else {
+                  report.abb3C = 1;
+                  //abb3Cb
+                  slave.clothes = 'shibari ropes';
+                }
+              } else if (slave.fetishKnown === 1 && slave.fetish === 'masochist') {
+                report.abb3 = 30;
+                //abb3D
+                slave.clothes = 'uncomfortable straps';
+              } else if (slave.fetishKnown === 1 && slave.fetish === 'sadist') {
+                report.abb3 = 31;
+                //abb3E
+                slave.clothes = 'a slave gown';
+              } else if (slave.attrKnown === 1 && slave.attrXY > 85) {
+                report.abb3 = 32;
+                //abb3F
+                slave.clothes = 'a schoolgirl outfit';
+              } else if (slave.attrKnown === 1 && slave.attrXX > 85) {
+                report.abb3 = 33;
+                //abb3G
+                slave.clothes = 'a slave gown';
+              } else if (slave.fetishKnown === 1 && slave.fetish === 'cumslut') {
+                report.abb3 = 34;
+                //abb3H
+                slave.clothes = 'cutoffs and a t-shirt';
+              } else if (slave.fetishKnown === 1 && slave.fetish === 'humiliation') {
+                report.abb3 = 35;
+                //abb3I
+                slave.clothes = 'uncomfortable straps';
+              } else if (slave.fetishKnown === 1 && slave.fetish === 'buttslut') {
+                report.abb3 = 36;
+                //abb3J
+                slave.clothes = 'slutty jewelry';
+              } else if (slave.fetishKnown === 1 && slave.fetish === 'mindbroken') {//todo ???
+                report.abb3 = 37;
+                //abb3K
+                slave.clothes = 'no clothing';
+              } else if (slave.fetishKnown === 1 && slave.fetish === 'pregnancy') {
+                report.abb3 = 38;
+                //abb3L
+                slave.clothes = 'a slutty maid outfit';
+              } else if (slave.energy > 95) {
+                report.abb3 = 39;
+                //abb3M
+                slave.clothes = 'no clothing';
+              } else if (slave.assignment === 'rest') {
+                report.abb3 = 40;
+                //abb3N
+                slave.clothes = 'cutoffs and a t-shirt';
+              } else if (slave.assignment === 'be a subordinate slave') {
+                report.abb3 = 41;
+                //abb3O
+                slave.clothes = 'no clothing';
+              } else if (slave.assignment === 'work a glory hole') {
+                report.abb3 = 42;
+                //abb3P
+                slave.clothes = 'no clothing';
+              } else if (slave.assignment === 'take classes' || slave.assignment === 'learn in the schoolroom') {
+                report.abb3 = 43;
+                //abb3Q
+                slave.clothes = 'a schoolgirl outfit';
+              } else if (slave.assignment === 'whore' || slave.assignment === 'work in the brothel') {
+                report.abb3 = 44;
+                //abb3R
+                slave.clothes = 'attractive lingerie';
+              } else if (slave.assignment === 'serve the public' || slave.assignment === 'serve in the club') {
+                report.abb3 = 45;
+                //abb3S
+                slave.clothes = 'a string bikini';
+              } else if (slave.assignment === 'get milked' || slave.assignment === 'work in the dairy') {
+                report.abb3 = 46;
+                //abb3T
+                slave.clothes = 'attractive lingerie';
+              } else if (slave.assignment === 'be a servant' || slave.assignment === 'work as a servant') {
+                report.abb3 = 47;
+                //abb3U
+                slave.clothes = 'a nice maid outfit';
+              } else {
+                report.abb3 = 48;
+                //abb3V
+                slave.clothes = 'a string bikini';
+              }
+
+              if (slave.amp !== 1) {
+                report.abb4 = true;
+                //abb4a
+                if (slave.fetishKnown === 1 && slave.fetish === 'dom') {
+                  report.abb4a = 0;
+                  //abb4aa
+                  slave.shoes = 'boots';
+                } else if (slave.fetishKnown === 1 && slave.fetish === 'sadist') {
+                  report.abb4a = 1;
+                  //abb4ab
+                  slave.shoes = 'boots';
+                } else if (slave.heels === 1) {
+                  report.abb4a = 2;
+                  //abb4ac
+                  slave.shoes = 'heels';
+                } else if (slave.fetishKnown === 1 && slave.fetish === 'none') {
+                  report.abb4a = 3;
+                  //abb4ad
+                  slave.shoes = 'flats';
+                } else {
+                  report.abb4a = 4;
+                  //abb4ae
+                  slave.shoes = 'heels';
+                }
+              }
+            }
+          }
+        }
+        slave.devotion += devotion;
+        return report;
+      }
+
+      save() {
+        this.$.storage.saveValue('fc-game-state');
+      }
+
+      _saRules(slave) {
+        let report = {};
+        if (slave.fuckdoll === 0 && slave.fetish !== 'mindbroken') {
+          if (slave.devotion >= -50 && slave.energy > 20) {
+            if (slave.need < slave.energy * 0.5) {
+              if (slave.devotion <= 20) {
+                slave.devotion++;
+                if (slave.trust > -20 && slave.devotion <= 20) {
+                  slave.trust--;
+                }
+              }
+            } else {
+              if (slave.releaseRules === 'restrictive') {
+
+                if (slave.devotion <= 20 && slave.trust > -20) {
+                  slave.trust -= 2;
+                } else if (slave.devotion < 50) {
+                  if (this.gameState.freeSexualEnergy > 0) {
+                    if (this.gameState.freeSexualEnergy === 3) {
+                      slave.devotion += 2;
+                      slave.need = 0;
+                    } else if (this.gameState.freeSexualEnergy === 2) {
+                      slave.devotion++;
+                      slave.need -= 40;
+                    } else {
+                      slave.need -= 20;
+                    }
+                  } else {
+                    slave.trust--;
+                  }
+                } else {
+                  if (this.gameState.freeSexualEnergy > 0) {
+                    if (this.gameState.freeSexualEnergy === 3) {
+                      slave.trust += 2;
+                      slave.need = 0;
+                    } else if (this.gameState.freeSexualEnergy === 2) {
+                      slave.trust++;
+                      slave.need -= 40;
+                    } else {
+                      slave.need -= 20;
+                    }
+                  } else {
+                    slave.trust--;
+                  }
+                }
+
+                if (slave.fetishKnown === 0 && (slave.devotion > 20 || slave.trust <= -20)
+                    && this.gameState.freeSexualEnergy > 0
+                    && this.gameState.freeSexualEnergy > Math.floor(Math.random() * 6)) {
+                  slave.fetishKnown = 1;
+                  report.fk1 = true;
+                }
+
+                if (slave.drugs === 'testicle enhancement' && slave.balls > 0
+                    && (slave.devotion > 20 || slave.trust < -20)) {
+                  if (slave.hormones > 0) {
+                    slave.trust += 2;
+                  } else {
+                    slave.trust++;
+                  }
+                }
+
+              } else {// not restrictive
+
+                if (!this.gameState.universalRulesConsent) {
+                  if (slave.devotion <= 20 && slave.trust > -20) {
+                    if (slave.releaseRules === 'permissive') {
+                      slave.trust++;
+                      slave.need = 0;
+                    } else {
+                      slave.trust -= 2;
+                    }
+                  } else if (slave.devotion <= 20) {
+                    if (slave.releaseRules === 'permissive') {
+                      slave.trust++;
+                      slave.need = 0;
+                    } else {
+                      slave.devotion++;
+                      slave.need = 0;
+                    }
+                  } else if (slave.devotion < 50) {
+                    slave.devotion++;
+                    slave.need = 0;
+                  } else {
+                    slave.trust++;
+                    slave.need = 0;
+                  }
+
+                  if (slave.devotion > 20) {
+                    if (slave.fetishKnown === 1 && slave.fetishStrength > 60) {
+                      if (slave.fetish === 'submissive') {
+                        if (this.gameState.averageDick > 4) {
+                          if (slave.anus > 0 && slave.anus < 3 && canDoAnal(slave)
+                              && slave.anus * 40 - this.gameState.averageDick * 5 < Math.floor(Math.random() * 100) + 1) {
+                            slave.anus++;
+                            report.a1 = true;
+                          }
+                          if (this.gameState.averageDick > 5 && slave.vagina > 0 && slave.vagina < 3 && canDoVaginal(slave)
+                              && (slave.vagina * 40) - (this.gameState.averageDick * 5) < Math.floor(Math.random() * 100) + 1) {
+                            slave.vagina++;
+                            report.v1 = true;
+                          }
+                        }
+                      } else if (slave.fetish !== 'cumslut') {
+                        if (slave.fetish === 'humiliation') {
+                          //todo rivalry
+                        } else if (slave.fetish === 'buttslut') {
+                          if (this.gameState.averageDick > 4 && slave.anus > 0 && slave.anus < 3 && canDoAnal(slave)
+                              && slave.anus * 30 - this.gameState.averageDick * 5 < Math.floor(Math.random() * 100) + 1) {
+                            slave.anus++;
+                            report.a2 = true;
+                          }
+                        } else if (slave.fetish !== 'boobs') {
+                          if (slave.fetish === 'sadist') {
+                            //todo rivalry
+                          } else if (slave.fetish === 'masochist') {
+                            if (this.gameState.averageDick > 4) {
+                              if (slave.anus > 0 && slave.anus < 3 && canDoAnal(slave)
+                                  && slave.anus * 30 - this.gameState.averageDick * 5 < Math.floor(Math.random() * 100) + 1) {
+                                slave.anus++;
+                                report.a3 = true;
+                              }
+                              if (this.gameState.averageDick > 5 && slave.vagina > 0 && slave.vagina < 3 && canDoVaginal(slave)
+                                  && (slave.vagina * 30) - (this.gameState.averageDick * 5) < Math.floor(Math.random() * 100) + 1) {
+                                slave.vagina++;
+                                report.v3 = true;
+                              }
+                            }
+                          } else if (slave.fetish === 'dom') {
+                            //todo rivalry
+                          } else if (slave.fetish === 'pregnancy') {
+                            if (this.gameState.averageDick > 5 && slave.vagina > 0 && slave.vagina < 3 && canDoVaginal(slave)
+                                && (slave.vagina * 40) - (this.gameState.averageDick * 5) < Math.floor(Math.random() * 100) + 1) {
+                              slave.vagina++;
+                              report.v4 = true;
+                            }
+                          } else if (slave.energy > 95) {
+                            if (this.gameState.averageDick > 4) {
+                              if (slave.anus > 0 && slave.anus < 3 && canDoAnal(slave)
+                                  && slave.anus * 30 - this.gameState.averageDick * 5 < Math.floor(Math.random() * 100) + 1) {
+                                slave.anus++;
+                                report.a5 = true;
+                              }
+                              if (this.gameState.averageDick > 5 && slave.vagina > 0 && slave.vagina < 3 && canDoVaginal(slave)
+                                  && (slave.vagina * 30) - (this.gameState.averageDick * 5) < Math.floor(Math.random() * 100) + 1) {
+                                slave.vagina++;
+                                report.v5 = true;
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                    if (slave.fetishKnown === 0 && Math.random() < 0.5) {
+                      slave.fetishKnown = 1;
+                      report.fk2 = true;
+                    }
+                  }
+
+                } else {// rulesconsent not 0
+
+                  if (slave.devotion <= 20 && slave.trust > -20) {
+                    if (slave.releaseRules === 'permissive') {
+                      slave.trust++;
+                      slave.need = 0;
+                    } else {
+                      slave.trust -= 2;
+                    }
+                  } else if (slave.devotion <= 20) {
+                    if (slave.releaseRules === 'permissive') {
+                      slave.trust++;
+                      slave.need = 0;
+                    } else {
+                      slave.devotion++;
+                      slave.need *= 0.5;
+                    }
+                  } else if (slave.devotion < 50) {
+                    slave.devotion++;
+                    slave.need = 0;
+                  } else {
+                    slave.trust++;
+                    slave.need = 0;
+                  }
+
+                  if (slave.devotion > 20) {
+                    if (slave.fetishKnown === 1 && slave.fetishStrength > 60) {
+                      if (slave.fetish === 'submissive') {
+                        if (this.gameState.averageDick > 4) {
+                          if (slave.anus > 0 && slave.anus < 3 && canDoAnal(slave)) {
+                            if (slave.anus * 40 - this.gameState.averageDick * 5 < Math.floor(Math.random() * 100) + 1) {
+                              slave.anus++;
+                              report.a6 = true;
+                            }
+                          }
+                          if (this.gameState.averageDick > 5) {
+                            if (slave.vagina > 0 && slave.vagina < 3 && canDoVaginal(slave)) {
+                              if ((slave.vagina * 40) - (this.gameState.averageDick * 5) < Math.floor(Math.random() * 100) + 1) {
+                                slave.vagina++;
+                                report.v6 = true;
+                              }
+                            }
+                          }
+                        }
+                      } else if (slave.fetish === 'cumslut') {
+                      } else if (slave.fetish === 'humiliation') {
+                      } else if (slave.fetish === 'buttslut') {
+                        if (this.gameState.averageDick > 4) {
+                          if (slave.anus > 0 && slave.anus < 3 && canDoAnal(slave)) {
+                            if (slave.anus * 30 - this.gameState.averageDick * 5 < Math.floor(Math.random() * 100) + 1) {
+                              slave.anus++;
+                              report.a7 = true;
+                            }
+                          }
+                        }
+                      } else if (slave.fetish === 'boobs') {
+                      } else if (slave.fetish === 'sadist') {
+                      } else if (slave.fetish === 'masochist') {
+                        if (this.gameState.averageDick > 4) {
+                          if (slave.anus > 0 && slave.anus < 3 && canDoAnal(slave)) {
+                            if (slave.anus * 30 - this.gameState.averageDick * 5 < Math.floor(Math.random() * 100) + 1) {
+                              slave.anus++;
+                              report.a8 = true;
+                            }
+                          }
+                          if (this.gameState.averageDick > 5) {
+                            if (slave.vagina > 0 && slave.vagina < 3 && canDoVaginal(slave)) {
+                              if ((slave.vagina * 30) - (this.gameState.averageDick * 5) < Math.floor(Math.random() * 100) + 1) {
+                                slave.vagina++;
+                                report.v8 = true;
+                              }
+                            }
+                          }
+                        }
+                      } else if (slave.fetish === 'dom') {
+                      } else if (slave.fetish === 'pregnancy') {
+                        if (this.gameState.averageDick > 5) {
+                          if (slave.vagina > 0 && slave.vagina < 3 && canDoVaginal(slave)) {
+                            if ((slave.vagina * 40) - (this.gameState.averageDick * 5) < Math.floor(Math.random() * 100) + 1) {
+                              slave.vagina++;
+                              report.v9 = true;
+                            }
+                          }
+                        }
+                      } else if (slave.energy > 95) {
+                        if (this.gameState.averageDick > 4) {
+                          if (slave.anus > 0 && slave.anus < 3 && canDoAnal(slave)) {
+                            if (slave.anus * 30 - this.gameState.averageDick * 5 < Math.floor(Math.random() * 100) + 1) {
+                              slave.anus++;
+                              report.a10 = true;
+                            }
+                          }
+                          if (this.gameState.averageDick > 5) {
+                            if (slave.vagina > 0 && slave.vagina < 3 && canDoVaginal(slave)) {
+                              if ((slave.vagina * 30) - (this.gameState.averageDick * 5) < Math.floor(Math.random() * 100) + 1) {
+                                slave.vagina++;
+                                report.v10 = true;
+                              }
+                            }
+                          }
+                        }
+                      } else {
+                      }
+                    } else {
+                    }
+
+                    if (slave.fetishKnown === 0) {
+                      if (Math.random() < 0.5) {
+                        slave.fetishKnown = 1;
+                        report.fk3 = true;
+                      }
+                    }
+                  }
+                }
+
+                if (slave.devotion > 20 || slave.trust < -20) {
+                  if (slave.balls > 0) {
+                    if (slave.drugs === 'testicle enhancement') {
+                      slave.trust++;
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          if (slave.devotion <= 20 && (slave.voice === 0 || slave.lips > 95 || slave.speechRules === 'restrictive')) {
+            slave.devotion++;
+          }
+
+          if (this.gameState.roomsPopulation > this.gameState.rooms && slave.livingRules === 'luxurious') {
+            slave.livingRules = 'normal';
+            this.gameState.dormitoryPopulation++;
+            if (slave.relationship >= 4) {
+              this.gameState.roomsPopulation -= 0.5;
+            } else {
+              this.gameState.roomsPopulation--;
+            }
+          }
+
+          if (slave.devotion <= 20) {
+            if (slave.livingRules === 'spare') {
+              if (slave.trust > 20) {
+                slave.trust--;
+              }
+              slave.devotion++;
+            } else if (slave.livingRules === 'normal') {
+              slave.trust++;
+            } else {
+              slave.trust += 2;
+            }
+          } else {
+            if (slave.ID === this.gameState.headGirl.ID && this.gameState.hgSuite === 1) {
+              slave.devotion++;
+              slave.trust++;
+            } else if (slave.livingRules === 'luxurious') {
+              slave.devotion++;
+              slave.trust++;
+            } else if (slave.livingRules !== 'normal') {
+              if (slave.trust > 8) {
+                slave.trust -= 2;
+              } else if (slave.trust > 2) {
+                slave.trust--;
+              }
+            }
+          }
+
+          if (slave.livingRules !== 'luxurious' && this.gameState.dormitoryPopulation > this.gameState.dormitory) {
+            let diff = this.gameState.dormitoryPopulation - this.gameState.dormitory;
+            if (diff <= 5) {
+              if (slave.trust > 20) {
+                slave.trust -= 2;
+              } else {
+                slave.devotion -= 2;
+              }
+            } else if (diff <= 10) {
+              if (slave.trust > 20) {
+                slave.trust -= 3;
+              } else {
+                slave.devotion -= 3;
+              }
+              slave.health -= 2;
+            } else {
+              if (slave.trust > 20) {
+                slave.trust -= 5;
+              } else {
+                slave.devotion -= 5;
+              }
+              slave.health -= 4;
+            }
+          }
+
+          if (!this.gameState.universalRulesConsent) {
+            if (slave.devotion <= 20) {
+              if (slave.trust > -10) {
+                slave.trust -= 2;
+              }
+            } else if (slave.releaseRules !== 'restrictive') {
+              if (slave.energy > 95 || slave.fetishKnown === 1 && slave.fetishStrength > 60
+                && (slave.fetish === 'sadist' || slave.fetish === 'dom')) {
+                slave.devotion++;
+              }
+            }
+          } else {
+            if (slave.devotion <= 20 && slave.devotion >= -20) {
+              slave.trust++;
+            }
+          }
+
+          if (slave.attrKnown === 0 && this.gameState.release === 1) {
+            slave.attrKnown = 1;
+          }
+
+          let punishments = 0, rewards = 0;
+          if (slave.devotion > 50) {
+            rewards = 3;
+          } else if (slave.devotion > 20) {
+            punishments = 1;
+            rewards = 2;
+          } else if (slave.devotion >= 20) {
+            if (slave.trust < -20) {
+              punishments = 1;
+              rewards = 1;
+            } else {
+              punishments = 2;
+            }
+          } else {
+            if (slave.trust < -50) {
+              punishments = 1;
+            } else {
+              punishments = 3;
+            }
+          }
+
+          if (rewards > 0) {
+            switch (slave.standardReward) {
+              case 'relaxation':
+                slave.health += rewards;
+                break;
+              case 'drugs':
+                slave.health -= rewards;
+                slave.devotion += rewards * 2;
+                break;
+              case 'orgasm':
+                if (slave.energy < 98) {
+                  slave.energy += rewards;
+                }
+                slave.devotion += rewards;
+                break;
+              default:
+                slave.devotion += rewards;
+            }
+          }
+
+          if (punishments > 0) {
+            switch (slave.standardPunishment) {
+              case 'confinement':
+                slave.trust -= punishments;
+                break;
+              case 'whipping':
+                slave.health -= punishments;
+                slave.trust -= 2 * punishments;
+                break;
+              case 'chastity':
+                if (slave.energy > 2) {
+                  slave.energy -= 2 * punishments;
+                }
+                slave.devotion += punishments;
+                slave.trust -= punishments;
+                break;
+              default:
+                slave.trust -= punishments;
+            }
+          }
+
+        }
+      }
+
       _whore(slave) {
         let report = {
           slave: JSON.parse(JSON.stringify(slave)),
+          type: 'assignment',
           assignment: 'whore',
         };
         let sexScore = this.$.fcSexScore.calcSexScore(slave);
@@ -127,6 +1129,7 @@
               slave.minorInjury = 'sore muscle';
               report.i5 = true;
             }
+            report.minorInjury = slave.minorInjury;
             if (injuryResponse) {
               //todo FS degr/patern
               //todo drones/grid
@@ -199,9 +1202,29 @@
             if (canDoVaginal(slave)) {
               slave.vaginalSkill += 5 + slave.intelligence + 5;
             }
+          } else {
+            if (canDoVaginal(slave) && Math.random() < 0.25) {
+              report.sm1 = true;
+            } else if (beautyScore > 70 && Math.random() * 3 < 1) {
+              report.sm2 = true;
+            } else if (Math.random() < 0.5) {
+              report.sm3 = true;
+            } else {
+              report.sm4 = true;
+            }
           }
           if (slave.amp !== 1 && slave.whoreSkill < 100) {
-            slave.whoreSkill += 10 + slave.intelligence;
+            let inc = 10 + slave.intelligence;
+            if (slave.whoreSkill <= 10 && slave.whoreSkill + inc > 10) {
+              report.ws1 = true;
+            } else if (slave.whoreSkill <= 30 && slave.whoreSkill + inc > 30) {
+              report.ws2 = true;
+            } else if (slave.whoreSkill <= 60 && slave.whoreSkill + inc > 60) {
+              report.ws3 = true;
+            } else if (slave.whoreSkill < 100 && slave.whoreSkill + inc >= 100) {
+              report.ws4 = true;
+            }
+            slave.whoreSkill += 10 + inc;
           }
         }
 

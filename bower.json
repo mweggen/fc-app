@@ -1,7 +1,7 @@
 {
-  "name": "polymer-starter-kit",
+  "name": "free cities",
   "authors": [
-    "The Polymer Authors"
+    "mweggen"
   ],
   "license": "https://polymer.github.io/LICENSE.txt",
   "dependencies": {

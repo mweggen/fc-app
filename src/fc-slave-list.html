@@ -1,5 +1,9 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
 <link rel="import" href="../bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="fc-slave-long-desc.html">
 <link rel="import" href="fc-slave.html">
 
 <dom-module id="fc-slave-list">
@@ -10,9 +14,11 @@
 
         padding: 16px;
       }
+
       .list {
-        float:left;
+        float: left;
       }
+
       .info {
         margin-left: 150px;
       }
@@ -22,22 +28,25 @@
     <!--<button on-click="_generateSlave">Generate Slave</button>-->
 
     <div class="list">
-      <template is="dom-repeat" items="[[slaves]]">
-        <paper-item on-click="_onClick">[[getSlaveFullName(item)]]</paper-item>
-      </template>
+      <paper-listbox selected="{{_selected}}">
+        <template is="dom-repeat" items="[[slaves]]">
+          <paper-item>[[getSlaveFullName(item)]]</paper-item>
+        </template>
+      </paper-listbox>
     </div>
     <div class="info">
-      <fc-slave-long-desc slave="[[selectedSlave]]"></fc-slave-long-desc>
-      <paper-dropdown-menu label="Assignment">
-        <paper-listbox
-            slot="dropdown-content"
-            attr-for-selected="name"
-            selected="{{selectedSlave.assignment}}"
-            on-selected-changed="_assignmentChanged">
-          <paper-item name="whore">whore</paper-item>
-          <paper-item name="rest">rest</paper-item>
-        </paper-listbox>
-      </paper-dropdown-menu>
+      <template is="dom-if" if="[[selectedSlave]]">
+        <fc-slave-long-desc slave="[[selectedSlave]]"></fc-slave-long-desc>
+        <paper-dropdown-menu label="Assignment">
+          <paper-listbox
+              slot="dropdown-content"
+              attr-for-selected="name"
+              selected="{{selectedSlave.assignment}}">
+            <paper-item name="whore">whore</paper-item>
+            <paper-item name="rest">rest</paper-item>
+          </paper-listbox>
+        </paper-dropdown-menu>
+      </template>
     </div>
   </template>
   <script>
@@ -49,30 +58,30 @@
       static get properties() {
         return {
           slaves: Array,
+          _selected: {
+            value: 0
+          },
           selectedSlave: {
             type: Object,
-            notify: true
+            computed: '_computeSelected(_selected)'
           }
         }
       }
 
       ready() {
         super.ready();
+/*
         if (this.slaves && this.slaves.length > 0) {
           this.selectedSlave = this.slaves[0];
         }
+*/
       }
 
-      _assignmentChanged(e) {
-        this.splice('slaves', this.slaves.indexOf(this.selectedSlave), 1, this.selectedSlave);
-        this.dispatchEvent(new CustomEvent('update-slave', {
-          bubbles: true, composed: true, detail: this.selectedSlave
-        }));
-      }
-
-
-      _onClick(event) {
-        this.selectedSlave = event.model.item;
+      _computeSelected(s) {
+        if (s < this.slaves.length) {
+          return this.slaves[s];
+        }
+        return null;
       }
 
       getSlaveFullName(slave) {

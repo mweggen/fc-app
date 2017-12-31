@@ -1,0 +1,331 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+
+<dom-module id="fc-intro-summary">
+  <template>
+    <style include="iron-flex"></style>
+    <style>
+      .summaryLine {
+        align-items: flex-end;
+        min-height: 2em;
+      }
+      .summaryLine span {
+        padding: 0 5px 11px 0;
+      }
+      .summaryLine paper-dropdown-menu {
+        margin-top: -10px;
+      }
+      .summaryLine paper-checkbox {
+        margin-bottom: 5px;
+      }
+      paper-checkbox {
+        padding: 8px 16px;
+      }
+      paper-checkbox .subtitle {
+        display: block;
+        font-size: 0.75em;
+        line-height: 0.75em;
+        margin-top: 2px;
+        color: var(--secondary-text-color);
+        margin-bottom: -7px;
+      }
+      paper-checkbox .subtitle b {
+        color: var(--primary-text-color);
+      }
+    </style>
+    <p>You may review your settings before clicking "Continue" to begin.</p>
+    <h2>The World</h2>
+    <div class="summaryLine layout horizontal">
+      <span>The world economy is in</span>
+      <paper-dropdown-menu style="width: 100px">
+        <paper-listbox slot="dropdown-content" selected="{{_economyIndex}}" on-selected-changed="_economyChanged">
+          <paper-item>good</paper-item>
+          <paper-item>doubtful</paper-item>
+          <paper-item>terrible</paper-item>
+        </paper-listbox>
+      </paper-dropdown-menu>
+      <span>shape.</span>
+    </div>
+    <div class="summaryLine layout horizontal wrap">
+      <paper-checkbox checked="{{gameState.internationalTrade}}">
+        International slave trade
+        <span class="subtitle">
+          <template is="dom-if" if="[[gameState.internationalTrade]]">The slave trade is <b>international</b>, so a wider variety of slaves will be available.</template>
+          <template is="dom-if" if="[[!gameState.internationalTrade]]">The slave trade is <b>continental</b>, so a narrower variety of slaves will be available.</template>
+        </span>
+      </paper-checkbox>
+      <paper-checkbox disabled="[[!gameState.internationalTrade]]" checked="{{gameState.internationalVariety}}">
+        Normalized international slave variety
+        <span class="subtitle">
+          <template is="dom-if" if="[[gameState.internationalVariety]]">International slave variety is <b>normalized</b>, so small nations will appear nearly as much as large ones.</template>
+          <template is="dom-if" if="[[!gameState.internationalVariety]]">International slave variety is <b>semi-realistic</b>, so more populous nations will be more common.</template>
+        </span>
+      </paper-checkbox>
+      <paper-checkbox checked="{{gameState.seeAge}}">
+        Natural slave aging
+        <span class="subtitle">
+        <template is="dom-if" if="[[gameState.seeAge]]">Slaves will <b>age naturally</b>.</template>
+        <template is="dom-if" if="[[!gameState.seeAge]]">Slaves will <b>not age</b>, and not experience birthdays.</template>
+        </span>
+      </paper-checkbox>
+      <paper-checkbox checked="{{gameState.seeRace}}">
+        Ethnicity
+        <span class="subtitle">
+          <template is="dom-if" if="[[gameState.seeRace]]">Ethnicity will <b>occasionally</b> be mentioned.</template>
+          <template is="dom-if" if="[[!gameState.seeRace]]">Ethnicity will <b>almost never</b> be mentioned.</template>
+        </span>
+      </paper-checkbox>
+      <paper-checkbox checked="{{gameState.seeNationality}}">
+        Nationality
+        <span class="subtitle">
+          <template is="dom-if" if="[[gameState.seeNationality]]">Nationality will <b>occasionally</b> be mentioned.</template>
+          <template is="dom-if" if="[[!gameState.seeNationality]]">Nationality will <b>almost never</b> be mentioned.</template>
+        </span>
+      </paper-checkbox>
+      <paper-checkbox checked="{{gameState.seeExtreme}}">Extreme content like amputation</paper-checkbox>
+      <paper-checkbox disabled="[[_eq(gameState.seeDicks, 0)]]" checked="{{gameState.seeCircumcision}}">Circumcision</paper-checkbox>
+      <paper-checkbox checked="{{gameState.weightAffectsAssets}}">Interactions between slaves' weight and asset size</paper-checkbox>
+      <paper-checkbox checked="{{gameState.curativeSideEffects}}">Curative side effects</paper-checkbox>
+    </div>
+    <div class="summaryLine layout horizontal">
+      <paper-dropdown-menu style="width: 100px">
+        <paper-listbox slot="dropdown-content" selected="{{_seeDicksIndex}}" on-selected-changed="_seeDicksChanged">
+          <paper-item>None</paper-item>
+          <paper-item>A few</paper-item>
+          <paper-item>Some</paper-item>
+          <paper-item>Half</paper-item>
+          <paper-item>Most</paper-item>
+          <paper-item>Almost all</paper-item>
+          <paper-item>All</paper-item>
+        </paper-listbox>
+      </paper-dropdown-menu>
+      <span> of the slave girls will have dicks.</span>
+    </div>
+    <div class="summaryLine layout horizontal wrap">
+      <paper-checkbox checked="{{gameState.familyTesting}}">
+        Extended families
+        <span class="subtitle">
+          <template is="dom-if" if="[[gameState.familyTesting]]">Slaves <b>can</b> have extended families instead of just a single relative. <i>May cause lag.</i></template>
+          <template is="dom-if" if="[[!gameState.familyTesting]]">Slaves <b>cannot</b> have extended families, just a single relative. <i>Vanilla Mode.</i></template>
+        </span>
+      </paper-checkbox>
+      <paper-checkbox checked="{{gameState.plot}}">
+        Non-erotic events
+        <span class="subtitle">
+          <template is="dom-if" if="[[gameState.plot]]">Game mode: <b>two-handed</b>. Includes non-erotic events concerning the changing world.</template>
+          <template is="dom-if" if="[[!gameState.plot]]">Game mode: <b>one-handed</b>. No non-erotic events concerning the changing world.</template>
+        </span>
+      </paper-checkbox>
+    </div>
+    <h2>The Free City</h2>
+    <div class="summaryLine layout horizontal">
+      <span>The Free City features</span>
+      <paper-input min="0" max="8" type="number" value="{{gameState.neighboringArcologies}}"></paper-input>
+      <span>arcologies in addition to your own.</span>
+    </div>
+      <div class="summaryLine layout horizontal">
+        <span>The Free City is located on</span>
+        <paper-dropdown-menu style="width: 90px">
+          <paper-listbox slot="dropdown-content" attr-for-selected="name" selected="{{gameState.terrain}}">
+            <paper-item name="urban">urban</paper-item>
+            <paper-item name="rural">rural</paper-item>
+            <paper-item name="marine">marine</paper-item>
+            <paper-item name="oceanic">oceanic</paper-item>
+          </paper-listbox>
+        </paper-dropdown-menu>
+        <span>terrain.</span>
+      </div>
+    <div class="layout horizontal wrap">
+      <div class="summaryLine layout horizontal">
+        <span>The Free City is located in</span>
+        <paper-dropdown-menu disabled="[[_eq(gameState.terrain, 'oceanic')]]" style="width: 150px">
+          <paper-listbox slot="dropdown-content" attr-for-selected="name" selected="{{gameState.continent}}">
+            <paper-item name="North America">North America</paper-item>
+            <paper-item name="South America">South America</paper-item>
+            <paper-item name="Europe">Europe</paper-item>
+            <paper-item name="the Middle East">the Middle East</paper-item>
+            <paper-item name="Africa">Africa</paper-item>
+            <paper-item name="Asia">Asia</paper-item>
+            <paper-item name="Australia">Australia</paper-item>
+          </paper-listbox>
+        </paper-dropdown-menu>
+        <span>.</span>
+      </div>
+      <div class="summaryLine layout horizontal">
+        <span>The lingua franca of your arcology is</span>
+        <template is="dom-if" if="[[!_eq(_languageIndex, 4)]]">
+        <paper-dropdown-menu style="width: 100px">
+          <paper-listbox slot="dropdown-content" selected="[[_languageIndex]]" on-selected-changed="_languageChanged">
+            <paper-item name="English">English</paper-item>
+            <paper-item name="Spanish">Spanish</paper-item>
+            <paper-item name="Arabic">Arabic</paper-item>
+            <paper-item name="Chinese">Chinese</paper-item>
+            <paper-item name="custom">custom</paper-item>
+          </paper-listbox>
+        </paper-dropdown-menu>
+        </template>
+        <template is="dom-if" if="[[_eq(_languageIndex, 4)]]">
+          <paper-input value="{{gameState.language}}"></paper-input>
+        </template>
+        <span>.</span>
+      </div>
+      </div>
+    <h2>Player Character</h2>
+    <div class="layout horizontal wrap">
+      <div class="summaryLine layout horizontal">
+        <span>Conversational title:</span>
+        <paper-dropdown-menu style="width: 100px">
+          <paper-listbox slot="dropdown-content" selected="{{gameState.pc.title}}">
+            <paper-item>Mistress</paper-item>
+            <paper-item>Master</paper-item>
+          </paper-listbox>
+        </paper-dropdown-menu>
+      </div>
+      <div class="summaryLine layout horizontal">
+        <span>Career:</span>
+        <paper-dropdown-menu style="width: 100px">
+          <paper-listbox slot="dropdown-content" attr-for-selected="name" selected="{{gameState.pc.career}}">
+            <paper-item name="wealth">Wealth</paper-item>
+            <paper-item name="capitalist">Business</paper-item>
+            <paper-item name="mercenary">PMC work</paper-item>
+            <paper-item name="slaver">Slaving</paper-item>
+            <paper-item name="engineer">Engineering</paper-item>
+            <paper-item name="medicine">Medicine</paper-item>
+            <paper-item name="celebrity">Celebrity</paper-item>
+          </paper-listbox>
+        </paper-dropdown-menu>
+      </div>
+      <div class="summaryLine layout horizontal">
+        <span>Method of acquiring your arcology:</span>
+        <paper-dropdown-menu style="width: 100px">
+          <paper-listbox slot="dropdown-content" attr-for-selected="name" selected="{{gameState.pc.rumor}}">
+            <paper-item name="wealth">Wealth</paper-item>
+            <paper-item name="diligence">Hard work</paper-item>
+            <paper-item name="force">Force</paper-item>
+            <paper-item name="social engineering">Social Engineering</paper-item>
+            <paper-item name="luck">Luck</paper-item>
+          </paper-listbox>
+        </paper-dropdown-menu>
+      </div>
+      <div class="summaryLine layout horizontal">
+        <span>Genitalia:</span>
+        <paper-checkbox checked="{{gameState.pc.dick}}">Penis</paper-checkbox>
+        <paper-checkbox checked="{{gameState.pc.vagina}}">Vagina</paper-checkbox>
+        <paper-checkbox checked="{{gameState.pc.breasts}}">Breasts</paper-checkbox>
+      </div>
+      <div class="summaryLine layout horizontal">
+        <span>Age:</span>
+        <paper-dropdown-menu style="width: 200px">
+          <paper-listbox slot="dropdown-content" selected="{{gameState.pc.age}}">
+            <paper-item>surprisingly young</paper-item>
+            <paper-item>entering middle age</paper-item>
+            <paper-item>well into middle age</paper-item>
+          </paper-listbox>
+        </paper-dropdown-menu>
+        <span>.</span>
+      </div>
+    </div>
+    <paper-button raised class="green" on-click="_toStartingGirls">Continue to Starting Girls</paper-button>
+  </template>
+  <script>
+    class FCIntroSummary extends Polymer.Element {
+      static get is() { return 'fc-intro-summary'; }
+      static get properties() { return {
+        gameState: {
+          type: Object,
+          value: () => ({
+            economy: 1.5,
+            internationalTrade: 0
+          }),
+          notify: true
+        },
+        _languageIndex: { computed: '_computeLanguageIndex(gameState.language)' },
+        _economyIndex: { computed: '_computeEconomyIndex(gameState.economy)' },
+        _seeDicksIndex: { computed: '_computeSeeDicksIndex(gameState.seeDicks)' }
+      }}
+      _eq(v1, v2) { return v1 === v2; }
+
+      _toStartingGirls(e) {
+        switch(this.gameState.pc.career) {
+          case 'wealth':
+            this.set('gameState.cash', this.gameState.cash + 10000);
+            this.push('gameState.trinkets', 'a collection of diplomas from expensive schools');
+            break;
+          case 'capitalist':
+            this.set('gameState.pc.trading', 100);
+            this.push('gameState.trinkets', 'a framed low denomination piece of paper money from your native country');
+            break;
+          case 'mercenary':
+            this.set('gameState.pc.warfare', 100);
+            this.push('gameState.trinkets', 'a battered old assault rifle');
+            break;
+          case 'slaver':
+            this.set('gameState.pc.slaving', 100);
+            this.push('gameState.trinkets', 'a framed picture of a slave with her sale price scrawled across the bottom');
+            break;
+          case 'engineer':
+            this.set('gameState.pc.engineering', 100);
+            this.set('gameState.arcologyUpgrade.drones', true);
+            this.set('gameState.arcologyUpgrade.hydro', true);
+            this.set('gameState.upgradeMultiplierArcology', 0.6);
+            this.push('gameState.trinkets', 'an artist\'s impression of an early arcology design');
+            break;
+          case 'medicine':
+            this.set('gameState.pc.medicine', 100);
+            this.set('gameState.surgeryCost', Math.floor(this.gameState.surgeryCost / 2));
+            this.set('gameState.upgradeMultiplierMedicine', 0.8);
+            this.push('gameState.trinkets', 'a framed postsurgical x-ray');
+            break;
+          case 'celebrity':
+            this.set('gameState.rep', this.gameState.rep + 4000);
+            this.push('gameState.trinkets', 'a framed copy of the first news story featuring yourself');
+            break;
+          case 'arcology owner':
+            this.set('gameState.pc.trading', 100);
+            this.set('gameState.pc.warfare', 100);
+            this.set('gameState.pc.slaving', 100);
+            this.set('gameState.pc.engineering', 100);
+            this.set('gameState.pc.medicine', 100);
+            this.set('gameState.upgradeMultiplierArcology', 0.8);
+            this.set('gameState.rep', this.gameState.rep + 4000);
+            this.push('gameState.trinkets', 'a miniature model of your first arcology');
+        }
+
+        this.set('route.path', '/starting-girls');
+      }
+
+      _computeLanguageIndex(language) {
+        let arr = ['English', 'Spanish', 'Arabic', 'Chinese'];
+        let i = arr.indexOf(language);
+        return i < 0 ? 4 : i;
+      }
+
+      _languageChanged(event) {
+        let arr = ['English', 'Spanish', 'Arabic', 'Chinese', ''];
+        this.set('gameState.language', arr[event.detail.value]);
+      }
+
+      _economyChanged(event) {
+        let e = event.detail.value;
+        this.set('gameState.economy', e === 0 ? 0.5 : e === 1 ? 1 : 1.5);
+        console.log('eco:'+this.gameState.economy);
+      }
+
+      _computeEconomyIndex(economy) { return economy === 0.5 ? 0 : economy === 1 ? 1 : 2; }
+
+      _seeDicksChanged(event) {
+        let e = event.detail.value;
+        this.set('gameState.seeDicks', e === 0 ? 0 : e === 1 ? 10 : e === 2 ? 25 : e === 3 ? 50 : e === 4 ? 75 : e === 5 ? 90 : 100);
+        console.log('seeDicks: '+this.gameState.seeDicks);
+      }
+
+      _computeSeeDicksIndex(seeDicks) { return seeDicks === 100 ? 6 : seeDicks >= 90 ? 5 : seeDicks >= 75 ? 4 : seeDicks >= 50 ? 3 : seeDicks >= 25 ? 2 : seeDicks > 0 ? 1 : 0; }
+    }
+
+    customElements.define(FCIntroSummary.is, FCIntroSummary);
+  </script>
+</dom-module>

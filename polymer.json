@@ -2,12 +2,40 @@
   "entrypoint": "index.html",
   "shell": "src/fc-app.html",
   "fragments": [
-    "src/fc-view1.html",
-    "src/fc-view2.html",
-    "src/fc-view3.html",
-    "src/fc-new-view.html",
-    "src/fc-slave-edit.html",
+    "src/fc-age-health-desc.html",
+    "src/fc-areolae-desc.html",
+    "src/fc-beauty-score.html",
+    "src/fc-belly-desc.html",
+    "src/fc-boobs-desc.html",
+    "src/fc-boobs-extra-desc.html",
+    "src/fc-boobs-shape-desc.html",
+    "src/fc-butt-desc.html",
+    "src/fc-create-slave-data.html",
+    "src/fc-crotch-desc.html",
+    "src/fc-devotion.html",
+    "src/fc-eye-desc.html",
+    "src/fc-game-state.html",
+    "src/fc-hair-clothing-desc.html",
+    "src/fc-hair-desc.html",
+    "src/fc-hips-desc.html",
+    "src/fc-mod-score.html",
+    "src/fc-nipples-desc.html",
+    "src/fc-reports.html",
+    "src/fc-rest-report.html",
+    "src/fc-sex-score.html",
+    "src/fc-shoulders-desc.html",
+    "src/fc-skin-desc.html",
     "src/fc-slave.html",
+    "src/fc-slave-edit.html",
+    "src/fc-slave-list.html",
+    "src/fc-slave-long-desc.html",
+    "src/fc-slave-title.html",
+    "src/fc-trust.html",
+    "src/fc-upper-face-desc.html",
+    "src/fc-util.html",
+    "src/fc-vagina-desc.html",
+    "src/fc-waist-desc.html",
+    "src/fc-whore-report.html",
     "src/fc-view404.html"
   ],
   "sources": [
@@ -23,13 +51,16 @@
   },
   "builds": [
     {
-      "preset": "es5-bundled"
+      "preset": "es5-bundled",
+      "html": {"minify": false}
     },
     {
-      "preset": "es6-bundled"
+      "preset": "es6-bundled",
+      "html": {"minify": false}
     },
     {
-      "preset": "es6-unbundled"
+      "preset": "es6-unbundled",
+      "html": {"minify": false}
     }
   ]
 }

@@ -1,0 +1,25 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<dom-module id="fc-disclaimer">
+  <template>
+    <style>
+      .disclaimer {
+        color: yellow;
+      }
+    </style>
+    <p class="disclaimer">
+      This is a text-based game that includes descriptions of sexual activity, graphic violence, drug use,
+      and other subjects not suitable for persons under the age of 18. This is a work of fiction; any resemblance
+      to actual persons, places, or events is unintended.
+    </p>
+    <p>
+      <a href="[[rootPath]]intro-summary">I am 18 or more years of age, I understand, and I wish to continue</a>
+    </p>
+  </template>
+  <script>
+    class FCDisclaimer extends Polymer.Element {
+      static get is() { return 'fc-disclaimer'; }
+    }
+    customElements.define(FCDisclaimer.is, FCDisclaimer);
+  </script>
+</dom-module>
