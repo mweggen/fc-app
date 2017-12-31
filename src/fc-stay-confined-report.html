@@ -1,0 +1,80 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+
+<dom-module id="fc-stay-confined-report">
+  <template>
+    <style>
+      iron-pages {
+        display: inline;
+      }
+      .incDev {
+        color: hotpink;
+        font-weight: bold;
+      }
+      .decDev {
+        color: mediumorchid;
+        font-weight: bold;
+      }
+      .decTru {
+        color: gold;
+        font-weight: bold;
+      }
+      .decHP {
+        color: red;
+        font-weight: bold;
+      }
+      .assign {
+        color: yellow;
+        font-weight: bold;
+      }
+    </style>
+    <iron-pages selected="[[report.a1]]">
+      <span>
+        is kept in solitary confinement whenever she is not being forced to do something else. She still hates her place
+        in the world, but being forced to rely on slave life as her only human contact
+        <span class="incDev">grinds down her resistance</span>.
+      </span>
+      <span>
+        is kept in solitary confinement whenever she is not being forced to do something else. With nothing to do but
+        look forward to the next time she's let out to serve, <span class="incDev">she begins to rely on servitude</span>.
+      </span>
+      <span>
+        accepts solitary confinement whenever she is not being forced to do something else. Since she is obedient, the
+        mental torture neither breaks her further nor causes her to hate you.
+      </span>
+      <span>
+        accepts solitary confinement whenever she is not being forced to do something else. She spends her time
+        wondering hopelessly how she has failed you, <span class="decDev">damaging her devotion to you</span>.
+      </span>
+    </iron-pages>
+
+    <iron-pages selected="[[report.a2]]">
+      <span>She is so terrified of you that this confinement does not make her fear you any more.</span>
+      <span>She is already afraid if you, but this confinement makes her <span class="decTru">fear you even more</span>.</span>
+      <span>This confinement makes her <span class="decTru">fear your power</span> over her.</span>
+      <span>This confinement makes her <span class="decTru">trust you less</span>, and fear you more.</span>
+    </iron-pages>
+
+    The stress of confinement <span class="decHP">damages her health</span>.
+
+    <template is="dom-if" if="[[report.a3]]">
+      She is now willing to <span class="incDev">do as she's told</span>, so
+      <span class="assign">her assignment has defaulted to rest</span>.
+    </template>
+  </template>
+  <script>
+    class FCStayConfinedReport extends Polymer.Element {
+      static get is() { return 'fc-stay-confined-report'; }
+      static get properties() { return {
+        report: {
+          type: Object,
+          value: () => ({
+
+          })
+        }
+      }}
+    }
+
+    customElements.define(FCStayConfinedReport.is, FCStayConfinedReport);
+  </script>
+</dom-module>

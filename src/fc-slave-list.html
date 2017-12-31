@@ -37,13 +37,14 @@
     <div class="info">
       <template is="dom-if" if="[[selectedSlave]]">
         <fc-slave-long-desc slave="[[selectedSlave]]"></fc-slave-long-desc>
-        <paper-dropdown-menu label="Assignment">
+        <paper-dropdown-menu label="Assignment" style="width: 150px">
           <paper-listbox
               slot="dropdown-content"
               attr-for-selected="name"
               selected="{{selectedSlave.assignment}}">
             <paper-item name="whore">whore</paper-item>
             <paper-item name="rest">rest</paper-item>
+            <paper-item name="stay confined">stay confined</paper-item>
           </paper-listbox>
         </paper-dropdown-menu>
       </template>

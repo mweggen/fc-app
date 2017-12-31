@@ -1,6 +1,7 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="fc-rest-report.html">
 <link rel="import" href="fc-whore-report.html">
+<link rel="import" href="fc-stay-confined-report.html">
 <link rel="import" href="fc-chooses-own-clothes-report.html">
 
 <dom-module id="fc-reports">
@@ -11,9 +12,17 @@
         text-decoration: underline;
         font-weight: bold;
       }
+      p.first {
+        text-indent: 0;
+        margin-top: 24px;
+      }
+      p {
+        margin: 5px auto;
+        text-indent: 2em;
+      }
     </style>
     <template is="dom-repeat" items="[[slaveReports]]">
-      <p>
+      <p class="first">
         <span class="pink">[[item.slave.slaveName]] [[item.slave.slaveSurname]]</span>
         <template is="dom-if" if="[[_eq(item.assignment, 'whore')]]">
           <fc-whore-report report="[[item]]"></fc-whore-report>
@@ -21,6 +30,11 @@
         <template is="dom-if" if="[[_eq(item.assignment, 'rest')]]">
           <fc-rest-report slave-report="[[item]]"></fc-rest-report>
         </template>
+        <template is="dom-if" if="[[_eq(item.assignment, 'stay confined')]]">
+          <fc-stay-confined-report report="[[item]]"></fc-stay-confined-report>
+        </template>
+      </p>
+      <p>
         <fc-chooses-own-clothes-report report="[[item.coc]]"></fc-chooses-own-clothes-report>
       </p>
     </template>
