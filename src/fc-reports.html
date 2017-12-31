@@ -28,7 +28,7 @@
           <fc-whore-report report="[[item]]"></fc-whore-report>
         </template>
         <template is="dom-if" if="[[_eq(item.assignment, 'rest')]]">
-          <fc-rest-report slave-report="[[item]]"></fc-rest-report>
+          <fc-rest-report report="[[item]]"></fc-rest-report>
         </template>
         <template is="dom-if" if="[[_eq(item.assignment, 'stay confined')]]">
           <fc-stay-confined-report report="[[item]]"></fc-stay-confined-report>

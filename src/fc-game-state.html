@@ -183,7 +183,11 @@
             };
             this._saStayConfined(slave, report);
           } else {
-            report = this._rest(slave);
+            report = {
+              slave: JSON.parse(JSON.stringify(slave)),
+              assignment: slave.assignment,
+            };
+            this._rest(slave, report);
           }
           //todo SA rules
           report.rules = this._saRules(slave);
@@ -1387,23 +1391,43 @@
         return report;
       }
 
-      _rest(slave) {
-        let report = {
-          slave: JSON.parse(JSON.stringify(slave)),
-          assignment: 'rest',
-        };
-        if (slave.health <= 90 && slave.health > -100) {
+      _rest(slave, report) {
+        if (slave.fuckdoll > 0) {
+          report.a1 = true;
+          if (slave.amp === 0) {
+            report.a1a = 0;
+          } else {
+            report.a1a = 1;
+          }
+        }
+
+        report.a2 = -1;
+        if (slave.health > 90) {
+          report.a2 = 0;
+        } else if (slave.health <= 90 && slave.health > -100) {
+          report.a2 = 1;
           slave.health += 10;
         }
+        report.a3a2 = -1;
         if (slave.fuckdoll === 0 && slave.fetish !== 'mindbroken') {
           if (slave.devotion > 20) {
+            report.a3a2 = 0;
             if (slave.trust <= 20) {
+              report.a3aa = 0;
               slave.trust += 4;
+            } else if (slave.trust <= 50) {
+              report.a3aa = 1;
+              slave.trust += 2;
             } else {
+              report.a3aa = 2;
               slave.trust += 2;
             }
-          } else if (slave.trust < -20) {
-            slave.trust += 4;
+          } else {
+            report.a3a2 = 1;
+            if (slave.trust < -20) {
+              report.a3aba = true;
+              slave.trust += 4;
+            }
           }
         }
         return report;
