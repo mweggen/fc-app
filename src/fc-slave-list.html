@@ -3,6 +3,11 @@
 <link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
 <link rel="import" href="../bower_components/paper-item/paper-item.html">
 <link rel="import" href="../bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../bower_components/paper-tabs/paper-tab.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/paper-radio-group/paper-radio-group.html">
+<link rel="import" href="../bower_components/paper-radio-button/paper-radio-button.html">
 <link rel="import" href="fc-slave-long-desc.html">
 <link rel="import" href="fc-slave.html">
 
@@ -13,6 +18,8 @@
         display: block;
 
         padding: 16px;
+
+        --paper-radio-group-item-padding: 0px;
       }
 
       .list {
@@ -21,6 +28,10 @@
 
       .info {
         margin-left: 150px;
+      }
+      paper-radio-button {
+        padding: 0 12px;
+        width: 20%
       }
     </style>
 
@@ -37,16 +48,229 @@
     <div class="info">
       <template is="dom-if" if="[[selectedSlave]]">
         <fc-slave-long-desc slave="[[selectedSlave]]"></fc-slave-long-desc>
-        <paper-dropdown-menu label="Assignment" style="width: 150px">
-          <paper-listbox
-              slot="dropdown-content"
-              attr-for-selected="name"
-              selected="{{selectedSlave.assignment}}">
-            <paper-item name="whore">whore</paper-item>
-            <paper-item name="rest">rest</paper-item>
-            <paper-item name="stay confined">stay confined</paper-item>
-          </paper-listbox>
-        </paper-dropdown-menu>
+        <paper-tabs selected="{{selectedTab}}">
+          <paper-tab>GENERAL</paper-tab>
+          <paper-tab>WARDROBE</paper-tab>
+          <paper-tab>AUTO SALON</paper-tab>
+          <paper-tab>BODY MOD STUDIO</paper-tab>
+          <paper-tab>REMOTE SURGERY</paper-tab>
+        </paper-tabs>
+        <iron-pages selected="[[selectedTab]]">
+          <div>
+            <paper-dropdown-menu label="Assignment" style="width: 150px">
+              <paper-listbox
+                  slot="dropdown-content"
+                  attr-for-selected="name"
+                  selected="{{selectedSlave.assignment}}">
+                <paper-item name="rest">rest</paper-item>
+                <paper-item name="stay confined">confinement</paper-item>
+                <template is="dom-if" if="[[_eq(selectedSlave.fuckdoll, 0)]]">
+                  <paper-item name="whore">whore</paper-item>
+                  <paper-item name="serve the public">public servant</paper-item>
+                </template>
+              </paper-listbox>
+            </paper-dropdown-menu>
+            <paper-dropdown-menu label="Drugs" style="width: 150px">
+              <paper-listbox
+                  slot="dropdown-content"
+                  attr-for-selected="name"
+                  selected="{{selectedSlave.drugs}}">
+                <paper-item name="no drugs">none</paper-item>
+                <template is="dom-if" if="[[_gt(selectedSlave.intelligence, -2)]]">
+                  <paper-item name="psychosuppressants">psychosuppressants</paper-item>
+                </template>
+                <template is="dom-if" if="[[_gt(48000, selectedSlave.boobs)]]">
+                  <paper-item name="breast injections">breasts</paper-item>
+                </template>
+                <template is="dom-if" if="[[_gt(9, selectedSlave.butt)]]">
+                  <paper-item name="butt injections">buttocks</paper-item>
+                </template>
+                <template is="dom-if" if="[[_gt(selectedSlave.dick, 0)]]">
+                  <template is="dom-if" if="[[_gt(10, selectedSlave.dick)]]">
+                    <paper-item name="penis enhancement">dick +</paper-item>
+                  </template>
+                </template>
+                <template is="dom-if" if="[[!_gt(selectedSlave.dick, 0)]]">
+                  <template is="dom-if" if="[[_gt(5, selectedSlave.clit)]]">
+                    <paper-item name="penis enhancement">dick +</paper-item>
+                  </template>
+                </template>
+                <template is="dom-if" if="[[_gt(selectedSlave.balls, 0)]]">
+                  <template is="dom-if" if="[[_gt(10, selectedSlave.balls)]]">
+                    <paper-item name="testicle enhancement">balls +</paper-item>
+                  </template>
+                </template>
+                <paper-item name="steroids">steroids</paper-item>
+                <paper-item name="hormone enhancers">hormone enhancers</paper-item>
+              </paper-listbox>
+            </paper-dropdown-menu>
+            <paper-dropdown-menu label="Diet" style="width: 175px">
+              <paper-listbox
+                  slot="dropdown-content"
+                  attr-for-selected="name"
+                  selected="{{selectedSlave.diet}}">
+                <paper-item name="healthy">healthy</paper-item>
+                <template is="dom-if" if="[[!_gt(-95, selectedSlave.weight)]]">
+                  <paper-item name="restricted">lose weight</paper-item>
+                </template>
+                <template is="dom-if" if="[[!_gt(selectedSlave.weight, 95)]]">
+                  <paper-item name="fattening">fatten</paper-item>
+                </template>
+                <template is="dom-if" if="[[!_gt(selectedSlave.muscles, 95)]]"><!--todo canWalk-->
+                  <paper-item name="muscle building">build muscle</paper-item>
+                </template>
+                <template is="dom-if" if="[[_gt(selectedSlave.muscles, 5)]]">
+                  <paper-item name="slimming">slim down</paper-item>
+                </template>
+              </paper-listbox>
+            </paper-dropdown-menu>
+            <paper-dropdown-menu label="Hormones" style="width: 150px">
+              <paper-listbox
+                  slot="dropdown-content"
+                  attr-for-selected="name"
+                  selected="{{selectedSlave.hormones}}">
+                <paper-item name="2">intense female</paper-item>
+                <paper-item name="1">female</paper-item>
+                <paper-item name="0">none</paper-item>
+                <paper-item name="-1">male</paper-item>
+                <paper-item name="-2">intense male</paper-item>
+              </paper-listbox>
+            </paper-dropdown-menu>
+            <paper-dropdown-menu label="Health" style="width: 150px">
+              <paper-listbox
+                  slot="dropdown-content"
+                  selected="{{selectedSlave.curatives}}">
+                <paper-item>none</paper-item>
+                <paper-item>preventatives</paper-item>
+                <paper-item>curatives</paper-item>
+              </paper-listbox>
+            </paper-dropdown-menu>
+            <paper-dropdown-menu label="Aphrodisiacs" style="width: 150px">
+              <paper-listbox
+                  slot="dropdown-content"
+                  selected="{{selectedSlave.aphrodisiacs}}">
+                <paper-item>none</paper-item>
+                <paper-item>apply</paper-item>
+                <paper-item>extreme</paper-item>
+              </paper-listbox>
+            </paper-dropdown-menu>
+            <paper-dropdown-menu label="Typical punishment" style="width: 150px">
+              <paper-listbox
+                  slot="dropdown-content"
+                  attr-for-selected="name"
+                  selected="{{selectedSlave.standardPunishment}}">
+                <paper-item name="confinement">confinement</paper-item>
+                <paper-item name="whipping">whipping</paper-item>
+                <paper-item name="chastity">chastity</paper-item>
+                <paper-item name="situational">situational</paper-item>
+              </paper-listbox>
+            </paper-dropdown-menu>
+            <paper-dropdown-menu label="Typical reward" style="width: 150px">
+              <paper-listbox
+                  slot="dropdown-content"
+                  attr-for-selected="name"
+                  selected="{{selectedSlave.standardReward}}">
+                <paper-item name="relaxation">relaxation</paper-item>
+                <paper-item name="drugs">drugs</paper-item>
+                <paper-item name="orgasm">orgasm</paper-item>
+                <paper-item name="situational">situational</paper-item>
+              </paper-listbox>
+            </paper-dropdown-menu>
+            <template is="dom-if" if="[[!_eq(selectedSlave.voice, 0)]]">
+              <paper-dropdown-menu label="Speech rules" style="width: 150px">
+                <paper-listbox
+                    slot="dropdown-content"
+                    attr-for-selected="name"
+                    selected="{{selectedSlave.speechRules}}">
+                  <paper-item name="restrictive">restrictive</paper-item>
+                  <paper-item name="permissive">permissive</paper-item>
+                  <template is="dom-if" if="[[_gt(selectedSlave.accent, 0)]]">
+                    <paper-item name="accent elimination">accent elimination</paper-item>
+                  </template>
+                </paper-listbox>
+              </paper-dropdown-menu>
+            </template>
+            <paper-dropdown-menu label="Relationship rules" style="width: 150px">
+              <paper-listbox
+                  slot="dropdown-content"
+                  attr-for-selected="name"
+                  selected="{{selectedSlave.relationshipRules}}">
+                <paper-item name="restrictive">restrictive</paper-item>
+                <paper-item name="just friends">just friends</paper-item>
+                <paper-item name="permissive">permissive</paper-item>
+              </paper-listbox>
+            </paper-dropdown-menu>
+          </div>
+          <div><!--wardrobe-->
+            <p>
+              <i>[[selectedSlave.slaveName]] stands on a small platform surrounded by mirrors and an array of clothing options. She is awaiting your
+            fashion choices.</i>
+            </p>
+            <template is="dom-if" if="[[_eq(selectedSlave.fuckdoll, 0]]">
+              <paper-radio-group selected="{{selectedSlave.clothes}}">
+              Clothes: <b>[[selectedSlave.clothes]]</b>.<br>
+                <i>&nbsp;&nbsp;Nice:</i><br>
+                <paper-radio-button name="slutty jewelry">bangles</paper-radio-button>
+                <paper-radio-button name="a comfortable bodysuit">bodysuit</paper-radio-button>
+                <paper-radio-button name="a cheerleader outfit">cheerleader outfit</paper-radio-button>
+                <paper-radio-button name="clubslut netting">clubslut netting</paper-radio-button>
+                <paper-radio-button name="cutoffs and a t-shirt">cutoffs and a t-shirt</paper-radio-button>
+                <paper-radio-button name="a fallen nuns habit">fallen nun</paper-radio-button>
+                <paper-radio-button name="a halter top dress">haltertop dress</paper-radio-button>
+                <paper-radio-button name="a hijab and abaya">hijab and abaya</paper-radio-button>
+                <paper-radio-button name="a latex catsuit">latex catsuit</paper-radio-button>
+                <paper-radio-button name="a leotard">leotard</paper-radio-button>
+                <paper-radio-button name="a nice maid outfit">maid (nice)</paper-radio-button>
+                <paper-radio-button name="a slutty maid outfit">maid (slutty)</paper-radio-button>
+                <paper-radio-button name="a military uniform">military uniform</paper-radio-button>
+                <paper-radio-button name="a mini dress">mini dress</paper-radio-button>
+                <paper-radio-button name="attractive lingerie">nice lingerie</paper-radio-button>
+                <paper-radio-button name="a nice nurse outfit">nurse (nice)</paper-radio-button>
+                <paper-radio-button name="a slutty nurse outfit">nurse (slutty)</paper-radio-button>
+                <paper-radio-button name="a schoolgirl outfit">schoolgirl</paper-radio-button>
+                <paper-radio-button name="a ball gown">silken ballgown</paper-radio-button>
+                <paper-radio-button name="battledress">skimpy battledress</paper-radio-button>
+                <paper-radio-button name="a slave gown">slave gown</paper-radio-button>
+                <paper-radio-button name="a slutty outfit">slutty outfit</paper-radio-button>
+                <paper-radio-button name="a string bikini">string bikini</paper-radio-button>
+                <paper-radio-button name="a succubus outfit">succubus costume</paper-radio-button>
+                <paper-radio-button name="nice business attire">suit (nice)</paper-radio-button>
+                <paper-radio-button name="slutty business attire">suit (slutty)</paper-radio-button>
+                <!--todo FS clothing--><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<i>Harsh:</i><br>
+                <paper-radio-button name="no clothing">go naked</paper-radio-button>
+                <paper-radio-button name="a penitent nuns habit">penitent nun</paper-radio-button>
+                <paper-radio-button name="restrictive latex">restrictive latex</paper-radio-button>
+                <paper-radio-button name="shibari ropes">shibari ropes</paper-radio-button>
+                <paper-radio-button name="uncomfortable straps">uncomfortable straps</paper-radio-button>
+              </paper-radio-group>
+              <paper-radio-group selected="{{selectedSlave.collar}}">
+                Collar: <b>[[selectedSlave.collar]]</b><paper-radio-button name="none">remove</paper-radio-button><br>
+                description<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<i>Nice:</i><br>
+                <paper-radio-button name="stylish leather">stylish leather</paper-radio-button>
+                <paper-radio-button name="satin choker">satin choker</paper-radio-button>
+                <paper-radio-button name="heavy gold">heavy gold</paper-radio-button>
+                <paper-radio-button name="pretty jewelry">pretty jewelry</paper-radio-button>
+                <paper-radio-button name="nice retirement counter">nice retirement counter</paper-radio-button>
+                <paper-radio-button name="leather with cowbell">cowbell</paper-radio-button>
+                <br>&nbsp;&nbsp;&nbsp;&nbsp;<i>Harsh:</i><br>
+                <paper-radio-button name="tight steel">tight steel</paper-radio-button>
+                <paper-radio-button name="cruel retirement counter">cruel retirement counter</paper-radio-button>
+                <paper-radio-button name="uncomfortable leather">uncomfortable leather</paper-radio-button>
+                <paper-radio-button name="shock punishment">shock punishment</paper-radio-button>
+                <paper-radio-button name="dildo gag">dildo gag</paper-radio-button>
+                <paper-radio-button name="ball gag">ball gag</paper-radio-button>
+                <paper-radio-button name="bit gag">bit gag</paper-radio-button>
+                <paper-radio-button name="neck corset">neck corset</paper-radio-button>
+              </paper-radio-group>
+            </template>
+          </div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </iron-pages>
       </template>
     </div>
   </template>
@@ -65,9 +289,15 @@
           selectedSlave: {
             type: Object,
             computed: '_computeSelected(_selected)'
+          },
+          selectedTab: {
+            type: Number,
+            value: 0
           }
         }
       }
+      _gt(v1, v2) { return v1 > v2; }
+      _eq(v1, v2) { return v1 === v2; }
 
       ready() {
         super.ready();

@@ -51,4 +51,12 @@
     return !slave ? null
       : slave.vagina >= 0 && slave.vaginalAccessory !== "chastity belt" && slave.vaginalAccessory !== "combined chastity";
   }
+
+  function fetishChangeChance(slave) {
+    if (slave.clitSetting !== slave.fetish) {
+      return Math.max(0, (slave.devotion - slave.fetishStrength) / 400);
+    } else {
+      return 0;
+    }
+  }
 </script>

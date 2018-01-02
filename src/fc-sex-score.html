@@ -47,10 +47,10 @@
             sexScore++;
           }
 
-          if (slave.fetishKnown === 1 && slave.fetishStrength > 60 && slave.fetish !== 'none') {
+          if (slave.fetishKnown && slave.fetishStrength > 60 && slave.fetish !== 'none') {
             sexScore += slave.fetishStrength / 5;
           }
-          if (slave.attrKnown === 1) {
+          if (slave.attrKnown) {
             sexScore += Math.floor(slave.attrXX / 20);
             sexScore += Math.floor(slave.attrXY / 20);
             if (slave.energy > 95) {

@@ -265,8 +265,8 @@
           choosesOwnClothes: true, clothes: "no clothing", collar: "none", shoes: "none",
           vaginalAccessory: "none", dickAccessory: "none", buttplug: "none", buttplugAttachment: "none",
           intelligence: 0,  intelligenceImplant: 0,
-          energy: 50, need: 0, attrXX: 0, attrXY: 0, attrKnown: 0,
-          fetish: "none", fetishStrength: 70, fetishKnown: 0,
+          energy: 50, need: 0, attrXX: 0, attrXY: 0, attrKnown: false,
+          fetish: "none", fetishStrength: 70, fetishKnown: false,
           behavioralFlaw: "none", behavioralQuirk: "none",
           sexualFlaw: "none", sexualQuirk: "none",
           oralCount: 0, vaginalCount: 0, analCount: 0, mammaryCount: 0, penetrativeCount: 0, pitKills: 0,
@@ -286,7 +286,7 @@
         slave.trust = 0;
         slave.sexualQuirk = 'none';
         slave.behavioralQuirk = 'none';
-        slave.fetishKnown = 1;
+        slave.fetishKnown = true;
         return slave;
       }
 

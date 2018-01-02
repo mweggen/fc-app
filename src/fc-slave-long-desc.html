@@ -252,7 +252,7 @@
             <span>She's a <span class="great">size queen</span>; preferring big cock is almost her trademark.</span>
           </iron-pages>
 
-          <template is="dom-if" if="[[_eq(slave.fetishKnown, 1)]]">
+          <template is="dom-if" if="[[slave.fetishKnown]]">
             <iron-pages selected="[[_fetish(slave.fetish)]]">
               <span><!--submissive-->
                 <template is="dom-if" if="[[_eq(slave.sexualFlaw, 'apathetic')]]">
@@ -374,9 +374,9 @@
               <span>Her sexual tastes are <span class="coral">quite normal</span>.</span><!--normal-->
             </iron-pages>
           </template>
-          <template is="dom-if" if="[[!_eq(slave.fetishKnown, 1)]]">Her fetishes, if any, are not known to you.</template>
+          <template is="dom-if" if="[[!slave.fetishKnown]]">Her fetishes, if any, are not known to you.</template>
 
-          <template is="dom-if" if="[[_eq(slave.attrKnown, 1)]]">
+          <template is="dom-if" if="[[slave.attrKnown]]">
             <iron-pages selected="[[_energy(slave.energy)]]">
               <span>She's a <span class="great">nymphomaniac</span>.</span>
               <span>She's a <span class="great">sex addict</span>.</span>
@@ -388,7 +388,7 @@
 
             <!--todo attr-->
           </template>
-          <template is="dom-if" if="[[!_eq(slave.attrKnown, 1)]]">You do not understand her sexuality very well.</template>
+          <template is="dom-if" if="[[!slave.attrKnown]]">You do not understand her sexuality very well.</template>
 
         </template>
         <template is="dom-if" if="[[!_eq(slave.fuckdoll, 0)]]">
@@ -497,7 +497,7 @@
           <template is="dom-if" if="{{_eq(slave.skin, 'tanned')}}">
             <template is="dom-if" if="{{!_eq(slave.releaseRules, 'restrictive')}}">
               <template is="dom-if" if="{{_gt(slave.fetishStrength, 60)}}">
-                <template is="dom-if" if="{{_eq(slave.fetishKnown, 1)}}">
+                <template is="dom-if" if="{{slave.fetishKnown}}">
                   Her tan is slightly uneven, since she enjoys
                   <template is="dom-if" if="{{_eq(slave.fetish, 'buttslut')}}">
                     letting other tanned slaves share a tanning bed with her so they can sodomize her while she tans.
