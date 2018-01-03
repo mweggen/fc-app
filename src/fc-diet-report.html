@@ -7,11 +7,14 @@
       iron-pages { display: inline; }
       .incDev { color: hotpink; font-weight: bold; }
       .decDev { color: mediumorchid; font-weight: bold; }
+      .incTru { color: mediumaquamarine; font-weight: bold; }
       .decTru { color: gold; font-weight: bold; }
       .incFetish { color: lightcoral; font-weight: bold; }
       .decHealth { color: red; font-weight: bold; }
+      .incHealth { color: green; font-weight: bold; }
       .assets { color: orange; font-weight: bold; }
       .ok { color: yellow; font-weight: bold; }
+      .muscles { color: lime; font-weight: bold; }
     </style>
 
     <template is="dom-if" if="[[report.main1]]">
@@ -359,13 +362,255 @@
             </span>
             <span>She doesn't gain any weight this week.</span><!--else-->
           </iron-pages>
+        </span><!--end fattening-->
 
+        <span><!--muscle building-->
+
+          <iron-pages selected="[[report.a2c1]]">
+            <span><!--muscles > 90-->
+              Her heavy workouts focus on lifting. She has plateaued at a state of <span class="muscles">goddess-like
+              musculature</span>.
+            </span>
+            <span><!--drugs == steroids-->
+              Her heavy workouts focus on lifting, and since she's on so much gear, she <span class="muscles">gains
+              muscle rapidly</span>.
+            </span>
+            <span><!--balls > 0 && hormones > 0-->
+              Her heavy workouts focus on lifting, but with natural testosterone and artificial female hormones clashing
+              in her system, she only <span class="muscles">slowly gains muscle</span>.
+            </span>
+            <span><!--balls > 0 && hormones < 0-->
+              Her heavy workouts focus on lifting, and with natural testosterone and artificial male hormones in her
+              system, she <span class="muscles">gains muscle rapidly</span>.
+            </span>
+            <span><!--balls > 0-->
+              Her heavy workouts focus on lifting, and with natural testosterone in her system, she
+              <span class="muscles">gains muscle</span>.
+            </span>
+            <span><!--hormones < 0-->
+              Her heavy workouts focus on lifting, and with artificial testosterone in her system, she
+              <span class="muscles">gains muscle</span>.
+            </span>
+            <span><!--hormones > 0-->
+              Her heavy workouts focus on lifting, but with lots of female hormones in her system, she barely
+              <span class="muscles">gains muscle</span>.
+            </span>
+            <span><!--else-->
+              Her heavy workouts focus on lifting, and she <span class="muscles">slowly gains muscle</span>.
+            </span>
+          </iron-pages>
+          <template is="dom-if" if="[[report.a2c2]]">
+            She attacks lifting with real enthusiasm, further increasing her mass.
+          </template>
+          <iron-pages selected="[[report.report.a2c3a1]]">
+            <span class="assets">Her breasts get a little smaller.</span>
+            <span class="assets">Her butt gets a little smaller.</span>
+          </iron-pages>
+          <template is="dom-if" if="[[report.a2c4]]"><!--20%-->
+            Her workout successes have <span class="incHealth">improved her health</span>.
+          </template>
+          <template is="dom-if" if="[[report.a2c5]]"><!--weight > 10-->
+            Her workouts have also <span class="assets">burned off some excess fat</span>.
+          </template>
+        </span><!--end muscle building-->
+
+        <span><!--slimming-->
+
+          Her long workouts focus on
+          <iron-pages selected="[[report.a2d1]]">
+            <span><!--muscles <= 10-->
+              cardio. She has finally <span class="muscles">lost all visible musculature</span>.
+            </span>
+            <span><!--drugs == steroids-->
+              cardio, but since she's still shooting gear, she <span class="muscles">loses mass slowly</span>.
+            </span>
+            <span><!--balls > 0 && hormones < 0-->
+              cardio, but since she's got so much natural and artificial testosterone, she <span class="muscles">loses
+              mass slowly</span>.
+            </span>
+            <span><!--balls > 0 && hormones > 0-->
+              cardio, and with the natural testosterone in her system counteracted by hormone treatment, she
+              <span class="muscles">loses musculature</span>.
+            </span>
+            <span><!--balls > 0-->
+              cardio, but with some natural testosterone in her system, she <span class="muscles">loses muscle slowly</span>.
+            </span>
+            <span><!--hormones > 0-->
+              cardio, and with female hormone treatment, she <span class="muscles">loses musculature rapidly</span>.
+            </span>
+            <span><!--hormones < 0-->
+              cardio, but under male hormone treatment, she <span class="muscles">loses muscle slowly</span>.
+            </span>
+            <span><!--else-->
+              cardio, and she <span class="muscles">loses musculature</span>.
+            </span>
+          </iron-pages>
+          <template is="dom-if" if="[[report.a2d2]]"><!--behavioralQuirk == fitness-->
+            She approaches endurance work with real enthusiasm, quickly slimming her down.
+          </template>
+          <iron-pages selected="[[report.report.a2d3a1]]">
+            <span class="assets">Her breasts get a little smaller.</span><!--10% && boobs - boobsImplant >= 200-->
+            <span class="assets">Her butt gets a little smaller.</span><!--10% && butt > 1-->
+          </iron-pages>
+          <template is="dom-if" if="[[report.a2d4]]"><!--20%-->
+            Her workout successes have <span class="incHealth">improved her health</span>.
+          </template>
+          <template is="dom-if" if="[[report.a2d5]]"><!--weight > 10-->
+            Her workouts have also <span class="assets">burned off some excess fat</span>.
+          </template>
+
+        </span><!--end slimming-->
+      </iron-pages>
+
+      <iron-pages selected="[[report.a3a1]]">
+        <span><!--dietCum > 0 && devotion > 20-->
+          <iron-pages selected="[[report.a3a1a1a1]]">
+            <span><!--fetishKnown && fetishStrength > 95 && fetish == cumslut-->
+              She <span class="incDev">regularly orgasms</span> while sucking down her cum-infused breakfast.
+            </span>
+            <span><!--fetishKnown && (energy > 95 || fetish == cumslut)-->
+              She <span class="incDev">enjoys</span> the perversity of having large amounts of ejaculate in her diet.
+            </span>
+          </iron-pages>
+          <template is="dom-if" if="[[report.a3a1a2a1a1]]"><!--fetishStrength <= 95 & fetish != cumslut & fetishChangeChance-->
+            After sucking down cum for sustenance, she has started to think of the stuff as a
+            <span class="incFetish">normal part</span> of life.
+          </template>
         </span>
-      </iron-pages><!--todo ma 8 10:00 papa martini ziekenhuis, tot 12:00?-->
+        <iron-pages selected="[[report.a3a1b1a1a1a1a1]]"><!--dietCum > 0 && devotion <= 20-->
+          <span><!--SF != cum addict & fetish != cumslut & diet != fattening/restricted & energy < 60-->
+            <iron-pages selected="[[report.a3a1b1a1a1a1a1]]">
+              <span><!--dietCum == 2-->
+                Her diet is basically pure ejaculate supplemented by nutritional vitamins. Being forced to rely on human
+                sex-fluid for sustenance <span class="decDev">nauseates her</span>.
+              </span>
+              <span><!--dietCum == 1-->
+                She is <span class="decDev">nauseated</span> by the large amounts of ejaculate in her diet.
+              </span>
+            </iron-pages>
+            <iron-pages selected="[[report.a3a1b1a1a1a1a2a1]]">
+              <iron-pages selected="[[report.a3a1b1a1a1a1a2a1a1]]"><!--weight >= -95 && !cockFeeder-->
+                <span>She has trouble keeping her disgusting food down; she loses weight.</span><!--dietCum = 2-->
+                <span><!--dietCum = 1 && 33%-->
+                  She has trouble keeping her disgusting food down; she loses weight.
+                  <iron-pages selected="[[report.a3a1b1a1a1a1a2a1a1b1a1]]">
+                    <span class="assets">Her breasts get a little smaller.</span><!--boobs - boobsImplant >= 200-->
+                    <span class="assets">her butt gets a little smaller.</span><!--butt > 1-->
+                  </iron-pages>
+                </span>
+              </iron-pages>
+              <span><!--weight >= -95 && cockFeeder-->
+                Despite her revulsion, the deep-throating phallic feeders ensure that she swallows all her food.
+              </span>
+            </iron-pages>
+          </span>
+          <iron-pages selected="[[report.a3a1b1a1a1a1a1b1]]"><!--SF != cum addict & fetish != cumslut & diet != fattening/restricted & energy >= 60-->
+            <iron-pages selected="[[report.a3a1b1a1a1a1a1b1a1]]"><!--dietCum = 2-->
+              <span><!--energy > 80-->
+                She has become so sex-driven that she <span class="muscles">appreciates the perversity</span> of her
+                extreme cum diet, despite <span class="decDev">it sometimes being a bit too much for her</span>.
+              </span>
+              <span><!--energy <= 80-->
+                Her high sex drive helps her pretend her heavy cum-based diet is the
+                <iron-pages selected="[[report.a3a1b1a1a1a1a1b1a1b1]]">
+                  <span>ejaculate of an abusive lover</span><!--masochist-->
+                  <span>fresh milk from a pretty dairy cow</span><!--boobs-->
+                  <span>ejaculate of a dominant partner</span><!--submissive-->
+                  <span>ejaculate of her future baby's father</span><!--pregnancy-->
+                  <span>ejaculate of a pain-slut she recently milked</span><!--sadist-->
+                  <span>ejaculate of a cock that just came from her butt</span><!--buttslut-->
+                  <span>ejaculate of a weak-minded submissive</span><!--dom-->
+                  <span>ejaculate of a publicly used slut</span><!--humiliation-->
+                  <span>ejaculate of a gentle lover</span><!--normal-->
+                </iron-pages>
+                --helping her keep her <span class="decDev">unpleasant</span> food down.
+              </span>
+            </iron-pages>
+            <iron-pages selected="[[report.a3a1b1a1a1a1a1b1b1]]"><!--dietCum = 1-->
+              <span><!--energy > 80-->
+                She has become so sex-driven that she appreciates the perversity of her cum diet,
+                making her <span class="muscles">feel hot</span> just eating it.
+              </span>
+              <span><!--energy <= 80-->
+                Her high sex drive helps her pretend her cum-supplemented diet is the
+                <iron-pages selected="[[report.a3a1b1a1a1a1a1b1b1b1]]">
+                  <span>ejaculate of an abusive lover</span><!--masochist-->
+                  <span>fresh milk from a pretty dairy cow</span><!--boobs-->
+                  <span>ejaculate of a dominant partner</span><!--submissive-->
+                  <span>ejaculate of her future baby's father</span><!--pregnancy-->
+                  <span>ejaculate of a pain-slut she recently milked</span><!--sadist-->
+                  <span>ejaculate of a cock that just came from her butt</span><!--buttslut-->
+                  <span>ejaculate of a weak-minded submissive</span><!--dom-->
+                  <span>ejaculate of a publicly used slut</span><!--humiliation-->
+                  <span>ejaculate of a gentle lover</span><!--normal-->
+                </iron-pages>
+                --helping her swallow her food without complaint.
+              </span>
+            </iron-pages>
+          </iron-pages>
+        </iron-pages>
+      </iron-pages>
 
+      <template is="dom-if" if="[[report.a4a1]]"><!--cockFeeder && !mindbroken-->
+        <iron-pages selected="[[report.a4a1a1]]">
+          <iron-pages selected="[[report.a4a1a1a1a1]]"><!--sexualFlaw == hates oral-->
+            <span><!--20%-->
+              Getting her sustenance only after working the phallic food dispensers in the kitchen forces her to
+              <span class="incHealth">accept oral sex</span> as a fact of life.
+            </span>
+            <span><!--80%-->
+              Being forced to get her sustenance only by working the phallic food dispensers in the kitchen
+              <span class="decDev">infuriates her</span>, since she hates oral.
+            </span>
+          </iron-pages>
+          <iron-pages selected="[[report.a4a1a1b1]]"><!--fetish == cumslut-->
+            <span><!--!fetishKnown-->
+              Being forced to get her sustenance only by working the phallic food dispensers in the kitchen has revealed
+              something: <span class="incFetish">she's got an oral fetish!</span>
+            </span>
+            <span><!--fetishStrength <= 95 && devotion > 4-->
+              Being forced to get her sustenance only by working the phallic food dispensers in the kitchen has
+              <span class="incFetish">deepened her oral fixation</span>.
+            </span>
+          </iron-pages>
+          <iron-pages selected="[[report.a4a1a1c1a1]]"><!--fetish != cumslut-->
+            <span><!--diet != fattening && devotion < -20-->
+              Being forced to get her sustenance only by working the phallic food dispensers in the kitchen
+              <span class="decDev">disgusts her</span>.
+            </span>
+            <span><!--diet != fattening && devotion >= -20 && fetishChangeChance-->
+              Getting her sustenance only after working the phallic food dispensers in the kitchen makes sucking cock to
+              completion such an integral part of her life that she starts to <span class="incFetish">fetishize
+              ejaculate</span>.
+            </span>
+          </iron-pages>
+        </iron-pages>
+        <template is="dom-if" if="[[report.a4a1a2]]"><!--sexualQuirk == gagfuck queen-->
+          She <span class="incDev">secretly enjoys</span> gagging on her breakfast every morning.
+        </template>
+      </template>
 
-    </template>
-    <template is="dom-if" if="[[report.!main1]]">
+      <template is="dom-if" if="[[report.a5]]"><!--revealFoodEffects-->
+        She knows that every meal of the liquid slave food she
+        <iron-pages selected="[[report.a5a1]]"><span>sucks down</span><span>eats</span></iron-pages>
+        makes it less and less likely that she'll ever survive without it,
+        <iron-pages selected="[[report.a5a2]]">
+          <!--devotion > 50-->
+          <span>but she actually <span class="incTru">takes a kind of comfort</span> in knowing that she'll always be a slave.</span>
+          <!--devotion > 20 && devotion <= 50-->
+          <span>but since she's been broken to slavery, she does her best to not think about it.</span>
+          <span><!--devotion > -20 && devotion <= 20-->
+            and though she does her best to not think about it, it sometimes makes her <span class="decTru">cry herself
+            to sleep</span>.
+          </span>
+          <span><!--devotion <= -20-->
+            knowledge that fills her with <span class="decTru">fear</span> and <span class="decDev">horror</span> every
+            time she thinks about it.</span>
+        </iron-pages>
+      </template>
+
+    </template><!--end !fuckdoll-->
+    <template is="dom-if" if="[[report.!main1]]"><!--fuckdoll-->
 
     </template>
 
