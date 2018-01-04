@@ -1205,89 +1205,111 @@
           switch (slave.diet) {
             case 'restricted':
               //b1a text
+              report.b1 = 0;
               weight -= 9;
-              if (Math.random() < 0.25) {
+              if (Math.random() < 0.5) {//todo ???
                 //b1a1a text
+                report.b1a1 = true;
                 boobs -= 50;
               }
               if (slave.butt > 1) {
                 //b1a2a
                 if (Math.random() < 0.2) {
                   //b1a2a1a text
+                  report.b1a2a1 = true;
                   butt -= 1;
                 }
               }
               if (weight < -95) {
                 //b1a3a text
+                report.b1a3 = true;
                 diet = 'healthy';
               }
               break;
 
             case 'fattening':
               //b1b text
+              report.b1 = 1;
               weight += 9;
               if (Math.random() < 0.5) {
                 //b1b1a text
+                report.b1b1 = true;
                 boobs += 50;
               }
               if (Math.random() < 0.2) {
                 //b1b2a text
+                report.b1b2 = true;
                 butt += 1;
               }
               if (weight > 95) {
                 //b1b3a text
+                report.b1b3 = true;
                 diet = 'healthy';
               }
               break;
 
             case 'muscle building':
               //b1c text
+              report.b1 = 2;
               if (slave.muscles > 90) {
                 //b1c1a text
+                report.b1c1 = 0;
                 muscles = 100;
                 diet = 'healthy';
               } else {
                 //b1c1b text
+                report.b1c1 = 1;
                 muscles += 9;
               }
+              report.b1c2a1 = -1;
               if (Math.random() < 0.1) {
                 //b1c2a
                 if (slave.boobs - slave.boobsImplant >= 200) {
                   //b1c2a1a text
+                  report.b1c2a1 = 0;
                   boobs -= 50;
                 } else if (slave.butt > 1) {
                   //b1c2a1b text
+                  report.b1c2a1 = 1;
                   butt -= 1;
                 }
               }
               if (slave.weight > 10) {
                 //b1c3a text
+                report.b1c3 = true;
                 weight -= 2;
               }
               break;
 
             case 'slimming':
               //b1d text
+              report.b1 = 3;
               if (slave.muscles <= 10) {
                 //b1d1a text
+                report.b1d1 = 0;
                 muscles = 0;
                 diet = 'healthy';
               } else {
                 //b1d1b text
+                report.b1d1 = 1;
                 muscles -= 9;
               }
+              report.b1d2a1 = -1;
               if (Math.random() < 0.1) {
                 //b1d2a
                 if (slave.boobs - slave.boobsImplant >= 200) {
                   //b1d2a1a text
+                  report.b1d2a1 = 0;
                   boobs -= 50;
                 } else if (slave.butt > 1) {
                   //b1d2a1b text
+                  report.b1d2a1 = 1;
                   butt -= 1;
                 }
               }
               if (slave.weight > 10) {
                 //b1d3a text
+                report.b1d3 = true;
                 weight -= 2;
               }
               break;

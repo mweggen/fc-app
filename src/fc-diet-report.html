@@ -612,6 +612,53 @@
     </template><!--end !fuckdoll-->
     <template is="dom-if" if="[[report.!main1]]"><!--fuckdoll-->
 
+      <iron-pages selected="[[report.b1]]">
+        <span><!--diet == restricted-->
+          The ports in Fuckdoll suits allow total dietary control, and it's barely aware it's being
+          <span class="assets">slimmed down</span>.
+          <template is="dom-if" if="[[report.b1a1]]"><span class="assets">Its breasts get a little smaller.</span></template>
+          <template is="dom-if" if="[[report.b1a2a1]]"><span class="assets">Its butt gets a little smaller.</span></template>
+          <template is="dom-if" if="[[report.b1a3]]">It is now quite skinny, so its diet <span class="ok">has defaulted to maintenance of this weight</span>.</template>
+        </span>
+        <span><!--diet == fattening-->
+          The ports in Fuckdoll suits allow total dietary control, and it's barely aware it's being
+          <span class="muscles">fattened up</span>.
+          <template is="dom-if" if="[[report.b1b1]]"><span class="muscles">Its breasts get a little bigger.</span></template>
+          <template is="dom-if" if="[[report.b1b2]]"><span class="muscles">Its butt gets a little bigger.</span></template>
+          <template is="dom-if" if="[[report.b1b3]]">It is now quite fat, so its diet <span class="ok">has defaulted to maintenance of this weight</span>.</template>
+        </span>
+        <span><!--diet == muscle building-->
+          Fuckdoll suits can force their inhabitants to lift weights until they drop.
+          <iron-pages selected="[[report.b1c1]]">
+            <span>It has plateaued at a state of <span class="muscles">perfect musculature</span>.</span>
+            <span>It <span class="muscles">slowly gains muscle</span>.</span>
+          </iron-pages>
+          <iron-pages selected="[[report.b1c2a1]]">
+            <span class="assets">Its breasts get a little smaller.</span>
+            <span class="assets">Its butt gets a little smaller.</span>
+          </iron-pages>
+          <template is="dom-if" if="[[report.b1c3]]">
+            Its workouts have also <span class="assets">burned off some excess fat</span>.
+          </template>
+          The stress of forced exercise is trivial compared to everything else it experiences, and it's unaffected mentally.
+        </span>
+        <span><!--diet == slimming-->
+          Fuckdoll suits can force their inhabitants to work out until they drop.
+          <iron-pages selected="[[report.b1d1]]">
+            <span>It has finally <span class="muscles">lost all visible musculature</span>.</span>
+            <span>It <span class="muscles">loses musculature</span>.</span>
+          </iron-pages>
+          <iron-pages selected="[[report.b1d2a1]]">
+            <span class="assets">Its breasts get a little smaller.</span>
+            <span class="assets">Its butt gets a little smaller.</span>
+          </iron-pages>
+          <template is="dom-if" if="[[report.b1d3]]">
+            Its workouts have also <span class="assets">burned off some excess fat</span>.
+          </template>
+          The stress of forced exercise is trivial compared to everything else it experiences, and it's unaffected mentally.
+        </span>
+      </iron-pages>
+
     </template>
 
   </template>
